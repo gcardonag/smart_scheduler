@@ -1,0 +1,104 @@
+.tabs {
+	display: inline;
+	float: left;
+	height: 1000px;
+	border-right: 2px solid;
+	background-color: #C0C0C0;
+}
+
+.tab-title {
+	background-color: #FFDA5C;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 30px;
+	width: 500px;
+}
+
+.tab-exam {
+	background-color: #FF6D31;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 30px;
+	width: 500px;
+}
+
+.tab-project {
+	background-color: #EF597B;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 30px;
+	width: 500px;
+}
+
+.tab-class {
+	background-color: #73B66B;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 30px;
+	width: 500px;
+}
+
+.tab-extra {
+	background-color: #29A2C6;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 30px;
+	width: 500px;
+}
+
+.main {
+	height: 50px;
+}
+
+.sub {
+	font-size: 20px;
+	height: 170px;
+	display: none;
+}
+
+.eventBox_container {
+	display: inline-block;
+	float: left;
+	padding-left: 20px;
+	background-color: #A0CFCF;
+	height: 1000px;
+	width: 840px;
+}
+
+.class_eventBox {
+	background-color: #73B66B;
+	width: 800px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	padding: 5px;
+}
+
+.project_eventBox {
+	background-color: #EF597B;
+	width: 800px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	padding: 5px;
+}
+
+.exam_eventBox {
+	background-color: #FF6D31;
+	width: 800px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	padding: 5px;
+}
+
+.extra_eventBox {
+	background-color: #29A2C6;
+	width: 800px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	padding: 5px;
+}
+
+.eventBox_main {
+	height: 25px;
+	font-size: 25px;
+	padding-bottom: 5px;
+}
+
+.eventBox_sub {
+	height: 80px;
+	display: none;
+}

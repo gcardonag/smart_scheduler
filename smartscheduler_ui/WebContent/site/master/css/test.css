@@ -1,0 +1,15 @@
+.tab-class {
+	background-color: #73B66B;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 30px;
+	width: 300px;
+}
+
+.tab-class .main {
+	height: 50px;
+}
+
+.tab-class .sub {
+	height: 150px;
+	display: none;
+}

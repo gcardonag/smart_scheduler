@@ -1,0 +1,17 @@
+@CHARSET "ISO-8859-1";
+
+*{
+	padding:0px;
+	margin:0px;
+	font-family:'EB Garamond', serif;
+	font-weight:400;
+	border:none !important;
+}
+
+.clear
+{
+	clear:both;
+	height: 0;
+    margin: 0;
+    width: 0;
+}

@@ -1,0 +1,115 @@
+package testing;
+
+import java.lang.reflect.Array;
+
+
+public class PermutationTester<T> extends SimpleTester {
+
+	private Class<T> elementType;
+	private T[] dataSet;
+	private ParameterizedTester<T[]> innerTester;
+	private int minSubsetSize;
+	private int maxSubsetSize;
+	
+	public PermutationTester(Class<T> elementType, T[] dataSet, ParameterizedTester<T[]> innerTester)
+	{
+		this.elementType = elementType;
+		this.dataSet = dataSet;
+		this.innerTester = innerTester;
+		this.minSubsetSize = 0;
+		this.maxSubsetSize = dataSet.length;
+	}
+	
+	public PermutationTester(Class<T> elementType, T[] dataSet, ParameterizedTester<T[]> innerTester,
+			int minSubsetSize, int maxSubsetSize)
+	{
+		if (minSubsetSize < 0)
+			throw new IllegalArgumentException("minSubsetSize must be greater than or equal to 0");
+		if (minSubsetSize > maxSubsetSize)
+			throw new IllegalArgumentException("minSubsetSize must be less than or equal to maxSubsetSize");
+		if (maxSubsetSize > dataSet.length)
+			throw new IllegalArgumentException("maxSubsetSize must be less than or equal to the length of dataSet");
+		
+		this.elementType = elementType;
+		this.dataSet = dataSet;
+		this.innerTester = innerTester;
+		this.minSubsetSize = minSubsetSize;
+		this.maxSubsetSize = maxSubsetSize;
+	}
+	
+	public T[] getDataSet() {
+		return dataSet;
+	}
+
+	public ParameterizedTester<T[]> getInnerTester() {
+		return innerTester;
+	}
+
+	public String getName() {
+		return "Permutation Tester";
+	}
+
+	@SuppressWarnings("unchecked")
+	protected boolean runInternalTest() {
+		//This tester implements an exhaustive test that checks a certain
+		//subtest with every permutation of a given data set.
+
+		int length;
+		T[] subset;
+		boolean[] used = new boolean[dataSet.length];
+		
+		if (minSubsetSize == 0)
+		{
+			//Check for length = 0
+			subset = (T[]) Array.newInstance(elementType, 0);
+			if (!innerTester.runTest(subset))
+				return false;
+		}
+		
+		//Check for length > 0
+		length = (minSubsetSize > 0) ? minSubsetSize : 1;
+		for (; length < maxSubsetSize; length++)
+		{
+			subset = (T[]) Array.newInstance(elementType, length);
+			if (!testPermutations(0, subset, used))
+				return false;
+		}
+		
+		return true;
+	}
+
+	private boolean testPermutations(int index, T[] subset, boolean[] used) {
+		if (index + 1 < subset.length)
+		{
+			for (int k = 0; k < used.length; k++)
+			{
+				if (!used[k])
+				{
+					used[k] = true;
+					subset[index] = dataSet[k];
+					if (!testPermutations(index + 1, subset, used))
+						return false;
+					used[k] = false;
+				}
+			}
+		}
+		else
+		{
+			for (int k = 0; k < used.length; k++)
+			{
+				if (!used[k])
+				{
+					subset[index] = dataSet[k];
+					if (!innerTester.runTest((T[]) subset.clone()))
+					{
+						extraInformation = innerTester.getExtraInformation();
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+	
+	
+}
