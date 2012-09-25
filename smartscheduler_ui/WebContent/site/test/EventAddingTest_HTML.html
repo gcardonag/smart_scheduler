@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" media="screen" href="test.css">
+<!--<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>-->
+<link rel="stylesheet" type="text/css" href="../addons/anytime/anytime_css.css" />
+<!-- <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script> -->
+<script src="../addons/jquery-1.7.1.min.js"></script>
+<link rel="stylesheet" href="../addons/jquery-ui-1.8.18.custom/development-bundle/themes/base/jquery.ui.all.css">
+<script src="../addons/jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.core.js"></script>
+<script src="../addons/jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.widget.js"></script>
+<script src="../addons/jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.datepicker.js"></script>
+<script src="../addons/anytime/anytime.js"></script>
+<script src="EventAddingTest_JS.js"></script>
+
+<script>
+eventCounter = 0;
+$(function() {
+	$( "[id*='date']" ).not("div").datepicker({ minDate: -20, maxDate: "+12M" });
+	$( "[id*='time']" ).not("[id*='required']").AnyTime_picker({
+		format: "%I:%i %p"
+	});
+});
+</script>
+
+<title>Insert title here</title>
+
+</head>
+<body>
+<div class="top_level">	
+	<div class="tabs">
+	<div class="tab-title">
+		<div class="main">Create a New</div>
+	</div>
+	<div class="tab-project">
+		<div class="main">Project</div>
+		<div class="sub">
+			Name: <input type="text" id="project_event_name" size="50" />
+			<br>
+			<table border="0">
+				<tr>
+					<td>Start Date: <input type="text" id="project_date_start" size="15" /></td>
+					<td>End Date: <input type="text" id="project_date_end" size="15" /></td>
+				</tr>				
+			</table>
+			Time Required: <input type="text" id="project_time_required" size="50" />
+			
+			<a href="javascript:;" onclick="addProject();" class="addEvent_Button">Add Event</a>
+		</div>
+	</div>
+	<div class="tab-class">
+		<div class="main">Class</div>
+		<div class="sub">
+			Name: <input type="text" id="class_event_name" size="50" />
+			<br>
+			<table border="0">
+				<tr>
+					<td>Start Time:	<input type="text" id="class_time_start" size="15"/></td>
+					<td>Start Date: <input type="text" id="class_date_start" size="15"/></td>
+				</tr>
+				<tr>
+					<td>End Time: <input type="text" id="class_time_end" size="15"/></td>
+					<td>End Date: <input type="text" id="class_date_end" size="15"/></td>
+				</tr>
+			</table>
+			Is Recurring: <input id="class_isRecurring" type="checkbox" onchange="togglerecurrence(this, 'class')" value="yes" /><br>
+			<div id="class_recurrence" style="display:none">
+				<input type="checkbox" name="recurrence" value="M" />M <input type="checkbox" name="recurrence" value="T" />T <input type="checkbox" name="recurrence" value="W" />W 
+				<input type="checkbox" name="recurrence" value="Th"/>Th <input type="checkbox" name="recurrence" value="F" />F <input type="checkbox" name="recurrence" value="Sat" />Sat 
+				<input type="checkbox" name="recurrence" value="Sun" />Sun
+			</div>
+			
+			<a href="javascript:;" onclick="addEvent('class', this);" class="addEvent_Button">Add Event</a>
+		</div>
+	</div>
+	<div class="tab-exam">
+		<div class="main">Exam</div>
+		<div class="sub">
+			Name: <input type="text" id="exam_event_name" size="50" />
+			<br>
+			Date: <input type="text" id="exam_date" size="15" />
+			<br>
+			<table border="0">
+				<tr>
+					<td>Start Time:	<input type="text" id="exam_time_start" size="15"/></td>
+					<td>End Time: <input type="text" id="exam_time_end" size="15"/></td>
+				</tr>
+			</table>
+			
+			<a href="javascript:;" onclick="addExam();" class="addEvent_Button">Add Event</a>
+		</div>
+	</div>
+	<div class="tab-extra">
+		<div class="main">Extracurricular</div>
+		<div class="sub">
+			Name: <input type="text" id="extra_event_name" size="50" />
+			<br>
+			Scheduled? <input type="checkbox" id="extra_isScheduled" onchange="toggleTime(this)" value="yes" checked="checked" />
+			<table border="0" id="extra_time_container">
+				<tr>
+					<td>Start Time:	<input type="text" id="extra_time_start" size="15"/></td>
+					<td>End Time: <input type="text" id="extra_time_end" size="15"/></td>
+				</tr>
+			</table>
+			<div id="extra_time_required_container" style="display:none">
+				Time Required (Weekly): <input type="text" id="extra_time_required" size="15"/> Minutes
+			</div>
+			<table border="0">
+				<tr>
+					<td>Start Date: <input type="text" id="extra_date_start" size="15"/></td>
+					<td>End Date: <input type="text" id="extra_date_end" size="15"/></td>
+				</tr>
+			</table>	
+			Is Recurring? <input id="extra_isRecurring" type="checkbox" onchange="toggleExtraRecurrence(this)" value="yes" /><br>
+			<div id="extra_recurrence" style="display:none">
+				<input type="checkbox" name="recurrence" value="M" />M <input type="checkbox" name="recurrence" value="T" />T <input type="checkbox" name="recurrence" value="W" />W 
+				<input type="checkbox" name="recurrence" value="Th"/>Th <input type="checkbox" name="recurrence" value="F" />F <input type="checkbox" name="recurrence" value="Sat" />Sat 
+				<input type="checkbox" name="recurrence" value="Sun" />Sun
+			</div>
+			
+			<a href="javascript:;" onclick="addExtra();" class="addEvent_Button">Add Event</a>
+		</div>
+	</div>
+	</div>
+	<div id="eventBox_container" class="eventBox_container">    	
+    </div>
+</div>
+</body>
+</html>
