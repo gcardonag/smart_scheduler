@@ -1,0 +1,30 @@
+/* Navigation Bar */
+.navbar{
+	
+}
+
+/* Columns */
+.col3{
+	display: inline-block; 
+	float:left; 
+	width: 30%; 
+	border-radius: 30px;
+}
+.col4{
+	display:inline-block; 
+
+	float:left; 
+	width: 40%;
+	border-radius: 30px;
+}
+
+/* Colors */
+.background-green{
+	background-color: green;
+}
+
+/* Borders */
+.inset-green{
+	border-style: inset;
+	border-color: yellow;
+}

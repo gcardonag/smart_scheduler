@@ -5,7 +5,7 @@
 	width:40%;
 }
 
-.col40b{
+.col4{
 	background-color: blue; 
 	display:inline-block; 
 	border
@@ -13,11 +13,11 @@
 	width: 40%;
 	border-radius: 30px;
 }
-.col40g{
+.col3{
 	background-color: green; 
 	display: inline-block; 
 	float:left; 
-	width: 40%; 
+	width: 30%; 
 	height:100%;
 	border-radius: 30px;
 }
