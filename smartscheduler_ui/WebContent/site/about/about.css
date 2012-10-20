@@ -3,3 +3,36 @@
 			display: inline-block;
 			height: 10px;
 		}
+@CHARSET "UTF-8";
+#content{
+	margin-left:auto;
+	margin-right:auto;
+	width:40%;
+}
+
+.horizontal-navbar{
+	margin-left:auto;
+	margin-right:auto;
+	width:25%;
+}
+
+.navbar-elem{
+	/*font-size:25px;*/
+	display:inline;
+	float:left;
+	margin-right:15px;
+}
+
+.navbar-elem a{
+	text-decoration:none;
+	color: #708090;
+}
+
+.team-names li{
+	font-size:20px;
+}
+
+.team-names p{
+	padding:0px;
+	margin:0;
+}
