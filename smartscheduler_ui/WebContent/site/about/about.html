@@ -4,15 +4,52 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-</head>
-<body style="padding:0px;
-	margin:0px;
-	font-family:'EB Garamond', serif;
-	font-weight:400;
-	border:none !important;">
+<link rel="stylesheet" type="text/css" media="screen" href="../master/master.css">
+<link rel="stylesheet" type="text/css" media="screen" href="../master/css/test.css">
+<link rel="stylesheet" type="text/css" media="screen" href="about.css">
 
-<div style="background-color:orange; display:inline-block; float:left; width:30%; margin:0px; border:0px;">test</div>
-<div style="background-color:blue; display:inline-block; float:left; width:60%; margin:0;">test</div>
-<div style="background-color:green; display:inline-block; float:left; width:10%; padding:0;">test</div>
+</head>
+<body>
+
+<script>
+function showTeam(){
+	document.getElementById("team-content").style.display="block";
+	document.getElementById("idea-content").style.display="none";
+	document.getElementById("team-link").style.color="black";
+	document.getElementById("idea-link").style.color="#708090";
+}
+
+function showIdea(){
+	document.getElementById("team-content").style.display="none";
+	document.getElementById("idea-content").style.display="block";
+	document.getElementById("idea-link").style.color="black";
+	document.getElementById("team-link").style.color="#708090";
+}
+</script>
+
+<div id="top-navbar" class="horizontal-navbar">
+	<h1 class="navbar-elem"><a id="team-link" href="javascript:" onclick="showTeam()">The Team</a></h1>
+	<h1 class="navbar-elem"><a id="idea-link" href="javascript:" onclick="showIdea()">The Idea</a></h1>
+</div>
+<div class="clear"></div>
+<div id="content">
+	<div id="team-content">
+		<ul class="team-names">
+			<li>
+				Jose Acevedo
+				<p style="padding-left:10px;">test</p>
+			</li>
+			<li>Gabriel Cardona</li>
+			<li>Anthony Elias</li>
+			<li>Ricardo Fuentes</li>
+			<li>Nelson Reyes</li>
+			<li>Juan Torres</li>
+		</ul>
+	</div>
+	<div id="idea-content" style="display:none">
+		<p style="font-size:20px;">Pomodoro</p>
+		<p>The Pomodoro technique is super cool and stuff.</p>
+	</div>
+</div>
 </body>
 </html>
