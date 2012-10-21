@@ -2,6 +2,10 @@
 .navbar{
 	
 }
+		#nav ul li{
+			display: inline-block;
+			height: 10px;
+		}
 
 /* Columns */
 .col3{
@@ -27,4 +31,13 @@
 .inset-green{
 	border-style: inset;
 	border-color: yellow;
+}
+
+/* Table */
+
+/* Lists */
+dl.list-red dt{
+	font-size: 6;
+	font-family: Tahoma, sans-serif;
+	color:red;
 }
