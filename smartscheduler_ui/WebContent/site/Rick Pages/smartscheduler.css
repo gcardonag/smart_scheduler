@@ -1,43 +1,102 @@
 /* Navigation Bar */
-.navbar{
-	
+#navbar{
+	margin-left:auto;
+	margin-right:auto;
+	width:60%;
+	display: inline-block;
 }
-		#nav ul li{
-			display: inline-block;
-			height: 10px;
-		}
+
+#navbar ul{
+
+}
+
+#navbar ul li{
+	display:inline-block;
+	padding: 5px;
+}
+
+#navbar ul li a{
+	text-decoration:none;
+	margin:5px;
+	color: black;
+	background-color: #FFE476;
+	border-radius:15%;
+}
+
+#navbar ul li a:hover{
+	box-shadow: 10px 10px 10px #666;
+	border-radius:15%;
+	background-color: #72A3DB;
+}
+#navbar ul li a:active{ 
+	background-color: #ff8f00;
+}
 
 /* Columns */
+.col1{
+	display: inline-block; 
+	float:left; 
+	width: 10%; 
+}
 .col3{
 	display: inline-block; 
 	float:left; 
 	width: 30%; 
-	border-radius: 30px;
 }
 .col4{
 	display:inline-block; 
-
 	float:left; 
 	width: 40%;
-	border-radius: 30px;
+}
+.col5{
+	display:inline-block; 
+	float:left; 
+	width: 50%;
 }
 
-/* Colors */
+/*Colors: Stained Glass Sky*/
+.text-red{
+	color: #AA360D;
+}
+.text-green{
+	color: #359E15; /*Stained glass sky green: #B5AB21 */
+}
+.text-blue{
+	color: #72A3DB;
+}
+.text-yellow{
+	color: #FFE476;
+}
+.text-orange{
+	color: #F98434;
+}
+.background-red{
+	background-color: #AA360D;
+}
 .background-green{
-	background-color: green;
+	background-color: #B5AB21; /*Stained glass sky green: #B5AB21 #359E15*/
+}
+.background-blue{
+	background-color: #72A3DB;
+}
+.background-yellow{
+	background-color: #FFE476;
+}
+.background-orange{
+	background-color: #F98434;
 }
 
-/* Borders */
+
+/* Borders
 .inset-green{
 	border-style: inset;
-	border-color: yellow;
-}
+	border-color: #359315;
+} */
 
 /* Table */
 
 /* Lists */
-dl.list-red dt{
+dl.list dt{
 	font-size: 6;
 	font-family: Tahoma, sans-serif;
-	color:red;
 }
