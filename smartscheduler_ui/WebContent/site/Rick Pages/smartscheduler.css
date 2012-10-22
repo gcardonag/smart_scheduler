@@ -24,34 +24,61 @@
 }
 
 #navbar ul li a:hover{
-	box-shadow: 10px 10px 10px #666;
+	box-shadow: 10px 10px 5px #666;
 	border-radius:15%;
 	background-color: #72A3DB;
 }
-#navbar ul li a:active{ 
+li.active{ 
 	background-color: #ff8f00;
+	color:white;
 }
 
+/* Row */
+.row{
+	clear: both;
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
 /* Columns */
 .col1{
 	display: inline-block; 
 	float:left; 
-	width: 10%; 
+	width: 10%;
+	min-height: 1px;
 }
 .col3{
 	display: inline-block; 
 	float:left; 
 	width: 30%; 
+	min-height: 1px;
 }
 .col4{
 	display:inline-block; 
 	float:left; 
 	width: 40%;
+	min-height: 1px;
+	/* text-indent: 2%; //trying to find a way to give the c*/
 }
 .col5{
 	display:inline-block; 
 	float:left; 
 	width: 50%;
+	min-height: 1px;
+}
+.col6{
+
+}
+.col7{
+
+}
+.col8{
+
+}
+.col9{
+
+}
+.col10{
+
 }
 
 /*Colors: Stained Glass Sky*/
