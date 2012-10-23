@@ -8,7 +8,7 @@
 	
 	height: 100px;
 	padding-left: 75px;
-	boder: 2px solid black; 
+	border: 2px solid black; 
 	
 }
 
@@ -16,22 +16,56 @@
 	border: 1px solid #E5E5E5;
 	background: #F5F5F5;
 	display:inline-block;
-	height: 200px; 
+	height: 40%; 
 	position: relative; 
-	left: 500px; 
-	top:-150px; 
+	left: 50%;
+	right: 50%;
+	top:-275px; 
 	width: 300px;
-	padding: 20px 25px 15px;
+	padding: 20px 20px 20px;
+	margin-right: 60%;
+	margin-left: 10%;
 	
 }
 
 #circle {
 	float: left;
 	display: inline-block;
-	background-color: #E0B0FF;
+	background-color: #5CAE19;
     width: 50px;
     height: 50px;
     -webkit-border-radius: 25px;
     -moz-border-radius: 25px;
-    border-radius: 25px; 
+    border-radius: 25px;
+    font: 32px Garamond;
+    font-color: white; 
+    margin-right: 10px;
+    box-shadow: 2.5px 2.5px gray;
+}
+
+
+.text-white{
+	color:white;
+}
+
+.numberCircle {
+    -webkit-border-radius: 999px;
+    -moz-border-radius: 999px;
+    border-radius: 999px;
+    behavior: url(PIE.htc);
+
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+
+    font: 32px Arial, sans-serif
+}
+
+.verticalLine {
+    border-left:thick solid #ff0000;
 }
