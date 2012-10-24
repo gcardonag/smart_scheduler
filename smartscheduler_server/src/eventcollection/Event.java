@@ -18,7 +18,18 @@ public class Event implements Comparable<Event> {
 		this.start = start;
 		this.end = end;
 		this.repeating = repeating;
+		if(!repeating)
+			recurrenceGroup = null;
 		staticEvent = stat;
+	}
+	
+	public Event(Event source) {
+		name = source.getName();
+		start = (Calendar) source.getStart().clone();
+		end = (Calendar) source.getEnd().clone();
+		staticEvent = source.isStatic();
+		repeating = source.isRepeating();
+		recurrenceGroup = source.getRecurrenceGroup();
 	}
 	
 	public String getName()

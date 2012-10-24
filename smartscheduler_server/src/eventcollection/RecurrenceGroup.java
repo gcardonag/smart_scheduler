@@ -59,13 +59,12 @@ public class RecurrenceGroup {
 				currentStart.add(Calendar.MONTH, interval);
 				currentEnd.add(Calendar.MONTH, interval);
 			}
-			
-			if(group.size() <= 1) {
-				parent.setRepeating(false);
-				parent.setRecurrenceGroup(null);
-			}
 		}
-			
+		if(group.size() == 1) {
+			Event temp = group.remove(0);
+			temp.setRecurrenceGroup(null);
+			temp.setRepeating(false);
+		}
 	}
 	
 	public List<Event> getEventsInRecurrenceGroup() {
