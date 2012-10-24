@@ -1,9 +1,10 @@
-package testing;
+package humberto.testingClasses;
 
 import java.util.ArrayList;
 
-import scheduler.Event;
-import scheduler.EventCollection;
+import eventcollection.Event;
+import eventcollection.EventCollection;
+
 
 public class AdditionTester extends ParameterizedTester<Event[]> {
 

@@ -1,4 +1,4 @@
-package testing;
+package humberto.testingClasses;
 
 import scheduler.Event;
 

@@ -1,7 +1,7 @@
-package scheduler;
+package eventcollection;
 
 import java.util.ConcurrentModificationException;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Stack;
@@ -127,11 +127,11 @@ public class EventCollection implements Iterable<Event> {
 			return this.event.conflictsWith(event);
 		}
 
-		public int compareStart(Date time) {
+		public int compareStart(Calendar time) {
 			return this.event.getStart().compareTo(time);
 		}
 
-		public boolean containsTime(Date time) {
+		public boolean containsTime(Calendar time) {
 			return this.event.containsTime(time);
 		}
 	}
@@ -352,7 +352,7 @@ public class EventCollection implements Iterable<Event> {
 			{
 				//This section of the code is its own block as a precaution. It means
 				//that rightChild is only declared within this block. This is to stop
-				//anyone from reusing it below - tree transformations may update root's
+				//anyone from reusing it below - tree transformations may upCalendar root's
 				//right child directly, so rightChild would have an old value!
 				EventNode rightChild = root.getRightChild();
 				if (rightChild != null)
@@ -474,12 +474,12 @@ public class EventCollection implements Iterable<Event> {
 		root.setEvent(null);
 	}
 
-	public Event find(Date time)
+	public Event find(Calendar time)
 	{
 		return find(root, time);
 	}
 	
-	private static Event find(EventNode root, Date time)
+	private static Event find(EventNode root, Calendar time)
 	{
 		if (root == null)
 			return null;

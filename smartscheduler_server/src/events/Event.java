@@ -13,13 +13,14 @@ import practiceclasses.CalendarLogic;
 import practiceclasses.DateTime;
 
 /**
- * 
+ * CURRENTLY NOT BEING USED
  * @author Server Team
  *
  */
 
 
 public class Event {
+	
 	private String eName,name;
 	private TimeInterval tInterval;
 	private int priority;
