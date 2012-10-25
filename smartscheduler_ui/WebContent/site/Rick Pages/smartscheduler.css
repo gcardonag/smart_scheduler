@@ -1,7 +1,5 @@
 /* Navigation Bar */
 #navbar{
-	margin-left:auto;
-	margin-right:auto;
 	width:60%;
 	display: inline-block;
 }
@@ -28,10 +26,16 @@
 	border-radius:15%;
 	background-color: #72A3DB;
 }
-li.active{ 
-	background-color: #ff8f00;
-	color:white;
+#navbar ul li a:active{ 
+	color: white;
+	background-color: black;
+	border-radius:15%;
 }
+/*.active{
+	color: white;
+	background-color: black;
+	border-radius:15%;
+}*/
 
 /* Row */
 .row{
@@ -80,8 +84,12 @@ li.active{
 .col10{
 
 }
-
-/*Colors: Stained Glass Sky*/
+/* Font style */
+.titles{
+	font-size: 6;
+	font-family: Tahoma, sans-serif;
+}
+/* Colors: Stained Glass Sky */
 .text-red{
 	color: #AA360D;
 }
@@ -127,3 +135,4 @@ dl.list dt{
 	font-size: 6;
 	font-family: Tahoma, sans-serif;
 }
+
