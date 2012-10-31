@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public class Event implements Comparable<Event> {
 
-	private int id; //not used yet
+	private int id; // for now only being used for testing purposes
 	private String name;
 	private Calendar start;
 	private Calendar end;
@@ -14,6 +14,7 @@ public class Event implements Comparable<Event> {
 	
 	public Event(String name, Calendar start, Calendar end, boolean stat, boolean repeating)
 	{
+		this.id = 0;
 		this.name = name;
 		this.start = start;
 		this.end = end;
@@ -95,5 +96,10 @@ public class Event implements Comparable<Event> {
 	
 	public int getDuration() {
 		return start.compareTo(end);
+	}
+	
+	public String toString() {
+		String str = id+" "+name+"["+start.toString()+" - "+end.toString()+"] S="+isStatic()+"|R="+isRepeating();
+		return str;
 	}
 }
