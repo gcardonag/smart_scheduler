@@ -76,13 +76,19 @@
 
 }
 .col8{
-
+	display:inline-block; 
+	float:left; 
+	width: 80%;
+	min-height: 1px;
 }
 .col9{
 
 }
 .col10{
-
+	display:inline-block; 
+	float:left; 
+	width: 100%;
+	min-height: 1px;
 }
 /* Font style */
 .titles{

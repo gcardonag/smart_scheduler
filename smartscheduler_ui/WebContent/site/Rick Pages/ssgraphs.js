@@ -25,7 +25,7 @@ var pomodoro;
             tooltip: {
                 formatter: function() {
                   if(this.series.name == 'Elapsed time so far')
-                    return 'Elapsed time after '+
+                    return 'Total elapsed time after '+
                         this.x.toLowerCase() +': '+ this.y +'';
                   else
                     return ''+
