@@ -29,10 +29,9 @@ public class RecurrenceGroup {
 		Calendar currentEnd = (Calendar) parent.getEnd().clone();
 		
 		while(currentStart.compareTo(end) < 0) {
-			Calendar newStart = (Calendar) currentStart.clone();
-			Calendar newEnd = (Calendar) currentEnd.clone();
-			Event r = new Event(parent.getName(), newStart, newEnd, parent.isStatic(), true);
+			Event r = new Event(parent);
 			r.setRecurrenceGroup(this);
+			r.setRepeating(true);
 			
 			// DAILY
 			if(recurrence == 1) {
