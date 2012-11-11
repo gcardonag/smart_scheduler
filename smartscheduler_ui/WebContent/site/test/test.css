@@ -1,44 +1,58 @@
+html, body {
+	height:100%;
+}
+
 .tabs {
 	display: inline;
 	float: left;
-	height: 1000px;
+	/*height: 1000px;*/
+	height: 100%;
 	border-right: 2px solid;
 	background-color: #C0C0C0;
+	width:38%;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
 }
 
 .tab-title {
 	background-color: #FFDA5C;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 30px;
-	width: 500px;
+	/*width: 500px;*/
+	width:100%;
 }
 
 .tab-exam {
 	background-color: #FF6D31;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 30px;
-	width: 500px;
+	/*width: 500px;*/
+	width:100%;
 }
 
 .tab-project {
 	background-color: #EF597B;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 30px;
-	width: 500px;
+	/*width: 500px;*/
+	width:100%;
 }
 
 .tab-class {
 	background-color: #73B66B;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 30px;
-	width: 500px;
+	/*width: 500px;*/
+	width:100%;
 }
 
 .tab-extra {
 	background-color: #29A2C6;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 30px;
-	width: 500px;
+	/*width: 500px;*/
+	width:100%;
 }
 
 .main {
@@ -56,8 +70,10 @@
 	float: left;
 	padding-left: 20px;
 	background-color: #A0CFCF;
-	height: 1000px;
-	width: 840px;
+	/*height: 1000px;*/
+	height:100%;
+	/*width: 840px;*/
+	width:60%;
 }
 
 .class_eventBox {
