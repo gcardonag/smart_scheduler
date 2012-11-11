@@ -6,6 +6,9 @@
 		<link rel='stylesheet' href='smartscheduler.css'>
 		<link href='http://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'> <!-- not being used yet -->
 		<link rel='shortcut icon' href="favicon.ico"> <!-- icon that appears in browser tab -->
+		<script src='jquery-1.8.2.js'></script>
+		<script src="js/highcharts.js"></script>
+		<script src="ssgraphs.js"></script>
 	</head>
 
 	<body>
@@ -48,9 +51,10 @@
 		 				<li>Improve your work or study process</li>
 		 				<li>Strengthen your determination to keep on applying yourself in the face of complex situations</li>
 		 			</ul>
-		 		</dd>
+		 		</dd><br>
 		 		<dt class='text-red'>How does it do this?</dt>
 		  		<dd>Study periods are up to 25 minutes, with 3-5 minute intervals between period. After 4 of these periods, 15-30 minute breaks are needed.</dd>
+		  		<dd><div id='pomodoro'></div></dd>
 
 		  		<h2>Other techniques being integrated</h2>
 		 		<dt class='text-red'>Earliest Gap Earliest Deadline first</dt>

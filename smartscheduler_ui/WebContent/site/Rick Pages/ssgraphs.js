@@ -1,9 +1,9 @@
-$(function () {
-    var chart;
+var pomodoro;
+
     $(document).ready(function() {
-        chart = new Highcharts.Chart({
+        pomodoro = new Highcharts.Chart({
             chart: {
-                renderTo: 'container',
+                renderTo: 'pomodoro',
                 type: 'bar'
             },
             title: {
@@ -49,5 +49,3 @@ $(function () {
             }]
         });
     });
-    
-});
