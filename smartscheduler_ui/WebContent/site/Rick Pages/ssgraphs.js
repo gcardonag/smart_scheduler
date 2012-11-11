@@ -1,4 +1,5 @@
-var pomodoro;
+var pomodoro
+ ,  chart1;
 
     $(document).ready(function() {
         pomodoro = new Highcharts.Chart({
@@ -22,14 +23,17 @@ var pomodoro;
                 backgroundColor: '#FFFFFF',
                 reversed: true
             },
+            credits: {
+               enabled: false
+            },
             tooltip: {
                 formatter: function() {
                   if(this.series.name == 'Elapsed time so far')
                     return 'Total elapsed time after '+
-                        this.x.toLowerCase() +': '+ this.y +'';
+                        this.x.toLowerCase() +': '+ this.y +' minutes';
                   else
                     return ''+
-                        this.series.name +': '+ this.y +'';
+                        this.series.name +': '+ this.y +' minutes';
                 }
             },
             plotOptions: {

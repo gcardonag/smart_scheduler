@@ -7,7 +7,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'> <!-- not being used yet -->
 		<link rel='shortcut icon' href="favicon.ico"> <!-- icon that appears in browser tab -->
 		<script src='jquery-1.8.2.js'></script>
-		<script src="js/highcharts.js"></script>
+		<script src="highcharts.js"></script>
 		<script src="ssgraphs.js"></script>
 	</head>
 
@@ -22,56 +22,80 @@
 		</div>
 		
 		<div class='container'>
-		<div class='row'>
-			<div class='col1'><!-- Placeholder column --></div>
-			<div class='col4'>
-				<span class='text-red titles'>Why time management techniques?</span>
-				<ul>
-					<li>43% of Americans categorize themselves as disorganized and 21% have missed vital work deadlines.<sup>[1]</sup></li>
-					<li>75% of IT project failures are caused by missed deadlines.<sup>[2]</sup></li>
-					<li>Stress is a common side effect of students with poor time management skills.<sup>[3]</sup></li>
-				</ul>
-				<p>So, in order to fix we use time management techniques. The main one being applied in this application is the Pomodoro Technique (copyright), as developed by Francesco Cirillo.</p>
-			</div>
-		</div><!-- End of row -->
-		<div class='row'>
-			<div class='col1'><!-- Placeholder column --></div>
-			<div class='col8'>
-				<h2>The Pomodoro Technique</h2>
-			</div>
-		</div>
-		<div class='row'>
-			<div class='col1'><!-- Placeholder column --></div>
-			<div class='col4'>
-				<dl class='list'>
-		 		<dt class='text-red'>Goals of the Pomodoro Technique <sup>[4]</sup></dt>
-		 		<dd>[Currently quoting all of this from the book. Rework this part so that it is less quotes and more informative]</dd>
-		 		<dd>The aim of the Pomodoro Technique is to provide a simple tool/process for improving productivity(your own and that of your team) which is able to do the following: <!-- Maybe say "The aim...Technique, as stated in the book 'The Pomodoro Technique', is..."? -->
-		 			<ul>
-		 				<li>Alleviate anxiety linked to the habit of measuring time</li>
-		 				<li>Enhance focus and concentration by cutting down on interruptions</li>
-		 				<li>Increase awareness of your decisions</li>
-		 				<li>Boost motivation and keep it constant</li>
-		 				<li>Bolster the determination to achieve your goals</li>
-		 				<li>Refine the estimation process, both in qualitative and quantitative terms</li>
-		 				<li>Improve your work or study process</li>
-		 				<li>Strengthen your determination to keep on applying yourself in the face of complex situations</li>
-		 			</ul>
-		 		</dd><br>
+			<div class='row'>
+				<div class='col1'><!-- Placeholder column --></div>
+				<div class='col4'>
+					<span class='text-red titles'>Why time management techniques?</span>
+					<ul>
+						<li>43% of Americans categorize themselves as disorganized and 21% have missed vital work deadlines.<sup>[1]</sup></li>
+						<li>75% of IT project failures are caused by missed deadlines.<sup>[2]</sup></li>
+						<li>Stress is a common side effect of students with poor time management skills.<sup>[3]</sup></li>
+					</ul>
+					<p>So, in order to fix we use time management techniques. The main one being applied in this application is the Pomodoro Technique (copyright), as developed by Francesco Cirillo.</p>
+				</div>
+			</div><!-- End of row -->
 
-		  	<h2>Other techniques being integrated</h2>
-		 		<dt class='text-red'>Earliest Gap Earliest Deadline first</dt>
-		  		<dd>This consists of placing pomodoros in the earliest available gap in a person's generated schedule, prioritizing those that have the earliest deadline.</dd>
-				</dl>
-			</div><!-- End of column -->
-			<div class='col4'>
-				<dl class='list'>
-		 		  <dt class='text-red'>How does it do this?</dt>
-		  		<dd>Study periods are up to 25 minutes, with 3-5 minute intervals between period. After 4 of these periods, 15-30 minute breaks are needed.</dd>
-		  		<dd><div id='pomodoro'></div></dd>
-				</dl>
+			<div class='row'>
+				<div class='col1'></div>
+				<div class='col8'>
+					<h2>The Pomodoro Technique</h2>
+				</div>
 			</div>
-		</div><!-- End of row -->
+
+			<div class='row'>
+				<div class='col1'><!-- Placeholder column --></div>
+				<div class='col4'>
+
+					<dl class='list'>
+			 			<dt class='text-red'>Goals of the Pomodoro Technique</dt>
+			 			<dd class='text-green'>Currently quoting all of this from [4]. Rework this part so that it is less quotes and more informative.</dd>
+			 			<dd>The aim of the Pomodoro Technique is to provide a simple tool/process for improving productivity(your own and that of your team) which is able to do the following: <!-- Maybe say "The aim...Technique, as stated in the book 'The Pomodoro Technique', is..."? -->
+			 				<ul>
+				 				<li>Alleviate anxiety linked to the habit of measuring time</li>
+				 				<li>Enhance focus and concentration by cutting down on interruptions</li>
+				 				<li>Increase awareness of your decisions</li>
+				 				<li>Boost motivation and keep it constant</li>
+				 				<li>Bolster the determination to achieve your goals</li>
+				 				<li>Refine the estimation process, both in qualitative and quantitative terms</li>
+				 				<li>Improve your work or study process</li>
+				 				<li>Strengthen your determination to keep on applying yourself in the face of complex situations</li>
+			 				</ul>
+			 			</dd><br>
+					</dl>
+				</div><!-- End of column -->
+				<div class='col4'>
+					<dl class='list'>
+			 		  <dt class='text-red'>How does it do this?</dt>
+			  		<dd>Study periods are up to 25 minutes, with 3-5 minute intervals between period. After 4 of these periods, 15-30 minute breaks are needed.</dd>
+			  		<dd><div id='pomodoro'></div></dd>
+					</dl>
+				</div><!-- End of column -->
+			</div><!-- End of row -->
+			
+			<div class='row'>
+				<div class='col1'><!-- Placeholder column --></div>
+				<div class='col4'>
+			  		<h2>Other techniques being integrated</h2>
+			  		<dl class='list'>
+				 			<dt class='text-red'>Earliest Gap Earliest Deadline first</dt>
+				  		<dd>This consists of placing pomodoros in the earliest available gap in a person's generated schedule, prioritizing those that have the earliest deadline.</dd>
+			  		</dl>
+				</div><!-- End of column -->
+			</div><!-- End of row -->
+			
+			<div class='row'>
+				<div class='col1'></div>
+				<div class='col4'>
+					<dl class='references-list'>
+			 			<dt class='text-blue'>References</dt>
+			 			<dd>[1] Formal Methods for Components and Objects: 5th IS, FMCO 2006, Amsterdam, Netherlands, November 7-10,2006, Revised Lectures ... / Programming and Software Engineering</dd>
+						<dd>[2] IT Cortex, Failure Causes http://www.it-cortex.com/Stat_Failure_Cause.htm</dd>
+						<dd>[3] Randy Pauch, Time Management Talk, http://www.alice.org/Randy/timetalk.htm</dd>
+						<dd>[4] Cirillo, Francesco. The Pomodoro Technique, 2007.</dd>
+					</dl>
+				</div>
+			</div>
+
 		</div><!-- End of container -->
 	</body>
 

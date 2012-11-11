@@ -40,8 +40,8 @@
 /* Row */
 .row{
 	clear: both;
-	padding-top: 1%;
-	padding-bottom: 1%;
+	padding-top: 1px;
+	padding-bottom: 1px;
 }
 /* Columns */
 .col1{
@@ -70,10 +70,16 @@
 	min-height: 1px;
 }
 .col6{
-
+	display:inline-block; 
+	float:left; 
+	width: 60%;
+	min-height: 1px;
 }
 .col7{
-
+	display:inline-block; 
+	float:left; 
+	width: 70%;
+	min-height: 1px;
 }
 .col8{
 	display:inline-block; 
@@ -82,7 +88,10 @@
 	min-height: 1px;
 }
 .col9{
-
+	display:inline-block; 
+	float:left; 
+	width: 90%;
+	min-height: 1px;
 }
 .col10{
 	display:inline-block; 
@@ -137,8 +146,11 @@
 /* Table */
 
 /* Lists */
-dl.list dt{
+dl dt{
 	font-size: 6;
 	font-family: Tahoma, sans-serif;
 }
 
+dl.references-list dd{
+	font-size: 12px;
+}
