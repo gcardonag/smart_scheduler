@@ -1,18 +1,18 @@
 html, body {
 	height:100%;
+	width:100%;
 }
 
 .tabs {
-	display: inline;
-	float: left;
-	/*height: 1000px;*/
-	height: 100%;
-	border-right: 2px solid;
-	background-color: #C0C0C0;
-	width:38%;
 	box-sizing:border-box;
-	-moz-box-sizing:border-box;
-	-webkit-box-sizing:border-box;
+	/*-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;*/
+	/*display: inline;*/
+	height: 100%;
+	width: 35%;
+	border-right: 2px solid;
+	/*float: left;*/
+	background-color: #C0C0C0;
 }
 
 .tab-title {
@@ -73,7 +73,7 @@ html, body {
 	/*height: 1000px;*/
 	height:100%;
 	/*width: 840px;*/
-	width:60%;
+	width:65%;
 }
 
 .class_eventBox {
