@@ -1,4 +1,4 @@
-package humberto.testingClasses;
+package testingclasses;
 
 
 public abstract class ParameterizedTester2<T, S> extends BaseTester {
