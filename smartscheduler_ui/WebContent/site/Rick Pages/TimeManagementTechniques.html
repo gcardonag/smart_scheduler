@@ -3,21 +3,18 @@
 <htmL lang='en'>
 	<head>
 	<title>Time Management Techniques</title>
-		<link rel='stylesheet' href='smartscheduler.css'>
+		<link rel='stylesheet' href='cloudCSS/smartscheduler.css'>
 		<link href='http://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'> <!-- not being used yet -->
-		<link rel='shortcut icon' href="favicon.ico"> <!-- icon that appears in browser tab -->
-		<script src='jquery-1.8.2.js'></script>
-		<script src="highcharts.js"></script>
-		<script src="ssgraphs.js"></script>
+		<link rel='shortcut icon' href="cloudIMG/favicon.ico"> <!-- icon that appears in browser tab -->
 	</head>
 
 	<body>
 		<div id='navbar'>
 			<ul>
-			<li><a href='index.html'>Home</a></li>
-		 	<li class='active'><a href='TimeManagementtechniques.html'>Time Management Techniques</a></li>
-		 	<li><a href='About.html'>About Us</a></li>
-		 	<li><a href='contact.html'>Contact Us</a></li>
+				<li><a href='index.html'>Home</a></li>
+			 	<li class='active'><a href='TimeManagementtechniques.html'>Time Management Techniques</a></li>
+			 	<li><a href='About.html'>About Us</a></li>
+			 	<li><a href='contact.html'>Contact Us</a></li>
 			</ul>
 		</div>
 		
@@ -32,7 +29,10 @@
 						<li>Stress is a common side effect of students with poor time management skills.<sup>[3]</sup></li>
 					</ul>
 					<p>So, in order to fix we use time management techniques. The main one being applied in this application is the Pomodoro Technique (copyright), as developed by Francesco Cirillo.</p>
-				</div>
+				</div><!-- End of column -->
+				<div class='col4'>
+					<div id='timeStats'></div>
+				</div><!-- End of column -->
 			</div><!-- End of row -->
 
 			<div class='row'>
@@ -40,7 +40,7 @@
 				<div class='col8'>
 					<h2>The Pomodoro Technique</h2>
 				</div>
-			</div>
+			</div><!-- End of row -->
 
 			<div class='row'>
 				<div class='col1'><!-- Placeholder column --></div>
@@ -48,7 +48,9 @@
 
 					<dl class='list'>
 			 			<dt class='text-red'>Goals of the Pomodoro Technique</dt>
-			 			<dd class='text-green'>Currently quoting all of this from [4]. Rework this part so that it is less quotes and more informative.</dd>
+			 			<dd>The Pomodoro Technique, developed by Francesco Cirillo and outlined in his book <em>The Pomodoro Technique</em> is a time management technique whose aim is "to provide a simple tool/process for improving productivity"<sup>[4]</sup>. It does this by defining study periods into blocks of 25 minutes, which are followed by breaks of 3-5 minutes. If multiple periods are done in succession then after the 4th iteration of the study-break period cycle there is an elongated 15-30 minute break. This is to help the person focus on his work, but not be overwhelmed by it and also allow him time to let the information sink in. </dd>
+			 			<br>
+			 			<dd class='text-green'>Currently quoting what is below from reference [4]. Rework this part so that it is less quotes and more informative.</dd>
 			 			<dd>The aim of the Pomodoro Technique is to provide a simple tool/process for improving productivity(your own and that of your team) which is able to do the following: <!-- Maybe say "The aim...Technique, as stated in the book 'The Pomodoro Technique', is..."? -->
 			 				<ul>
 				 				<li>Alleviate anxiety linked to the habit of measuring time</li>
@@ -61,14 +63,12 @@
 				 				<li>Strengthen your determination to keep on applying yourself in the face of complex situations</li>
 			 				</ul>
 			 			</dd><br>
+			 		  <dt class='text-red'>How does it do this?</dt>
+			  		<dd>Study periods are up to 25 minutes, with 3-5 minute intervals between period. After 4 of these periods, 15-30 minute breaks are needed.</dd>
 					</dl>
 				</div><!-- End of column -->
 				<div class='col4'>
-					<dl class='list'>
-			 		  <dt class='text-red'>How does it do this?</dt>
-			  		<dd>Study periods are up to 25 minutes, with 3-5 minute intervals between period. After 4 of these periods, 15-30 minute breaks are needed.</dd>
-			  		<dd><div id='pomodoro'></div></dd>
-					</dl>
+					<div id='pomodoro'></div>
 				</div><!-- End of column -->
 			</div><!-- End of row -->
 			
@@ -93,10 +93,16 @@
 						<dd>[3] Randy Pauch, Time Management Talk, http://www.alice.org/Randy/timetalk.htm</dd>
 						<dd>[4] Cirillo, Francesco. The Pomodoro Technique, 2007.</dd>
 					</dl>
-				</div>
-			</div>
+				</div><!-- End of column -->
+			</div><!-- End of row -->
 
 		</div><!-- End of container -->
-	</body>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src='cloudJS/jquery-1.8.2.js'></script>
+    <script src="cloudJS/highcharts.js"></script>
+		<script src="cloudJS/ssgraphs.js"></script>
 
 </html>

@@ -1,4 +1,6 @@
-/* Navigation Bar */
+/******************
+ * Navigation Bar *
+ ******************/
 #navbar{
 	width:60%;
 	display: inline-block;
@@ -37,6 +39,12 @@
 	border-radius:15%;
 }*/
 
+/******** 
+ * Body *
+ ********/
+.container{
+
+}
 /* Row */
 .row{
 	clear: both;
@@ -99,11 +107,7 @@
 	width: 100%;
 	min-height: 1px;
 }
-/* Font style */
-.titles{
-	font-size: 6;
-	font-family: Tahoma, sans-serif;
-}
+
 /* Colors: Stained Glass Sky */
 .text-red{
 	color: #AA360D;
@@ -136,7 +140,6 @@
 	background-color: #F98434;
 }
 
-
 /* Borders
 .inset-green{
 	border-style: inset;
@@ -144,6 +147,12 @@
 } */
 
 /* Table */
+
+/* Font style */
+.titles{
+	font-size: 6;
+	font-family: Tahoma, sans-serif;
+}
 
 /* Lists */
 dl dt{
