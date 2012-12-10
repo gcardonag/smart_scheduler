@@ -1,17 +1,17 @@
-package humberto.testingClasses;
+package testingclasses;
 
 import java.lang.reflect.Array;
 
 
-public class PermutationTester<T> extends SimpleTester {
+public class PermutationTester2<T, S> extends ParameterizedTester<S> {
 
 	private Class<T> elementType;
 	private T[] dataSet;
-	private ParameterizedTester<T[]> innerTester;
+	private ParameterizedTester2<T[], S> innerTester;
 	private int minSubsetSize;
 	private int maxSubsetSize;
 	
-	public PermutationTester(Class<T> elementType, T[] dataSet, ParameterizedTester<T[]> innerTester)
+	public PermutationTester2(Class<T> elementType, T[] dataSet, ParameterizedTester2<T[], S> innerTester)
 	{
 		this.elementType = elementType;
 		this.dataSet = dataSet;
@@ -20,7 +20,7 @@ public class PermutationTester<T> extends SimpleTester {
 		this.maxSubsetSize = dataSet.length;
 	}
 	
-	public PermutationTester(Class<T> elementType, T[] dataSet, ParameterizedTester<T[]> innerTester,
+	public PermutationTester2(Class<T> elementType, T[] dataSet, ParameterizedTester2<T[], S> innerTester,
 			int minSubsetSize, int maxSubsetSize)
 	{
 		if (minSubsetSize < 0)
@@ -41,16 +41,16 @@ public class PermutationTester<T> extends SimpleTester {
 		return dataSet;
 	}
 
-	public ParameterizedTester<T[]> getInnerTester() {
+	public ParameterizedTester2<T[], S> getInnerTester() {
 		return innerTester;
 	}
 
 	public String getName() {
-		return "Permutation Tester";
+		return "Permutation Tester 2";
 	}
 
 	@SuppressWarnings("unchecked")
-	protected boolean runInternalTest() {
+	protected boolean runInternalTest(S secondArgument) {
 		//This tester implements an exhaustive test that checks a certain
 		//subtest with every permutation of a given data set.
 
@@ -62,7 +62,7 @@ public class PermutationTester<T> extends SimpleTester {
 		{
 			//Check for length = 0
 			subset = (T[]) Array.newInstance(elementType, 0);
-			if (!innerTester.runTest(subset))
+			if (!innerTester.runTest(subset, secondArgument))
 				return false;
 		}
 		
@@ -71,14 +71,14 @@ public class PermutationTester<T> extends SimpleTester {
 		for (; length < maxSubsetSize; length++)
 		{
 			subset = (T[]) Array.newInstance(elementType, length);
-			if (!testPermutations(0, subset, used))
+			if (!testPermutations(0, subset, used, secondArgument))
 				return false;
 		}
 		
 		return true;
 	}
 
-	private boolean testPermutations(int index, T[] subset, boolean[] used) {
+	private boolean testPermutations(int index, T[] subset, boolean[] used, S secondArgument) {
 		if (index + 1 < subset.length)
 		{
 			for (int k = 0; k < used.length; k++)
@@ -87,7 +87,7 @@ public class PermutationTester<T> extends SimpleTester {
 				{
 					used[k] = true;
 					subset[index] = dataSet[k];
-					if (!testPermutations(index + 1, subset, used))
+					if (!testPermutations(index + 1, subset, used, secondArgument))
 						return false;
 					used[k] = false;
 				}
@@ -100,7 +100,7 @@ public class PermutationTester<T> extends SimpleTester {
 				if (!used[k])
 				{
 					subset[index] = dataSet[k];
-					if (!innerTester.runTest((T[]) subset.clone()))
+					if (!innerTester.runTest((T[]) subset.clone(), secondArgument))
 					{
 						extraInformation = innerTester.getExtraInformation();
 						return false;
@@ -110,6 +110,4 @@ public class PermutationTester<T> extends SimpleTester {
 		}
 		return true;
 	}
-	
-	
 }

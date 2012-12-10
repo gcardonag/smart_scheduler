@@ -1,17 +1,17 @@
-package humberto.testingClasses;
+package testingclasses;
 
 import java.lang.reflect.Array;
 
 
-public class PermutationTester2<T, S> extends ParameterizedTester<S> {
+public class PermutationTester<T> extends SimpleTester {
 
 	private Class<T> elementType;
 	private T[] dataSet;
-	private ParameterizedTester2<T[], S> innerTester;
+	private ParameterizedTester<T[]> innerTester;
 	private int minSubsetSize;
 	private int maxSubsetSize;
 	
-	public PermutationTester2(Class<T> elementType, T[] dataSet, ParameterizedTester2<T[], S> innerTester)
+	public PermutationTester(Class<T> elementType, T[] dataSet, ParameterizedTester<T[]> innerTester)
 	{
 		this.elementType = elementType;
 		this.dataSet = dataSet;
@@ -20,7 +20,7 @@ public class PermutationTester2<T, S> extends ParameterizedTester<S> {
 		this.maxSubsetSize = dataSet.length;
 	}
 	
-	public PermutationTester2(Class<T> elementType, T[] dataSet, ParameterizedTester2<T[], S> innerTester,
+	public PermutationTester(Class<T> elementType, T[] dataSet, ParameterizedTester<T[]> innerTester,
 			int minSubsetSize, int maxSubsetSize)
 	{
 		if (minSubsetSize < 0)
@@ -41,16 +41,16 @@ public class PermutationTester2<T, S> extends ParameterizedTester<S> {
 		return dataSet;
 	}
 
-	public ParameterizedTester2<T[], S> getInnerTester() {
+	public ParameterizedTester<T[]> getInnerTester() {
 		return innerTester;
 	}
 
 	public String getName() {
-		return "Permutation Tester 2";
+		return "Permutation Tester";
 	}
 
 	@SuppressWarnings("unchecked")
-	protected boolean runInternalTest(S secondArgument) {
+	protected boolean runInternalTest() {
 		//This tester implements an exhaustive test that checks a certain
 		//subtest with every permutation of a given data set.
 
@@ -62,7 +62,7 @@ public class PermutationTester2<T, S> extends ParameterizedTester<S> {
 		{
 			//Check for length = 0
 			subset = (T[]) Array.newInstance(elementType, 0);
-			if (!innerTester.runTest(subset, secondArgument))
+			if (!innerTester.runTest(subset))
 				return false;
 		}
 		
@@ -71,14 +71,14 @@ public class PermutationTester2<T, S> extends ParameterizedTester<S> {
 		for (; length < maxSubsetSize; length++)
 		{
 			subset = (T[]) Array.newInstance(elementType, length);
-			if (!testPermutations(0, subset, used, secondArgument))
+			if (!testPermutations(0, subset, used))
 				return false;
 		}
 		
 		return true;
 	}
 
-	private boolean testPermutations(int index, T[] subset, boolean[] used, S secondArgument) {
+	private boolean testPermutations(int index, T[] subset, boolean[] used) {
 		if (index + 1 < subset.length)
 		{
 			for (int k = 0; k < used.length; k++)
@@ -87,7 +87,7 @@ public class PermutationTester2<T, S> extends ParameterizedTester<S> {
 				{
 					used[k] = true;
 					subset[index] = dataSet[k];
-					if (!testPermutations(index + 1, subset, used, secondArgument))
+					if (!testPermutations(index + 1, subset, used))
 						return false;
 					used[k] = false;
 				}
@@ -100,7 +100,7 @@ public class PermutationTester2<T, S> extends ParameterizedTester<S> {
 				if (!used[k])
 				{
 					subset[index] = dataSet[k];
-					if (!innerTester.runTest((T[]) subset.clone(), secondArgument))
+					if (!innerTester.runTest((T[]) subset.clone()))
 					{
 						extraInformation = innerTester.getExtraInformation();
 						return false;
@@ -110,4 +110,6 @@ public class PermutationTester2<T, S> extends ParameterizedTester<S> {
 		}
 		return true;
 	}
+	
+	
 }

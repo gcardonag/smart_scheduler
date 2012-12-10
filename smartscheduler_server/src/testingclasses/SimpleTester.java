@@ -1,4 +1,4 @@
-package humberto.testingClasses;
+package testingclasses;
 
 
 public abstract class SimpleTester extends BaseTester {

@@ -1,4 +1,4 @@
-package humberto.testingClasses;
+package testingclasses;
 
 import java.util.ArrayList;
 import java.util.Date;

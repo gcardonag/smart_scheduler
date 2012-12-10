@@ -1,18 +1,17 @@
 package eventcollection;
 
-import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
-public class EventQueue<K, V> {
+public class EventQueue implements Iterable<Event> {
 
 	private int size;
-	private LinkedList<EventEntry<K, V>> entries;
-	private Comparator<K> c;
+	private LinkedList<Event> entries;
 	
-	public EventQueue(Comparator<K> comp) {
-		entries = new LinkedList<EventEntry<K, V>>();
-		c = comp;
+	public EventQueue() {
+		entries = new LinkedList<Event>();
+		size = 0;
 	}
 	
 	public int size() {
@@ -23,63 +22,51 @@ public class EventQueue<K, V> {
 		return size == 0;
 	}
 
-	public EventEntry<K, V> insert(K key, V value) throws IllegalArgumentException {
-		// TODO check key method required to throw exception
-		EventEntry<K, V> EventEntry = new EventEntry<K, V>(key, value);
-		insertEventEntry(EventEntry);
-		return EventEntry;
+	public boolean insert(Event event) {
+		if(entries.isEmpty()) {
+			entries.addLast(event);
+			size++;
+			return true;
+		}
+		else {
+			Iterator<Event> iterator = iterator();
+			Event cur = iterator.next();
+			while(cur.compareTo(event) < 0) {
+				if(!iterator.hasNext())
+					return false;
+				cur = iterator.next();
+			}
+			return true;
+		}
 	}
 
-	public EventEntry<K, V> min() throws NoSuchElementException {
+	public Event min() throws NoSuchElementException {
 		if(entries.isEmpty())
 			throw new NoSuchElementException("event queue is empty");
 		else
 			return entries.getFirst();
 	}
 
-	public EventEntry<K, V> removeMin() throws NoSuchElementException {
+	public Event removeMin() throws NoSuchElementException {
 		if(entries.isEmpty())
 			throw new NoSuchElementException("event queue is empty");
-		else
-			return entries.removeFirst();
-	}
-	
-	private void insertEventEntry(EventEntry<K, V> e) {
-		if(entries.isEmpty()) {
-			entries.addFirst(e);
-		}
-		else if (c.compare(e.getKey(), entries.getLast().getKey()) > 0) {
-			entries.addLast(e);
-		}
 		else {
-			int curr = 1;
-			while (c.compare(e.getKey(), entries.get(curr).getKey()) > 0) {
-				curr++;
-			}
-			entries.add(curr-1, e);
+			size--;
+			return entries.removeFirst();
 		}
 	}
 	
-	/**
-	 * Internal class for queue entries
-	 */
-	private static class EventEntry<K, V> {
-		
-		private K k; // key
-		private V v; // value
-		
-		public EventEntry(K key, V value) {
-			k = key;
-			v = value;
-		}
-		
-		public K getKey() {
-			return k;
-		}
-		
-		public V getValue() {
-			return v;
-		}
+	public void clear() {
+		entries.clear();
+	}
+	
+	public Event[] toArray() {
+		Event[] a = new Event[size];
+		return entries.toArray(a);
+	}
+
+	public Iterator<Event> iterator() {
+		return entries.iterator();
 	}
 	
 }
