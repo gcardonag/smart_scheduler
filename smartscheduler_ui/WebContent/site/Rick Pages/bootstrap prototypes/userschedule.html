@@ -14,31 +14,6 @@
         padding-bottom: 40px;
         background-color: white;
       }
-      /* Styling for the login is here only for testing purposes */ 
-      .form-signin {
-        max-width: 300px;
-        padding: 19px 29px 29px;
-        margin: 0 auto 20px;
-        background-color: #fff;
-        border: 1px solid #e5e5e5;
-        -webkit-border-radius: 5px;
-           -moz-border-radius: 5px;
-                border-radius: 5px;
-        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-                box-shadow: 0 1px 2px rgba(0,0,0,.05);
-      }
-      .form-signin .form-signin-heading,
-      .form-signin .checkbox {
-        margin-bottom: 10px;
-      }
-      .form-signin input[type="text"],
-      .form-signin input[type="password"] {
-        font-size: 16px;
-        height: auto;
-        margin-bottom: 15px;
-        padding: 7px 9px;
-      }
     </style>
 
     <!-- Fav and touch icons   Not Using This Yet
@@ -62,7 +37,7 @@
           <a class="brand" href="index.html"><img src="img/Logo.gif" height="100px" width="100px" ></a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="index.html">Home</a></li>
+              <li><a href="index.html">Home</a></li>
               <li><a href="timemanagement.html">Time Management Techniques</a></li>
               <li><a href="#aboutModal" data-toggle="modal">About</a></li>
               <li><a href="#contactModal" data-toggle="modal">Contact</a></li>
@@ -74,39 +49,160 @@
 
     <div class="container">
       <div class="page-header">
-        <h1>Smart Scheduler <small>prototype</small></h1>
+        <h1><i class="icon-user"></i> Test User <small>event scheduler</small></h1>
       </div>
-      <h3>This page is for prototyping purposes only.</h3>
-    	<h3>Try the buttons on the nav bar.</h3>
-      <h3>(Work in progress) If you click sign in it will take you to the manage events page, where you can add, edit and remove events.<h3>
-    	<h4>-Ricardo</h4>
 
-      <div class="row=fluid">
+      <div class="row-fluid">
         <div class="span1"></div>
         <div class="span5">
+          <!-- <h3>Select the event type you wish to schedule</h3> -->
+          <p class="lead">Select the event type you wish to schedule</p>
+          <div class="accordion" id="accordionEvents">
+            
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionEvents" href="#collapseClass" style="background-color: #46a546">
+                <strong style="color:white">Class</strong>
+                </a>
+              </div>
+              <div id="collapseClass" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  <form>
+                    <label>Name:</label>
+                    <input type="text"></input>
+                    <label>Start Time:</label>
+                    <input type="text"></input>
+                    <label>End Time:</label>
+                    <input type="text"></input>
+                    <label>Start Date:</label>
+                    <input type="text"></input>
+                    <label>End Date:</label>
+                    <input type="text"></input>
+                  </form>
+                </div>
+              </div><!-- End of collapseClass -->
+            </div><!-- End of Class accordion group -->
+            
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionEvents" href="#collapseExam" style="background-color: #ffc40d">
+                <strong style="color:white">Exam</strong>
+                </a>
+              </div>
+              <div id="collapseExam" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  <form>
+                    <label>Name:</label>
+                    <input type="text"></input>
+                  </form>
+                </div>
+              </div><!-- End of collapseExam -->
+            </div><!-- End of Exam accordion group -->
+            
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionEvents" href="#collapseProject" style="background-color: #9d261d">
+                <strong style="color:white">Project</strong>
+                </a>
+              </div>
+              <div id="collapseProject" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  <form>
+                    <label>Name:</label>
+                    <input type="text"></input>
+                  </form>
+                </div>
+              </div><!-- End of collapseClass -->
+            </div><!-- End of Project accordion group -->
 
-        </div>
-        <div class="span5">
-          <!-- Sign in form -->
-          <form class="form-signin">
-            <h2 class="form-signin-heading text-success">Please sign in</h2>
-            <input type="text" class="input-block-level" placeholder="Email address">
-            <input type="password" class="input-block-level" placeholder="Password">
-            <label class="checkbox">
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
-            <a href="https://gaemail.upr.edu/ascc/index.php?action=resetbyquestions">Can't access your account?</a>
-            <button class="btn btn-large btn-inverse" type="submit" onClick="signIn();">Sign in</button>
-          </form>
-          <!--End of sign in form -->
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionEvents" href="#collapseExtra" style="background-color: #049cdb">
+                <strong style="color:white">Extracurricular</strong>
+                </a>
+              </div>
+              <div id="collapseExtra" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  <form>
+                    <label>Name:</label>
+                    <input type="text"></input>
+                  </form>
+                </div>
+              </div><!-- End of collapseClass -->
+            </div><!-- End of Extracurricular accordion group -->
+
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionEvents" href="#collapseCustom" style="background-color: gray">
+                <strong style="color:white">Custom</strong>
+                </a>
+              </div>
+              <div id="collapseCustom" class="accordion-body collapse">
+                <div class="accordion-inner">
+                  <form>
+                    <label>Name:</label>
+                    <input type="text"></input>
+                  </form>
+                </div>
+              </div><!-- End of collapseClass -->
+            </div><!-- End of Custom accordion group -->
+
+          </div><!-- End of accordion -->
+
+          <!-- Button Version Start -->
+          <div class="btn-group" data-toggle="button">
+            <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#eClass" data-parent="#eventForms">
+            Class
+            </button>
+            <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#eProject" data-parent="#eventForms">
+            Project
+            </button>
+            <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#eExam" data-parent="#eventForms">
+            Exam
+            </button>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#eExtra" data-parent="#eventForms">
+            Extracurricular
+            </button>
+            <button type="button" class="btn" data-toggle="collapse" data-target="#eCustom" data-parent="#eventForms">
+            Custom
+            </button>
+          </div>
+          
+          <div id="eClass" class="collapse">
+            <form>
+              <label>Name:</label>
+              <input type="text"></input>
+            </form>
+          </div>
+          <div id="eProject" class="collapse">
+            Project event forms
+          </div>
+          <div id="eExam" class="collapse">
+            Exam event forms
+          </div>
+          <div id="eExtra" class="collapse">
+            Extracurricular Event forms
+          </div>
+          <div id="eCustom" class="collapse">
+            Custom event forms
+          </div>
+          <!-- End of button version -->
+          
         </div><!-- End of collumn -->
-      </div>
+       
+        <div class="span5">
+          <p class="lead">Added events will show up here</p>
+        </div><!-- End of collumn -->
+      </div><!-- End of row -->
 
-      <!-- Insert footer code here
-      <div>
-          <p>Made with Bootstrap</p>
-      </div> -->
     </div> <!-- /container -->
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>Made with Bootstrap</p>
+      </div>
+    </footer>
 
     <!-- About Modal -->
     <div id="aboutModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -133,9 +229,13 @@
         <h3 id="myModalLabel">Contact us!</h3>
       </div>
       <div class="modal-body">
-        <p>Forms go here</p>
-        <input placeholder="email"></input>
-        <textarea placeholder="Comments and/or suggestions"></textarea>
+        <form>
+          <p>Forms go here</p>
+          <label>Email</label>
+          <input placeholder="email"></input>
+           <label>Comments</label>
+          <textarea placeholder="Comments and/or suggestions"></textarea>
+        </form>
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>

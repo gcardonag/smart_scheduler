@@ -79,10 +79,11 @@
       <h3>This page is for prototyping purposes only.</h3>
     	<h3>Try the buttons on the nav bar.</h3>
       <h3 class="muted">(Work in progress) If you click sign in it will take you to the manage events page, where you can add, edit and remove events to and from a JSON object.<h3>
+      <h4> &nbsp; Click <a href="userschedule.html">here</a> to go to the Test User event manager page.
       <h3 class="muted">(Work in progress) Being able to submit the info filled in the Contact us forms to a test JSON object</h3>
     	<h4>-Ricardo</h4>
 
-      <div class="row=fluid">
+      <div class="row-fluid">
         <div class="span1"></div>
         <div class="span5">
           <h2 class="text-success">How it works</h2>
@@ -96,13 +97,13 @@
           <!-- Sign in form -->
           <form class="form-signin">
             <h2 class="form-signin-heading text-success">Please sign in</h2>
-            <input type="text" class="input-block-level" placeholder="Email address">
-            <input type="password" class="input-block-level" placeholder="Password">
+            <input type="text" class="input-block-level" name="username" id="username" placeholder="Email address">
+            <input type="password" class="input-block-level" name="password" id="password" placeholder="Password">
             <label class="checkbox">
               <input type="checkbox" value="remember-me"> Remember me
             </label>
-            <button class="btn btn-large btn-inverse" type="submit" onClick="signIn();">Sign in</button>
-            <h5><a href="https://gaemail.upr.edu/ascc/index.php?action=resetbyquestions">Can't access your account?</a></h5>
+            <button class="btn btn-large btn-inverse" type="submit" name="signInBtn" id="signInBtn">Sign in</button>
+            <h5><a href="https://gaemail.upr.edu/ascc/index.php?action=resetbyquestions" target="_blank">Can't access your account?</a></h5>
           </form>
           <!--End of sign in form -->
         </div><!-- End of collumn -->
@@ -111,7 +112,7 @@
     </div> <!-- /container -->
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer>
       <div class="container">
         <p>Made with Bootstrap</p>
       </div>
