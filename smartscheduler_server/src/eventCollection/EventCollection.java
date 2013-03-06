@@ -1,4 +1,5 @@
-package eventcollection;
+package eventCollection;
+
 
 import java.util.ConcurrentModificationException;
 import java.util.Calendar;

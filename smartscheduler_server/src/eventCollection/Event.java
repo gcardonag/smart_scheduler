@@ -1,4 +1,4 @@
-package eventcollection;
+package eventCollection;
 
 import java.util.Calendar;
 
@@ -6,18 +6,18 @@ public class Event implements Comparable<Event> {
 
 	private int id; // for now only being used for testing purposes
 	private String name;
-	private Calendar start;
-	private Calendar end;
+	protected Calendar start;
+	protected Calendar end;
 	private boolean staticEvent;
 	private boolean repeating;
-	private RecurrenceGroup recurrenceGroup;
+	protected RecurrenceGroup recurrenceGroup;
 	
 	public Event(String name, Calendar start, Calendar end, boolean stat, boolean repeating)
 	{
 		this.id = 0;
 		this.name = name;
-		this.start = start;
-		this.end = end;
+		this.start = (Calendar) start.clone();
+		this.end = (Calendar) end.clone();
 		this.repeating = repeating;
 		if(!repeating)
 			recurrenceGroup = null;
@@ -73,9 +73,17 @@ public class Event implements Comparable<Event> {
 			return (start.compareTo(other.end) < 0);
 	}
 
+	/**@deprecated
+	 * Determines whether a time unit falls in the time range
+	 * of this event.
+	 * 
+	 * @param time - the time unit.
+	 * @return true if the unit occurs in this event's time range,
+	 * false otherwise.
+	 */
 	public boolean containsTime(Calendar time) {
-		return (start.compareTo(time) >= 0 &&
-				end.compareTo(time) <= 0);
+		return (start.compareTo(time) <= 0 &&
+				end.compareTo(time) >= 0);
 	}
 
 	public RecurrenceGroup getRecurrenceGroup() {
@@ -99,7 +107,17 @@ public class Event implements Comparable<Event> {
 	}
 	
 	public String toString() {
-		String str = id+" "+name+"["+start.toString()+" - "+end.toString()+"] S="+isStatic()+"|R="+isRepeating();
+		String str = "SmartScheduler.Event{"
+				//+ " 'ID': " + id  
+				+ ", 'Name' : " + name
+				+ ", 'CalendarRange' : [ "+ start.getTime().toString()  
+					+ " - " + end.getTime().toString() + " ]"
+				//+ ", 'Static' : "+isStatic()
+				//+ ", 'Repeating' : " + isRepeating()
+				+ "}"
+				;
 		return str;
+		
+		
 	}
 }
