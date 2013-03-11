@@ -8,19 +8,19 @@
 	
 	height: 100px;
 	padding-left: 75px;
-	border: 2px solid black; 
+	
 	
 }
 
 .signIn{
-	border: 1px solid #E5E5E5;
+	
 	background: #F5F5F5;
 	display:inline-block;
 	height: 40%; 
 	position: relative; 
 	left: 50%;
 	right: 50%;
-	top:-275px; 
+	top:-280px; 
 	width: 300px;
 	padding: 20px 20px 20px;
 	margin-right: 60%;
@@ -46,6 +46,7 @@
 
 .text-white{
 	color:white;
+	padding-top: 6px;
 }
 
 .numberCircle {
@@ -63,7 +64,7 @@
     color: #666;
     text-align: center;
 
-    font: 32px Arial, sans-serif
+    font: 32px, sans-serif;
 }
 
 .verticalLine {
