@@ -6,7 +6,13 @@ $(document).ready(function () {
         var password = $("#password").val();
 
         //call the authenticate function
-        authenticate(userName, password);
+        //authenticate(userName, password);
+        alert("OMG " + userName + ", your password is " + password);
+    });
+
+        $("a").click(function(event){
+        event.preventDefault();
+        $(this).hide("slow");
     });
 });
 
