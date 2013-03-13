@@ -62,12 +62,17 @@ public class ScheduleOptions {
 		
 		for(int i = 0; i < forbiddenHours.size() ; i++){
 			Event e = forbiddenHours.get(i) ;
-			e.getStart().set(Calendar.YEAR, currentDay.get(Calendar.YEAR)) ;
-			e.getStart().set(Calendar.MONTH, currentDay.get(Calendar.MONTH)) ;
-			e.getStart().set(Calendar.DAY_OF_MONTH, currentDay.get(Calendar.DAY_OF_MONTH)) ;
-			e.getEnd().set(Calendar.YEAR, currentDay.get(Calendar.YEAR)) ;
-			e.getEnd().set(Calendar.MONTH, currentDay.get(Calendar.MONTH)) ;
-			e.getEnd().set(Calendar.DAY_OF_MONTH, currentDay.get(Calendar.DAY_OF_MONTH)) ;
+			Calendar start = e.getStart() ;
+			Calendar end = e.getEnd() ;
+			start.set(Calendar.YEAR, currentDay.get(Calendar.YEAR)) ;
+			start.set(Calendar.MONTH, currentDay.get(Calendar.MONTH)) ;
+			start.set(Calendar.DAY_OF_MONTH, currentDay.get(Calendar.DAY_OF_MONTH)) ;
+			
+			end.set(Calendar.YEAR, currentDay.get(Calendar.YEAR)) ;
+			end.set(Calendar.MONTH, currentDay.get(Calendar.MONTH)) ;
+			end.set(Calendar.DAY_OF_MONTH, currentDay.get(Calendar.DAY_OF_MONTH)) ;
+			
+			e.setDate(start, end) ;
 		}
 		return forbiddenHours ;
 	}

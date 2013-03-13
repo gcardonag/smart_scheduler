@@ -44,7 +44,6 @@ public abstract class DaySchedule{
 	 * @param events - the events already scheduled.
 	 */
 	public void processStaticEvents(Iterable<Event> events){
-		
 		for (Event e : events) {
 			ArrayList<TimeSlot> newTimeSlots = new ArrayList<TimeSlot>();
 			for (TimeSlot t : timeSlots) {
