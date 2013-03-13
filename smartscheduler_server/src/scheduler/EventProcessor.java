@@ -1,8 +1,8 @@
-package testing.scheduler;
+package scheduler;
 
 import java.util.Iterator;
 import java.util.List;
-import eventcollection.*;
+import eventCollection.*;
 
 public class EventProcessor {
 	
@@ -24,7 +24,7 @@ public class EventProcessor {
 	}
 	
 	public static void processQueue(EventQueue q, EventCollection c) {
-		
+		//TODO apply time management technique
 	}
 
 }

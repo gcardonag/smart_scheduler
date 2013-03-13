@@ -249,7 +249,7 @@ public class ParetoElsenhowerScheduler {
 	 */
 	private void resetEventTime(Calendar day, DynamicEvent de){
 		RecurrenceGroup rg = de.getRecurrenceGroup() ;
-		if(rg.getRecurrence() == RecurrenceGroup.RECURRENCE_WEEKLY){
+		if(rg.getRecurrence() == RecurrenceGroup.WEEKLY){
 			int result = de.firstDayOfWeekWithRespectToDate(day) ;
 			if(day.get(Calendar.DAY_OF_WEEK) == result){
 				de.resetTime() ;
