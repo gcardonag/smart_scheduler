@@ -5,23 +5,50 @@ import java.util.LinkedList;
 
 import eventCollection.Event;
 
+/**
+ * Breaks an event into it's corresponding list of pomodoro events, event durations are in minutes
+ * @author user
+ *
+ */
 public class PomodoroCreator {
 	
+	public static final int DEFAULT_POMODORO_DURATION = 25;
+	public static final int DEFAULT_SHORT_BREAK_DURATION = 5;
+	public static final int DEFAULT_LONG_BREAK_DURATION = 30;
 	private int pomodoro_duration;
 	private int short_break_duration;
 	private int long_break_duration;
 	
+	/**
+	 * Constructs a creator using the given durations for each event
+	 * @param pomodoro duration for each pomodoro event
+	 * @param short_break duration for each of the short breaks between pomodoros
+	 * @param long_break duration for each long break after 4 pomodoro events
+	 */
 	public PomodoroCreator(int pomodoro, int short_break, int long_break) {
 		pomodoro_duration = pomodoro;
 		short_break_duration = short_break;
 		long_break_duration = long_break;
 	}
-
+	
+	/**
+	 * Default constructor, uses the default values for event durations
+	 */
+	public PomodoroCreator() {
+		pomodoro_duration = DEFAULT_POMODORO_DURATION;
+		short_break_duration = DEFAULT_SHORT_BREAK_DURATION;
+		long_break_duration = DEFAULT_LONG_BREAK_DURATION;
+	}
+	
+	/**
+	 * Generates a list of pomodoro events from a single Event object
+	 * @param e an event to break into pomodoro events
+	 * @return a list of pomodoro events generates from an ordinary event
+	 */
 	public Iterable<Event> getPomodorosFromEvent(Event e) {
 		LinkedList<Event> list = new LinkedList<Event>();
 		int duration = e.getDuration();
 		if(duration < pomodoro_duration) {
-			System.out.println("SINGLE: Duration: "+duration);
 			list.add(e);
 			return list;
 		}

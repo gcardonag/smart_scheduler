@@ -6,8 +6,14 @@ import eventCollection.*;
 
 public class EventProcessor {
 	
-	public static boolean processEvents(List<Event> list, EventQueue q, EventCollection c) {
-		Iterator<Event> iterator = list.iterator();
+	/**
+	 * Distributes static and dynamic events into a corresponding collection or queue
+	 * @param events the list of events to be processed
+	 * @param q a destination EventQueue
+	 * @param c a destination EventCollection
+	 */
+	public static void processEvents(List<Event> events, EventQueue q, EventCollection c) {
+		Iterator<Event> iterator = events.iterator();
 		Event current;
 		while(iterator.hasNext()) {
 			current = iterator.next();
@@ -18,13 +24,6 @@ public class EventProcessor {
 				q.insert(current);
 			}
 		}
-		if(list.size() != (q.size() + c.size()))
-			return false;
-		return true;
-	}
-	
-	public static void processQueue(EventQueue q, EventCollection c) {
-		//TODO apply time management technique
 	}
 
 }

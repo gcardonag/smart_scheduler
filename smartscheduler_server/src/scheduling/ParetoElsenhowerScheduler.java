@@ -10,6 +10,7 @@ import dynamicEventCollection.DynamicEvent;
 import dynamicEventCollection.ParetoElsenhowerEvent;
 import eventCollection.Event;
 import eventCollection.EventCollection;
+import eventCollection.EventQueue;
 import eventCollection.RecurrenceGroup;
 import optionStructures.ScheduleOptions;
 
@@ -93,7 +94,7 @@ public class ParetoElsenhowerScheduler {
 	 * @param counterEnd - the end date for which to schedule.
 	 * @return an ArrayList of Events that represent the dynamic event scheduling.
 	 */
-	public ArrayList<Event> scheduleDynamicEvents(ArrayList<ParetoElsenhowerEvent> dynamicEvents){
+	public ArrayList<Event> scheduleDynamicEvents(EventQueue dynamicEvents){
 		
 		// Prepare lists for scheduling and results.
 		unprocessedP1 = new ArrayList<DynamicEvent>();
@@ -107,7 +108,7 @@ public class ParetoElsenhowerScheduler {
 			
 			//Prepare day for scheduling.
 			ParetoSchedule currentDay = new ParetoSchedule(counterStart, staticEvents, options);
-			
+			System.out.println(currentDay);
 			//Categorization for prioritization occurs here.
 			addDynamicEventsInRange(currentDay.getDay(), dynamicEvents) ;
 			removeEventsNotInRange(currentDay.getDay()) ;
@@ -168,14 +169,12 @@ public class ParetoElsenhowerScheduler {
 	 * @param day - the day for which to check if in range.
 	 * @param dynamicEvents - the dynamic events to check if in range.
 	 */
-	private void addDynamicEventsInRange(Calendar day, ArrayList<ParetoElsenhowerEvent> dynamicEvents){	
-		for(int i = 0; i < dynamicEvents.size(); i++){
-			ParetoElsenhowerEvent event = (ParetoElsenhowerEvent) dynamicEvents.get(i);
+	private void addDynamicEventsInRange(Calendar day, EventQueue dynamicEvents){	
+		while( !dynamicEvents.isEmpty() && ((ParetoElsenhowerEvent)dynamicEvents.min()).containsDay(day) ){
+			ParetoElsenhowerEvent event = (ParetoElsenhowerEvent) dynamicEvents.removeMin();
 			
-			if(!event.containsDay(day)) continue ;
-			dynamicEvents.remove(i);
-			i-- ;
-			
+			//if(!event.containsDay(day)) continue ;
+			//dynamicEvents.remove(i);
 			
 			if(event.getPriority() == PE_PRIORITY_HIGH){	
 				unprocessedP1.add(event) ;
