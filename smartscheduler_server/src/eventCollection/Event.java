@@ -1,23 +1,26 @@
 package eventCollection;
 
 import java.util.Calendar;
+import java.text.SimpleDateFormat;
 
 public class Event implements Comparable<Event> {
-
-	private int id; // for now only being used for testing purposes
+	
+	public static final String DATE_FORMAT = "d/MMM/yyyy kk:mm";
+	private int id; // unused
 	private String name;
-	protected Calendar start;
-	protected Calendar end;
+	private Calendar start;
+	private Calendar end;
 	private boolean staticEvent;
 	private boolean repeating;
-	protected RecurrenceGroup recurrenceGroup;
+	private RecurrenceGroup recurrenceGroup;
+	private int duration; //event duration in minutes
 	
 	public Event(String name, Calendar start, Calendar end, boolean stat, boolean repeating)
 	{
-		this.id = 0;
 		this.name = name;
 		this.start = (Calendar) start.clone();
 		this.end = (Calendar) end.clone();
+		setDuration();
 		this.repeating = repeating;
 		if(!repeating)
 			recurrenceGroup = null;
@@ -28,6 +31,7 @@ public class Event implements Comparable<Event> {
 		name = source.getName();
 		start = (Calendar) source.getStart().clone();
 		end = (Calendar) source.getEnd().clone();
+		duration = source.getDuration();
 		staticEvent = source.isStatic();
 		repeating = source.isRepeating();
 		recurrenceGroup = source.getRecurrenceGroup();
@@ -38,14 +42,30 @@ public class Event implements Comparable<Event> {
 		return name;
 	}
 	
+	public void setDate(Calendar start, Calendar end) {
+		this.start = (Calendar) start.clone();
+		this.end = (Calendar) end.clone();
+		setDuration();
+	}
+	
+	public void setStart(Calendar start) {
+		this.start = (Calendar) start.clone();
+		setDuration();
+	}
+	
 	public Calendar getStart()
 	{
-		return start;
+		return (Calendar) start.clone();
+	}
+	
+	public void setEnd(Calendar end) {
+		this.end = (Calendar) end.clone();
+		setDuration();
 	}
 	
 	public Calendar getEnd()
 	{
-		return end;
+		return (Calendar) end.clone();
 	}
 	
 	public boolean isRepeating() {
@@ -62,28 +82,18 @@ public class Event implements Comparable<Event> {
 	}
 
 	public int compareTo(Event other) {
-		return start.compareTo(other.start);
+		return start.compareTo(other.getStart()); //THIS NEEDS TO BE CHANGED
 	}
 	
 	public boolean conflictsWith(Event other)
 	{
-		if (start.compareTo(other.start) < 0)
-			return (end.compareTo(other.start) > 0);
-		else
-			return (start.compareTo(other.end) < 0);
+		Event earlier = start.before(other.getStart()) ? this : other;
+		Event later = start.before(other.getStart()) ? other: this;
+		return earlier.getEnd().after(later.getStart());
 	}
 
-	/**@deprecated
-	 * Determines whether a time unit falls in the time range
-	 * of this event.
-	 * 
-	 * @param time - the time unit.
-	 * @return true if the unit occurs in this event's time range,
-	 * false otherwise.
-	 */
 	public boolean containsTime(Calendar time) {
-		return (start.compareTo(time) <= 0 &&
-				end.compareTo(time) >= 0);
+		return start.before(time) && end.after(time);
 	}
 
 	public RecurrenceGroup getRecurrenceGroup() {
@@ -102,22 +112,24 @@ public class Event implements Comparable<Event> {
 		this.id = id;
 	}
 	
+	private void setDuration() {
+		int s = start.get(Calendar.HOUR_OF_DAY)*60+start.get(Calendar.MINUTE);
+		int day_diff = (end.get(Calendar.DAY_OF_YEAR)-start.get(Calendar.DAY_OF_YEAR))*24;
+		int e = (day_diff+end.get(Calendar.HOUR_OF_DAY))*60+end.get(Calendar.MINUTE);
+		duration = e-s;
+	}
+	
 	public int getDuration() {
-		return start.compareTo(end);
+		return duration;
 	}
 	
 	public String toString() {
-		String str = "SmartScheduler.Event{"
-				//+ " 'ID': " + id  
-				+ ", 'Name' : " + name
-				+ ", 'CalendarRange' : [ "+ start.getTime().toString()  
-					+ " - " + end.getTime().toString() + " ]"
-				//+ ", 'Static' : "+isStatic()
-				//+ ", 'Repeating' : " + isRepeating()
-				+ "}"
-				;
-		return str;
-		
-		
+		SimpleDateFormat f = new SimpleDateFormat(DATE_FORMAT);
+		String start_str = f.format(start.getTime());
+		String end_str = f.format(end.getTime());
+		String s = isStatic() ? "S" : "D";
+		String r = isRepeating() ? "R" : "NR";
+		return name+"[("+duration+") "+start_str+" - "+end_str+", "+s+", "+r+"]";
 	}
+	
 }

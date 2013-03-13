@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class RecurrenceGroup {
 	
-	public static final int RECURRENCE_DAILY = 1 ;
-	public static final int RECURRENCE_WEEKLY = 2 ;
-	public static final int RECURRENCE_MONTHLY = 3 ;
+	public static final int DAILY = Calendar.DAY_OF_YEAR;
+	public static final int WEEKLY = Calendar.WEEK_OF_YEAR;
+	public static final int MONTHLY = Calendar.MONTH;
 	
 	/** The event that represents the range of recurrent events. */
 	private Event parent;
@@ -82,14 +82,14 @@ public class RecurrenceGroup {
 			r.setRepeating(true);
 			
 			// DAILY recurrence
-			if(recurrence == RECURRENCE_DAILY) {
+			if(recurrence == DAILY) {
 				group.add(r);
 				currentStart.add(Calendar.DATE, interval);
 				currentEnd.add(Calendar.DATE, interval);
 				
 			}
 			// WEEKLY recurrence
-			else if(recurrence == RECURRENCE_WEEKLY) {
+			else if(recurrence == WEEKLY) {
 				if(weekly[currentStart.get(Calendar.DAY_OF_WEEK)-1]) {
 					group.add(r);
 				}
@@ -101,7 +101,7 @@ public class RecurrenceGroup {
 				}
 			}
 			// MONTHLY
-			else if(recurrence == RECURRENCE_MONTHLY) {
+			else if(recurrence == MONTHLY) {
 				group.add(r);
 				currentStart.add(Calendar.MONTH, interval);
 				currentEnd.add(Calendar.MONTH, interval);
@@ -142,14 +142,13 @@ public class RecurrenceGroup {
 	 * @return a boolean value.
 	 */
 	public boolean occursOnWeekday(int weekday){
-		if(recurrence == RECURRENCE_WEEKLY){
+		if(recurrence == WEEKLY){
 			return weekly[weekday-1] ;
 		}
 		return false ;
 	}
 	
-	//Not implemented yet.
 	public String toString(){
-		return super.toString() ;
+		return group.toString();
 	}
 }

@@ -1,15 +1,16 @@
 package eventCollection;
 
-
+import java.io.Serializable;
+import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
-public class EventCollection implements Iterable<Event> {
+public class EventCollection implements Iterable<Event>, Serializable {
 
-	/*
+	/**
 	 * What must an EventCollection provide?
 	 * 1. Fast insertion
 	 * 2. Fast deletion
@@ -23,6 +24,8 @@ public class EventCollection implements Iterable<Event> {
 	 * is an O(n) time operation for n elements. Insertion and deletion run in O(log n). Checking
 	 * for conflicts can also be done in O(log n) time.
 	 */
+
+	private static final long serialVersionUID = 3064586140744599833L;
 
 	private class EventCollectionIterator implements Iterator<Event>
 	{
@@ -219,6 +222,12 @@ public class EventCollection implements Iterable<Event> {
 		{
 			return false;
 		}
+	}
+	
+	public void add(Iterable<Event> events)
+	{
+		for(Event e : events)
+			add(e);
 	}
 
 	private static EventNode add(EventNode root, Event event)
@@ -582,5 +591,19 @@ public class EventCollection implements Iterable<Event> {
 
 	public Iterator<Event> iterator() {
 		return new EventCollectionIterator();
+	}
+	
+	public Event[] toArray() {
+		Event[] a = new Event[size];
+		int i = 0;
+		for(Event e : this) {
+			a[i] = e;
+			i++;
+		}
+		return a;
+	}
+	
+	public String toString() {
+		return Arrays.toString(this.toArray())+" Size: "+size;
 	}
 }
