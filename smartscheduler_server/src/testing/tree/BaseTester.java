@@ -1,6 +1,6 @@
-package testing.testingclasses;
+package testing.tree;
 
-import testing.scheduler.Event;
+import scheduler.Event;
 
 
 public abstract class BaseTester {

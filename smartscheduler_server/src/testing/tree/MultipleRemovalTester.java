@@ -1,9 +1,9 @@
-package testing.testingclasses;
+package testing.tree;
 
 import java.util.ArrayList;
 
-import testing.scheduler.Event;
-import testing.scheduler.EventCollection;
+import scheduler.Event;
+import scheduler.EventCollection;
 
 public class MultipleRemovalTester extends ParameterizedTester2<Event[], Event[]> {
 

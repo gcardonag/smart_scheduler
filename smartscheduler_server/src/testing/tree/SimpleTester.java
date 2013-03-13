@@ -1,4 +1,4 @@
-package testing.testingclasses;
+package testing.tree;
 
 
 public abstract class SimpleTester extends BaseTester {

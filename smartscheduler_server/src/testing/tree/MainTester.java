@@ -1,9 +1,9 @@
-package testing.testingclasses;
+package testing.tree;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import testing.scheduler.Event;
+import scheduler.Event;
 
 
 
