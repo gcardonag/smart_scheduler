@@ -105,7 +105,7 @@ public abstract class DynamicEvent extends Event {
 		if(rg == null)
 			return false ;
 		
-		if(rg.getRecurrence() == RecurrenceGroup.RECURRENCE_DAILY){
+		if(rg.getRecurrence() == RecurrenceGroup.DAILY){
 			
 			//Simple Daily Occurrence.
 			if(rg.getInterval() == 1) 
@@ -124,7 +124,7 @@ public abstract class DynamicEvent extends Event {
 			
 			
 		}
-		else if(rg.getRecurrence() == RecurrenceGroup.RECURRENCE_WEEKLY){
+		else if(rg.getRecurrence() == RecurrenceGroup.WEEKLY){
 			
 			int interval = rg.getInterval() ;
 			
@@ -164,7 +164,7 @@ public abstract class DynamicEvent extends Event {
 				}
 			}
 		}
-		else if(rg.getRecurrence() == RecurrenceGroup.RECURRENCE_MONTHLY){
+		else if(rg.getRecurrence() == RecurrenceGroup.MONTHLY){
 			
 			int interval = rg.getInterval() ;
 			
@@ -264,7 +264,7 @@ public abstract class DynamicEvent extends Event {
 	public int firstDayOfWeekWithRespectToDate(Calendar day){
 	
 		RecurrenceGroup rg = this.getRecurrenceGroup() ;
-		if(!(rg.getRecurrence() == RecurrenceGroup.RECURRENCE_WEEKLY))
+		if(!(rg.getRecurrence() == RecurrenceGroup.WEEKLY))
 			return  -1 ;
 		
 		Calendar start = (Calendar) this.start.clone() ;

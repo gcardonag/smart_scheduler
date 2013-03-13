@@ -8,8 +8,8 @@ public class Event implements Comparable<Event> {
 	public static final String DATE_FORMAT = "d/MMM/yyyy kk:mm";
 	private int id; // unused
 	private String name;
-	private Calendar start;
-	private Calendar end;
+	protected Calendar start;
+	protected Calendar end;
 	private boolean staticEvent;
 	private boolean repeating;
 	private RecurrenceGroup recurrenceGroup;
