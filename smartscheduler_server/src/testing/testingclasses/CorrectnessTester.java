@@ -1,9 +1,9 @@
-package testingclasses;
+package testing.testingclasses;
 
 import java.util.Arrays;
 
-import scheduler.Event;
-import scheduler.EventCollection;
+import testing.scheduler.Event;
+import testing.scheduler.EventCollection;
 
 public class CorrectnessTester extends ParameterizedTester2<EventCollection, Event[]> {
 

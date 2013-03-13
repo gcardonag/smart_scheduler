@@ -1,4 +1,4 @@
-package testingclasses;
+package testing.testingclasses;
 
 
 public abstract class ParameterizedTester2<T, S> extends BaseTester {

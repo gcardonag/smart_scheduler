@@ -1,4 +1,4 @@
-package events;
+package testing.events;
 
 public class TimeInterval {
 	private int startTime;
