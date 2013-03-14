@@ -18,7 +18,7 @@ public class MultipleRemovalTester extends ParameterizedTester2<Event[], Event[]
 			int k;
 			boolean removed;
 			boolean contained;
-			EventCollection collection = new EventCollection();
+			EventTree collection = new EventTree();
 			ArrayList<Event> content = new ArrayList<Event>();
 			
 			//Add events to the collection

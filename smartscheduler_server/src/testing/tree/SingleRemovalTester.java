@@ -22,7 +22,7 @@ public class SingleRemovalTester extends ParameterizedTester<Event[]> {
 			Event last;
 			boolean removed;
 			boolean contained;
-			EventCollection collection = new EventCollection();
+			EventTree collection = new EventTree();
 			ArrayList<Event> content = new ArrayList<Event>();
 			
 			//Add events to the collection

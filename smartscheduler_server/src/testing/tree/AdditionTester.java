@@ -19,7 +19,7 @@ public class AdditionTester extends ParameterizedTester<Event[]> {
 			int k;
 			int h;
 			boolean conflict;
-			EventCollection collection = new EventCollection();
+			EventTree collection = new EventTree();
 			ArrayList<Event> content = new ArrayList<Event>();
 			
 			//Add events to the collection

@@ -4,6 +4,11 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import eventCollection.Event;
 
+/**
+ * Simple tester for the Event class.
+ * @author user
+ *
+ */
 public class EventTester {
 
 	/**

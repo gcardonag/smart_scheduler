@@ -5,13 +5,13 @@ import java.util.Arrays;
 import scheduler.Event;
 import scheduler.EventCollection;
 
-public class CorrectnessTester extends ParameterizedTester2<EventCollection, Event[]> {
+public class CorrectnessTester extends ParameterizedTester2<EventTree, Event[]> {
 
 	public String getName() {
 		return "Correctness Tester";
 	}
 
-	protected boolean runInternalTest(EventCollection collection, Event[] content) {
+	protected boolean runInternalTest(EventTree collection, Event[] content) {
 		
 		try
 		{
