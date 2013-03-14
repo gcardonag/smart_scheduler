@@ -3,6 +3,7 @@ package eventCollection;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @author Nelson Reyes Ciena
  * @author Anthony Llanos
  */
-public class RecurrenceGroup {
+public class RecurrenceGroup implements Iterable<Event> {
 	
 	public static final int DAILY = Calendar.DAY_OF_YEAR;
 	public static final int WEEKLY = Calendar.WEEK_OF_YEAR;
@@ -35,7 +36,7 @@ public class RecurrenceGroup {
 	/** The end calendar day for the recurring event. */
 	private Calendar end;
 	
-	/** An array that indicates on which days of the week will the ocurrence occur.*/
+	/** An array that indicates on which days of the week will the occurrence occur.*/
 	private boolean[] weekly;
 	
 	/** A linked list which contains the recurrent events created by the class.*/
@@ -61,7 +62,7 @@ public class RecurrenceGroup {
 	}
 	
 	/** Processes and recreates the concurrent list of events based on the parameters. */
-	public void process() {
+	private void process() {
 		Calendar currentStart = (Calendar) parent.getStart().clone();
 		
 		/////////////////
@@ -96,10 +97,6 @@ public class RecurrenceGroup {
 				}
 				currentStart.add(Calendar.DATE, 1);
 				currentEnd.add(Calendar.DATE, 1);
-				if(currentStart.get(Calendar.DAY_OF_WEEK) == 7) {
-					currentStart.add(Calendar.WEEK_OF_YEAR, interval);
-					currentEnd.add(Calendar.WEEK_OF_YEAR, interval);
-				}
 			}
 			// MONTHLY
 			else if(recurrence == MONTHLY) {
@@ -151,5 +148,10 @@ public class RecurrenceGroup {
 	
 	public String toString(){
 		return group.toString();
+	}
+
+	@Override
+	public Iterator<Event> iterator() {
+		return group.iterator();
 	}
 }
