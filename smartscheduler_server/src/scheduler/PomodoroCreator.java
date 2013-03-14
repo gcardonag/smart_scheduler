@@ -7,7 +7,8 @@ import eventCollection.Event;
 
 /**
  * Breaks an event into it's corresponding list of pomodoro events, event durations are in minutes
- * @author user
+ * @author Nelson Reyes Ciena
+ * @author Anthony Llanos
  *
  */
 public class PomodoroCreator {
@@ -48,38 +49,46 @@ public class PomodoroCreator {
 	public Iterable<Event> getPomodorosFromEvent(Event e) {
 		LinkedList<Event> list = new LinkedList<Event>();
 		int duration = e.getDuration();
+		
+		//Case for a single pomodoro event (duration is shorter than a single pomodoro)
 		if(duration < pomodoro_duration) {
 			list.add(e);
 			return list;
 		}
+		
+		int count = 0;
 		int pomodoros = 0;
 		Calendar start = e.getStart();
 		Calendar end = e.getStart();
+		
 		while(duration >= pomodoro_duration) {
-			end = (Calendar) start.clone();
 			end.add(Calendar.MINUTE, pomodoro_duration);
-			Event p = new Event(e.getName(), start, end, false, e.isRepeating());
-			list.add(p);
-			duration-=pomodoro_duration;
+			duration -= pomodoro_duration;
 			pomodoros++;
-			if(pomodoros >= 4 && duration >= long_break_duration) {
-				start = (Calendar) end.clone();
-				end = (Calendar) start.clone();
+			count++;
+			Event p = new Event(e.getName()+" #"+count, start, end, false, e.isRepeating());
+			list.add(p);
+			//System.out.println("ADDED POMODORO: "+p.toString());
+			start.add(Calendar.MINUTE, pomodoro_duration);
+			
+			if(pomodoros >= 4 && duration >= long_break_duration + pomodoro_duration) {
 				end.add(Calendar.MINUTE, long_break_duration);
-				Event lb = new Event("Long Break", start, end, false, e.isRepeating());
-				list.add(lb);
-				duration-=long_break_duration;
+				duration -= long_break_duration;
 				pomodoros = 0;
+				Event lb = new Event(long_break_duration+" min. break", start, end, false, e.isRepeating());
+				list.add(lb);
+				//System.out.println("ADDED LONG BREAK: "+lb.toString());
+				start.add(Calendar.MINUTE, long_break_duration);
 			}
-			else if(duration >= short_break_duration) {
-				start = (Calendar) end.clone();
-				end = (Calendar) start.clone();
+			
+			else if(duration >= short_break_duration + pomodoro_duration) {
 				end.add(Calendar.MINUTE, short_break_duration);
-				Event sb = new Event("Short Break", start, end, false, e.isRepeating());
+				Event sb = new Event(short_break_duration+" min. break", start, end, false, e.isRepeating());
 				list.add(sb);
-				duration-=short_break_duration;
+				//System.out.println("ADDED SHORT BREAK: "+sb.toString());
+				duration -= short_break_duration;
+				start.add(Calendar.MINUTE, short_break_duration);
 			}
-			start = (Calendar) end.clone();
 		}
 		return list;
 	}
