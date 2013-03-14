@@ -27,7 +27,7 @@ public class PomodoroTester {
 		Event aclass = new Event("Class", start, end, true, true);
 		
 		start = (Calendar) end.clone();
-		end.add(Calendar.HOUR_OF_DAY, 2);
+		end.add(Calendar.HOUR_OF_DAY, 7);
 		
 		Event studytime = new Event("Study", start, end, false, true);
 		

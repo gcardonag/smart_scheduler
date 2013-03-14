@@ -10,7 +10,8 @@ import java.util.List;
  * <code><i>time length</i></code> and end date. It also considers events which
  * repeat only on specific days of the week an include recurrence.
  * 
- * @author Nelson Reyes
+ * @author Nelson Reyes Ciena
+ * @author Anthony Llanos
  */
 public class RecurrenceGroup {
 	
