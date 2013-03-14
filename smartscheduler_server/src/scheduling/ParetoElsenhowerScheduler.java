@@ -9,7 +9,7 @@ import java.util.Calendar;
 import dynamicEventCollection.DynamicEvent;
 import dynamicEventCollection.ParetoElsenhowerEvent;
 import eventCollection.Event;
-import eventCollection.EventCollection;
+import eventCollection.EventTree;
 import eventCollection.EventQueue;
 import eventCollection.RecurrenceGroup;
 import optionStructures.ScheduleOptions;
@@ -54,7 +54,7 @@ public class ParetoElsenhowerScheduler {
 	
 	/** The static events for determining the available time slots
 	 *  for each day. */
-	private EventCollection staticEvents ;
+	private EventTree staticEvents ;
 	
 	
 	/** The options the user has chosen for hours that are
@@ -81,7 +81,7 @@ public class ParetoElsenhowerScheduler {
 	 * @param staticEvents - the static events already set in the schedule.
 	 * @param options - the options the user has set for scheduling.
 	 */
-	public ParetoElsenhowerScheduler(EventCollection staticEvents, 
+	public ParetoElsenhowerScheduler(EventTree staticEvents, 
 										ScheduleOptions options, Calendar start, Calendar end){
 		this.staticEvents = staticEvents ;
 		this.options = options ;
@@ -170,8 +170,8 @@ public class ParetoElsenhowerScheduler {
 	 * @param dynamicEvents - the dynamic events to check if in range.
 	 */
 	private void addDynamicEventsInRange(Calendar day, EventQueue dynamicEvents){	
-		while( !dynamicEvents.isEmpty() && ((ParetoElsenhowerEvent)dynamicEvents.min()).containsDay(day) ){
-			ParetoElsenhowerEvent event = (ParetoElsenhowerEvent) dynamicEvents.removeMin();
+		while( !dynamicEvents.isEmpty() && ((ParetoElsenhowerEvent)dynamicEvents.element()).containsDay(day) ){
+			ParetoElsenhowerEvent event = (ParetoElsenhowerEvent) dynamicEvents.remove();
 			
 			//if(!event.containsDay(day)) continue ;
 			//dynamicEvents.remove(i);

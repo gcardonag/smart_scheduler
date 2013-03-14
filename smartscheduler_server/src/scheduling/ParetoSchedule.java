@@ -10,7 +10,7 @@ import optionStructures.ScheduleOptions;
 import dynamicEventCollection.DynamicEvent;
 import dynamicEventCollection.ParetoElsenhowerEvent;
 import eventCollection.Event;
-import eventCollection.EventCollection;
+import eventCollection.EventTree;
 
 /**Class that determines the schedule for a day in accordance with the
  * Pareto Time Management Technique. In order to achieve this the 
@@ -39,7 +39,7 @@ public class ParetoSchedule extends DaySchedule {
 	 * @param staticEvents
 	 * @param options
 	 */
-	public ParetoSchedule(Calendar day, EventCollection staticEvents, ScheduleOptions options) {
+	public ParetoSchedule(Calendar day, EventTree staticEvents, ScheduleOptions options) {
 		super(day);
 		
 		this.highPrioritySlots = new ArrayList<TimeSlot>();

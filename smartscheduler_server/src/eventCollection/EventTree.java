@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
-public class EventCollection implements Iterable<Event>, Serializable {
+public class EventTree implements Iterable<Event>, Serializable {
 
 	/**
 	 * What must an EventCollection provide?
@@ -171,14 +171,14 @@ public class EventCollection implements Iterable<Event>, Serializable {
 	private int size;
 	private int version;
 
-	public EventCollection()
+	public EventTree()
 	{
 		root = null;
 		size = 0;
 		version = 0;
 	}
 	
-	private EventCollection(EventCollection source)
+	private EventTree(EventTree source)
 	{
 		//This is a copy constructor
 		root = copyTree(source.root);
@@ -509,9 +509,9 @@ public class EventCollection implements Iterable<Event>, Serializable {
 		}
 	}
 	
-	public EventCollection clone()
+	public EventTree clone()
 	{
-		return new EventCollection(this);
+		return new EventTree(this);
 	}
 
 	public boolean conflictsWith(Event event)
@@ -589,10 +589,17 @@ public class EventCollection implements Iterable<Event>, Serializable {
 		return size;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public Iterator<Event> iterator() {
 		return new EventCollectionIterator();
 	}
 	
+	/**
+	 * Returns an array containing all of the elements in this collection in the correct order.
+	 * @return an array containing all of the elements in this collection
+	 */
 	public Event[] toArray() {
 		Event[] a = new Event[size];
 		int i = 0;
@@ -603,6 +610,9 @@ public class EventCollection implements Iterable<Event>, Serializable {
 		return a;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	public String toString() {
 		return Arrays.toString(this.toArray())+" Size: "+size;
 	}
