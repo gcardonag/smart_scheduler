@@ -13,7 +13,7 @@ import eventCollection.Event;
  * available in it.
  * @author Anthony Llanos
  * @deprecated Abstracted due to non-use of this specific class 
- * in scheduler. Will provide a more strucutured approch.
+ * in scheduler. Will provide a more structured approach.
  */
 public abstract class DaySchedule{
 	

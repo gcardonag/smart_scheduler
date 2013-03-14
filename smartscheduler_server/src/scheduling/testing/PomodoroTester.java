@@ -27,11 +27,11 @@ public class PomodoroTester {
 		start.set(2013, Calendar.MARCH, 3, 8, 0);
 		
 		Calendar end = (Calendar) start.clone();
-		end.add(Calendar.HOUR_OF_DAY, 1);
+		start.set(2013, Calendar.MARCH, 3, 9, 0);
 		
 		Event aclass = new Event("Class", start, end, true, true);
 		
-		start = (Calendar) end.clone();
+		start.add(Calendar.HOUR, 1);
 		end.add(Calendar.HOUR_OF_DAY, 7);
 		
 		Event studytime = new Event("Study", start, end, false, true);
@@ -39,9 +39,9 @@ public class PomodoroTester {
 		Calendar recend = (Calendar) start.clone();
 		recend.add(Calendar.DAY_OF_YEAR, 6);
 
-		boolean[] w = {false,true,false,true,false,true,false};
-		RecurrenceGroup classrec = new RecurrenceGroup(aclass, RecurrenceGroup.WEEKLY, 1, recend, w);
-		RecurrenceGroup studyrec = new RecurrenceGroup(studytime, RecurrenceGroup.WEEKLY, 1, recend, w);
+		boolean[] lwv = {false,true,false,true,false,true,false};
+		RecurrenceGroup classrec = new RecurrenceGroup(aclass, RecurrenceGroup.WEEKLY, 1, recend, lwv);
+		RecurrenceGroup studyrec = new RecurrenceGroup(studytime, RecurrenceGroup.WEEKLY, 1, recend, lwv);
 		
 		//SIMULATING SOME TIME MANAGEMENT ALGORITHM
 		for(Event e : classrec.getEventsInRecurrenceGroup())
