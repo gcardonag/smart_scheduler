@@ -3,18 +3,44 @@ package eventCollection;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 
+/**
+ * Represents a single event
+ * @author user
+ *
+ */
 public class Event implements Comparable<Event> {
 	
+	/**
+	 * Format used to parse <code>Event</code> dates with the <code>SimpleDateFormat</code>.
+	 * @see SimpleDateFormat
+	 */
 	public static final String DATE_FORMAT = "d/MMM/yyyy kk:mm";
-	private int id; // unused
+	
+	/**
+	 * Unique identifier for this <code>Event</code> object. Currently unused and it's methods are deprecated.
+	 */
+	private int id;
+	
 	private String name;
 	protected Calendar start;
 	protected Calendar end;
 	private boolean staticEvent;
 	private boolean repeating;
 	private RecurrenceGroup recurrenceGroup;
-	private int duration; //event duration in minutes
 	
+	/**
+	 * Event duration in minutes.
+	 */
+	private int duration;
+	
+	/**
+	 * Constructor for a single <code>Event</code> object.
+	 * @param name Name and/or description of the event.
+	 * @param start a <code>Calendar</code> object specifying when the event starts
+	 * @param end a <code>Calendar</code> object specifying when the event ends
+	 * @param stat specifies whether the event is static(true) or dynamic(false)
+	 * @param repeating specifies whether the event is a recurring event
+	 */
 	public Event(String name, Calendar start, Calendar end, boolean stat, boolean repeating)
 	{
 		this.name = name;
@@ -27,6 +53,10 @@ public class Event implements Comparable<Event> {
 		staticEvent = stat;
 	}
 	
+	/**
+	 * Constructs an <code>Event</code> clone from another <code>Event</code>.
+	 * @param source a source <code>Event</code> to clone from
+	 */
 	public Event(Event source) {
 		name = source.getName();
 		start = (Calendar) source.getStart().clone();
@@ -37,11 +67,20 @@ public class Event implements Comparable<Event> {
 		recurrenceGroup = source.getRecurrenceGroup();
 	}
 	
+	/**
+	 * Returns the name for this <code>Event</code>.
+	 * @return the name and/or description for this <code>Event</code>.
+	 */
 	public String getName()
 	{
 		return name;
 	}
 	
+	/**
+	 * Sets the start and end date for this <code>Event</code>
+	 * @param start the new start date
+	 * @param end the new end date
+	 */
 	public void setDate(Calendar start, Calendar end) {
 		this.start = (Calendar) start.clone();
 		this.end = (Calendar) end.clone();
@@ -89,7 +128,7 @@ public class Event implements Comparable<Event> {
 	{
 		Event earlier = start.before(other.getStart()) ? this : other;
 		Event later = start.before(other.getStart()) ? other: this;
-		return earlier.getEnd().after(later.getStart());
+		return earlier.compareTo(later) > 0;
 	}
 
 	public boolean containsTime(Calendar time) {
