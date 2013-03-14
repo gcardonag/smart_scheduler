@@ -170,8 +170,8 @@ public class ParetoElsenhowerScheduler {
 	 * @param dynamicEvents - the dynamic events to check if in range.
 	 */
 	private void addDynamicEventsInRange(Calendar day, EventQueue dynamicEvents){	
-		while( !dynamicEvents.isEmpty() && ((ParetoElsenhowerEvent)dynamicEvents.min()).containsDay(day) ){
-			ParetoElsenhowerEvent event = (ParetoElsenhowerEvent) dynamicEvents.removeMin();
+		while( !dynamicEvents.isEmpty() && ((ParetoElsenhowerEvent)dynamicEvents.element()).containsDay(day) ){
+			ParetoElsenhowerEvent event = (ParetoElsenhowerEvent) dynamicEvents.remove();
 			
 			//if(!event.containsDay(day)) continue ;
 			//dynamicEvents.remove(i);

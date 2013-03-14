@@ -21,7 +21,7 @@ public class EventProcessor {
 				c.add(current);
 			}
 			else {
-				q.insert(current);
+				q.offer(current);
 			}
 		}
 	}

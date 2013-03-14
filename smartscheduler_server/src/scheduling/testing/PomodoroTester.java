@@ -7,6 +7,11 @@ import scheduler.PomodoroCreator;
 
 import eventCollection.*;
 
+/**
+ * Tests the PomodoroCreator in conjunction with RecurrenceGroup.
+ * @author user
+ *
+ */
 public class PomodoroTester {
 
 	/**
@@ -42,9 +47,9 @@ public class PomodoroTester {
 		for(Event e : classrec.getEventsInRecurrenceGroup())
 			c.add(e);
 		for(Event e : studyrec.getEventsInRecurrenceGroup())
-			q.insert(e);
+			q.offer(e);
 		while(!q.isEmpty()) {
-			Iterable<Event> pomodoros = p.getPomodorosFromEvent(q.removeMin());
+			Iterable<Event> pomodoros = p.getPomodorosFromEvent(q.remove());
 			for(Event e : pomodoros)
 				c.add(e);
 		}
