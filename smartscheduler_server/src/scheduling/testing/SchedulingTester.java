@@ -6,11 +6,16 @@ import java.util.GregorianCalendar;
 import eventCollection.*;
 
 /**
- * Tester that will test the all the scheduling classes at the same time.
- * @author user
+ * Tester that will test the all the scheduling classes at the same time. IN PROGRESS
+ * @author Nelson Reyes Ciena
  *
  */
 public class SchedulingTester {
+	
+	static boolean[] lwv = {false,true,false,true,false,true,false};
+	static boolean[] mj = {false,false,true,false,true,false,false};
+	static boolean[] l = {false,true,false,false,false,false,false};
+	static boolean[] w = {false,false,false,true,false,false,false};
 
 	/**
 	 * @param args
@@ -28,11 +33,6 @@ public class SchedulingTester {
 		Calendar start = new GregorianCalendar();
 		Calendar end = new GregorianCalendar();
 		Calendar recend = new GregorianCalendar();
-
-		boolean[] lwv = {false,true,false,true,false,true,false};
-		boolean[] mj = {false,false,true,false,true,false,false};
-		boolean[] l = {false,true,false,false,false,false,false};
-		boolean[] w = {false,false,false,true,false,false,false};
 		recend.set(2013, 4, 14);
 		
 		//Statics & Dynamics

@@ -19,6 +19,10 @@ public class RecurrenceGroup implements Iterable<Event> {
 	public static final int DAILY = Calendar.DAY_OF_YEAR;
 	public static final int WEEKLY = Calendar.WEEK_OF_YEAR;
 	public static final int MONTHLY = Calendar.MONTH;
+	public static final boolean[] LWV = {false,true,false,true,false,true,false};
+	public static final boolean[] MJ = {false,false,true,false,true,false,false};
+	public static final boolean[] L = {false,true,false,false,false,false,false};
+	public static final boolean[] W = {false,false,false,true,false,false,false};
 	
 	/** The event that represents the range of recurrent events. */
 	private Event parent;
@@ -144,6 +148,11 @@ public class RecurrenceGroup implements Iterable<Event> {
 			return weekly[weekday-1] ;
 		}
 		return false ;
+	}
+	
+	public boolean setWeeklyRecurrence(boolean[] days_of_week) {
+		this.weekly = days_of_week;
+		return false;
 	}
 	
 	public String toString(){
