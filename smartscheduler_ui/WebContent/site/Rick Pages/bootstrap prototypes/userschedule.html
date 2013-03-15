@@ -69,16 +69,17 @@
                 <div class="accordion-inner">
                   <form>
                     <label>Name:</label>
-                    <input type="text"></input>
+                    <input type="text" id="#eName"></input>
                     <label>Start Time:</label>
-                    <input type="text"></input>
+                    <input type="text" id="#esTime"></input>
                     <label>End Time:</label>
-                    <input type="text"></input>
+                    <input type="text" id="#eeTime"></input>
                     <label>Start Date:</label>
-                    <input type="text"></input>
+                    <input type="text" id="#esDate"></input>
                     <label>End Date:</label>
-                    <input type="text"></input>
+                    <input type="text" id="#eeDate"></input>
                   </form>
+                  <button class="btn btn-info" id="submitBtn">Add event</button>
                 </div>
               </div><!-- End of collapseClass -->
             </div><!-- End of Class accordion group -->
@@ -198,8 +199,11 @@
           
         </div><!-- End of collumn -->
        
-        <div class="span5">
+        <div class="span5" id="rightCol">
           <p class="lead">Added events will show up here</p>
+          <div class="accordion" id="accordionEventsList">
+
+          </div>
         </div><!-- End of collumn -->
       </div><!-- End of row -->
 
@@ -256,7 +260,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src='js/jquery-1.8.2.js'></script>
     <script src='js/bootstrap.js'></script>
-    <script src="js/smartscheduler.js"></script>
+    <script src='js/smartscheduler.js'></script>
 
 	</body>
 </html>
