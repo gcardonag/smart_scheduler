@@ -60,7 +60,9 @@ public class PomodoroCreator {
 		int pomodoros = 0;
 		Calendar start = e.getStart();
 		Calendar end = e.getStart();
-		
+		/**
+		 * This while loop can be improved
+		 */
 		while(duration >= pomodoro_duration) {
 			end.add(Calendar.MINUTE, pomodoro_duration);
 			duration -= pomodoro_duration;
