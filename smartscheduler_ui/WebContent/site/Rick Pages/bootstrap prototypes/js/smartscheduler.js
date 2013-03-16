@@ -10,6 +10,9 @@ $(function() {
 	});
 });
 
+//eventCount is used to create a unique id for each event
+var eventCount = 0;
+
 $(document).ready(function() {
     $('#submitBtn').click(function(){
         var eventName = $('#eName').val(); //alternative is .attr('value')        
@@ -18,20 +21,35 @@ $(document).ready(function() {
         var startDate = $('#esDate').val();
         var endDate = $('#eeDate').val();
        
-       //This works but its too simple
-       //('#rightCol #accordionEventsList').append("<p>Name: " + eventName + "</p> <p>startTime: " + startTime + "</p>" + "<ul><li>End Time: "+endTime+"</li><li>Start Time: "+startDate+"</li><li>End Date: "+endDate+"</li></ol>");
+        //Works like this: you add an event and it gets added as an extra collapsable element in the accordion.
 
-        //This does not work for some reason. This, if you look at it in conjunction with the test.html page, 
-        //should work like this: you add an event and it gets added as an extra collapsable element in the accordion
-         $('#rightCol #accordionEventsList').append(
+        eventCount++;
+        var eventId = eventCount;
+
+        //This is used to help select the color for the event's accordion heading, based on its event type.
+        var eType = "class"; //add propper code later
+        var hColor;
+
+        if (eType === "class")
+            hColor = "#46a546";
+        else if (eType === "exam")
+            hColor = "#ffc40d";
+        else if (eType === "project")
+            hColor = "#9d261d";
+        else if (eType ==="extracurricular")
+            hColor = "#049cdb";
+        else
+            hColor = "gray";
+       
+        $('#rightCol #accordionEventsList').append(
              "\
-                 <div class='accordion-group' id='"+ eventName + "''>\
+                 <div class='accordion-group' id='" + eType + eventId + "'>\
                      <div class='accordion-heading'>\
-                         <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionEventsList' href='#collapse" +eventName+ "' style='background-color: #46a546'>\
+                         <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionEventsList' href='#collapse" + eventId + "' style='background-color:" + hColor + "'>\
                          <strong style='color:white'>" + eventName + "</strong>\
                          </a>\
                      </div>\
-                     <div id='collapse"+eventName+ "' class='accordion-body collapse'>\
+                     <div id='collapse" + eventId + "' class='accordion-body collapse'>\
                          <div class='accordion-inner'>\
                              <dl class='dl-horizontal'>\
                                  <dt>Name:</dt>\
@@ -53,10 +71,8 @@ $(document).ready(function() {
          );
     });
 
-    $('#deleteBtn').click(function(){
-        var cEvent = $('this').$('').innerHTML;
-        $('.accordion-group div a[href$="#collapse"'+cEvent+']')
-
+    $('#deleteBtn').live('click', function(){
+        $(this).parents().eq(2).remove();
     });
 });
 
