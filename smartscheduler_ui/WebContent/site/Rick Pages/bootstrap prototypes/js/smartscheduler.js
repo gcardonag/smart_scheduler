@@ -6,39 +6,38 @@ $(document).ready(function() {
         var startDate = $('#esDate').val();
         var endDate = $('#eeDate').val();
        
-        $('#rightCol').append("<h1>Hello</h1>"                  
 
-        );
-/*
-        $('#rightCol').append(
-            "<div class='accordion' id='accordionEventsList'>
-              <div class='accordion-group'>
-                   <div class='accordion-heading'>
-                   <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionEventsList' href='#collapse" +$eventName+ "' style='background-color: #46a546'>
-                   <strong style='color:white'>" + $eventName + "</strong>
-                   </a>
-                 </div>
-                 <div id='collapse"+$eventName+ "' class='accordion-body collapse'>
-                    <div class='accordion-inner'>
-                        <dl class='dl-horizontal'>
-                            <dt>Name:</dt>
-                            <dd>" + $eventName + "</dd>
-                            <dt>Start Time:</dt>
-                            <dd>" + $startTime + "</dd>
-                            <dt>End Time:</dt>
-                            <dd>" + $endTime + "</dd>
-                            <dt>Start Date:</dt>
-                            <dd>" + $startDate + "</dd>
-                            <dt>End Date:</dt>
-                            <dd>" + $endDate + "</dd>
-                        </dl>
-                        <button class='btn btn-inverse'>Delete event</button>
+        $('#rightCol #accordionEventsList').html(
+            "
+                <div class='accordion-group'>
+                    <div class='accordion-heading'>
+                        <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionEventsList' href='#collapse" +eventName+ "' style='background-color: #46a546'>
+                        <strong style='color:white'>" + eventName + "</strong>
+                        </a>
                     </div>
-                  </div><!-- End of collapseClass -->
-                </div><!-- End of Class accordion group -->
-            </div><!--End of accodion -->"
+                    <div id='collapse"+eventName+ "' class='accordion-body collapse'>
+                        <div class='accordion-inner'>
+                            <dl class='dl-horizontal'>
+                                <dt>Name:</dt>
+                                <dd>" + eventName + "</dd>
+                                <dt>Start Time:</dt>
+                                <dd>" + startTime + "</dd>
+                                <dt>End Time:</dt>
+                                <dd>" + endTime + "</dd>
+                                <dt>Start Date:</dt>
+                                <dd>" + startDate + "</dd>
+                                <dt>End Date:</dt>
+                                <dd>" + endDate + "</dd>
+                            </dl>
+                            <button class='btn btn-inverse' id='deleteBtn'>Delete event</button>
+                        </div>
+                    </div>
+                </div>
+            "
         );
-*/
+    });
+
+    $('#deleteBtn').click(function(){
 
     });
 });
