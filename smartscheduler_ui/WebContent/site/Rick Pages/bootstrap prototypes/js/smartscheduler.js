@@ -1,3 +1,15 @@
+/*
+ * ADDING DATE&TIME PICKERS HERE
+ * 
+ */
+
+$(function() {
+	$( "[id*='Date']" ).datepicker({ minDate: -20, maxDate: "+12M" });
+	$( "[id*='Time']" ).AnyTime_picker({
+		format: "%I:%i %p"
+	});
+});
+
 $(document).ready(function() {
     $('#submitBtn').click(function(){
         var eventName = $('#eName').val(); //alternative is .attr('value')        
