@@ -4,10 +4,10 @@
  */
 
 $(function() {
-	$( "[id*='Date']" ).datepicker({ minDate: -20, maxDate: "+12M" });
-	$( "[id*='Time']" ).AnyTime_picker({
+	$( '[name*=Date]' ).datepicker({ minDate: -20, maxDate: "+12M" });
+/*	$( '[name*=Time]' ).AnyTime_picker({
 		format: "%I:%i %p"
-	});
+	});*/
 });
 
 //eventCount is used to create a unique id for each event
@@ -15,11 +15,11 @@ var eventCount = 0;
 
 $(document).ready(function() {
     $('#submitBtn').click(function(){
-        var eventName = $('#eName').val(); //alternative is .attr('value')        
-        var startTime = $('#esTime').val();
-        var endTime = $('#eeTime').val();
-        var startDate = $('#esDate').val();
-        var endDate = $('#eeDate').val();
+        var eventName = $("input[name=eName]").val();      
+        var startTime = $("input[name=eStartTime]").val();
+        var endTime = $("input[name=eEndTime]").val();
+        var startDate = $("input[name=eStartDate]").val();
+        var endDate = $("input[name=eEndDate]").val();
        
         //Works like this: you add an event and it gets added as an extra collapsable element in the accordion.
 
@@ -40,7 +40,8 @@ $(document).ready(function() {
             hColor = "#049cdb";
         else
             hColor = "gray";
-       
+        
+        //event adding html code       
         $('#rightCol #accordionEventsList').append(
              "\
                  <div class='accordion-group' id='" + eType + eventId + "'>\
@@ -71,7 +72,34 @@ $(document).ready(function() {
          );
     });
 
+    //Set event recurrance html
+    $('input:checkbox:checked').after(
+        '<label class="checkbox inline">\
+            <input type="checkbox" id="sundayCheckbox" value="option1"> Sun\
+        </label>\
+        <label class="checkbox inline">\
+            <input type="checkbox" id="mondayCheckbox" value="option2"> Mon\
+        </label>\
+        <label class="checkbox inline">\
+            <input type="checkbox" id="tuesdayCheckbox" value="option3"> Tue\
+        </label>\
+        <label class="checkbox inline">\
+            <input type="checkbox" id="wednesdayCheckbox" value="option4"> Wed\
+        </label>\
+        <label class="checkbox inline">\
+            <input type="checkbox" id="thrusdayCheckbox" value="option5"> Thu\
+        </label>\
+        <label class="checkbox inline">\
+            <input type="checkbox" id="fridayCheckbox" value="option6"> Fri\
+        </label>\
+        <label class="checkbox inline">\
+            <input type="checkbox" id="saturdayCheckbox" value="option7"> Sat\
+        </label>\ '
+    );
 
+    //Get event reccurance 
+
+    //Event deletion
     $(document).on('click', '#deleteBtn', function() {
         $(this).parents().eq(2).remove();
     });
