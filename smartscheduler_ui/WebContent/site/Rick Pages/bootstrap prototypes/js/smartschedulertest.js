@@ -5,9 +5,9 @@
 
 $(function() {
 	$( '[name*=Date]' ).datepicker({ minDate: -20, maxDate: "+12M" });
-/*	$( '[name*=Time]' ).AnyTime_picker({
+	$( '[name*=Time]' ).AnyTime_picker({
 		format: "%I:%i %p"
-	});*/
+	});
 });
 
 //eventCount is used to create a unique id for each event
@@ -16,10 +16,10 @@ var eventCount = 0;
 $(document).ready(function() {
     $('#submitBtn').click(function(){
         var eventName = $("input[name=eName]").val();      
-        var startTime = $("input[name=eStartTime]").val();
-        var endTime = $("input[name=eEndTime]").val();
-        var startDate = $("input[name=eStartDate]").val();
-        var endDate = $("input[name=eEndDate]").val();
+        var startTime = $("input[name=esTime]").val();
+        var endTime = $("input[name=eeTime]").val();
+        var startDate = $("input[name=esDate]").val();
+        var endDate = $("input[name=eeDate]").val();
        
         //Works like this: you add an event and it gets added as an extra collapsable element in the accordion.
 
