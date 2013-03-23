@@ -53,109 +53,100 @@
       </div>
 
       <div class="row-fluid">
-        <div class="span1"></div>
-        <div class="span5">
+        <!--  <div class="span1"></div> -->
+        <div class="span6">
           <!-- <h3>Select the event type you wish to schedule</h3> -->
           <p class="lead">Select the event type you wish to schedule</p>
           <div class="accordion" id="accordionEvents">
             
-            <div class="accordion-group">
-              <div class="accordion-heading">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionEvents" href="#collapseClass" style="background-color: #46a546">
-                <strong style="color:white">Class</strong>
-                </a>
-              </div>
-              <div id="collapseClass" class="accordion-body collapse">
-                <div class="accordion-inner">
                   <form>
+                  	<label>Type:</label>
+                  	<div class="btn-group" data-toggle="buttons-radio">
+  					<button type="button" class="btn btn-primary" value="Class">Class</button>
+  					<button type="button" class="btn btn-primary" value="Exam">Exam</button>
+  					<button type="button" class="btn btn-primary" value="Project">Project</button>
+  					<button type="button" class="btn btn-primary" value="Custom">Custom</button>
+					</div>
+                  	<br>
+                  	<br>
+                  
                     <label>Name:</label>
                     <input type="text"></input>
-                    <label>Start Time:</label>
+                    <label>From: (Ex: January 01, 2013)</label>
                     <input type="text"></input>
-                    <label>End Time:</label>
+                    <label>To: (Ex: May 01, 2013)</label>
                     <input type="text"></input>
-                    <label>Start Date:</label>
+                    <label>Start: (Ex: 10:45 AM)</label>
                     <input type="text"></input>
-                    <label>End Date:</label>
+                    <label>End: (Ex: 11:45 AM)</label>
                     <input type="text"></input>
+                    
+                    <br>
+                    <label class="checkbox inline">
+ 					<input type="checkbox" id="recurring" value="yes"> Recurring?
+					</label>
+                    
+                    <br>
+                    <br>
+                    <label>Repeats every:</label>
+                    <select class="span2">
+  					<option value="1">1</option>
+  					<option value="2">2</option>
+  					<option value="3">3</option>
+  					<option value="4">4</option>
+  					<option value="5">5</option>
+  					<option value="6">6</option>
+  					<option value="7">7</option>
+  					<option value="8">8</option>
+  					<option value="9">9</option>
+  					<option value="10">10</option>
+					</select>
+					
+					<select class="span3">
+  					<option value="Daily">Days</option>
+  					<option value="Weekly">Weeks</option>
+  					<option value="Monthly">Months</option>
+					</select>
+					
+					
+                    <label>Days of the week:</label>
+                    <div class="btn-group" data-toggle="buttons-checkbox">
+  					<button type="button" class="btn btn-primary" value="Sun">Sun</button>
+  					<button type="button" class="btn btn-primary" value="Mon">Mon</button>
+  					<button type="button" class="btn btn-primary" value="Tue">Tue</button>
+  					<button type="button" class="btn btn-primary" value="Wed">Wed</button>
+  					<button type="button" class="btn btn-primary" value="Thu">Thu</button>
+  					<button type="button" class="btn btn-primary" value="Fri">Fri</button>
+  					<button type="button" class="btn btn-primary" value="Sat">Sat</button>
+					</div>
+					
+					<br>
+					<br>
+					
+					<label>How much weekly study time would you like to dedicate (in hours)?</label>
+					<select class="span2">
+  					<option value="1">1</option>
+  					<option value="2">2</option>
+  					<option value="3">3</option>
+  					<option value="4">4</option>
+  					<option value="5">5</option>
+  					<option value="6">6</option>
+  					<option value="7">7</option>
+  					<option value="8">8</option>
+  					<option value="9">9</option>
+  					<option value="10">10</option>
+					</select>
+					
+					<label>Priority:</label>
+					<div class="btn-group" data-toggle="buttons-radio">
+  					<button type="button" class="btn btn-primary" value="low">Low</button>
+  					<button type="button" class="btn btn-primary" value="medium">Medium</button>
+  					<button type="button" class="btn btn-primary" value="high">High</button>
+					</div>
+					
                   </form>
                 </div>
-              </div><!-- End of collapseClass -->
-            </div><!-- End of Class accordion group -->
-            
-            <div class="accordion-group">
-              <div class="accordion-heading">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionEvents" href="#collapseExam" style="background-color: #ffc40d">
-                <strong style="color:white">Exam</strong>
-                </a>
-              </div>
-              <div id="collapseExam" class="accordion-body collapse">
-                <div class="accordion-inner">
-                  <form>
-                    <label>Name:</label>
-                    <input type="text"></input>
-                    <label>Start Date:</label>
-                    <input type="text"></input>
-                    <label>End Date:</label>
-                    <input type="text"></input>
-                    <label>Start Time:</label>
-                    <input type="text"></input>
-                    <label>End Time:</label>
-                    <input type="text"></input>
-                  </form>
-                </div>
-              </div><!-- End of collapseExam -->
-            </div><!-- End of Exam accordion group -->
-            
-            <div class="accordion-group">
-              <div class="accordion-heading">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionEvents" href="#collapseProject" style="background-color: #9d261d">
-                <strong style="color:white">Project</strong>
-                </a>
-              </div>
-              <div id="collapseProject" class="accordion-body collapse">
-                <div class="accordion-inner">
-                  <form>
-                    <label>Name:</label>
-                    <input type="text"></input>
-                  </form>
-                </div>
-              </div><!-- End of collapseClass -->
-            </div><!-- End of Project accordion group -->
-
-            <div class="accordion-group">
-              <div class="accordion-heading">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionEvents" href="#collapseExtra" style="background-color: #049cdb">
-                <strong style="color:white">Extracurricular</strong>
-                </a>
-              </div>
-              <div id="collapseExtra" class="accordion-body collapse">
-                <div class="accordion-inner">
-                  <form>
-                    <label>Name:</label>
-                    <input type="text"></input>
-                  </form>
-                </div>
-              </div><!-- End of collapseClass -->
-            </div><!-- End of Extracurricular accordion group -->
-
-            <div class="accordion-group">
-              <div class="accordion-heading">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionEvents" href="#collapseCustom" style="background-color: gray">
-                <strong style="color:white">Custom</strong>
-                </a>
-              </div>
-              <div id="collapseCustom" class="accordion-body collapse">
-                <div class="accordion-inner">
-                  <form>
-                    <label>Name:</label>
-                    <input type="text"></input>
-                  </form>
-                </div>
-              </div><!-- End of collapseClass -->
-            </div><!-- End of Custom accordion group -->
-
-          </div><!-- End of accordion -->
+              
 
           <!-- Button Version Start -->
          <!--  <div class="btn-group" data-toggle="button">
@@ -206,12 +197,14 @@
     </div> <!-- /container -->
 
     <!-- Footer -->
+    <!--  
     <footer>
       <div class="container">
         <p>Made with Bootstrap</p>
       </div>
     </footer>
-
+	-->
+	
     <!-- About Modal -->
     <div id="aboutModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-header">
