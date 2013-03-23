@@ -20,8 +20,12 @@ $(document).ready(function() {
         var endTime = $("input[name=eeTime]").val();
         var startDate = $("input[name=esDate]").val();
         var endDate = $("input[name=eeDate]").val();
-       
-        //Works like this: you add an event and it gets added as an extra collapsable element in the accordion.
+        var $recurrent = $('input[name=recurrent]:checked');
+        var recurrent;
+        
+/*        if ()
+            recurrent = true;*/
+
 
         eventCount++;
         var eventId = eventCount;
@@ -73,7 +77,7 @@ $(document).ready(function() {
     });
 
     //Set event recurrance html
-    $('input:checkbox:checked').after(
+/*    $recurrent.after(
         '<label class="checkbox inline">\
             <input type="checkbox" id="sundayCheckbox" value="option1"> Sun\
         </label>\
@@ -95,7 +99,7 @@ $(document).ready(function() {
         <label class="checkbox inline">\
             <input type="checkbox" id="saturdayCheckbox" value="option7"> Sat\
         </label>\ '
-    );
+    );*/
 
     //Get event reccurance 
 
