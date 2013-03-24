@@ -57,19 +57,22 @@
         <div class="span6">
           <!-- <h3>Select the event type you wish to schedule</h3> -->
           <p class="lead">Select the event type you wish to schedule</p>
-          <div class="accordion" id="accordionEvents">
+          <div>
             
                   <form>
                   	<label>Type:</label>
                   	<div class="btn-group" data-toggle="buttons-radio">
-  						<button type="button" class="btn btn-primary" value="Class">Class</button>
-  						<button type="button" class="btn btn-primary" value="Exam">Exam</button>
-  						<button type="button" class="btn btn-primary" value="Project">Project</button>
-  						<button type="button" class="btn btn-primary" value="Custom">Custom</button>
+  						<button type="button" class="btn btn-primary" value="Class" id="ClassButton">Class</button>
+  						<button type="button" class="btn btn-primary" value="Exam" id="ExamButton">Exam</button>
+  						<button type="button" class="btn btn-primary" value="Project" id="ProjectButton">Project</button>
+  						<button type="button" class="btn btn-primary" value="Custom" id="CustomButton">Custom</button>
 					</div>
 					
-					<div id= "Class" >
-                  	<br>
+					
+					
+					
+					
+					<div id= "Class">
                   	<br>
                   
 	                    <label>Name:</label>
@@ -85,70 +88,77 @@
                     
 	                    <br>
 	                    <label class="checkbox inline">
-	 					<input type="checkbox" id="recurring" value="yes"> Recurring?
+	 					<input type="checkbox" class="recurringCheckbox"> Recurring?
 						</label>
 	                    
 	                    <br>
 	                    <br>
-	                    <label>Repeats every:</label>
-	                    <select class="span2">
-	  					<option value="1">1</option>
-	  					<option value="2">2</option>
-	  					<option value="3">3</option>
-	  					<option value="4">4</option>
-	  					<option value="5">5</option>
-	  					<option value="6">6</option>
-	  					<option value="7">7</option>
-	  					<option value="8">8</option>
-	  					<option value="9">9</option>
-	  					<option value="10">10</option>
-						</select>
+	                    
+	                    <div class="recurringDiv" style="display:none">
+	                    
+		                    <label>Repeats every:</label>
+		                    <select class="span2">
+		  					<option value="1">1</option>
+		  					<option value="2">2</option>
+		  					<option value="3">3</option>
+		  					<option value="4">4</option>
+		  					<option value="5">5</option>
+		  					<option value="6">6</option>
+		  					<option value="7">7</option>
+		  					<option value="8">8</option>
+		  					<option value="9">9</option>
+		  					<option value="10">10</option>
+							</select>
+							
+							<select class="span3">
+		  					<option value="Daily">Days</option>
+		  					<option value="Weekly">Weeks</option>
+		  					<option value="Monthly">Months</option>
+							</select>
+							
+							
+		                    <label>Days of the week:</label>
+		                    <div class="btn-group" data-toggle="buttons-checkbox">
+		  					<button type="button" class="btn btn-primary" value="Sun">Sun</button>
+		  					<button type="button" class="btn btn-primary" value="Mon">Mon</button>
+		  					<button type="button" class="btn btn-primary" value="Tue">Tue</button>
+		  					<button type="button" class="btn btn-primary" value="Wed">Wed</button>
+		  					<button type="button" class="btn btn-primary" value="Thu">Thu</button>
+		  					<button type="button" class="btn btn-primary" value="Fri">Fri</button>
+		  					<button type="button" class="btn btn-primary" value="Sat">Sat</button>
+							</div>
 						
-						<select class="span3">
-	  					<option value="Daily">Days</option>
-	  					<option value="Weekly">Weeks</option>
-	  					<option value="Monthly">Months</option>
-						</select>
-						
-						
-	                    <label>Days of the week:</label>
-	                    <div class="btn-group" data-toggle="buttons-checkbox">
-	  					<button type="button" class="btn btn-primary" value="Sun">Sun</button>
-	  					<button type="button" class="btn btn-primary" value="Mon">Mon</button>
-	  					<button type="button" class="btn btn-primary" value="Tue">Tue</button>
-	  					<button type="button" class="btn btn-primary" value="Wed">Wed</button>
-	  					<button type="button" class="btn btn-primary" value="Thu">Thu</button>
-	  					<button type="button" class="btn btn-primary" value="Fri">Fri</button>
-	  					<button type="button" class="btn btn-primary" value="Sat">Sat</button>
 						</div>
 						
-						<br>
 						<br>
 						
 						<label>How much weekly study time would you like to dedicate (in hours)?</label>
 						<select class="span2">
-	  					<option value="1">1</option>
-	  					<option value="2">2</option>
-	  					<option value="3">3</option>
-	  					<option value="4">4</option>
-	  					<option value="5">5</option>
-	  					<option value="6">6</option>
-	  					<option value="7">7</option>
-	  					<option value="8">8</option>
-	  					<option value="9">9</option>
-	  					<option value="10">10</option>
+		  					<option value="1">1</option>
+		  					<option value="2">2</option>
+		  					<option value="3">3</option>
+		  					<option value="4">4</option>
+		  					<option value="5">5</option>
+		  					<option value="6">6</option>
+		  					<option value="7">7</option>
+		  					<option value="8">8</option>
+		  					<option value="9">9</option>
+		  					<option value="10">10</option>
 						</select>
 						
 						<label>Priority:</label>
 						<div class="btn-group" data-toggle="buttons-radio">
-	  					<button type="button" class="btn btn-primary" value="low">Low</button>
-	  					<button type="button" class="btn btn-primary" value="medium">Medium</button>
-	  					<button type="button" class="btn btn-primary" value="high">High</button>
+		  					<button type="button" class="btn btn-primary" value="low">Low</button>
+		  					<button type="button" class="btn btn-primary" value="medium">Medium</button>
+		  					<button type="button" class="btn btn-primary" value="high">High</button>
 						</div>
 					
 					</div>
 					
 					<div id="Exam" style="display: none">
+					
+					<br>
+					
 						<label>Class:</label>
 	                    <input type="text"></input>
 	                    <label>Date: (Ex: January 01, 2013)</label>
@@ -178,6 +188,9 @@
 					</div>
 					
 					<div id="Project" style="display: none">
+					
+					<br>
+					
 						<label>Class:</label>
                     	<input type="text"></input>
                     	<label>Due Date: (Ex: January 01, 2013)</label>
@@ -208,6 +221,8 @@
 					
 					<div id="Custom" style="display: none">
 					
+					<br>
+					
 						<label>Name:</label>
 	                    <input type="text"></input>
 	                    <label>From: (Ex: January 01, 2013)</label>
@@ -221,43 +236,46 @@
 	                    
 	                    <br>
 	                    <label class="checkbox inline">
-	 					<input type="checkbox" id="recurring" value="yes"> Recurring?
+	 					<input type="checkbox" class="recurringCheckbox"> Recurring?
 						</label>
 	                    
 	                    <br>
 	                    <br>
-	                    <label>Repeats every:</label>
-	                    <select class="span2">
-	  					<option value="1">1</option>
-	  					<option value="2">2</option>
-	  					<option value="3">3</option>
-	  					<option value="4">4</option>
-	  					<option value="5">5</option>
-	  					<option value="6">6</option>
-	  					<option value="7">7</option>
-	  					<option value="8">8</option>
-	  					<option value="9">9</option>
-	  					<option value="10">10</option>
-						</select>
+	                    
+	                    <div class="recurringDiv" style="display:none">
+		                    <label>Repeats every:</label>
+		                    <select class="span2">
+		  					<option value="1">1</option>
+		  					<option value="2">2</option>
+		  					<option value="3">3</option>
+		  					<option value="4">4</option>
+		  					<option value="5">5</option>
+		  					<option value="6">6</option>
+		  					<option value="7">7</option>
+		  					<option value="8">8</option>
+		  					<option value="9">9</option>
+		  					<option value="10">10</option>
+							</select>
+							
+							<select class="span3">
+		  					<option value="Daily">Days</option>
+		  					<option value="Weekly">Weeks</option>
+		  					<option value="Monthly">Months</option>
+							</select>
+							
+							
+		                    <label>Days of the week:</label>
+		                    <div class="btn-group" data-toggle="buttons-checkbox">
+		  					<button type="button" class="btn btn-primary" value="Sun">Sun</button>
+		  					<button type="button" class="btn btn-primary" value="Mon">Mon</button>
+		  					<button type="button" class="btn btn-primary" value="Tue">Tue</button>
+		  					<button type="button" class="btn btn-primary" value="Wed">Wed</button>
+		  					<button type="button" class="btn btn-primary" value="Thu">Thu</button>
+		  					<button type="button" class="btn btn-primary" value="Fri">Fri</button>
+		  					<button type="button" class="btn btn-primary" value="Sat">Sat</button>
+							</div>
 						
-						<select class="span3">
-	  					<option value="Daily">Days</option>
-	  					<option value="Weekly">Weeks</option>
-	  					<option value="Monthly">Months</option>
-						</select>
-						
-						
-	                    <label>Days of the week:</label>
-	                    <div class="btn-group" data-toggle="buttons-checkbox">
-	  					<button type="button" class="btn btn-primary" value="Sun">Sun</button>
-	  					<button type="button" class="btn btn-primary" value="Mon">Mon</button>
-	  					<button type="button" class="btn btn-primary" value="Tue">Tue</button>
-	  					<button type="button" class="btn btn-primary" value="Wed">Wed</button>
-	  					<button type="button" class="btn btn-primary" value="Thu">Thu</button>
-	  					<button type="button" class="btn btn-primary" value="Fri">Fri</button>
-	  					<button type="button" class="btn btn-primary" value="Sat">Sat</button>
 						</div>
-						
 						<br>
 						<br>
 						
@@ -390,6 +408,51 @@
     <script src='js/jquery-1.8.2.js'></script>
     <script src='js/bootstrap.js'></script>
     <script src="js/smartscheduler.js"></script>
+    <script>
+					 $(document).ready(function() {
+
+ 							$('#Exam').hide(); //Initially form wil be hidden.
+  							$('#ExamButton').click(function() {
+   							$('#Exam').show();//Form shows on button click	
+   							$('#Class').hide();
+  							$('#Project').hide();
+  							$('#Custom').hide();
+  							});
+ 							
+  							$('#Class').hide(); //Initially form wil be hidden.
+  							$('#ClassButton').click(function() {
+   							$('#Class').show();//Form shows on button click	
+   							$('#Exam').hide();
+  							$('#Project').hide();
+  							$('#Custom').hide();
+   							});
+  							
+  							$('#Project').hide(); //Initially form wil be hidden.
+  							$('#ProjectButton').click(function() {
+   							$('#Project').show();//Form shows on button click
+   							$('#Class').hide();
+  							$('#Exam').hide();
+  							$('#Custom').hide();
+   							});
+ 							
+  							$('#Custom').hide(); //Initially form wil be hidden.
+  							$('#CustomButton').click(function() {
+   							$('#Custom').show();//Form shows on button click
+   							$('#Class').hide();
+  							$('#Project').hide();
+  							$('#Exam').hide();
+   							});
+  							
+  							
+  							$('.recurringCheckbox').click(function () {
+  							    $(".recurringDiv").toggle(this.checked);
+  							});
+  							
+  				 
+  							  							
+	 				});
+	</script>
+					
 
 	</body>
 </html>
