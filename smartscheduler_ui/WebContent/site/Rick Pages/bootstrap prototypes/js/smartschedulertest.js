@@ -20,8 +20,8 @@ $(document).ready(function() {
         var endTime = $("input[name=eeTime]").val();
         var startDate = $("input[name=esDate]").val();
         var endDate = $("input[name=eeDate]").val();
-        var $recurrent = $('input[name=recurrent]:checked');
-        var recurrent;
+        //var $recurrent = $('input[name=recurrent]:checked');
+        var $recurrent = $('#recurrent').is(':checked');
         
 /*        if ()
             recurrent = true;*/
@@ -101,6 +101,11 @@ $(document).ready(function() {
         </label>\ '
     );*/
 
+//Show recurrance checkkboxes
+$('#recurrentOptions').hide();
+$('#isRecurrent').click(function () {
+    $("#recurrentOptions").toggle(this.checked);
+});
     //Get event reccurance 
 
     //Event deletion

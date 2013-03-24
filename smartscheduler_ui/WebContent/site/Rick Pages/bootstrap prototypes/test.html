@@ -31,7 +31,7 @@
           <p class="lead">Fill out the forms detailing the event you wish to schedule</p>
 
 
-                  <form id="eventForm">
+                  <form id="eventForm" action="" method="">
                     <label>Name:</label>
                     <input type="text" name="eName" />
                     <label>Start Time:</label>
@@ -44,11 +44,14 @@
                     <input type="text" name="eeDate" />
 
                     <label class="checkbox">
-                     <input type="checkbox" name="recurrent" value="">
-                      Recurrant 
+                     <input type="checkbox" id="isRecurrent" value="">
+                      Recurrent 
                     </label>
+                    <button class="btn btn-info" id="submitBtn">Add event</button>
+                    <input type="submit" value="Submit">
                   </form>
-                  <button class="btn btn-info" id="submitBtn">Add event</button>
+
+                  
 
           
         </div><!-- End of collumn -->
@@ -60,11 +63,29 @@
         	</div><!--End of accodion -->
         </div><!-- End of collumn -->
       </div><!-- End of row -->
-      
-      <div class="row-fluid">
-      	<div class="span12">
-      	</div>
-      </div>
+        <div id="recurrentOptions" >
+          <label class="checkbox inline">
+              <input type="checkbox" id="sundayCheckbox" value="option1"> Sun
+          </label>
+          <label class="checkbox inline">
+              <input type="checkbox" id="mondayCheckbox" value="option2"> Mon
+          </label>
+          <label class="checkbox inline">
+              <input type="checkbox" id="tuesdayCheckbox" value="option3"> Tue
+          </label>
+          <label class="checkbox inline">
+              <input type="checkbox" id="wednesdayCheckbox" value="option4"> Wed
+          </label>
+          <label class="checkbox inline">
+              <input type="checkbox" id="thrusdayCheckbox" value="option5"> Thu
+          </label>
+          <label class="checkbox inline">
+              <input type="checkbox" id="fridayCheckbox" value="option6"> Fri
+          </label>
+          <label class="checkbox inline">
+              <input type="checkbox" id="saturdayCheckbox" value="option7"> Sat
+          </label>
+        </div>
 
     </div> <!-- /container -->
 	</body>
