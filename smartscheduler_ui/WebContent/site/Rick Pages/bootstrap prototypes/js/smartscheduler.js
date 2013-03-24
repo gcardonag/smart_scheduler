@@ -15,13 +15,12 @@ var eventCount = 0;
 
 $(document).ready(function() {
     $('#submitBtn').click(function(){
-        var eventName = $('#eName').val(); //alternative is .attr('value')        
-        var startTime = $('#esTime').val();
-        var endTime = $('#eeTime').val();
-        var startDate = $('#esDate').val();
-        var endDate = $('#eeDate').val();
-       
-        //Works like this: you add an event and it gets added as an extra collapsable element in the accordion.
+        var eventName = $("input[name=eName]").val();      
+        var startTime = $("input[name=esTime]").val();
+        var endTime = $("input[name=eeTime]").val();
+        var startDate = $("input[name=esDate]").val();
+        var endDate = $("input[name=eeDate]").val();
+        var $recurrent = $('#recurrent').is(':checked');
 
         eventCount++;
         var eventId = eventCount;
@@ -73,6 +72,43 @@ $(document).ready(function() {
 
     $('#deleteBtn').live('click', function(){
         $(this).parents().eq(2).remove();
+    });
+
+    $('#Exam').hide(); //Initially form wil be hidden.
+    $('#ExamButton').click(function() {
+        $('#Exam').show();//Form shows on button click  
+        $('#Class').hide();
+        $('#Project').hide();
+        $('#Custom').hide();
+    });
+
+    $('#Class').hide(); //Initially form wil be hidden.
+    $('#ClassButton').click(function() {
+        $('#Class').show();//Form shows on button click 
+        $('#Exam').hide();
+        $('#Project').hide();
+        $('#Custom').hide();
+    });
+
+    $('#Project').hide(); //Initially form wil be hidden.
+    $('#ProjectButton').click(function() {
+        $('#Project').show();//Form shows on button click
+        $('#Class').hide();
+        $('#Exam').hide();
+        $('#Custom').hide();
+    });
+
+    $('#Custom').hide(); //Initially form wil be hidden.
+    $('#CustomButton').click(function() {
+        $('#Custom').show();//Form shows on button click
+        $('#Class').hide();
+        $('#Project').hide();
+        $('#Exam').hide();
+    });
+
+
+    $('.recurringCheckbox').click(function () {
+        $(".recurringDiv").toggle(this.checked);
     });
 });
 
