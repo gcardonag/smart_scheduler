@@ -20,12 +20,7 @@ $(document).ready(function() {
         var endTime = $("input[name=eeTime]").val();
         var startDate = $("input[name=esDate]").val();
         var endDate = $("input[name=eeDate]").val();
-        //var $recurrent = $('input[name=recurrent]:checked');
         var $recurrent = $('#recurrent').is(':checked');
-        
-/*        if ()
-            recurrent = true;*/
-
 
         eventCount++;
         var eventId = eventCount;
@@ -76,36 +71,11 @@ $(document).ready(function() {
          );
     });
 
-    //Set event recurrance html
-/*    $recurrent.after(
-        '<label class="checkbox inline">\
-            <input type="checkbox" id="sundayCheckbox" value="option1"> Sun\
-        </label>\
-        <label class="checkbox inline">\
-            <input type="checkbox" id="mondayCheckbox" value="option2"> Mon\
-        </label>\
-        <label class="checkbox inline">\
-            <input type="checkbox" id="tuesdayCheckbox" value="option3"> Tue\
-        </label>\
-        <label class="checkbox inline">\
-            <input type="checkbox" id="wednesdayCheckbox" value="option4"> Wed\
-        </label>\
-        <label class="checkbox inline">\
-            <input type="checkbox" id="thrusdayCheckbox" value="option5"> Thu\
-        </label>\
-        <label class="checkbox inline">\
-            <input type="checkbox" id="fridayCheckbox" value="option6"> Fri\
-        </label>\
-        <label class="checkbox inline">\
-            <input type="checkbox" id="saturdayCheckbox" value="option7"> Sat\
-        </label>\ '
-    );*/
-
-//Show recurrance checkkboxes
-$('#recurrentOptions').hide();
-$('#isRecurrent').click(function () {
-    $("#recurrentOptions").toggle(this.checked);
-});
+    //Show recurrance checkkboxes
+    //$('#recurrentOptions').hide(); //to hide them initially
+    $('#isRecurrent').click(function () {
+        $("#recurrentOptions").toggle(this.checked);
+    });
     //Get event reccurance 
 
     //Event deletion
