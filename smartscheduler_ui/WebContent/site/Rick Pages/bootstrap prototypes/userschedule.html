@@ -48,8 +48,8 @@
       <div class="row-fluid">
         <div class="span6">
           <h3>Select the event type you wish to schedule</h3>
-          <div>       
-                  
+          
+          <div>              
           <label>Type:</label>
           <div class="btn-group" data-toggle="buttons-radio">
               <button type="button" class="btn btn-primary" value="Class" id="ClassButton">Class</button>
@@ -59,31 +59,31 @@
           </div>
 
           <div id= "Class">
-                    <br>
-                  
-                      <label>Name:</label>
-                      <input type="text"></input>
-                      <label>From: (Ex: January 01, 2013)</label>
-                      <input type="text"></input>
-                      <label>To: (Ex: May 01, 2013)</label>
-                      <input type="text"></input>
-                      <label>Start: (Ex: 10:45 AM)</label>
-                      <input type="text"></input>
-                      <label>End: (Ex: 11:45 AM)</label>
-                      <input type="text"></input>
-                    
-                      <br>
-                      <label class="checkbox inline">
-            <input type="checkbox" class="recurringCheckbox"> Recurring?
+            <br>
+            <!--<form action="">-->
+            <label>Name:</label>
+              <input type="text" name="eName"></input>
+            <label>Start Date: (Ex: mm/dd/yy)</label>
+              <input type="text" name="eStartDate"></input>
+            <label>End Date: (Ex: mm/dd/yy)</label>
+              <input type="text" name="eEndDate"></input>
+            <label>From: (Ex: 10:45 AM)</label>
+              <input type="text" id="eStartTime" name="eStartTime"></input>
+            <label>To: (Ex: 11:45 AM)</label>
+              <input type="text" id="eEndTime" name="eEndTime"></input>
+          
+            <br>
+            <label class="checkbox inline">
+              <input type="checkbox" class="recurringCheckbox"> Recurrance
             </label>
 
-                      <br>
-                      <br>
+            <br>
+            <br>
 
-                      <div class="recurringDiv" style="display:none">
+            <div class="recurringDiv" style="display:none">
 
-                        <label>Repeats every:</label>
-                        <select class="span2">
+              <label>Repeats every:</label>
+              <select class="span2">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -103,8 +103,8 @@
               </select>
 
 
-                        <label>Days of the week:</label>
-                        <div class="btn-group" data-toggle="buttons-checkbox">
+              <label>Days of the week:</label>
+              <div class="btn-group" data-toggle="buttons-checkbox">
                 <button type="button" class="btn btn-primary" value="Sun">Sun</button>
                 <button type="button" class="btn btn-primary" value="Mon">Mon</button>
                 <button type="button" class="btn btn-primary" value="Tue">Tue</button>
@@ -138,7 +138,7 @@
                 <button type="button" class="btn btn-primary" value="medium">Medium</button>
                 <button type="button" class="btn btn-primary" value="high">High</button>
             </div>
-
+            <button class="btn btn-info" id="submitBtn">Add event</button>
           </div>
 
           <div id="Exam" style="display: none">
@@ -288,7 +288,7 @@
 
           </div>
 
-                  </form>
+                  
                 </div>
           
         </div><!-- End of collumn -->

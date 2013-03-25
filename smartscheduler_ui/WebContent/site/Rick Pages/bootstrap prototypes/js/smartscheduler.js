@@ -4,29 +4,29 @@
  */
 
 $(function() {
-	$( "[id*='Date']" ).datepicker({ minDate: -20, maxDate: "+12M" });
+	$( "[name*='Date']" ).datepicker({ minDate: -20, maxDate: "+12M" });
 	$( "[id*='Time']" ).AnyTime_picker({
 		format: "%I:%i %p"
 	});
 });
 
 //eventCount is used to create a unique id for each event
-var eventCount = 0;
+var eventCount = 0; //need to modify this since the number will never decrease in the current code.
+var eventList = new Array();
 
 $(document).ready(function() {
     $('#submitBtn').click(function(){
         var eventName = $("input[name=eName]").val();      
-        var startTime = $("input[name=esTime]").val();
-        var endTime = $("input[name=eeTime]").val();
-        var startDate = $("input[name=esDate]").val();
-        var endDate = $("input[name=eeDate]").val();
-        var $recurrent = $('#recurrent').is(':checked');
+        var startTime = $("input[name=eStartTime]").val();
+        var endTime = $("input[name=eEndTime]").val();
+        var startDate = $("input[name=eStartDate]").val();
+        var endDate = $("input[name=eEndDate]").val();
+        //var $recurrent = $('#recurrent').is(':checked');
 
         eventCount++;
         var eventId = eventCount;
-
         //This is used to help select the color for the event's accordion heading, based on its event type.
-        var eType = "class"; //add propper code later
+        var eType = $(''); //add propper code later
         var hColor;
 
         if (eType === "class")
@@ -40,6 +40,15 @@ $(document).ready(function() {
         else
             hColor = "gray";
        
+        //Add to global aray
+       eventList[eventCount-1] = {
+            name : eventName,
+            sTime : startTime,
+            eTime : endTime,
+            sTime : startDate,
+            eDate : endDate
+        };
+       //Add event to list on page
         $('#rightCol #accordionEventsList').append(
              "\
                  <div class='accordion-group' id='" + eType + eventId + "'>\
@@ -68,8 +77,9 @@ $(document).ready(function() {
                  </div>\
              "
          );
+        alert("The first event is: " + eventList[0].name);
     });
-
+    //Delete current event from list and global array
     $('#deleteBtn').live('click', function(){
         $(this).parents().eq(2).remove();
     });
@@ -105,7 +115,6 @@ $(document).ready(function() {
         $('#Project').hide();
         $('#Exam').hide();
     });
-
 
     $('.recurringCheckbox').click(function () {
         $(".recurringDiv").toggle(this.checked);
