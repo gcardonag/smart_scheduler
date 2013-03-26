@@ -41,13 +41,15 @@ $(document).ready(function() {
             hColor = "gray";
        
         //Add to global aray
-       eventList[eventCount-1] = {
+        eventList[eventCount-1] = {
             name : eventName,
             sTime : startTime,
             eTime : endTime,
             sTime : startDate,
-            eDate : endDate
+            eDate : endDate,
+            type : eType
         };
+
        //Add event to list on page
         $('#rightCol #accordionEventsList').append(
              "\
@@ -77,7 +79,6 @@ $(document).ready(function() {
                  </div>\
              "
          );
-        alert("The first event is: " + eventList[0].name);
     });
     //Delete current event from list and global array
     $('#deleteBtn').live('click', function(){

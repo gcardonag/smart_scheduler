@@ -53,9 +53,10 @@
           <label>Type:</label>
           <div class="btn-group" data-toggle="buttons-radio">
               <button type="button" class="btn btn-primary" value="Class" id="ClassButton">Class</button>
-              <button type="button" class="btn btn-primary" value="Exam" id="ExamButton">Exam</button>
-              <button type="button" class="btn btn-primary" value="Project" id="ProjectButton">Project</button>
+              <button type="button" class="btn btn-primary" value="Exam" id="ExamButton">Exam or Project</button>
+              <button type="button" class="btn btn-primary" value="Project" id="ProjectButton">Meeting</button>
               <button type="button" class="btn btn-primary" value="Custom" id="CustomButton">Custom</button>
+              <button type="button" class="btn btn-primary" value="Flexible">Flexible</button>
           </div>
 
           <div id= "Class">
@@ -102,16 +103,29 @@
                 <option value="Monthly">Months</option>
               </select>
 
-
               <label>Days of the week:</label>
-              <div class="btn-group" data-toggle="buttons-checkbox">
-                <button type="button" class="btn btn-primary" value="Sun">Sun</button>
-                <button type="button" class="btn btn-primary" value="Mon">Mon</button>
-                <button type="button" class="btn btn-primary" value="Tue">Tue</button>
-                <button type="button" class="btn btn-primary" value="Wed">Wed</button>
-                <button type="button" class="btn btn-primary" value="Thu">Thu</button>
-                <button type="button" class="btn btn-primary" value="Fri">Fri</button>
-                <button type="button" class="btn btn-primary" value="Sat">Sat</button>
+              <div>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="sundayCheckbox" value="option1"> Sun
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="mondayCheckbox" value="option2"> Mon
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="tuesdayCheckbox" value="option3"> Tue
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="wednesdayCheckbox" value="option4"> Wed
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="thrusdayCheckbox" value="option5"> Thu
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="fridayCheckbox" value="option6"> Fri
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="saturdayCheckbox" value="option7"> Sat
+                </label>
               </div>
 
             </div>
@@ -145,10 +159,10 @@
 
           <br>
 
-            <label>Class:</label>
+            <label>Name:</label>
                       <input type="text"></input>
-                      <label>Date: (Ex: January 01, 2013)</label>
-                      <input type="text"></input>
+                      <label>Date: (Ex: mm/dd/yy)</label>
+                      <input type="text" ></input>
 
             <label>How much weekly study time would you like to dedicate (in hours)?</label>
             <select class="span2">
