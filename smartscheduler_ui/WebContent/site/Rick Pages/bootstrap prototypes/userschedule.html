@@ -52,13 +52,13 @@
           <div>              
           <label>Type:</label>
           <div class="btn-group" data-toggle="buttons-radio">
-              <button type="button" class="btn btn-primary" value="Class" id="ClassButton">Class</button>
-              <button type="button" class="btn btn-primary" value="Exam" id="ExamButton">Deadline</button>
-              <button type="button" class="btn btn-primary" value="Project" id="ProjectButton">Meeting</button>
-              <button type="button" class="btn btn-primary" value="Custom" id="CustomButton">Custom</button>
-              <button type="button" class="btn btn-primary" value="Flexible">Flexible</button>
+              <button type="button" class="btn btn-primary" value="Class" id="classButton">Class</button>
+              <button type="button" class="btn btn-primary" value="Exam" id="deadlineButton">Deadline</button>
+              <button type="button" class="btn btn-primary" value="Project" id="meetingButton">Meeting</button>
+              <!--<button type="button" class="btn btn-primary" value="Custom" id="CustomButton">Custom</button>-->
+              <button type="button" class="btn btn-primary" value="Flexible" id="flexibleButton">Flexible</button>
           </div>
-
+          <a id="helpButton" href="#" class="btn btn-info" rel="popover" data-original-title="Help Popover" data-trigger="click" data-placement="top" data-content="A brief description of each event type will show here when activated."><i class="icon-info-sign icon-white"></i> Help</a>
           <div id= "Class">
             <br>
             <!--<form action="">-->
@@ -315,9 +315,9 @@
           </div>
         </div><!-- End of collumn -->
         <div class="span1">
-          <br>
+          <h3>Create</h3>
           <form action="post">
-            <input class="btn btn-primary" type="submit" value="Generate">
+            <button class="btn" type="submit"><i class="icon-calendar"></i>Generate Schedule</button>
           </form>
         </div>
       </div><!-- End of row -->

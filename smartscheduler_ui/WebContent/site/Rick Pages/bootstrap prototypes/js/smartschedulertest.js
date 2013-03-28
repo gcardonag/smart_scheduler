@@ -82,6 +82,7 @@ $(document).ready(function() {
     $(document).on('click', '#deleteBtn', function() {
         $(this).parents().eq(2).remove();
     });
+    $('#elem').popover()
 });
 
 /* ALTERNATE DELETE   

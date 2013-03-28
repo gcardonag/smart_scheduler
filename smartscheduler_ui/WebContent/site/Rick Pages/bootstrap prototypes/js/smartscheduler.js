@@ -85,24 +85,24 @@ $(document).ready(function() {
         $(this).parents().eq(2).remove();
     });
 
-    $('#Exam').hide(); //Initially form wil be hidden.
-    $('#ExamButton').click(function() {
-        $('#Exam').show();//Form shows on button click  
-        $('#Class').hide();
-        $('#Project').hide();
-        $('#Custom').hide();
-    });
-
     $('#Class').hide(); //Initially form wil be hidden.
-    $('#ClassButton').click(function() {
+    $('#classButton').click(function() {
         $('#Class').show();//Form shows on button click 
         $('#Exam').hide();
         $('#Project').hide();
         $('#Custom').hide();
     });
 
+    $('#Exam').hide(); //Initially form wil be hidden.
+    $('#deadlineButton').click(function() {
+        $('#Exam').show();//Form shows on button click  
+        $('#Class').hide();
+        $('#Project').hide();
+        $('#Custom').hide();
+    });
+
     $('#Project').hide(); //Initially form wil be hidden.
-    $('#ProjectButton').click(function() {
+    $('#meetingButton').click(function() {
         $('#Project').show();//Form shows on button click
         $('#Class').hide();
         $('#Exam').hide();
@@ -110,7 +110,7 @@ $(document).ready(function() {
     });
 
     $('#Custom').hide(); //Initially form wil be hidden.
-    $('#CustomButton').click(function() {
+    $('#flexibleButton').click(function() {
         $('#Custom').show();//Form shows on button click
         $('#Class').hide();
         $('#Project').hide();
@@ -120,5 +120,30 @@ $(document).ready(function() {
     $('.recurringCheckbox').click(function () {
         $(".recurringDiv").toggle(this.checked);
     });
+
+    //Help popovers
+    $help = $('#helpButton');
+    $help.popover();  
+    $help.click(function(){
+        $help.data('popover').tip().find('.popover-title').empty().append("Help information");
+        $help.data('popover').tip().find('.popover-content').empty().append("A brief description of each event type will show here while the help button is active");
+    });
+    $('#classButton').click(function(){
+        $help.data('popover').tip().find('.popover-title').empty().append("Class type");
+        $help.data('popover').tip().find('.popover-content').empty().append("Class events are those that usually repeat multiple times a week, for 1 or more weeks");
+    });
+    $('#deadlineButton').click(function(){
+        $help.data('popover').tip().find('.popover-title').empty().append("Deadline type");
+        $help.data('popover').tip().find('.popover-content').empty().append("Deadline events are those that require a set amount of time to complete by a due date");
+    });
+    $('#meetingButton').click(function(){
+        $help.data('popover').tip().find('.popover-title').empty().append("Meeting type");
+        $help.data('popover').tip().find('.popover-content').empty().append("Meeting events are those that occur at a specific time and date, but can be ");
+    });
+    $('#flexibleButton').click(function(){
+        $help.data('popover').tip().find('.popover-title').empty().append("Flexible type");
+        $help.data('popover').tip().find('.popover-content').empty().append("Deadline events are those that require a set amount of time to complete by a due date");
+    });
+
 });
 
