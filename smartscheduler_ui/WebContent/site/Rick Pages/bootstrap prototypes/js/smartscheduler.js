@@ -85,6 +85,12 @@ $(document).ready(function() {
         $(this).parents().eq(2).remove();
     });
 
+    //Delete all events 
+/*    $('removeAll').live('click', functon(){
+        for (var i = eventCount; i > 0; i--)
+            "$('#delete"+ eventType + eventCount +"')"
+    });*/
+
     $('#Class').hide(); //Initially form wil be hidden.
     $('#classButton').click(function() {
         $('#Class').show();//Form shows on button click 
@@ -124,10 +130,10 @@ $(document).ready(function() {
     //Help popovers
     $help = $('#helpButton');
     $help.popover();  
-    $help.click(function(){
+/*    $help.click(function(){
         $help.data('popover').tip().find('.popover-title').empty().append("Help information");
         $help.data('popover').tip().find('.popover-content').empty().append("A brief description of each event type will show here while the help button is active");
-    });
+    });*/
     $('#classButton').click(function(){
         $help.data('popover').tip().find('.popover-title').empty().append("Class type");
         $help.data('popover').tip().find('.popover-content').empty().append("Class events are those that usually repeat multiple times a week, for 1 or more weeks");
@@ -138,11 +144,11 @@ $(document).ready(function() {
     });
     $('#meetingButton').click(function(){
         $help.data('popover').tip().find('.popover-title').empty().append("Meeting type");
-        $help.data('popover').tip().find('.popover-content').empty().append("Meeting events are those that occur at a specific time and date, but can be ");
+        $help.data('popover').tip().find('.popover-content').empty().append("Meeting events are those that occur at a specific time and date, but can be recurrent");
     });
     $('#flexibleButton').click(function(){
         $help.data('popover').tip().find('.popover-title').empty().append("Flexible type");
-        $help.data('popover').tip().find('.popover-content').empty().append("Deadline events are those that require a set amount of time to complete by a due date");
+        $help.data('popover').tip().find('.popover-content').empty().append("Flexible events are those that do not need to happen at a specific time, as long as they happen during that day or week");
     });
 
 });

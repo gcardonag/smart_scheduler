@@ -58,7 +58,7 @@
               <!--<button type="button" class="btn btn-primary" value="Custom" id="CustomButton">Custom</button>-->
               <button type="button" class="btn btn-primary" value="Flexible" id="flexibleButton">Flexible</button>
           </div>
-          <a id="helpButton" href="#" class="btn btn-info" rel="popover" data-original-title="Help Popover" data-trigger="click" data-placement="top" data-content="A brief description of each event type will show here when activated."><i class="icon-info-sign icon-white"></i> Help</a>
+          <a id="helpButton" href="#" class="btn" rel="popover" data-original-title="Help Popover" data-trigger="click" data-placement="top" data-content="A brief description of each event type will show here while the help button is active."><i class="icon-info-sign"></i> Help</a>
           <div id= "Class">
             <br>
             <!--<form action="">-->
@@ -309,16 +309,17 @@
        
         <div class="span5" id="rightCol">
           <h3>Added events will show up here</h3>
-          <p class="lead">When you are finished, click the button on the right to submit your events and generate your schedule!</p>
+          <p class="muted">When you are finished, click the button on the right to submit your events and generate your schedule!</p>
           <div class="accordion" id="accordionEventsList">
 
           </div>
         </div><!-- End of collumn -->
         <div class="span1">
-          <h3>Create</h3>
+          <br>
           <form action="post">
-            <button class="btn" type="submit"><i class="icon-calendar"></i>Generate Schedule</button>
+            <button class="btn btn-info" type="submit"><i class="icon-calendar icon-white"></i>Generate Schedule</button>
           </form>
+            <button class="btn btn-warning" id='removeAll'>Remove all events</button>
         </div>
       </div><!-- End of row -->
 
