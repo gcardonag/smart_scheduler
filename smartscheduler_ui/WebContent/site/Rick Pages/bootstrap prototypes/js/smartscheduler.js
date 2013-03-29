@@ -90,7 +90,8 @@ $(document).ready(function() {
                                 <dt>End Time:</dt>\
                                 <dd>" + endTime + "</dd>";
                             }
-                            
+                            newEventHtml += "<dt>Priority</dt>\
+                            <dd>" + eventPriority + "</dd>";
                             newEventHtml += "</dl>\
                         <button class='btn btn-inverse' id='deleteBtn'>Delete event</button>\
                     </div>\
