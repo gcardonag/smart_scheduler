@@ -15,7 +15,7 @@ var eventCount = 0; //need to modify this since the number will never decrease i
 var eventList = new Array();
 
 $(document).ready(function() {
-    $('#submitBtn').click(function(){
+    $('#addClassBtn, #addDeadlineBtn, #addMeetingBtn, #addFlexibleBtn').click(function(){
         var eventName = $("input[name=eName]").val();      
         var startTime = $("input[name=eStartTime]").val();
         var endTime = $("input[name=eEndTime]").val();
@@ -23,19 +23,20 @@ $(document).ready(function() {
         var endDate = $("input[name=eEndDate]").val();
         //var $recurrent = $('#recurrent').is(':checked');
 
+        var hColor;
         eventCount++;
         var eventId = eventCount;
-        //This is used to help select the color for the event's accordion heading, based on its event type.
-        var eType = $(''); //add propper code later
-        var hColor;
+        var eType = $(this).attr("value");
+        
 
-        if (eType === "class")
+        //Selects accordion label color
+        if (eType === "classEvent")
             hColor = "#46a546";
-        else if (eType === "exam")
+        else if (eType === "deadlineEvent")
             hColor = "#ffc40d";
-        else if (eType === "project")
+        else if (eType === "meetingEvent")
             hColor = "#9d261d";
-        else if (eType ==="extracurricular")
+        else if (eType ==="flexibleEvent")
             hColor = "#049cdb";
         else
             hColor = "gray";
@@ -91,36 +92,32 @@ $(document).ready(function() {
             "$('#delete"+ eventType + eventCount +"')"
     });*/
 
-    $('#Class').hide(); //Initially form wil be hidden.
     $('#classButton').click(function() {
-        $('#Class').show();//Form shows on button click 
-        $('#Exam').hide();
-        $('#Project').hide();
-        $('#Custom').hide();
+        $('#classForms').show();//Form shows on button click 
+        $('#deadlineForms').hide();
+        $('#meetingForms').hide();
+        $('#flexibleForms').hide();
     });
 
-    $('#Exam').hide(); //Initially form wil be hidden.
     $('#deadlineButton').click(function() {
-        $('#Exam').show();//Form shows on button click  
-        $('#Class').hide();
-        $('#Project').hide();
-        $('#Custom').hide();
+        $('#deadlineForms').show();//Form shows on button click  
+        $('#classForms').hide();
+        $('#meetingForms').hide();
+        $('#flexibleForms').hide();
     });
 
-    $('#Project').hide(); //Initially form wil be hidden.
     $('#meetingButton').click(function() {
-        $('#Project').show();//Form shows on button click
-        $('#Class').hide();
-        $('#Exam').hide();
-        $('#Custom').hide();
+        $('#meetingForms').show();//Form shows on button click
+        $('#classForms').hide();
+        $('#deadlineForms').hide();
+        $('#flexibleForms').hide();
     });
 
-    $('#Custom').hide(); //Initially form wil be hidden.
     $('#flexibleButton').click(function() {
-        $('#Custom').show();//Form shows on button click
-        $('#Class').hide();
-        $('#Project').hide();
-        $('#Exam').hide();
+        $('#flexibleForms').show();//Form shows on button click
+        $('#classForms').hide();
+        $('#meetingForms').hide();
+        $('#deadlineForms').hide();
     });
 
     $('.recurringCheckbox').click(function () {
