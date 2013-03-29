@@ -13,6 +13,7 @@ $(function() {
 //eventCount is used to create a unique id for each event
 var eventCount = 0; //need to modify this since the number will never decrease in the current code.
 var eventList = new Array();
+var currentEventType = "";
 
 $(document).ready(function() {
     $('#addClassBtn, #addDeadlineBtn, #addMeetingBtn, #addFlexibleBtn').click(function(){
@@ -147,6 +148,19 @@ $(document).ready(function() {
         $help.data('popover').tip().find('.popover-title').empty().append("Flexible type");
         $help.data('popover').tip().find('.popover-content').empty().append("Flexible events are those that do not need to happen at a specific time, as long as they happen during that day or week");
     });
-
+    
+    //Event Type Button Functions
+    $('#classButton').click(function(){
+    	currentEventType = "class";
+    });
+    $('#deadlineButton').click(function(){
+    	currentEventType = "deadline";
+    });
+    $('#meetingButton').click(function(){
+    	currentEventType = "meeting";
+    });
+    $('#flexibleButton').click(function(){
+    	currentEventType = "flexible";
+    });
 });
 
