@@ -22,7 +22,8 @@ $(document).ready(function() {
         var endTime = $("input[name=" + currentEventType + "EndTime]").val();
         var startDate = $("input[name=" + currentEventType + "StartDate]").val();
         var endDate = $("input[name=" + currentEventType + "EndDate]").val();
-        var $recurrent = $('#recurrent').is(':checked');
+        //var eventPriority = $('').attr("value");
+        //var $recurrent = $('#recurrent').is(':checked');
         
         eventCount++;
         var eventId = eventCount;
@@ -49,6 +50,7 @@ $(document).ready(function() {
             sTime : startDate,
             eDate : endDate,
             type : currentEventType
+            //priority : eventPriority
         };
 
         //Accordion html code to add
@@ -90,8 +92,8 @@ $(document).ready(function() {
                                 <dt>End Time:</dt>\
                                 <dd>" + endTime + "</dd>";
                             }
-                            newEventHtml += "<dt>Priority</dt>\
-                            <dd>" + eventPriority + "</dd>";
+/*                            newEventHtml += "<dt>Priority</dt>\
+                            <dd>" + eventPriority + "</dd>";*/
                             newEventHtml += "</dl>\
                         <button class='btn btn-inverse' id='deleteBtn'>Delete event</button>\
                     </div>\
