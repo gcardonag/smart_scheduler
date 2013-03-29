@@ -72,10 +72,10 @@ $(document).ready(function() {
                             if (currentEventType === "class" || "flexible"){
                                 newEventHtml += "<dt>End Date:</dt>"; 
                             }
-                            else if (currentEventType === "deadline"){
+                            if (currentEventType === "deadline"){
                                 newEventHtml += "<dt>Due Date:</dt>";
                             }
-                            else{
+                            if (currentEventType === "meeting"){
                                 newEventHtml += "<dt>Date:</dt>";
                             }
                             newEventHtml += "<dd>" + endDate + "</dd>";
