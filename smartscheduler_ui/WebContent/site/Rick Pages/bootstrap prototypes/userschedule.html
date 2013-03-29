@@ -52,32 +52,32 @@
           <div>              
           <label>Type:</label>
           <div class="btn-group" data-toggle="buttons-radio">
-              <button type="button" class="btn btn-primary" id="classButton">Class</button>
-              <button type="button" class="btn btn-primary" id="deadlineButton">Deadline</button>
-              <button type="button" class="btn btn-primary" id="meetingButton">Meeting</button>
+              <button type="button" class="btn btn-success" id="classButton">Class</button>
+              <button type="button" class="btn btn-warning" id="deadlineButton">Deadline</button>
+              <button type="button" class="btn btn-danger" id="meetingButton">Meeting</button>
               <!--<button type="button" class="btn btn-primary" value="Custom" id="CustomButton">Custom</button>-->
-              <button type="button" class="btn btn-primary" id="flexibleButton">Flexible</button>
+              <button type="button" class="btn btn-info" id="flexibleButton">Flexible</button>
           </div>
 
-          <a id="helpButton" href="#" class="btn" rel="popover" data-original-title="Help Popover" data-trigger="click" data-placement="top" data-content="A brief description of each event type will show here while the help button is active."><i class="icon-info-sign"></i> Help</a>
+          <a id="helpButton" href="#" class="btn btn-inverse" rel="popover" data-original-title="Help Popover" data-trigger="click" data-placement="top" data-content="A brief description of each event type will show here while the help button is active."><i class="icon-info-sign icon-white"></i> Help</a>
           
           <div id= "classForms" style="display: none">
             <br>
             <!--<form action="">-->
             <label>Name:</label>
-              <input type="text" name="eName"></input>
+              <input type="text" name="className"></input>
             <label>Start Date: (Ex: mm/dd/yy)</label>
-              <input type="text" name="eStartDate"></input>
+              <input type="text" name="classStartDate"></input>
             <label>End Date: (Ex: mm/dd/yy)</label>
-              <input type="text" name="eEndDate"></input>
+              <input type="text" name="classEndDate"></input>
             <label>From: (Ex: 10:45 AM)</label>
-              <input type="text" id="eStartTime" name="eStartTime"></input>
+              <input type="text" id="classStartTime" name="classStartTime"></input>
             <label>To: (Ex: 11:45 AM)</label>
-              <input type="text" id="eEndTime" name="eEndTime"></input>
+              <input type="text" id="classEndTime" name="classEndTime"></input>
           
             <br>
             <label class="checkbox inline">
-              <input type="checkbox" class="recurringCheckbox"> Recurrance
+              <input type="checkbox" class="recurringCheckbox"> Recurring
             </label>
 
             <br>
@@ -161,11 +161,13 @@
 
           <br>
             <label>Name:</label>
-              <input type="text" name="eName"></input>
+              <input type="text" name="deadlineName"></input>
             <label>Start Date: (Ex: mm/dd/yy)</label>
-              <input type="text" name="eStartDate"></input>
+              <input type="text" name="deadlineStartDate"></input>
             <label>Due Date: (Ex: mm/dd/yy)</label>
-              <input type="text" name="eEndDate"></input>
+              <input type="text" name="deadlineEndDate"></input>
+            <label>Due by: (Ex: 11:45 AM)</label>
+              <input type="text" id="deadlineEndTime" name="deadlineEndTime"></input>
 
             <label>How much weekly study time would you like to dedicate (in hours)?</label>
             <select class="span2">
@@ -194,27 +196,13 @@
 
           <br>
             <label>Name:</label>
-              <input type="text" name="eName"></input>
+              <input type="text" name="meetingName"></input>
             <label>Date: (Ex: mm/dd/yy)</label>
-              <input type="text" name="eEndDate"></input>
-<!--             <label>From: (Ex: 10:45 AM)</label>
-              <input type="text" id="eStartTime" name="eStartTime"></input>
+              <input type="text" name="meetingEndDate"></input>
+            <label>From: (Ex: 10:45 AM)</label>
+              <input type="text" id="meetingStartTime" name="meetingStartTime"></input>
             <label>To: (Ex: 11:45 AM)</label>
-              <input type="text" id="eEndTime" name="eEndTime"></input> -->
-                    
-            <label>How much work time per week would you like to dedicate (in hours)?</label>
-            <select class="span2">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
+              <input type="text" id="meetingEndTime" name="meetingEndTime"></input>
 
             <label>Priority:</label>
             <div class="btn-group" data-toggle="buttons-radio">
@@ -228,27 +216,27 @@
           <div id="flexibleForms" style="display: none">
 
           <br>
-
             <label>Name:</label>
-                      <input type="text"></input>
-            <label>From: (Ex: January 01, 2013)</label>
-                      <input type="text"></input>
-            <label>To: (Ex: May 01, 2013)</label>
-                      <input type="text"></input>
-            <label>Start: (Ex: 10:45 AM)</label>
-                      <input type="text"></input>
-            <label>End: (Ex: 11:45 AM)</label>
-                      <input type="text"></input>
+              <input type="text" name="flexibleName"></input>
+            <label>Start Date: (Ex: mm/dd/yy)</label>
+              <input type="text" name="flexibleStartDate"></input>
+            <label>End Date: (Ex: mm/dd/yy)</label>
+              <input type="text" name="flexibleEndDate"></input>
+            <label>From: (Ex: 10:45 AM)</label>
+              <input type="text" id="flexibleStartTime" name="flexibleStartTime"></input>
+            <label>To: (Ex: 11:45 AM)</label>
+              <input type="text" id="flexibleEndTime" name="flexibleEndTime"></input>
 
                       <br>
-                      <label class="checkbox inline">
+            <label class="checkbox inline">
             <input type="checkbox" class="recurringCheckbox"> Recurring?
             </label>
 
                       <br>
                       <br>
 
-              <div class="recurringDiv" style="display:none">
+            <div class="recurringDiv" style="display:none">
+
               <label>Repeats every:</label>
               <select class="span2">
                 <option value="1">1</option>
@@ -269,16 +257,29 @@
                 <option value="Monthly">Months</option>
               </select>
 
-
               <label>Days of the week:</label>
-              <div class="btn-group" data-toggle="buttons-checkbox">
-                <button type="button" class="btn btn-primary" value="Sun">Sun</button>
-                <button type="button" class="btn btn-primary" value="Mon">Mon</button>
-                <button type="button" class="btn btn-primary" value="Tue">Tue</button>
-                <button type="button" class="btn btn-primary" value="Wed">Wed</button>
-                <button type="button" class="btn btn-primary" value="Thu">Thu</button>
-                <button type="button" class="btn btn-primary" value="Fri">Fri</button>
-                <button type="button" class="btn btn-primary" value="Sat">Sat</button>
+              <div>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="sundayCheckbox" value="option1"> Sun
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="mondayCheckbox" value="option2"> Mon
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="tuesdayCheckbox" value="option3"> Tue
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="wednesdayCheckbox" value="option4"> Wed
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="thrusdayCheckbox" value="option5"> Thu
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="fridayCheckbox" value="option6"> Fri
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="saturdayCheckbox" value="option7"> Sat
+                </label>
               </div>
 
             </div>
@@ -323,9 +324,9 @@
         <div class="span1">
           <br>
           <form action="post">
-            <button class="btn btn-info" type="submit"><i class="icon-calendar icon-white"></i>Generate Schedule</button>
+            <button class="btn btn-inverse" type="submit"><i class="icon-calendar icon-white"></i>Generate Schedule</button>
           </form>
-            <button class="btn btn-warning" id='removeAll'><i class="icon-trash icon-white"></i>Remove all events</button>
+            <!--  <button class="btn" id='removeAll'><i class="icon-trash icon-white"></i>Delete events</button>-->
         </div>
       </div><!-- End of row -->
 

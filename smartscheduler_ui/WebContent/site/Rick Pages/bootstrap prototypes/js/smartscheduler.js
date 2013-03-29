@@ -17,27 +17,26 @@ var currentEventType = "";
 
 $(document).ready(function() {
     $('#addClassBtn, #addDeadlineBtn, #addMeetingBtn, #addFlexibleBtn').click(function(){
-        var eventName = $("input[name=eName]").val();      
-        var startTime = $("input[name=eStartTime]").val();
-        var endTime = $("input[name=eEndTime]").val();
-        var startDate = $("input[name=eStartDate]").val();
-        var endDate = $("input[name=eEndDate]").val();
-        //var $recurrent = $('#recurrent').is(':checked');
-
-        var hColor;
+        var eventName = $("input[name=" + currentEventType + "Name]").val();      
+        var startTime = $("input[name=" + currentEventType + "StartTime]").val();
+        var endTime = $("input[name=" + currentEventType + "EndTime]").val();
+        var startDate = $("input[name=" + currentEventType + "StartDate]").val();
+        var endDate = $("input[name=" + currentEventType + "EndDate]").val();
+        var $recurrent = $('#recurrent').is(':checked');
+        
         eventCount++;
         var eventId = eventCount;
-        var eType = $(this).attr("value");
+        //var eType = $(this).attr("value");
         
-
         //Selects accordion label color
-        if (eType === "classEvent")
+        var hColor = "gray";
+        if (currentEventType === "class")
             hColor = "#46a546";
-        else if (eType === "deadlineEvent")
+        else if (currentEventType === "deadline")
             hColor = "#ffc40d";
-        else if (eType === "meetingEvent")
+        else if (currentEventType=== "meeting")
             hColor = "#9d261d";
-        else if (eType ==="flexibleEvent")
+        else if (currentEventType === "flexible")
             hColor = "#049cdb";
         else
             hColor = "gray";
@@ -49,41 +48,59 @@ $(document).ready(function() {
             eTime : endTime,
             sTime : startDate,
             eDate : endDate,
-            type : eType
+            type : currentEventType
         };
 
-       //Add event to list on page
-        $('#rightCol #accordionEventsList').append(
-             "\
-                 <div class='accordion-group' id='" + eType + eventId + "'>\
-                     <div class='accordion-heading'>\
-                         <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionEventsList' href='#collapse" + eventId + "' style='background-color:" + hColor + "'>\
-                         <strong style='color:white'>" + eventName + "</strong>\
-                         </a>\
-                     </div>\
-                     <div id='collapse" + eventId + "' class='accordion-body collapse'>\
-                         <div class='accordion-inner'>\
-                             <dl class='dl-horizontal'>\
-                                 <dt>Name:</dt>\
-                                 <dd>" + eventName + "</dd>\
-                                 <dt>Start Time:</dt>\
-                                 <dd>" + startTime + "</dd>\
-                                 <dt>End Time:</dt>\
-                                 <dd>" + endTime + "</dd>\
-                                 <dt>Start Date:</dt>\
-                                 <dd>" + startDate + "</dd>\
-                                 <dt>End Date:</dt>\
-                                 <dd>" + endDate + "</dd>\
-                             </dl>\
-                             <button class='btn btn-inverse' id='deleteBtn'>Delete event</button>\
-                         </div>\
-                     </div>\
-                 </div>\
-             "
-         );
+        //Accordion html code to add
+        var newEventHtml = "<div class='accordion-group' id='" + currentEventType + eventId + "'>\
+                <div class='accordion-heading'>\
+                    <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionEventsList' href='#collapse" + eventId + "' style='background-color:" + hColor + "'>\
+                    <strong style='color:white'>" + eventName + "</strong>\
+                    </a>\
+                </div>\
+                <div id='collapse" + eventId + "' class='accordion-body collapse'>\
+                    <div class='accordion-inner'>\
+                        <dl class='dl-horizontal'>\
+                            <dt>Name:</dt>\
+                                <dd>" + eventName + "</dd>";
+                            //meeting type does not have a start date.
+                            if(currentEventType != "meeting"){
+                                newEventHtml += "<dt>Start Date:</dt>\
+                                <dd>" + startDate + "</dd>";
+                            }
+                            //variations on End Date for different event types
+                            if (currentEventType === "class" || "flexible"){
+                                newEventHtml += "<dt>End Date:</dt>"; 
+                            }
+                            else if (currentEventType === "deadline"){
+                                newEventHtml += "<dt>Due Date:</dt>";
+                            }
+                            else{
+                                newEventHtml += "<dt>Date:</dt>";
+                            }
+                            newEventHtml += "<dd>" + endDate + "</dd>";
+
+                            if(currentEventType === "deadline"){
+                                newEventHtml += "<dt>Due by:</dt>\
+                                <dd>" + endTime + "</dd>";
+                            }
+                            else{
+                                newEventHtml += "<dt>Start Time:</dt>\
+                                <dd>" + startTime + "</dd>\
+                                <dt>End Time:</dt>\
+                                <dd>" + endTime + "</dd>";
+                            }
+                            
+                            newEventHtml += "</dl>\
+                        <button class='btn btn-inverse' id='deleteBtn'>Delete event</button>\
+                    </div>\
+                </div>\
+            </div>";
+        //Add event to list on page
+        $('#rightCol #accordionEventsList').append(newEventHtml);
     });
     //Delete current event from list and global array
-    $('#deleteBtn').live('click', function(){
+    $(document).on('click', '#deleteBtn', function() {
         $(this).parents().eq(2).remove();
     });
 
