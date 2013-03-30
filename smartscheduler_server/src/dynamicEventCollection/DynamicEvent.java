@@ -323,14 +323,14 @@ public abstract class DynamicEvent extends Event {
 	 * @see eventCollection.Event#toString()
 	 */
 	public String toString(){
-		String str = "SmartScheduler.DynamicEvent{"
+		String str = "\nSmartScheduler.DynamicEvent{"
 				+ " 'ID': " + super.getId()  
 				+ ", 'Name' : " + super.getName()
 				+ ", 'CalendarRange' : [ "+ start.getTime().toString()  
 				+ " - " + end.getTime().toString() + " ]"
 				+ ", 'Time' : '" + this.time + "',"  
 				+ ", 'TimeLeft' : '" + this.timeLeft
-				+ "}" ;
+				+ "}\n" ;
 		
 		return str;
 	}
