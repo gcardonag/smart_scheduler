@@ -59,7 +59,7 @@
               <button type="button" class="btn" id="flexibleButton">Flexible</button>
           </div>
 
-          <a id="helpButton" href="#" class="btn btn-inverse" rel="popover" data-original-title="Help Popover" data-trigger="click" data-placement="top" data-content="A brief description of each event type will show here while the help button is active."><i class="icon-info-sign icon-white"></i> Help</a>
+          <button id="helpButton" class="btn btn-inverse" rel="popover" data-original-title="Help Popover" data-trigger="click" data-placement="top" data-content="A brief description of each event type will show here while the help button is active."><i class="icon-info-sign icon-white"></i> Help</button>
           
           <div id= "classForms" style="display: none">
             <br>
@@ -149,10 +149,10 @@
             </select>
 
             <label>Priority:</label>
-            <div class="btn-group" data-toggle="buttons-radio">
-                <button type="button" class="btn btn-success" value="low">Low</button>
-                <button type="button" class="btn" value="medium">Medium</button>
-                <button type="button" class="btn btn-success" value="high">High</button>
+            <div class="btn-group" data-toggle="buttons-radio" id="classPriority">
+                <button type="button" class="btn btn-success" id="classLowPrio">Low</button>
+                <button type="button" class="btn" id="classMedPrio">Medium</button>
+                <button type="button" class="btn btn-success" id="classHiPrio">High</button>
             </div>
             <button class="btn btn-inverse" value="classEvent" id="addClassBtn">Add event</button>
           </div>
@@ -168,20 +168,8 @@
               <input type="text" name="deadlineEndDate"></input>
             <label>Due by: (Ex: 11:45 AM)</label>
               <input type="text" id="deadlineEndTime" name="deadlineEndTime"></input>
-
-            <label>How much weekly study time would you like to dedicate (in hours)?</label>
-            <select class="span2">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
+            <label>How many hours do you estimate you will need to complete your project?</label>
+              <input class="input-small" type="text" name="deadlineHours"></input>
 
             <label>Priority:</label>
             <div class="btn-group" data-toggle="buttons-radio">

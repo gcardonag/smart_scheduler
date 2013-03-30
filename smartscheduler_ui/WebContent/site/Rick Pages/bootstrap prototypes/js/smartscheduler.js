@@ -12,8 +12,8 @@ $(function() {
 
 //eventCount is used to create a unique id for each event
 var eventCount = 0; //need to modify this since the number will never decrease in the current code.
-var eventList = new Array();
-var currentEventType = "";
+var eventList = {};
+var currentEventType, eventPriority = "";
 
 $(document).ready(function() {
     $('#addClassBtn, #addDeadlineBtn, #addMeetingBtn, #addFlexibleBtn').click(function(){
@@ -22,12 +22,9 @@ $(document).ready(function() {
         var endTime = $("input[name=" + currentEventType + "EndTime]").val();
         var startDate = $("input[name=" + currentEventType + "StartDate]").val();
         var endDate = $("input[name=" + currentEventType + "EndDate]").val();
-        //var eventPriority = $('').attr("value");
-        //var $recurrent = $('#recurrent').is(':checked');
         
         eventCount++;
         var eventId = eventCount;
-        //var eType = $(this).attr("value");
         
         //Selects accordion label color
         var hColor = "gray";
@@ -41,16 +38,23 @@ $(document).ready(function() {
             hColor = "#049cdb";
         else
             hColor = "gray";
-       
+
+        //Recurrance
+        var recurrent = $(this).$('#recurrent').is(':checked');
+
         //Add to global aray
         eventList[eventCount-1] = {
             name : eventName,
+            type : currentEventType,
+            sDate : startDate,
+            eDate : endDate,
             sTime : startTime,
             eTime : endTime,
-            sTime : startDate,
-            eDate : endDate,
-            type : currentEventType
-            //priority : eventPriority
+/*            recurrence : recType,
+            interval : recInterval,
+            days : recDays,  
+            hours : recHours,*/
+            priority : eventPriority
         };
 
         //Accordion html code to add
@@ -181,6 +185,17 @@ $(document).ready(function() {
     });
     $('#flexibleButton').click(function(){
     	currentEventType = "flexible";
+    });
+
+    //Event Priority Button Functions
+    $('#deadlineButton').click(function(){
+        eventPriority = "low";
+    });
+    $('#meetingButton').click(function(){
+        eventPriority = "medium";
+    });
+    $('#flexibleButton').click(function(){
+        eventPriority = "high";
     });
 });
 
