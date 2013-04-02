@@ -41,6 +41,8 @@ $(document).ready(function() {
 
         //Recurrance
         var recurrent = $(this).$('#recurrent').is(':checked');
+        if(recurrent === true)
+            
 
         //Add to global aray
         eventList[eventCount-1] = {
