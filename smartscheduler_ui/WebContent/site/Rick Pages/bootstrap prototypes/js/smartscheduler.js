@@ -22,7 +22,7 @@ $(document).ready(function() {
         var endTime = $("input[name=" + currentEventType + "EndTime]").val();
         var startDate = $("input[name=" + currentEventType + "StartDate]").val();
         var endDate = $("input[name=" + currentEventType + "EndDate]").val();
-        
+
         eventCount++;
         var eventId = eventCount;
         
@@ -40,11 +40,10 @@ $(document).ready(function() {
             hColor = "gray";
 
         //Recurrance
-        var recurrent = $(this).$('#recurrent').is(':checked');
-        if(recurrent === true)
-            
+/*        var recurrent = $(this).$('#recurrent').is(':checked');
+        if(recurrent === true)*/
 
-        //Add to global aray
+        //Add to global array  NEED TO CHANGE TO LIST
         eventList[eventCount-1] = {
             name : eventName,
             type : currentEventType,
@@ -52,7 +51,7 @@ $(document).ready(function() {
             eDate : endDate,
             sTime : startTime,
             eTime : endTime,
-/*            recurrence : recType,
+/*          recurrence : recType,
             interval : recInterval,
             days : recDays,  
             hours : recHours,*/
@@ -70,7 +69,9 @@ $(document).ready(function() {
                     <div class='accordion-inner'>\
                         <dl class='dl-horizontal'>\
                             <dt>Name:</dt>\
-                                <dd>" + eventName + "</dd>";
+                                <dd>" + eventName + "</dd>\
+                            <dt>Type:</dt>\
+                                <dd>" + currentEventType + "</dd>"; 
                             //meeting type does not have a start date.
                             if(currentEventType != "meeting"){
                                 newEventHtml += "<dt>Start Date:</dt>\
@@ -98,8 +99,8 @@ $(document).ready(function() {
                                 <dt>End Time:</dt>\
                                 <dd>" + endTime + "</dd>";
                             }
-/*                            newEventHtml += "<dt>Priority</dt>\
-                            <dd>" + eventPriority + "</dd>";*/
+                            newEventHtml += "<dt>Priority: </dt>\
+                            <dd>" + eventPriority + "</dd>";
                             newEventHtml += "</dl>\
                         <button class='btn btn-inverse' id='deleteBtn'>Delete event</button>\
                     </div>\
@@ -188,16 +189,31 @@ $(document).ready(function() {
     $('#flexibleButton').click(function(){
     	currentEventType = "flexible";
     });
-
+        
     //Event Priority Button Functions
-    $('#deadlineButton').click(function(){
+    var lowPriority = currentEventType + "LowPrio";
+    //var medPriority = "#" + currentEventType + "MedPrio";
+    var highPriority = "#" + currentEventType + "HiPrio";
+    
+    //This works.
+    $('#classLowPrio').click(function(){
         eventPriority = "low";
+        alert(eventPriority + " priority was selected for this " + currentEventType + " class");
     });
-    $('#meetingButton').click(function(){
+
+    //But these variations dont.
+/*    $('#'+lowPriority).click(function(){
+        eventPriority = "low";
+        alert(eventPriority + " priority was selected for this " + currentEventType + " class");
+    });*/
+    $('#' + currentEventType + 'MedPrio').click(function(){
         eventPriority = "medium";
+        alert(eventPriority + " priority was selected for this " + currentEventType + " class");
     });
-    $('#flexibleButton').click(function(){
+    $(highPriority).click(function(){
         eventPriority = "high";
+        alert(eventPriority + " priority was selected for this " + currentEventType + " class");
     });
+
 });
 
