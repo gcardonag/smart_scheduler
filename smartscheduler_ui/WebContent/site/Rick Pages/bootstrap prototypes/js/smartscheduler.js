@@ -13,7 +13,7 @@ $(function() {
 //eventCount is used to create a unique id for each event
 var eventCount = 0; //need to modify this since the number will never decrease in the current code.
 var eventList = {};
-var currentEventType, eventPriority = "";
+var currentEventType, eventPriority;
 
 $(document).ready(function() {
     $('#addClassBtn, #addDeadlineBtn, #addMeetingBtn, #addFlexibleBtn').click(function(){
@@ -22,22 +22,28 @@ $(document).ready(function() {
         var endTime = $("input[name=" + currentEventType + "EndTime]").val();
         var startDate = $("input[name=" + currentEventType + "StartDate]").val();
         var endDate = $("input[name=" + currentEventType + "EndDate]").val();
+        var recType = $('#recType').val();
+        var recInterval = $('#recInterval').val();
 
         eventCount++;
         var eventId = eventCount;
         
         //Selects accordion label color
-        var hColor = "gray";
-        if (currentEventType === "class")
+        var hColor;
+
+        switch(currentEventType) {
+          case 'class':
             hColor = "#46a546";
-        else if (currentEventType === "deadline")
+            break;
+          case 'deadline':
             hColor = "#ffc40d";
-        else if (currentEventType=== "meeting")
+            break;
+          case 'meeting':
             hColor = "#9d261d";
-        else if (currentEventType === "flexible")
-            hColor = "#049cdb";
-        else
-            hColor = "gray";
+            break;
+          default:
+            hColor = '#049cdb';
+        }
 
         //Recurrance
 /*        var recurrent = $(this).$('#recurrent').is(':checked');
@@ -51,9 +57,9 @@ $(document).ready(function() {
             eDate : endDate,
             sTime : startTime,
             eTime : endTime,
-/*          recurrence : recType,
+            recurrence : recType,
             interval : recInterval,
-            days : recDays,  
+/*          days : recDays,  
             hours : recHours,*/
             priority : eventPriority
         };
@@ -63,6 +69,7 @@ $(document).ready(function() {
                 <div class='accordion-heading'>\
                     <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionEventsList' href='#collapse" + eventId + "' style='background-color:" + hColor + "'>\
                     <strong style='color:white'>" + eventName + "</strong>\
+                    <strong class='pull-right' style='color:white'>" + currentEventType + "</strong>\
                     </a>\
                 </div>\
                 <div id='collapse" + eventId + "' class='accordion-body collapse'>\
@@ -73,36 +80,46 @@ $(document).ready(function() {
                             <dt>Type:</dt>\
                                 <dd>" + currentEventType + "</dd>"; 
                             //meeting type does not have a start date.
-                            if(currentEventType != "meeting"){
+                            if(currentEventType != 'meeting'){
                                 newEventHtml += "<dt>Start Date:</dt>\
                                 <dd>" + startDate + "</dd>";
                             }
                             //variations on End Date for different event types
-                            if (currentEventType === "class" || "flexible"){
-                                newEventHtml += "<dt>End Date:</dt>"; 
+                            switch (currentEventType){
+                                case 'deadline':
+                                  newEventHtml += "<dt>Due Date:</dt>";
+                                  break;
+                                case 'meeting':
+                                  newEventHtml += "<dt>Date:</dt>";
+                                  break;
+                                default:
+                                  newEventHtml += "<dt>End Date:</dt>"; 
                             }
-                            if (currentEventType === "deadline"){
-                                newEventHtml += "<dt>Due Date:</dt>";
-                            }
-                            if (currentEventType === "meeting"){
-                                newEventHtml += "<dt>Date:</dt>";
-                            }
+
                             newEventHtml += "<dd>" + endDate + "</dd>";
 
-                            if(currentEventType === "deadline"){
+                            switch (currentEventType){
+                              case 'deadline':
                                 newEventHtml += "<dt>Due by:</dt>\
                                 <dd>" + endTime + "</dd>";
-                            }
-                            else{
+                              break;
+                              default:
                                 newEventHtml += "<dt>Start Time:</dt>\
                                 <dd>" + startTime + "</dd>\
                                 <dt>End Time:</dt>\
                                 <dd>" + endTime + "</dd>";
                             }
+
                             newEventHtml += "<dt>Priority: </dt>\
-                            <dd>" + eventPriority + "</dd>";
+                            <dd>" + eventPriority + "</dd>\
+                            <dt>Recurrence: </dt>\
+                            <dd>" + recType + "</dd>\
+                            <dt>Interval: </dt>\
+                            <dd>" + recInterval + "</dd>";
+
                             newEventHtml += "</dl>\
-                        <button class='btn btn-inverse' id='deleteBtn'>Delete event</button>\
+                        <button class='btn btn-inverse' id='editBtn'>Edit</button>\
+                        <button class='btn btn-inverse pull-right' id='deleteBtn'>Delete</button>\
                     </div>\
                 </div>\
             </div>";
@@ -114,10 +131,11 @@ $(document).ready(function() {
         $(this).parents().eq(2).remove();
     });
 
-    //Delete all events 
+    //Delete all events button
 /*    $('removeAll').live('click', functon(){
         for (var i = eventCount; i > 0; i--)
             "$('#delete"+ eventType + eventCount +"')"
+            //add code to erase events from list object
     });*/
 
     $('#classButton').click(function() {
@@ -198,7 +216,7 @@ $(document).ready(function() {
     //This works.
     $('#classLowPrio').click(function(){
         eventPriority = "low";
-        alert(eventPriority + " priority was selected for this " + currentEventType + " class");
+        //alert(eventPriority + " priority was selected for this " + currentEventType + " class");
     });
 
     //But these variations dont.
@@ -206,14 +224,14 @@ $(document).ready(function() {
         eventPriority = "low";
         alert(eventPriority + " priority was selected for this " + currentEventType + " class");
     });*/
-    $('#' + currentEventType + 'MedPrio').click(function(){
+/*    $("#" + currentEventType + "MedPrio").click(function(){
         eventPriority = "medium";
         alert(eventPriority + " priority was selected for this " + currentEventType + " class");
     });
     $(highPriority).click(function(){
         eventPriority = "high";
         alert(eventPriority + " priority was selected for this " + currentEventType + " class");
-    });
+    });*/
 
 });
 

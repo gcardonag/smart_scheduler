@@ -52,9 +52,9 @@
           <div>              
           <label>Type:</label>
           <div class="btn-group" data-toggle="buttons-radio">
-              <button type="button" class="btn btn-success" id="classButton">Class</button>
+              <button type="button" class="btn" id="classButton">Class</button>
               <button type="button" class="btn" id="deadlineButton">Deadline</button>
-              <button type="button" class="btn btn-success" id="meetingButton">Meeting</button>
+              <button type="button" class="btn" id="meetingButton">Meeting</button>
               <!--<button type="button" class="btn btn-primary" value="Custom" id="CustomButton">Custom</button>-->
               <button type="button" class="btn" id="flexibleButton">Flexible</button>
           </div>
@@ -86,7 +86,7 @@
             <div class="recurringDiv" style="display:none">
 
               <label>Repeats every:</label>
-              <select class="span2">
+              <select class="span2" id="recInterval">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -99,7 +99,7 @@
                 <option value="10">10</option>
               </select>
 
-              <select class="span3">
+              <select class="span3" id="recType">
                 <option value="Daily">Days</option>
                 <option value="Weekly">Weeks</option>
                 <option value="Monthly">Months</option>
@@ -150,9 +150,9 @@
 
             <label>Priority:</label>
             <div class="btn-group" data-toggle="buttons-radio" id="classPriority">
-                <button type="button" class="btn btn-success" id="classLowPrio">Low</button>
+                <button type="button" class="btn" id="classLowPrio">Low</button>
                 <button type="button" class="btn" id="classMedPrio">Medium</button>
-                <button type="button" class="btn btn-success" id="classHiPrio">High</button>
+                <button type="button" class="btn" id="classHiPrio">High</button>
             </div>
             <button class="btn btn-inverse" value="classEvent" id="addClassBtn">Add event</button>
           </div>
@@ -168,7 +168,7 @@
               <input type="text" name="deadlineEndDate"></input>
             <label>Due by: (Ex: 11:45 AM)</label>
               <input type="text" id="deadlineEndTime" name="deadlineEndTime"></input>
-            <label>How many hours do you estimate you will need to complete your project?</label>
+            <label>How many hours do you estimate you will need to complete this task?</label>
               <input class="input-small" type="text" name="deadlineHours"></input>
 
             <label>Priority:</label>
