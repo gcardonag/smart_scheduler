@@ -16,6 +16,9 @@ var eventList = {};
 var currentEventType, eventPriority;
 
 $(document).ready(function() {
+
+    eventCount++;
+
     $('#addClassBtn, #addDeadlineBtn, #addMeetingBtn, #addFlexibleBtn').click(function(){
         var eventName = $("input[name=" + currentEventType + "Name]").val();      
         var startTime = $("input[name=" + currentEventType + "StartTime]").val();
@@ -25,9 +28,8 @@ $(document).ready(function() {
         var recType = $('#recType').val();
         var recInterval = $('#recInterval').val();
 
-        eventCount++;
-        var eventId = eventCount;
-        
+        var eventId = currentEventType + eventCount.toString();
+        alert("Hi this event is" + eventId);
         //Selects accordion label color
         var hColor;
 
@@ -50,7 +52,7 @@ $(document).ready(function() {
         if(recurrent === true)*/
 
         //Add to global array  NEED TO CHANGE TO LIST
-        eventList[eventCount-1] = {
+        eventList += {
             name : eventName,
             type : currentEventType,
             sDate : startDate,
@@ -65,7 +67,7 @@ $(document).ready(function() {
         };
 
         //Accordion html code to add
-        var newEventHtml = "<div class='accordion-group' id='" + currentEventType + eventId + "'>\
+        var newEventHtml = "<div class='accordion-group' id='" + eventId + "'>\
                 <div class='accordion-heading'>\
                     <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionEventsList' href='#collapse" + eventId + "' style='background-color:" + hColor + "'>\
                     <strong style='color:white'>" + eventName + "</strong>\
@@ -126,17 +128,6 @@ $(document).ready(function() {
         //Add event to list on page
         $('#rightCol #accordionEventsList').append(newEventHtml);
     });
-    //Delete current event from list and global array
-    $(document).on('click', '#deleteBtn', function() {
-        $(this).parents().eq(2).remove();
-    });
-
-    //Delete all events button
-/*    $('removeAll').live('click', functon(){
-        for (var i = eventCount; i > 0; i--)
-            "$('#delete"+ eventType + eventCount +"')"
-            //add code to erase events from list object
-    });*/
 
     $('#classButton').click(function() {
         $('#classForms').show();//Form shows on button click 
@@ -207,7 +198,23 @@ $(document).ready(function() {
     $('#flexibleButton').click(function(){
     	currentEventType = "flexible";
     });
-        
+
+    // //Edit current event
+    // $(document).on('click', '#editBtn', function() {
+    // });
+
+    //Delete current event from list and global array
+    $(document).on('click', '#deleteBtn', function() {
+        $(this).parents().eq(2).remove();
+    });
+
+    //Delete all events button
+/*    $('removeAll').live('click', functon(){
+        for (var i = eventCount; i > 0; i--)
+            "$('#delete"+ eventType + eventCount +"')"
+            //add code to erase events from list object
+    });*/
+
     //Event Priority Button Functions
     var lowPriority = currentEventType + "LowPrio";
     //var medPriority = "#" + currentEventType + "MedPrio";
@@ -216,7 +223,7 @@ $(document).ready(function() {
     //This works.
     $('#classLowPrio').click(function(){
         eventPriority = "low";
-        //alert(eventPriority + " priority was selected for this " + currentEventType + " class");
+/*        alert(eventPriority + " priority was selected for this " + currentEventType + " event");*/
     });
 
     //But these variations dont.
