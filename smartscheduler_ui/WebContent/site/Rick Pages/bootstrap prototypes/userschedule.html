@@ -59,11 +59,11 @@
               <button type="button" class="btn" id="flexibleButton">Flexible</button>
           </div>
 
-          <button id="helpButton" class="btn btn-inverse" rel="popover" data-original-title="Help Popover" data-trigger="click" data-placement="top" data-content="A brief description of each event type will show here while the help button is active."><i class="icon-info-sign icon-white"></i> Help</button>
+          <button id="helpButton" class="btn btn-inverse" rel="popover" data-original-title="Help Popover" data-trigger="click" data-placement="right" data-content=""><i class="icon-info-sign icon-white"></i> Help</button>
           
           <div id= "classForms" style="display: none">
             <br>
-            <!--<form action="">-->
+          <form>
             <label>Name:</label>
               <input type="text" name="className"></input>
             <label>Start Date: (Ex: mm/dd/yy)</label>
@@ -79,7 +79,7 @@
             <label class="checkbox inline">
               <input type="checkbox" class="recurringCheckbox"> Recurring
             </label>
-
+            <button id="helpButton" class="btn btn-inverse" rel="popover" data-original-title="Recurrence Help Popover" data-trigger="click" data-placement="top" data-content="An event recurrs every 10 Days, every 2 Weeks, etc"><i class="icon-info-sign icon-white"></i></button>
             <br>
             <br>
 
@@ -87,6 +87,7 @@
 
               <label>Repeats every:</label>
               <select class="span2" id="recInterval">
+                <option value="none"></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -97,9 +98,31 @@
                 <option value="8">8</option>
                 <option value="9">9</option>
                 <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
               </select>
 
               <select class="span3" id="recType">
+                <option value="none"></option>
                 <option value="Daily">Days</option>
                 <option value="Weekly">Weeks</option>
                 <option value="Monthly">Months</option>
@@ -134,19 +157,9 @@
 
             <br>
 
-            <label>How much weekly study time would you like to dedicate (in hours)?</label>
-            <select class="span2">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-            </select>
+            <label>How much weekly study time (in hours) do you estimate you will need to dedicate?</label>
+              <input class="input-small" type="text" name="deadlineHours"></input>
+
 
             <label>Priority:</label>
             <div class="btn-group" data-toggle="buttons-radio" id="classPriority">
@@ -154,7 +167,8 @@
                 <button type="button" class="btn" id="classMedPrio">Medium</button>
                 <button type="button" class="btn" id="classHiPrio">High</button>
             </div>
-            <button class="btn btn-inverse" value="classEvent" id="addClassBtn">Add event</button>
+          </form>
+            <button class="btn btn-success" value="classEvent" id="addClassBtn">Add event</button>
           </div>
 
           <div id="deadlineForms" style="display: none">
@@ -171,12 +185,8 @@
             <label>How many hours do you estimate you will need to complete this task?</label>
               <input class="input-small" type="text" name="deadlineHours"></input>
 
-            <label>Priority:</label>
-            <div class="btn-group" data-toggle="buttons-radio">
-                <button type="button" class="btn btn-success" id="deadlineLowPrio">Low</button>
-                <button type="button" class="btn" id="deadlineMedPrio">Medium</button>
-                <button type="button" class="btn btn-success" id="deadlineHiPrio">High</button>
-            </div>
+          <div id='priorityDeadline'>
+          </div>
             <button class="btn btn-inverse" value="deadlineEvent" id="addDeadlineBtn">Add event</button>
           </div>
 
@@ -192,12 +202,6 @@
             <label>To: (Ex: 11:45 AM)</label>
               <input type="text" id="meetingEndTime" name="meetingEndTime"></input>
 
-            <label>Priority:</label>
-            <div class="btn-group" data-toggle="buttons-radio">
-                <button type="button" class="btn btn-success" value="low">Low</button>
-                <button type="button" class="btn" value="medium">Medium</button>
-                <button type="button" class="btn btn-success" value="high">High</button>
-            </div>
           <button class="btn btn-inverse" value="meetingEvent" id="addMeetingBtn">Add event</button>
           </div>
 
@@ -274,7 +278,7 @@
             <br>
             <br>
 
-            <label>How much weekly study time would you like to dedicate (in hours)?</label>
+            <label>How much time would you like to dedicate (in hours)?</label>
             <select class="span2">
               <option value="1">1</option>
               <option value="2">2</option>
@@ -288,12 +292,6 @@
               <option value="10">10</option>
             </select>
 
-            <label>Priority:</label>
-            <div class="btn-group" data-toggle="buttons-radio">
-                <button type="button" class="btn btn-success" value="low">Low</button>
-                <button type="button" class="btn" value="medium">Medium</button>
-                <button type="button" class="btn btn-success" value="high">High</button>
-            </div>
             <button class="btn btn-inverse" value="flexibleEvent" id="addFlexibleBtn">Add event</button>
           </div>
 
@@ -311,9 +309,12 @@
         </div><!-- End of collumn -->
         <div class="span1">
           <br>
-          <form action="post">
-            <button class="btn btn-inverse" type="submit"><i class="icon-calendar icon-white"></i>Generate Schedule</button>
+
+          <form action="Redirector_1" method="get" id="generateForm">
+            <button class="btn btn-inverse" id="generateBtn"><i class="icon-calendar icon-white"></i>Generate Schedule</button>
+            <input type="hidden" id="eventArrayList" name="eventArrayList"></input>
           </form>
+            
             <!--  <button class="btn" id='removeAll'><i class="icon-trash icon-white"></i>Delete events</button>-->
         </div>
       </div><!-- End of row -->
@@ -371,7 +372,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src='js/jquery-1.8.2.js'></script>
     <script src='js/bootstrap.js'></script>
-    <script src='js/smartscheduler.js'></script>
+    <script src='js/smartschedulertest.js'></script>
     <!-- ADDING DATE&TIME PICKERS HERE -->
     <link rel="stylesheet" href="../../addons/jquery-ui-1.8.18.custom/development-bundle/themes/base/jquery.ui.all.css">
     <script src="../../addons/jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.core.js"></script>
