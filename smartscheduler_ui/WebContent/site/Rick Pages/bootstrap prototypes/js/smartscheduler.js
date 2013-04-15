@@ -4,21 +4,18 @@
  */
 
 $(function() {
-	$( "[name*='Date']" ).datepicker({ minDate: -20, maxDate: "+12M" });
-	$( "[id*='Time']" ).AnyTime_picker({
-		format: "%I:%i %p"
-	});
+    $( "[name*='Date']" ).datepicker({ minDate: -20, maxDate: "+12M" });
+    $( "[id*='Time']" ).AnyTime_picker({
+        format: "%I:%i %p"
+    });
 });
 
 //eventCount is used to create a unique id for each event
 var eventCount = 0; //need to modify this since the number will never decrease in the current code.
-var eventList = {};
+var eventArray = [];
 var currentEventType, eventPriority;
 
 $(document).ready(function() {
-
-    eventCount++;
-
     $('#addClassBtn, #addDeadlineBtn, #addMeetingBtn, #addFlexibleBtn').click(function(){
         var eventName = $("input[name=" + currentEventType + "Name]").val();      
         var startTime = $("input[name=" + currentEventType + "StartTime]").val();
@@ -28,8 +25,9 @@ $(document).ready(function() {
         var recType = $('#recType').val();
         var recInterval = $('#recInterval').val();
 
+        eventCount++; //so first event is counted as 1 and not 0.
         var eventId = currentEventType + eventCount.toString();
-        alert("Hi this event is" + eventId);
+        
         //Selects accordion label color
         var hColor;
 
@@ -52,7 +50,7 @@ $(document).ready(function() {
         if(recurrent === true)*/
 
         //Add to global array  NEED TO CHANGE TO LIST
-        eventList += {
+        var newEvent = {
             name : eventName,
             type : currentEventType,
             sDate : startDate,
@@ -65,6 +63,11 @@ $(document).ready(function() {
             hours : recHours,*/
             priority : eventPriority
         };
+
+        eventArray.push(newEvent);
+
+        //[{name: eventName, ...},{name:eventName2}]
+        //alert("The event as an object: " + JSON.stringify(eventArray));
 
         //Accordion html code to add
         var newEventHtml = "<div class='accordion-group' id='" + eventId + "'>\
@@ -127,7 +130,36 @@ $(document).ready(function() {
             </div>";
         //Add event to list on page
         $('#rightCol #accordionEventsList').append(newEventHtml);
+        clearForm('form');
     });
+
+    //Delete current event from list and global array
+    $(document).on('click', '#deleteBtn', function() {
+        $(this).parents().eq(2).remove();
+    });
+    //Clear all forms
+    function clearForm(datForm){
+        $(datForm).find(':input').each(function(){
+            switch(this.type) {
+                case 'text':
+                case 'select-one':
+                    $(this).val('');
+                    break;
+                case 'checkbox':
+                    this.checked = false;
+            }
+        });
+    }
+    //Edit current event
+/*    $(document).on('click', '#editBtn', function() {
+    });*/
+
+    //Delete all events button
+/*    $('removeAll').live('click', functon(){
+        for (var i = eventCount; i > 0; i--)
+            "$('#delete"+ eventType + eventCount +"')"
+            //add code to erase events from list object
+    });*/
 
     $('#classButton').click(function() {
         $('#classForms').show();//Form shows on button click 
@@ -161,13 +193,13 @@ $(document).ready(function() {
         $(".recurringDiv").toggle(this.checked);
     });
 
-    //Help popovers
+    //Help popover
     $help = $('#helpButton');
     $help.popover();  
-/*    $help.click(function(){
-        $help.data('popover').tip().find('.popover-title').empty().append("Help information");
-        $help.data('popover').tip().find('.popover-content').empty().append("A brief description of each event type will show here while the help button is active");
-    });*/
+    $help.click(function(){
+        $help.data('popover').tip().find('.popover-title').empty().append("Help Popover");
+        $help.data('popover').tip().find('.popover-content').empty().append("While this popover is active, a brief description of each event type will show after selecting an event type");
+    });
     $('#classButton').click(function(){
         $help.data('popover').tip().find('.popover-title').empty().append("Class type");
         $help.data('popover').tip().find('.popover-content').empty().append("Class events are those that usually repeat multiple times a week, for 1 or more weeks");
@@ -185,36 +217,24 @@ $(document).ready(function() {
         $help.data('popover').tip().find('.popover-content').empty().append("Flexible events are those that do not need to happen at a specific time, as long as they happen during that day or week");
     });
     
+    //Recurrence Help Popover
+    $('#recHelpBtn').popover();
+
+
     //Event Type Button Functions
     $('#classButton').click(function(){
-    	currentEventType = "class";
+        currentEventType = "class";
     });
     $('#deadlineButton').click(function(){
-    	currentEventType = "deadline";
+        currentEventType = "deadline";
     });
     $('#meetingButton').click(function(){
-    	currentEventType = "meeting";
+        currentEventType = "meeting";
     });
     $('#flexibleButton').click(function(){
-    	currentEventType = "flexible";
+        currentEventType = "flexible";
     });
-
-    // //Edit current event
-    // $(document).on('click', '#editBtn', function() {
-    // });
-
-    //Delete current event from list and global array
-    $(document).on('click', '#deleteBtn', function() {
-        $(this).parents().eq(2).remove();
-    });
-
-    //Delete all events button
-/*    $('removeAll').live('click', functon(){
-        for (var i = eventCount; i > 0; i--)
-            "$('#delete"+ eventType + eventCount +"')"
-            //add code to erase events from list object
-    });*/
-
+        
     //Event Priority Button Functions
     var lowPriority = currentEventType + "LowPrio";
     //var medPriority = "#" + currentEventType + "MedPrio";
@@ -223,7 +243,7 @@ $(document).ready(function() {
     //This works.
     $('#classLowPrio').click(function(){
         eventPriority = "low";
-/*        alert(eventPriority + " priority was selected for this " + currentEventType + " event");*/
+        //alert(eventPriority + " priority was selected for this " + currentEventType + " class");
     });
 
     //But these variations dont.
@@ -240,5 +260,10 @@ $(document).ready(function() {
         alert(eventPriority + " priority was selected for this " + currentEventType + " class");
     });*/
 
+    //Generate string of schedule events
+    $('#generateBtn').click(function(){
+        $('#eventArrayList').val(JSON.stringify(eventArray));
+        $('generateForm').submit();
+    });
+    $('#eventArrayParagraph').html(window.location.search);
 });
-
