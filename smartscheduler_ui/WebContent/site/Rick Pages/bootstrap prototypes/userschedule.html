@@ -65,7 +65,7 @@
             <br>
           <form>
             <label>Name:</label>
-              <input type="text" name="className"></input>
+              <input type="text" name="className"></input><div class="alert-error pull-right"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Invalid input!</strong> Please fill out this field</div>
             <label>Start Date: (Ex: mm/dd/yy)</label>
               <input type="text" name="classStartDate"></input>
             <label>End Date: (Ex: mm/dd/yy)</label>
@@ -79,7 +79,7 @@
             <label class="checkbox inline">
               <input type="checkbox" class="recurringCheckbox"> Recurring
             </label>
-            <button id="helpButton" class="btn btn-inverse" rel="popover" data-original-title="Recurrence Help Popover" data-trigger="click" data-placement="top" data-content="An event recurrs every 10 Days, every 2 Weeks, etc"><i class="icon-info-sign icon-white"></i></button>
+            <button type="button" id="recHelpBtn" class="btn btn-inverse" rel="popover" data-original-title="Recurrence Help Popover" data-trigger="click" data-placement="right" data-content="An event recurrs every 10 Days, every 2 Weeks, etc"><i class="icon-info-sign icon-white"></i></button>
             <br>
             <br>
 
@@ -168,7 +168,7 @@
                 <button type="button" class="btn" id="classHiPrio">High</button>
             </div>
           </form>
-            <button class="btn btn-success" value="classEvent" id="addClassBtn">Add event</button>
+            <button class="btn btn-inverse" value="classEvent" id="addClassBtn">Add event</button>
           </div>
 
           <div id="deadlineForms" style="display: none">
@@ -311,7 +311,7 @@
           <br>
 
           <form action="Redirector_1" method="get" id="generateForm">
-            <button class="btn btn-inverse" id="generateBtn"><i class="icon-calendar icon-white"></i>Generate Schedule</button>
+            <button class="btn btn-success" id="generateBtn"><i class="icon-calendar icon-white"></i>Generate Schedule</button>
             <input type="hidden" id="eventArrayList" name="eventArrayList"></input>
           </form>
             
@@ -372,7 +372,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src='js/jquery-1.8.2.js'></script>
     <script src='js/bootstrap.js'></script>
-    <script src='js/smartschedulertest.js'></script>
+    <script src='js/smartscheduler.js'></script>
     <!-- ADDING DATE&TIME PICKERS HERE -->
     <link rel="stylesheet" href="../../addons/jquery-ui-1.8.18.custom/development-bundle/themes/base/jquery.ui.all.css">
     <script src="../../addons/jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.core.js"></script>

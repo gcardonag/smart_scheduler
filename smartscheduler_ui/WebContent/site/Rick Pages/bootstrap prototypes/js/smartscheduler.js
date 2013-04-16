@@ -4,15 +4,15 @@
  */
 
 $(function() {
-	$( "[name*='Date']" ).datepicker({ minDate: -20, maxDate: "+12M" });
-	$( "[id*='Time']" ).AnyTime_picker({
-		format: "%I:%i %p"
-	});
+    $( "[name*='Date']" ).datepicker({ minDate: -20, maxDate: "+12M" });
+    $( "[id*='Time']" ).AnyTime_picker({
+        format: "%I:%i %p"
+    });
 });
 
 //eventCount is used to create a unique id for each event
 var eventCount = 0; //need to modify this since the number will never decrease in the current code.
-var eventList = {};
+var eventArray = [];
 var currentEventType, eventPriority;
 
 $(document).ready(function() {
@@ -25,8 +25,8 @@ $(document).ready(function() {
         var recType = $('#recType').val();
         var recInterval = $('#recInterval').val();
 
-        eventCount++;
-        var eventId = eventCount;
+        eventCount++; //so first event is counted as 1 and not 0.
+        var eventId = currentEventType + eventCount.toString();
         
         //Selects accordion label color
         var hColor;
@@ -50,7 +50,7 @@ $(document).ready(function() {
         if(recurrent === true)*/
 
         //Add to global array  NEED TO CHANGE TO LIST
-        eventList[eventCount-1] = {
+        var newEvent = {
             name : eventName,
             type : currentEventType,
             sDate : startDate,
@@ -64,8 +64,13 @@ $(document).ready(function() {
             priority : eventPriority
         };
 
+        eventArray.push(newEvent);
+
+        //[{name: eventName, ...},{name:eventName2}]
+        //alert("The event as an object: " + JSON.stringify(eventArray));
+
         //Accordion html code to add
-        var newEventHtml = "<div class='accordion-group' id='" + currentEventType + eventId + "'>\
+        var newEventHtml = "<div class='accordion-group' id='" + eventId + "'>\
                 <div class='accordion-heading'>\
                     <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionEventsList' href='#collapse" + eventId + "' style='background-color:" + hColor + "'>\
                     <strong style='color:white'>" + eventName + "</strong>\
@@ -125,11 +130,29 @@ $(document).ready(function() {
             </div>";
         //Add event to list on page
         $('#rightCol #accordionEventsList').append(newEventHtml);
+        clearForm('form');
     });
+
     //Delete current event from list and global array
     $(document).on('click', '#deleteBtn', function() {
         $(this).parents().eq(2).remove();
     });
+    //Clear all forms
+    function clearForm(datForm){
+        $(datForm).find(':input').each(function(){
+            switch(this.type) {
+                case 'text':
+                case 'select-one':
+                    $(this).val('');
+                    break;
+                case 'checkbox':
+                    this.checked = false;
+            }
+        });
+    }
+    //Edit current event
+/*    $(document).on('click', '#editBtn', function() {
+    });*/
 
     //Delete all events button
 /*    $('removeAll').live('click', functon(){
@@ -170,13 +193,13 @@ $(document).ready(function() {
         $(".recurringDiv").toggle(this.checked);
     });
 
-    //Help popovers
+    //Help popover
     $help = $('#helpButton');
     $help.popover();  
-/*    $help.click(function(){
-        $help.data('popover').tip().find('.popover-title').empty().append("Help information");
-        $help.data('popover').tip().find('.popover-content').empty().append("A brief description of each event type will show here while the help button is active");
-    });*/
+    $help.click(function(){
+        $help.data('popover').tip().find('.popover-title').empty().append("Help Popover");
+        $help.data('popover').tip().find('.popover-content').empty().append("While this popover is active, a brief description of each event type will show after selecting an event type");
+    });
     $('#classButton').click(function(){
         $help.data('popover').tip().find('.popover-title').empty().append("Class type");
         $help.data('popover').tip().find('.popover-content').empty().append("Class events are those that usually repeat multiple times a week, for 1 or more weeks");
@@ -194,18 +217,22 @@ $(document).ready(function() {
         $help.data('popover').tip().find('.popover-content').empty().append("Flexible events are those that do not need to happen at a specific time, as long as they happen during that day or week");
     });
     
+    //Recurrence Help Popover
+    $('#recHelpBtn').popover();
+
+
     //Event Type Button Functions
     $('#classButton').click(function(){
-    	currentEventType = "class";
+        currentEventType = "class";
     });
     $('#deadlineButton').click(function(){
-    	currentEventType = "deadline";
+        currentEventType = "deadline";
     });
     $('#meetingButton').click(function(){
-    	currentEventType = "meeting";
+        currentEventType = "meeting";
     });
     $('#flexibleButton').click(function(){
-    	currentEventType = "flexible";
+        currentEventType = "flexible";
     });
         
     //Event Priority Button Functions
@@ -233,5 +260,10 @@ $(document).ready(function() {
         alert(eventPriority + " priority was selected for this " + currentEventType + " class");
     });*/
 
+    //Generate string of schedule events
+    $('#generateBtn').click(function(){
+        $('#eventArrayList').val(JSON.stringify(eventArray));
+        $('generateForm').submit();
+    });
+    $('#eventArrayParagraph').html(window.location.search);
 });
-
