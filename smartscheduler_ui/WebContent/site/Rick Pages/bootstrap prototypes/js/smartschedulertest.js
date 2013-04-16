@@ -59,9 +59,9 @@ $(document).ready(function() {
             eTime : endTime,
             recurrence : recType,
             interval : recInterval,
-/*          days : recDays,  
-            hours : recHours,*/
-            priority : eventPriority
+            days : "none",  
+            hours : "none",
+            priority : "medium"
         };
 
         eventArray.push(newEvent);
@@ -162,8 +162,8 @@ $(document).ready(function() {
         $('#eventArrayList').val(JSON.stringify(eventArray));
         $('generateForm').submit();
     });
-   //window.location.search
-   $('#eventArrayParagraph').html(window.location.search);
+   // //window.location.search
+   // $('#eventArrayParagraph').html(window.location.search);
 
     $('#classButton').click(function() {
         $('#classForms').show();//Form shows on button click 

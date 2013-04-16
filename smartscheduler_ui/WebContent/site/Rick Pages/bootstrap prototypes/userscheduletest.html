@@ -1,55 +1,52 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang='en'>
 	<head>
     <meta charset="utf-8">
-		<title>Test Page</title>
+		<title>Smart Scheduler</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel='stylesheet' href='css/bootstrap.css'>
     <link rel='stylesheet' href='css/bootstrap-responsive.css'> 
-		<script src='js/jquery-1.8.2.js'></script>
-    <script src='js/bootstrap.js'></script>
-    <!-- ADDING DATE&TIME PICKERS HERE -->
-    <link rel="stylesheet" href="../../addons/jquery-ui-1.8.18.custom/development-bundle/themes/base/jquery.ui.all.css">
-  	<script src="../../addons/jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.core.js"></script>
-  	<script src="../../addons/jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.widget.js"></script>
-  	<script src="../../addons/jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.datepicker.js"></script>
-  	<link rel="stylesheet" type="text/css" href="../../addons/anytime/anytime_css.css" />
-  	<script src="../../addons/anytime/anytime.js"></script>
-	<!-- END DATE&TIME PICKER ADDITION -->
-    <script src='js/smartschedulertest.js'></script>
+    <link rel='shortcut icon' href='img/favicon.ico'>
+
     <style type="text/css">
       body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+				padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
         padding-bottom: 40px;
         background-color: white;
       }
     </style>
-
 	</head>
-	
+
 	<body>
-		<div class="container">
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="index.html"><img src="img/Logo.gif" height="100px" width="100px" ></a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="timemanagement.html">Time Management Techniques</a></li>
+              <li><a href="#aboutModal" data-toggle="modal">About</a></li>
+              <li><a href="#contactModal" data-toggle="modal">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
       <div class="page-header">
         <h1><i class="icon-user"></i> Test User <small>event scheduler</small></h1>
-        <span class="pull-right">
-          <script language="javascript"> 
-            <!-- 
-            today = new Date(); 
-            document.write("<BR>The time now is: ", today.getHours(),":",today.getMinutes()); 
-            document.write("<BR>The date is: ", today.getDate(),"/",today.getMonth()+1,"/",today.getYear());
-            //--> 
-          </script> 
-        </span>
       </div>
 
       <div class="row-fluid">
-        <div class="span1">
-<!--           <div class="btn-group btn-group-vertical">
-            <button class="btn btn-success">Forms View</button>
-            <button class="btn btn-inverse">Calendar View</button>
-          </div> -->
-        </div>
-        <div class="span5">
+        <div class="span6">
           <h3>Select the event type you wish to schedule</h3>
           
           <div>              
@@ -66,37 +63,18 @@
           
           <div id= "classForms" style="display: none">
             <br>
-          <form class="form-horizontal">
-            <div class="control-group">
-              <label class="control-label">Name:</label>
-              <div class="controls">
-                <input type="text" name="className" placeholder="Name">
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">Start Date:</label>
-              <div class="controls">
-                <input type="text" name="classStartDate" placeholder="mm/dd/yy">
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">End Date:</label>
-              <div class="controls">
-                <input type="text" name="classEndDate" placeholder="mm/dd/yy">
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">From:</label>
-              <div class="controls">
-                <input type="text" id="classStartTime" name="classStartTime" placeholder="hh:mm AM/PM">
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">To:</label>
-              <div class="controls">
-                <input type="text" id="classEndTime" name="classEndTime" placeholder="hh:mm AM/PM">
-              </div>
-            </div>
+          <form>
+            <label>Name:</label>
+              <input type="text" name="className"></input>
+            <label>Start Date: (Ex: mm/dd/yy)</label>
+              <input type="text" name="classStartDate"></input>
+            <label>End Date: (Ex: mm/dd/yy)</label>
+              <input type="text" name="classEndDate"></input>
+            <label>From: (Ex: 10:45 AM)</label>
+              <input type="text" id="classStartTime" name="classStartTime"></input>
+            <label>To: (Ex: 11:45 AM)</label>
+              <input type="text" id="classEndTime" name="classEndTime"></input>
+          
             <br>
             <label class="checkbox inline">
               <input type="checkbox" class="recurringCheckbox"> Recurring
@@ -319,31 +297,90 @@
 
                   
           </div>
+          
         </div><!-- End of collumn -->
        
-        <div id="rightCol" class="span5">
-          <p class="lead">Added events are shown here</p>
-        	<div class='accordion' id='accordionEventsList'>
+        <div class="span5" id="rightCol">
+          <h3>Added events will show up here</h3>
+          <p class="muted">When you are finished, click the button on the right to submit your events and generate your schedule!</p>
+          <div class="accordion" id="accordionEventsList">
 
-        	</div><!--End of accodion -->
-          <!--<p id="eventArrayParagraph"></p>-->
+          </div>
         </div><!-- End of collumn -->
         <div class="span1">
           <br>
 
           <form action="Redirector_1" method="get" id="generateForm">
             <button class="btn btn-inverse" id="generateBtn"><i class="icon-calendar icon-white"></i>Generate Schedule</button>
-
             <input type="hidden" id="eventArrayList" name="eventArrayList"></input>
           </form>
-          <div class="btn-group btn-group-vertical">
-            <button class="btn btn-success">Forms View</button>
-            <button class="btn btn-inverse">Calendar View</button>
-          </div>
+            
             <!--  <button class="btn" id='removeAll'><i class="icon-trash icon-white"></i>Delete events</button>-->
         </div>
       </div><!-- End of row -->
 
     </div> <!-- /container -->
+
+    <!-- Footer 
+    <footer>
+      <div class="container">
+        <p>Made with Bootstrap</p>
+      </div>
+    </footer> -->
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">About us</h3>
+      </div>
+      <div class="modal-body">
+        <h2>We are the UPRM cloud development team</h2>
+        <h3>GUI team</h3>
+          <p>Gabriel Cardona, Anthony Elias, Ricardo Fuenes</p>
+        <h3>Server Team</h3>
+          <p>Jose Acevedo, Nelson Reyes, Juan Torres</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Return to Page</button>
+      </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Contact us!</h3>
+      </div>
+      <div class="modal-body">
+        <form>
+          <p>Forms go here</p>
+          <label>Email</label>
+          <input placeholder="email"></input>
+           <label>Comments</label>
+          <textarea placeholder="Comments and/or suggestions"></textarea>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-inverse" type="submit" onClick="contactSubmit();">Submit</button>
+      </div>
+    </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src='js/jquery-1.8.2.js'></script>
+    <script src='js/bootstrap.js'></script>
+    <script src='js/smartschedulertest.js'></script>
+    <!-- ADDING DATE&TIME PICKERS HERE -->
+    <link rel="stylesheet" href="addons/jquery-ui-1.8.18.custom/development-bundle/themes/base/jquery.ui.all.css">
+    <script src="addons/jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.core.js"></script>
+    <script src="addons/jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.widget.js"></script>
+    <script src="addons/jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.datepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="addons/anytime/anytime_css.css" />
+    <script src="addons/anytime/anytime.js"></script>
+    <!-- END DATE&TIME PICKER ADDITION -->
+
 	</body>
 </html>
