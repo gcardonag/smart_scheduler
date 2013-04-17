@@ -10,6 +10,14 @@ $(function() {
     });
 });
 
+/*          <script language="javascript"> 
+            <!-- 
+            today = new Date(); 
+            document.write("<BR>The time now is: ", today.getHours(),":",today.getMinutes()); 
+            document.write("<BR>The date is: ", today.getDate(),"/",today.getMonth()+1,"/",today.getYear());
+            //--> 
+          </script> */
+
 //eventCount is used to create a unique id for each event
 var eventCount = 0; //need to modify this since the number will never decrease in the current code.
 var eventArray = [];
@@ -24,6 +32,7 @@ $(document).ready(function() {
         var endDate = $("input[name=" + currentEventType + "EndDate]").val();
         var recType = $('#recType').val();
         var recInterval = $('#recInterval').val();
+        var recHours = $('#estHoursClass').val();
 
         eventCount++; //so first event is counted as 1 and not 0.
         var eventId = currentEventType + eventCount.toString();
@@ -51,6 +60,7 @@ $(document).ready(function() {
 
         //Add to global array  NEED TO CHANGE TO LIST
         var newEvent = {
+            id : eventId,
             name : eventName,
             type : currentEventType,
             sDate : startDate,
@@ -59,8 +69,8 @@ $(document).ready(function() {
             eTime : endTime,
             recurrence : recType,
             interval : recInterval,
-/*          days : recDays,  
-            hours : recHours,*/
+            //days : recDays,  
+            hours : recHours,
             priority : eventPriority
         };
 
@@ -69,10 +79,12 @@ $(document).ready(function() {
         //[{name: eventName, ...},{name:eventName2}]
         //alert("The event as an object: " + JSON.stringify(eventArray));
 
+        var calendarType;
         //Accordion html code to add
-        var newEventHtml = "<div class='accordion-group' id='" + eventId + "'>\
+        var newEventHtml = "\
+            <div class='accordion-group' id='" + eventId + "'>\
                 <div class='accordion-heading'>\
-                    <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordionEventsList' href='#collapse" + eventId + "' style='background-color:" + hColor + "'>\
+                    <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion"+calendarType+"'List' href='#collapse" + eventId + "' style='background-color:" + hColor + "'>\
                     <strong style='color:white'>" + eventName + "</strong>\
                     <strong class='pull-right' style='color:white'>" + currentEventType + "</strong>\
                     </a>\
@@ -128,15 +140,30 @@ $(document).ready(function() {
                     </div>\
                 </div>\
             </div>";
-        //Add event to list on page
-        $('#rightCol #accordionEventsList').append(newEventHtml);
+
+        //Add event to events list and calendar tabs
+        calendarType = "Events";
+        $('#accordionEventsList').append(newEventHtml);
+        calendarType = "Daily";
+        $('#accordionDailyList').append(newEventHtml);
+        calendarType = "Weekly";
+        $('#accordionWeeklyList').append(newEventHtml);
+        calendarType = "Monthly";
+        $('#accordionMonthlyList').append(newEventHtml);
         clearForm('form');
     });
 
-    //Delete current event from list and global array
-    $(document).on('click', '#deleteBtn', function() {
+    //-Old- Delete current event from list
+/*    $(document).on('click', '#deleteBtn', function() {
         $(this).parents().eq(2).remove();
+    });*/
+
+    //-New- Delete current event from list and global array
+    $(document).on('click', '#deleteBtn', function() {
+        var thisId = $(this).parents().eq(2).attr('id');
+        $(this).parents().eq(2).remove(); //delets from events list
     });
+
     //Clear all forms
     function clearForm(datForm){
         $(datForm).find(':input').each(function(){
@@ -189,8 +216,17 @@ $(document).ready(function() {
         $('#deadlineForms').hide();
     });
 
-    $('.recurringCheckbox').click(function () {
+    $('#btnRecurring').click(function () {
         $(".recurringDiv").toggle(this.checked);
+    });
+
+    $('#listViewBtn').click(function(){
+        $('#listView').show();
+        $('#calendarView').hide();
+    });
+    $('#calendarViewBtn').click(function(){
+        $('#listView').hide();
+        $('#calendarView').show();
     });
 
     //Help popover
@@ -218,8 +254,7 @@ $(document).ready(function() {
     });
     
     //Recurrence Help Popover
-    $('#recHelpBtn').popover();
-
+    $('#btnRecHelp').popover();
 
     //Event Type Button Functions
     $('#classButton').click(function(){
@@ -235,30 +270,16 @@ $(document).ready(function() {
         currentEventType = "flexible";
     });
         
-    //Event Priority Button Functions
-    var lowPriority = currentEventType + "LowPrio";
-    //var medPriority = "#" + currentEventType + "MedPrio";
-    var highPriority = "#" + currentEventType + "HiPrio";
-    
-    //This works.
-    $('#classLowPrio').click(function(){
+    //Event Priority Button Functions    
+    $('#lowPriority').click(function(){
         eventPriority = "low";
-        //alert(eventPriority + " priority was selected for this " + currentEventType + " class");
     });
-
-    //But these variations dont.
-/*    $('#'+lowPriority).click(function(){
-        eventPriority = "low";
-        alert(eventPriority + " priority was selected for this " + currentEventType + " class");
-    });*/
-/*    $("#" + currentEventType + "MedPrio").click(function(){
+    $('#medPriority').click(function(){
         eventPriority = "medium";
-        alert(eventPriority + " priority was selected for this " + currentEventType + " class");
     });
-    $(highPriority).click(function(){
+    $('#highPriority').click(function(){
         eventPriority = "high";
-        alert(eventPriority + " priority was selected for this " + currentEventType + " class");
-    });*/
+    });
 
     //Generate string of schedule events
     $('#generateBtn').click(function(){
