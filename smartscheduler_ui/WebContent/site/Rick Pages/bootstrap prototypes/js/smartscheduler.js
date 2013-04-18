@@ -35,11 +35,10 @@ $(document).ready(function() {
         var recHours = $('#estHoursClass').val();
 
         eventCount++; //so first event is counted as 1 and not 0.
+        var hColor, calendarType;
         var eventId = currentEventType + eventCount.toString();
         
         //Selects accordion label color
-        var hColor;
-
         switch(currentEventType) {
           case 'class':
             hColor = "#46a546";
@@ -52,13 +51,8 @@ $(document).ready(function() {
             break;
           default:
             hColor = '#049cdb';
-        }
-
-        //Recurrance
-/*        var recurrent = $(this).$('#recurrent').is(':checked');
-        if(recurrent === true)*/
-
-        //Add to global array  NEED TO CHANGE TO LIST
+        };
+        //Current Event Object
         var newEvent = {
             id : eventId,
             name : eventName,
@@ -73,13 +67,12 @@ $(document).ready(function() {
             hours : recHours,
             priority : eventPriority
         };
-
+        //Add to Global Array
         eventArray.push(newEvent);
 
         //[{name: eventName, ...},{name:eventName2}]
         //alert("The event as an object: " + JSON.stringify(eventArray));
 
-        var calendarType;
         //Accordion html code to add
         var newEventHtml = "\
             <div class='accordion-group' id='" + eventId + "'>\
@@ -153,15 +146,26 @@ $(document).ready(function() {
         clearForm('form');
     });
 
-    //-Old- Delete current event from list
-/*    $(document).on('click', '#deleteBtn', function() {
-        $(this).parents().eq(2).remove();
+    //Edit current event
+/*    $(document).on('click', '#editBtn', function() {
     });*/
 
-    //-New- Delete current event from list and global array
+    //Delete current event from list and global array
     $(document).on('click', '#deleteBtn', function() {
-        var thisId = $(this).parents().eq(2).attr('id');
+        var thisId = $(this).parents().eq(2).attr('id'); //get this event id
+        $.each(eventArray, function(i){
+            if(eventArray[i].id === thisId) eventArray.splice(i,1);
+        });
         $(this).parents().eq(2).remove(); //delets from events list
+    });
+
+    //Delete all events button -fix why it only 1 per click instead of at same time)
+    $(document).on('click', '#btnDeleteAll', function(){
+        $.each(eventArray, function(i){
+            $('#'+eventArray[i].id).remove();
+            eventArray.splice(i,1);
+        });
+        eventCount = 0;
     });
 
     //Clear all forms
@@ -177,16 +181,6 @@ $(document).ready(function() {
             }
         });
     }
-    //Edit current event
-/*    $(document).on('click', '#editBtn', function() {
-    });*/
-
-    //Delete all events button
-/*    $('removeAll').live('click', functon(){
-        for (var i = eventCount; i > 0; i--)
-            "$('#delete"+ eventType + eventCount +"')"
-            //add code to erase events from list object
-    });*/
 
     $('#classButton').click(function() {
         $('#classForms').show();//Form shows on button click 
@@ -217,13 +211,14 @@ $(document).ready(function() {
     });
 
     $('#btnRecurring').click(function () {
-        $(".recurringDiv").toggle(this.checked);
+        $(".recurringDiv").toggle();
     });
 
     $('#listViewBtn').click(function(){
         $('#listView').show();
         $('#calendarView').hide();
     });
+
     $('#calendarViewBtn').click(function(){
         $('#listView').hide();
         $('#calendarView').show();
@@ -287,4 +282,13 @@ $(document).ready(function() {
         $('generateForm').submit();
     });
     $('#eventArrayParagraph').html(window.location.search);
+
+    //Test alert to show current events
+    $('#btnShowEvents').click(function(){
+        var printList = "";
+        $.each(eventArray, function(i){
+            printList += "{" + eventArray[i].id + ", " + eventArray[i].name + "} ";
+        });
+        alert("Events in the array by name and id are: " + printList);
+    });
 });

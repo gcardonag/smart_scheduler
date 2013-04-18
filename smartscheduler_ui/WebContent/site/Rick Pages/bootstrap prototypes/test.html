@@ -40,6 +40,7 @@
             <button class="btn btn-success">Forms View</button>
             <button class="btn btn-inverse">Calendar View</button>
           </div> -->
+          <button type="button" class="btn btn-mini" id="btnShowEvents">Show current events in array</button>
         </div>
         <div class="span5">
           <h3>Select the event type you wish to schedule</h3>
@@ -90,11 +91,11 @@
             </div>
             <br>
             <div class="btn-group">
-              <button type="button" class="btn" data-toggle="button">Recurring</button>
+              <button type="button" class="btn" data-toggle="button" id="btnRecurring">Recurring</button>
               <button type="button" id="btnRecHelp" class="btn btn-inverse" title="Recurrence Help Popover" data-trigger="click" data-placement="right" data-content="Example: An event recurrs every 10 Days, every 2 Weeks, etc"><i class="icon-info-sign icon-white"></i></button>
             </div>
             <br>
-
+            <br>
             <div class="recurringDiv" style="display:none">
 
               <label>Repeats every:</label>
@@ -171,7 +172,6 @@
 
             <label>How much weekly study time (in hours) do you estimate you will need to dedicate?</label>
               <input class="input-mini" type="text" name="estHoursClass"></input>
-
 
             <label>Priority:</label>
             <div class="btn-group" data-toggle="buttons-radio" id="classPriority">
@@ -361,7 +361,7 @@
             </p>
           </div>
           <p>
-          <button class="btn btn-small btn-info" type="button" id='removeAll'><i class="icon-trash icon-white"></i>Delete events</button>
+          <button class="btn btn-small btn-info" type="button" id='btnDeleteAll'><i class="icon-trash icon-white"></i>Delete events</button>
           </p>
         </div>
       </div><!-- End of row -->
