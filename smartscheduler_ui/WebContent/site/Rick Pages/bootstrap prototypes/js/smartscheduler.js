@@ -25,6 +25,8 @@ var currentEventType, eventPriority;
 
 $(document).ready(function() {
     $('#addClassBtn, #addDeadlineBtn, #addMeetingBtn, #addFlexibleBtn').click(function(){
+        eventCount++; //so first event is counted as 1 and not 0.
+
         var eventName = $("input[name=" + currentEventType + "Name]").val();      
         var startTime = $("input[name=" + currentEventType + "StartTime]").val();
         var endTime = $("input[name=" + currentEventType + "EndTime]").val();
@@ -33,8 +35,48 @@ $(document).ready(function() {
         var recType = $('#recType').val();
         var recInterval = $('#recInterval').val();
         var recHours = $('#estHoursClass').val();
+        
+        //This is more complicated than it needs to be but someone fix it.
+        var recDays="none";
+        var daysArray=[0,0,0,0,0,0,0];
+        $(':checkbox:checked').each(function(i){
+            switch($(this).val()){
+                case "Sunday":
+                    daysArray[0]=1;
+                    recDays="yes";
+                    break;
+                case "Monday":
+                    daysArray[1]=1;
+                    recDays="yes";
+                    break;
+                case "Tuesday":
+                    daysArray[2]=1;
+                    recDays="yes";
+                    break;
+                case "Wednesday":
+                    daysArray[3]=1;
+                    recDays="yes";
+                    break;
+                case "Thursday":
+                    daysArray[4]=1;
+                    recDays="yes";
+                    break;
+                case "Friday":
+                    daysArray[5]=1;
+                    recDays="yes";
+                    break;
+                case "Saturday":
+                    daysArray[6]=1;
+                    recDays="yes";
+                    break;
+                default:
+                    recDays="wat";
+            };
+        });
+        //if there is no days checked keeps value as "none"
+        if(recDays != "none")
+            recDays = daysArray.toString().replace(/,/g, "");
 
-        eventCount++; //so first event is counted as 1 and not 0.
         var hColor, calendarType;
         var eventId = currentEventType + eventCount.toString();
         
@@ -63,7 +105,7 @@ $(document).ready(function() {
             eTime : endTime,
             recurrence : recType,
             interval : recInterval,
-            //days : recDays,  
+            days : recDays,  
             hours : recHours,
             priority : eventPriority
         };
@@ -125,7 +167,9 @@ $(document).ready(function() {
                             <dt>Recurrence: </dt>\
                             <dd>" + recType + "</dd>\
                             <dt>Interval: </dt>\
-                            <dd>" + recInterval + "</dd>";
+                            <dd>" + recInterval + "</dd>\
+                            <dt>Days: </dt>\
+                            <dd>" + recDays + "</dd>";
 
                             newEventHtml += "</dl>\
                         <button class='btn btn-inverse' id='editBtn'>Edit</button>\
@@ -291,4 +335,5 @@ $(document).ready(function() {
         });
         alert("Events in the array by name and id are: " + printList);
     });
+
 });
