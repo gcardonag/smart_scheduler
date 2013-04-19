@@ -70,7 +70,7 @@ $(document).ready(function() {
                     recDays="yes";
                     break;
                 default:
-                    recDays="wat";
+                    recDays="nayda"; //never happens
             };
         });
         //if there is no days checked keeps value as "none"
