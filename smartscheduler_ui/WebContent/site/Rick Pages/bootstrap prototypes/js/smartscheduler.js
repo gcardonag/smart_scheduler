@@ -10,6 +10,7 @@ $(function() {
     });
 });
 
+//will need this for generate to send current time
 /*          <script language="javascript"> 
             <!-- 
             today = new Date(); 
@@ -214,7 +215,7 @@ $(document).ready(function() {
 
     //Clear all forms
     function clearForm(datForm){
-        $(datForm).find(':input').each(function(){
+        $(datForm).find(':input, :button').each(function(){
             switch(this.type) {
                 case 'text':
                 case 'select-one':
@@ -222,9 +223,20 @@ $(document).ready(function() {
                     break;
                 case 'checkbox':
                     this.checked = false;
-            }
+                    break;
+                case 'button':
+                    this.off('click');
+                    break;
+            };
         });
-    }
+        clearButtons($(datForm).find(':button'));
+    };
+
+    function clearButtons(buttons){
+        buttons.each(function(){
+            $('#lowPriority, #medPriority, #highPriority').blur();
+        });
+    };
 
     $('#classButton').click(function() {
         $('#classForms').show();//Form shows on button click 
@@ -268,6 +280,12 @@ $(document).ready(function() {
         $('#calendarView').show();
     });
 
+    //Make this code simpler, using toggle perhaps?
+    $('#recType').change(function(){
+        $('#checkboxesWeekly').hide();
+        $('#checkboxes' + $(this).val()).show();
+    });
+
     //Help popover
     $help = $('#helpButton');
     $help.popover();  
@@ -292,7 +310,7 @@ $(document).ready(function() {
         $help.data('popover').tip().find('.popover-content').empty().append("Flexible events are those that do not need to happen at a specific time, as long as they happen during that day or week");
     });
     
-    //Recurrence Help Popover
+    //Recurrence Help Popover -Not working properly-
     $('#btnRecHelp').popover();
 
     //Event Type Button Functions
