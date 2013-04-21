@@ -43,17 +43,17 @@
                        
           <label>Type:</label>
           <div class="btn-group" data-toggle="buttons-radio">
-              <button type="button" class="btn" id="classButton">Class</button>
-              <button type="button" class="btn" id="deadlineButton">Deadline</button>
-              <button type="button" class="btn" id="meetingButton">Meeting</button>
+              <button type="button" class="btn" id="btnClass" name="class">Class</button>
+              <button type="button" class="btn" id="btnDeadline" name="deadline">Deadline</button>
+              <button type="button" class="btn" id="btnMeeting" name="meeting">Meeting</button>
               <!--<button type="button" class="btn btn-primary" value="Custom" id="CustomButton">Custom</button>-->
-              <button type="button" class="btn" id="flexibleButton">Flexible</button>
+              <button type="button" class="btn" id="btnFlexible" name="flexible">Flexible</button>
           </div>
 
           <button type="button" id="helpButton" class="btn btn-inverse" rel="popover" title="Help Popover" data-trigger="click" data-placement="right" data-content=""><i class="icon-info-sign icon-white"></i> Help</button>
           
-          <div id="classForms" style="display: none">
-            <br>
+          <div id="divClass" style="display: none">
+          <br>
           <form class="well form-horizontal">
             <div class="control-group">
               <label class="control-label">Name:</label>
@@ -92,7 +92,7 @@
             </div>
             <br>
             <br>
-            <div class="recurringDiv" style="display:none">
+            <div id="divRecurring" style="display:none">
               <label>Repeats every:</label>
               <select class="span2" id="recInterval">
                 <option value="none"></option>
@@ -131,9 +131,9 @@
 
               <select class="span3" id="recType">
                 <option value="none"></option>
-                <option value="Daily">Days</option>
-                <option value="Weekly">Weeks</option>
-                <option value="Monthly">Months</option>
+                <option value="daily">Days</option>
+                <option value="weekly">Weeks</option>
+                <option value="monthly">Months</option>
               </select>
 
               <div id="checkboxesWeekly" style="display:none">
@@ -166,7 +166,7 @@
             <br>
 
             <label>How much weekly study time (in hours) do you estimate you will need to dedicate?</label>
-              <input class="input-mini" type="text" name="estHoursClass"></input>
+              <input class="input-mini" type="text" name="estimateHrs"></input>
 
             <label>Priority:</label>
             <div class="btn-group" data-toggle="buttons-radio" id="classPriority">
@@ -175,47 +175,42 @@
                 <button type="button" class="btn" id="highPriority">High</button>
             </div>
           </form>
-            <div class="form-actions">
-              <button type="button" class="btn btn-block btn-success" value="classEvent" id="addClassBtn">Add event</button>
-              <!--<button type="button" class="btn btn-block">Cancel</button>-->
+          </div>
+
+          <div id="divDeadline" style="display: none">
+            <br>
+            <form class="well form-horizontal">
+              <label>Name:</label>
+                <input type="text" name="deadlineName"></input>
+              <label>Start Date: (Ex: mm/dd/yy)</label>
+                <input type="text" name="deadlineStartDate"></input>
+              <label>Due Date: (Ex: mm/dd/yy)</label>
+                <input type="text" name="deadlineEndDate"></input>
+              <label>Due by: (Ex: 11:45 AM)</label>
+                <input type="text" id="deadlineEndTime" name="deadlineEndTime"></input>
+              <label>How many hours do you estimate you will need to complete this task?</label>
+                <input class="input-small" type="text" name="deadlineHours"></input>
+            </form>
+
+            <div id='priorityDeadline'>
             </div>
-          </div>
+          </div><!-- End of Deadline div -->
 
-          <div id="deadlineForms" style="display: none">
-          <br>
-            <label>Name:</label>
-              <input type="text" name="deadlineName"></input>
-            <label>Start Date: (Ex: mm/dd/yy)</label>
-              <input type="text" name="deadlineStartDate"></input>
-            <label>Due Date: (Ex: mm/dd/yy)</label>
-              <input type="text" name="deadlineEndDate"></input>
-            <label>Due by: (Ex: 11:45 AM)</label>
-              <input type="text" id="deadlineEndTime" name="deadlineEndTime"></input>
-            <label>How many hours do you estimate you will need to complete this task?</label>
-              <input class="input-small" type="text" name="deadlineHours"></input>
+          <div id="divMeeting" style="display: none">
+            <form class="well form-horizontal">
+              <label>Name:</label>
+                <input type="text" name="meetingName"></input>
+              <label>Date: (Ex: mm/dd/yy)</label>
+                <input type="text" name="meetingEndDate"></input>
+              <label>From: (Ex: 10:45 AM)</label>
+                <input type="text" id="meetingStartTime" name="meetingStartTime"></input>
+              <label>To: (Ex: 11:45 AM)</label>
+                <input type="text" id="meetingEndTime" name="meetingEndTime"></input>
+            </form>
+          </div><!-- End of Meeting div -->
 
-          <div id='priorityDeadline'>
-          </div>
-            <button class="btn btn-inverse" value="deadlineEvent" id="addDeadlineBtn">Add event</button>
-          </div>
-
-          <div id="meetingForms" style="display: none">
-          <br>
-            <label>Name:</label>
-              <input type="text" name="meetingName"></input>
-            <label>Date: (Ex: mm/dd/yy)</label>
-              <input type="text" name="meetingEndDate"></input>
-            <label>From: (Ex: 10:45 AM)</label>
-              <input type="text" id="meetingStartTime" name="meetingStartTime"></input>
-            <label>To: (Ex: 11:45 AM)</label>
-              <input type="text" id="meetingEndTime" name="meetingEndTime"></input>
-
-          <button class="btn btn-inverse" value="meetingEvent" id="addMeetingBtn">Add event</button>
-          </div>
-
-          <div id="flexibleForms" style="display: none">
-
-          <br>
+          <div id="divFlexible" style="display: none">
+          <form class="well form-horizontal">
             <label>Name:</label>
               <input type="text" name="flexibleName"></input>
             <label>Start Date: (Ex: mm/dd/yy)</label>
@@ -299,8 +294,12 @@
               <option value="9">9</option>
               <option value="10">10</option>
             </select>
+          </form>
+          </div><!--End of flexible forms -->
 
-            <button class="btn btn-inverse" value="flexibleEvent" id="addFlexibleBtn">Add event</button>
+          <div class="form-actions" style="display:none">
+            <button type="button" class="btn btn-block btn-success" id="btnAddEvent">Add event</button>
+            <button type="button" class="btn btn-block" id="btnCancel">Cancel</button>
           </div>
         </div><!-- End of collumn -->
        

@@ -22,10 +22,10 @@ $(function() {
 //eventCount is used to create a unique id for each event
 var eventCount = 0; //need to modify this since the number will never decrease in the current code.
 var eventArray = [];
-var currentEventType, eventPriority;
+var currentEventType, eventPriority = "";//the ="" is needed until validation is implemented so you can add an event even without selecting priority
 
 $(document).ready(function() {
-    $('#addClassBtn, #addDeadlineBtn, #addMeetingBtn, #addFlexibleBtn').click(function(){
+    $('#btnAddEvent').click(function(){
         eventCount++; //so first event is counted as 1 and not 0.
 
         var eventName = $("input[name=" + currentEventType + "Name]").val();      
@@ -35,8 +35,10 @@ $(document).ready(function() {
         var endDate = $("input[name=" + currentEventType + "EndDate]").val();
         var recType = $('#recType').val();
         var recInterval = $('#recInterval').val();
-        var recHours = $('#estHoursClass').val();
-        
+        var recHours = $('input[name=estimateHrs]').val();
+
+        if(recHours === "")
+            recHours = "none";
         //This is more complicated than it needs to be but someone fix it.
         var recDays="none";
         var daysArray=[0,0,0,0,0,0,0];
@@ -44,35 +46,27 @@ $(document).ready(function() {
             switch($(this).val()){
                 case "Sunday":
                     daysArray[0]=1;
-                    recDays="yes";
-                    break;
+                    break; 
                 case "Monday":
                     daysArray[1]=1;
-                    recDays="yes";
                     break;
                 case "Tuesday":
                     daysArray[2]=1;
-                    recDays="yes";
                     break;
                 case "Wednesday":
                     daysArray[3]=1;
-                    recDays="yes";
                     break;
                 case "Thursday":
                     daysArray[4]=1;
-                    recDays="yes";
                     break;
                 case "Friday":
                     daysArray[5]=1;
-                    recDays="yes";
                     break;
                 case "Saturday":
                     daysArray[6]=1;
-                    recDays="yes";
                     break;
-                default:
-                    recDays="nayda"; //never happens
             };
+            recDays = "yes";
         });
         //if there is no days checked keeps value as "none"
         if(recDays != "none")
@@ -131,7 +125,7 @@ $(document).ready(function() {
                             <dt>Name:</dt>\
                                 <dd>" + eventName + "</dd>\
                             <dt>Type:</dt>\
-                                <dd>" + currentEventType + "</dd>"; 
+                                <dd>" + capFirst(currentEventType) + "</dd>"; 
                             //meeting type does not have a start date.
                             if(currentEventType != 'meeting'){
                                 newEventHtml += "<dt>Start Date:</dt>\
@@ -164,13 +158,13 @@ $(document).ready(function() {
                             }
 
                             newEventHtml += "<dt>Priority: </dt>\
-                            <dd>" + eventPriority + "</dd>\
+                            <dd>" + capFirst(eventPriority) + "</dd>\
                             <dt>Recurrence: </dt>\
-                            <dd>" + recType + "</dd>\
-                            <dt>Interval: </dt>\
-                            <dd>" + recInterval + "</dd>\
+                            <dd>" + capFirst(recType) + ", every " + recInterval + " days</dd>\
                             <dt>Days: </dt>\
-                            <dd>" + recDays + "</dd>";
+                            <dd>" + recDays + "</dd>\
+                            <dt>Estimate: </dt>\
+                            <dd>" + recHours + "</dd>";
 
                             newEventHtml += "</dl>\
                         <button class='btn btn-inverse' id='editBtn'>Edit</button>\
@@ -179,7 +173,7 @@ $(document).ready(function() {
                 </div>\
             </div>";
 
-        //Add event to events list and calendar tabs
+        //Add event to events list and calendar tabs -This probably needs modifications-
         calendarType = "Events";
         $('#accordionEventsList').append(newEventHtml);
         calendarType = "Daily";
@@ -188,7 +182,12 @@ $(document).ready(function() {
         $('#accordionWeeklyList').append(newEventHtml);
         calendarType = "Monthly";
         $('#accordionMonthlyList').append(newEventHtml);
-        clearForm('form');
+        clearForm('form'); //is this clearing just currentEventType's forms, or all forms?
+    });
+
+    //Cancel button
+    $('#btnCancel').click(function(){
+        clearForm($('form')); //is this clearing just currentEventType's forms, or all forms?
     });
 
     //Edit current event
@@ -204,7 +203,7 @@ $(document).ready(function() {
         $(this).parents().eq(2).remove(); //delets from events list
     });
 
-    //Delete all events button -fix why it only 1 per click instead of at same time)
+    //Delete all events button -fix why it only 1 per click instead of at same time-
     $(document).on('click', '#btnDeleteAll', function(){
         $.each(eventArray, function(i){
             $('#'+eventArray[i].id).remove();
@@ -212,6 +211,11 @@ $(document).ready(function() {
         });
         eventCount = 0;
     });
+
+    //Capitalize first letter
+    function capFirst(string){
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
 
     //Clear all forms
     function clearForm(datForm){
@@ -225,51 +229,49 @@ $(document).ready(function() {
                     this.checked = false;
                     break;
                 case 'button':
-                    this.off('click');
+                    $(this).removeClass('active');
                     break;
             };
         });
-        clearButtons($(datForm).find(':button'));
     };
 
-    function clearButtons(buttons){
-        buttons.each(function(){
-            $('#lowPriority, #medPriority, #highPriority').blur();
-        });
-    };
-
-    $('#classButton').click(function() {
-        $('#classForms').show();//Form shows on button click 
-        $('#deadlineForms').hide();
-        $('#meetingForms').hide();
-        $('#flexibleForms').hide();
+    //Show event forms and save type
+    $('#btnClass, #btnDeadline, #btnMeeting, #btnFlexible').click(function(){
+        $('#divClass, #divDeadline, #divMeeting, #divFlexible').hide();
+        switch(this.name){
+            case "class":
+                $('#divClass').show();
+                break;
+            case "deadline":
+                $('#divDeadline').show();
+                break;
+            case "meeting":
+                $('#divMeeting').show();
+                break;
+            case "flexible":
+                $('#divFlexible').show();
+                break;
+        };
+        $('.form-actions').show();
+        currentEventType = this.name;
     });
 
-    $('#deadlineButton').click(function() {
-        $('#deadlineForms').show();//Form shows on button click  
-        $('#classForms').hide();
-        $('#meetingForms').hide();
-        $('#flexibleForms').hide();
+    //Event Priority Button Functions    
+    $('#lowPriority').click(function(){
+        eventPriority = "low";
+    });
+    $('#medPriority').click(function(){
+        eventPriority = "medium";
+    });
+    $('#highPriority').click(function(){
+        eventPriority = "high";
     });
 
-    $('#meetingButton').click(function() {
-        $('#meetingForms').show();//Form shows on button click
-        $('#classForms').hide();
-        $('#deadlineForms').hide();
-        $('#flexibleForms').hide();
+    $('#btnRecurring').click(function(){
+        $("#divRecurring").toggle();
     });
 
-    $('#flexibleButton').click(function() {
-        $('#flexibleForms').show();//Form shows on button click
-        $('#classForms').hide();
-        $('#meetingForms').hide();
-        $('#deadlineForms').hide();
-    });
-
-    $('#btnRecurring').click(function () {
-        $(".recurringDiv").toggle();
-    });
-
+    //View Events Options
     $('#listViewBtn').click(function(){
         $('#listView').show();
         $('#calendarView').hide();
@@ -283,7 +285,7 @@ $(document).ready(function() {
     //Make this code simpler, using toggle perhaps?
     $('#recType').change(function(){
         $('#checkboxesWeekly').hide();
-        $('#checkboxes' + $(this).val()).show();
+        $('#checkboxes' + capFirst($(this).val())).show();
     });
 
     //Help popover
@@ -293,50 +295,25 @@ $(document).ready(function() {
         $help.data('popover').tip().find('.popover-title').empty().append("Help Popover");
         $help.data('popover').tip().find('.popover-content').empty().append("While this popover is active, a brief description of each event type will show after selecting an event type");
     });
-    $('#classButton').click(function(){
+    $('#btnClass').click(function(){
         $help.data('popover').tip().find('.popover-title').empty().append("Class type");
         $help.data('popover').tip().find('.popover-content').empty().append("Class events are those that usually repeat multiple times a week, for 1 or more weeks");
     });
-    $('#deadlineButton').click(function(){
+    $('#btnDeadline').click(function(){
         $help.data('popover').tip().find('.popover-title').empty().append("Deadline type");
         $help.data('popover').tip().find('.popover-content').empty().append("Deadline events are those that require a set amount of time to complete by a due date");
     });
-    $('#meetingButton').click(function(){
+    $('#btnMeeting').click(function(){
         $help.data('popover').tip().find('.popover-title').empty().append("Meeting type");
         $help.data('popover').tip().find('.popover-content').empty().append("Meeting events are those that occur at a specific time and date, but can be recurrent");
     });
-    $('#flexibleButton').click(function(){
+    $('#btnFlexible').click(function(){
         $help.data('popover').tip().find('.popover-title').empty().append("Flexible type");
         $help.data('popover').tip().find('.popover-content').empty().append("Flexible events are those that do not need to happen at a specific time, as long as they happen during that day or week");
     });
     
     //Recurrence Help Popover -Not working properly-
     $('#btnRecHelp').popover();
-
-    //Event Type Button Functions
-    $('#classButton').click(function(){
-        currentEventType = "class";
-    });
-    $('#deadlineButton').click(function(){
-        currentEventType = "deadline";
-    });
-    $('#meetingButton').click(function(){
-        currentEventType = "meeting";
-    });
-    $('#flexibleButton').click(function(){
-        currentEventType = "flexible";
-    });
-        
-    //Event Priority Button Functions    
-    $('#lowPriority').click(function(){
-        eventPriority = "low";
-    });
-    $('#medPriority').click(function(){
-        eventPriority = "medium";
-    });
-    $('#highPriority').click(function(){
-        eventPriority = "high";
-    });
 
     //Generate string of schedule events
     $('#generateBtn').click(function(){
