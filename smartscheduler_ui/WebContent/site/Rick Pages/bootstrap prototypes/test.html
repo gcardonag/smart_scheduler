@@ -9,12 +9,12 @@
 		<script src='js/jquery-1.8.2.js'></script>
     <script src='js/bootstrap.js'></script>
     <!-- ADDING DATE&TIME PICKERS HERE -->
-    <link rel="stylesheet" href="../../addons/jquery-ui-1.8.18.custom/development-bundle/themes/base/jquery.ui.all.css">
-  	<script src="../../addons/jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.core.js"></script>
-  	<script src="../../addons/jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.widget.js"></script>
-  	<script src="../../addons/jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.datepicker.js"></script>
-  	<link rel="stylesheet" type="text/css" href="../../addons/anytime/anytime_css.css" />
-  	<script src="../../addons/anytime/anytime.js"></script>
+    <link rel="stylesheet" href="jquery-ui-1.8.18.custom/development-bundle/themes/base/jquery.ui.all.css">
+  	<script src="jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.core.js"></script>
+  	<script src="jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.widget.js"></script>
+  	<script src="jquery-ui-1.8.18.custom/development-bundle/ui/jquery.ui.datepicker.js"></script>
+  	<link rel="stylesheet" type="text/css" href="anytime/anytime_css.css" />
+  	<script src="anytime/anytime.js"></script>
 	<!-- END DATE&TIME PICKER ADDITION -->
     <script src='js/smartscheduler.js'></script>
     <style type="text/css">
@@ -197,6 +197,7 @@
           </div><!-- End of Deadline div -->
 
           <div id="divMeeting" style="display: none">
+            <br>
             <form class="well form-horizontal">
               <label>Name:</label>
                 <input type="text" name="meetingName"></input>
@@ -210,90 +211,9 @@
           </div><!-- End of Meeting div -->
 
           <div id="divFlexible" style="display: none">
+          <br>
           <form class="well form-horizontal">
-            <label>Name:</label>
-              <input type="text" name="flexibleName"></input>
-            <label>Start Date: (Ex: mm/dd/yy)</label>
-              <input type="text" name="flexibleStartDate"></input>
-            <label>End Date: (Ex: mm/dd/yy)</label>
-              <input type="text" name="flexibleEndDate"></input>
-            <label>From: (Ex: 10:45 AM)</label>
-              <input type="text" id="flexibleStartTime" name="flexibleStartTime"></input>
-            <label>To: (Ex: 11:45 AM)</label>
-              <input type="text" id="flexibleEndTime" name="flexibleEndTime"></input>
 
-                      <br>
-            <label class="checkbox inline">
-            <input type="checkbox" class="recurringCheckbox"> Recurring?
-            </label>
-
-                      <br>
-                      <br>
-
-            <div class="recurringDiv" style="display:none">
-
-              <label>Repeats every:</label>
-              <select class="span2">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-              </select>
-
-              <select class="span3">
-                <option value="Daily">Days</option>
-                <option value="Weekly">Weeks</option>
-                <option value="Monthly">Months</option>
-              </select>
-
-              <label>Days of the week:</label>
-              <div>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="sundayCheckbox" value="option1"> Sun
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="mondayCheckbox" value="option2"> Mon
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="tuesdayCheckbox" value="option3"> Tue
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="wednesdayCheckbox" value="option4"> Wed
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="thrusdayCheckbox" value="option5"> Thu
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="fridayCheckbox" value="option6"> Fri
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="saturdayCheckbox" value="option7"> Sat
-                </label>
-              </div>
-
-            </div>
-            <br>
-            <br>
-
-            <label>How much time would you like to dedicate (in hours)?</label>
-            <select class="span2">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
           </form>
           </div><!--End of flexible forms -->
 
@@ -342,18 +262,19 @@
         <div class="span1">
           <form action="Redirector_1" method="get" id="generateForm">
             <p>
-            <button class="btn btn-small btn-danger" id="generateBtn"><i class="icon-calendar icon-white"></i>Generate Schedule</button>
+            <button class="btn btn-block btn-danger" id="generateBtn"><i class="icon-calendar icon-white"></i>Generate Schedule</button>
             <input type="hidden" id="eventArrayList" name="eventArrayList"></input>
             </p>
           </form>
-          <div class="btn-group btn-group-vertical">
+          <div class="btn-group btn-block btn-group-vertical">
             <p>
-            <button class="btn btn-small btn-primary" type="button" id="listViewBtn">Event List</button>
-            <button class="btn btn-small btn-warning" type="button" id="calendarViewBtn">Calendar</button>
+            <button type="button" class="btn btn-block btn-primary" id="listViewBtn">Event List</button>
+            <button type="button" class="btn btn-block btn-warning" id="calendarViewBtn">Calendar</button>
+            <button type="button" class="btn btn-block">Alt Calendar</button>
             </p>
           </div>
           <p>
-          <button class="btn btn-small btn-info" type="button" id='btnDeleteAll'><i class="icon-trash icon-white"></i>Delete events</button>
+          <button class="btn btn-block btn-info" type="button" id='btnDeleteAll'><i class="icon-trash icon-white"></i>Delete events</button>
           </p>
         </div>
       </div><!-- End of row -->

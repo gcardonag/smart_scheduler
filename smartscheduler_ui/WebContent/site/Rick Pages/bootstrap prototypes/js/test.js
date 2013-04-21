@@ -109,16 +109,47 @@ $(document).ready(function() {
         eventArray.push(newEvent);
 
         //Accordion html code to add -Need see how i can use this as html so i can later repeat the accordion in the calendar view tabs
-        var newEventHtml = "\
-            <div class='accordion-group' id='" + eventId + "'>\
+        calendarType = "Events";
+        var eventsNewEventHtml = "\
+            <div class='accordion-group' id='" + eventId + calendarType + "'>\
                 <div class='accordion-heading'>\
-                    <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion"+calendarType+"'List' href='#collapse" + eventId + "' style='background-color:" + hColor + "'>\
+                <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion" + calendarType + "List' href='#collapse" + eventId + calendarType + "' style='background-color:" + hColor + "'>\
                     <strong style='color:white'>" + eventName + "</strong>\
                     <strong class='pull-right' style='color:white'>" + currentEventType + "</strong>\
                     </a>\
                 </div>\
-                <div id='collapse" + eventId + "' class='accordion-body collapse'>\
-                    <div class='accordion-inner'>\
+                <div id='collapse" + eventId + calendarType + "' class='accordion-body collapse'>";
+        calendarType = "Daily";
+        var dailyNewEventHtml = "\
+            <div class='accordion-group' id='" + eventId + calendarType + "'>\
+                <div class='accordion-heading'>\
+                <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion" + calendarType + "List' href='#collapse" + eventId + calendarType + "' style='background-color:" + hColor + "'>\
+                    <strong style='color:white'>" + eventName + "</strong>\
+                    <strong class='pull-right' style='color:white'>" + currentEventType + "</strong>\
+                    </a>\
+                </div>\
+                <div id='collapse" + eventId + calendarType + "' class='accordion-body collapse'>";
+        calendarType = "Weekly";
+        var weeklyNewEventHtml = "\
+            <div class='accordion-group' id='" + eventId + calendarType + "'>\
+                <div class='accordion-heading'>\
+                <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion" + calendarType + "List' href='#collapse" + eventId + calendarType + "' style='background-color:" + hColor + "'>\
+                    <strong style='color:white'>" + eventName + "</strong>\
+                    <strong class='pull-right' style='color:white'>" + currentEventType + "</strong>\
+                    </a>\
+                </div>\
+                <div id='collapse" + eventId + calendarType + "' class='accordion-body collapse'>";
+        calendarType = "Monthly";
+        var monthlyNewEventHtml = "\
+            <div class='accordion-group' id='" + eventId + calendarType + "'>\
+                <div class='accordion-heading'>\
+                <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion" + calendarType + "List' href='#collapse" + eventId + calendarType + "' style='background-color:" + hColor + "'>\
+                    <strong style='color:white'>" + eventName + "</strong>\
+                    <strong class='pull-right' style='color:white'>" + currentEventType + "</strong>\
+                    </a>\
+                </div>\
+                <div id='collapse" + eventId + calendarType + "' class='accordion-body collapse'>";
+        var newEventHtml = "<div class='accordion-inner'>\
                         <dl class='dl-horizontal'>\
                             <dt>Name:</dt>\
                                 <dd>" + eventName + "</dd>\
@@ -174,14 +205,13 @@ $(document).ready(function() {
             </div>";
 
         //Add event to events list and calendar tabs -This probably needs modifications-
-        calendarType = "Events";
-        $('#accordionEventsList').append(newEventHtml);
-        calendarType = "Daily";
-        $('#accordionDailyList').append(newEventHtml);
-        calendarType = "Weekly";
-        $('#accordionWeeklyList').append(newEventHtml);
-        calendarType = "Monthly";
-        $('#accordionMonthlyList').append(newEventHtml);
+        $('#accordionEventsList').append(eventsNewEventHtml + newEventHtml);
+
+        $('#accordionDailyList').append(dailyNewEventHtml + newEventHtml);
+
+        $('#accordionWeeklyList').append(weeklyNewEventHtml + newEventHtml);
+
+        $('#accordionMonthlyList').append(monthlyNewEventHtml + newEventHtml);
         clearForm('form'); //is this clearing just currentEventType's forms, or all forms?
     });
 
