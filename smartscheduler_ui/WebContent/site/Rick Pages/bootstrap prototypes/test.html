@@ -41,186 +41,266 @@
         <div class="span5">
           <h3>Select the event type you wish to schedule</h3>
                        
-          <label>Type:</label>
           <div class="btn-group" data-toggle="buttons-radio">
               <button type="button" class="btn" id="btnClass" name="class">Class</button>
               <button type="button" class="btn" id="btnDeadline" name="deadline">Deadline</button>
               <button type="button" class="btn" id="btnMeeting" name="meeting">Meeting</button>
-              <!--<button type="button" class="btn btn-primary" value="Custom" id="CustomButton">Custom</button>-->
               <button type="button" class="btn" id="btnFlexible" name="flexible">Flexible</button>
+              <!--<button type="button" class="btn" id="CustomButton" name="custom">Custom</button>-->
           </div>
 
           <button type="button" id="helpButton" class="btn btn-inverse" rel="popover" title="Help Popover" data-trigger="click" data-placement="right" data-content=""><i class="icon-info-sign icon-white"></i> Help</button>
-          
+
           <div id="divClass" style="display: none">
-          <br>
-          <form class="well form-horizontal">
-            <div class="control-group">
-              <label class="control-label">Name:</label>
-              <div class="controls">
-                <input type="text" name="className" placeholder="Name">
+            <br />
+            <form class="well form-horizontal">
+              <div class="control-group">
+                <label class="control-label">Name:</label>
+                <div class="controls">
+                  <input type="text" name="className" placeholder="Name">
+                </div>
               </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">Start Date:</label>
-              <div class="controls">
-                <input type="text" name="classStartDate" placeholder="mm/dd/yy">
+              <div class="control-group">
+                <label class="control-label">Start Date:</label>
+                <div class="controls">
+                  <input type="text" name="classStartDate" placeholder="mm/dd/yy">
+                </div>
               </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">End Date:</label>
-              <div class="controls">
-                <input type="text" name="classEndDate" placeholder="mm/dd/yy">
+              <div class="control-group">
+                <label class="control-label">End Date:</label>
+                <div class="controls">
+                  <input type="text" name="classEndDate" placeholder="mm/dd/yy">
+                </div>
               </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">From:</label>
-              <div class="controls">
-                <input type="text" id="classStartTime" name="classStartTime" placeholder="hh:mm AM/PM">
+              <div class="control-group">
+                <label class="control-label">From:</label>
+                <div class="controls">
+                  <input type="text" id="classStartTime" name="classStartTime" placeholder="hh:mm AM/PM">
+                </div>
               </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">To:</label>
-              <div class="controls">
-                <input type="text" id="classEndTime" name="classEndTime" placeholder="hh:mm AM/PM">
+              <div class="control-group">
+                <label class="control-label">To:</label>
+                <div class="controls">
+                  <input type="text" id="classEndTime" name="classEndTime" placeholder="hh:mm AM/PM">
+                </div>
               </div>
-            </div>
-            <br>
-            <div class="btn-group">
-              <button type="button" class="btn" data-toggle="button" id="btnRecurring">Recurrence</button>
-              <button type="button" id="btnRecHelp" class="btn btn-inverse" title="Recurrence Help Popover" data-trigger="click" data-placement="right" data-content="Example: An event recurrs every 10 Days, every 2 Weeks, etc"><i class="icon-info-sign icon-white"></i></button>
-            </div>
-            <br>
-            <br>
-            <div id="divRecurring" style="display:none">
-              <label>Repeats every:</label>
-              <select class="span2" id="recInterval">
-                <option value="none"></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-                <option value="25">25</option>
-                <option value="26">26</option>
-                <option value="27">27</option>
-                <option value="28">28</option>
-                <option value="29">29</option>
-                <option value="30">30</option>
-                <option value="31">31</option>
-              </select>
+              <br />
+              <div class="showDivRecurrence">
+                <div class="btn-group">
+                  <button type="button" class="btn btnRecurrence" data-toggle="button">Recurrence</button>
+                  <button type="button" id="btnRecHelp" class="btn btn-inverse" title="Recurrence Help Popover" data-trigger="click" data-placement="right" data-content="Example: An event recurrs every 10 Days, every 2 Weeks, etc"><i class="icon-info-sign icon-white"></i></button>
+                </div>
+              </div>
+              <br />
+              <div class="showDivPriority">
+                <button type="button" class="btn btnPriority" data-toggle="button">Priority</button>
+              </div>
+            </form>
+          </div> <!-- End of Class div -->
 
-              <select class="span3" id="recType">
-                <option value="none"></option>
-                <option value="daily">Days</option>
-                <option value="weekly">Weeks</option>
-                <option value="monthly">Months</option>
-              </select>
-
-              <div id="checkboxesWeekly" style="display:none">
-                <label>Days of the week:</label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="sundayCheckbox" value="Sunday"> Sun
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="mondayCheckbox" value="Monday"> Mon
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="tuesdayCheckbox" value="Tuesday"> Tue
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="wednesdayCheckbox" value="Wednesday"> Wed
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="thrusdayCheckbox" value="Thursday"> Thu
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="fridayCheckbox" value="Friday"> Fri
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="saturdayCheckbox" value="Saturday"> Sat
-                </label>
+          <div id="divDeadline" style="display: none">
+            <br />
+            <form class="well form-horizontal">
+              <div class="control-group">
+                <label class="control-label">Name:</label>
+                <div class="controls">
+                  <input type="text" name="deadlineName" placeholder="Name"></input>
+                </div>
               </div>
+              <div class="control-group">
+                <label class="control-label">Start Date:</label>
+                <div class="controls">
+                  <input type="text" name="deadlineStartDate" placeholder="mm/dd/yy"></input>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Due Date:</label>
+                <div class="controls">
+                  <input type="text" name="deadlineEndDate" placeholder="mm/dd/yy"></input>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Due by:</label>
+                <div class="controls">
+                  <input type="text" id="deadlineEndTime" name="deadlineEndTime" placeholder="hh:mm AM/PM"></input>
+                </div>
+              </div>
+              <br />
+              <div class="showDivRecurrence">
+                <div class="btn-group">
+                  <button type="button" class="btn btnRecurrence" data-toggle="button">Recurrence</button>
+                  <button type="button" id="btnRecHelp" class="btn btn-inverse" title="Recurrence Help Popover" data-trigger="click" data-placement="right" data-content="Example: An event recurrs every 10 Days, every 2 Weeks, etc"><i class="icon-info-sign icon-white"></i></button>
+                </div>
+              </div>
+              <div class="showDivPriority">
+                <button type="button" class="btn btnPriority" data-toggle="button">Priority</button>
+              </div>
+            </form>
+          </div><!-- End of Deadline div -->
 
+          <div id="divMeeting" style="display: none">
+            <br />
+            <form class="well form-horizontal">
+              <div class="control-group">
+                <label class="control-label">Name:</label>
+                <div class="controls">
+                  <input type="text" name="meetingName" placeholder="Name"></input>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Date:</label>
+                <div class="controls">
+                  <input type="text" name="meetingEndDate" placeholder="mm/dd/yy"></input>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">From:</label>
+                <div class="controls">
+                  <input type="text" id="meetingStartTime" name="meetingStartTime" placeholder="hh:mm AM/PM"></input>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">To:</label>
+                <div class="controls">
+                  <input type="text" id="meetingEndTime" name="meetingEndTime" placeholder="hh:mm AM/PM"></input>
+                </div>
+              </div>
+            </form>
+          </div><!-- End of Meeting div -->
+
+          <div id="divFlexible" style="display: none">
+            <br />
+            <form class="well form-horizontal">
+              <div class="control-group">
+                <label class="control-label">Name:</label>
+                <div class="controls">
+                  <input type="text" name="flexibleName" placeholder="Name">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Start Date:</label>
+                <div class="controls">
+                  <input type="text" name="flexibleStartDate" placeholder="mm/dd/yy">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">End Date:</label>
+                <div class="controls">
+                  <input type="text" name="flexibleEndDate" placeholder="mm/dd/yy">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">From:</label>
+                <div class="controls">
+                  <input type="text" id="flexibleStartTime" name="flexibleStartTime" placeholder="hh:mm AM/PM">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">To:</label>
+                <div class="controls">
+                  <input type="text" id="flexibleEndTime" name="flexibleEndTime" placeholder="hh:mm AM/PM">
+                </div>
+              </div>
+              <br />
+              <div class="showDivRecurrence">
+                <div class="btn-group">
+                  <button type="button" class="btn btnRecurrence" data-toggle="button">Recurrence</button>
+                  <button type="button" id="btnRecHelp" class="btn btn-inverse" title="Recurrence Help Popover" data-trigger="click" data-placement="right" data-content="Example: An event recurrs every 10 Days, every 2 Weeks, etc"><i class="icon-info-sign icon-white"></i></button>
+                </div>
+              </div>
+              <br />
+              <div class="showDivPriority">
+                <button type="button" class="btn btnPriority" data-toggle="button">Priority</button>
+              </div>
+            </form>
+          </div><!--End of Flexible div -->
+
+          <div class="form-actions" style="display:none">
+            <button type="button" class="btn btn-block btn-success" id="btnAddEvent">Add event</button>
+            <button type="button" class="btn btn-block" id="btnCancel">Cancel</button>
+          </div>
+
+          <div id="divRecurrence">
+            <label>Repeats every:</label>
+            <select class="span2 recInterval">
+              <option value="none"></option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+            </select>
+
+            <select class="span3 recType">
+              <option value="none"></option>
+              <option value="daily">Days</option>
+              <option value="weekly">Weeks</option>
+              <option value="monthly">Months</option>
+            </select>
+
+            <div class="checkboxesWeekly" style="display:none">
+              <label>Days of the week:</label>
+              <label class="checkbox inline">
+                <input type="checkbox" value="Sunday"> Sun
+              </label>
+              <label class="checkbox inline">
+                <input type="checkbox" value="Monday"> Mon
+              </label>
+              <label class="checkbox inline">
+                <input type="checkbox" value="Tuesday"> Tue
+              </label>
+              <label class="checkbox inline">
+                <input type="checkbox" value="Wednesday"> Wed
+              </label>
+              <label class="checkbox inline">
+                <input type="checkbox" value="Thursday"> Thu
+              </label>
+              <label class="checkbox inline">
+                <input type="checkbox" value="Friday"> Fri
+              </label>
+              <label class="checkbox inline">
+                <input type="checkbox" value="Saturday"> Sat
+              </label>
             </div>
+          </div><!-- End of recurrence div -->
 
-            <br>
-
-            <label>How much weekly study time (in hours) do you estimate you will need to dedicate?</label>
+          <div id="divPriority">
+            <label>How much weekly time (in hours) do you estimate you will need to dedicate to this event?</label>
+            <label>How many hours do you estimate you will need to complete this task?</label>
               <input class="input-mini" type="text" name="estimateHrs"></input>
-
             <label>Priority:</label>
             <div class="btn-group" data-toggle="buttons-radio" id="classPriority">
                 <button type="button" class="btn" id="lowPriority">Low</button>
                 <button type="button" class="btn" id="medPriority">Medium</button>
                 <button type="button" class="btn" id="highPriority">High</button>
             </div>
-          </form>
-          </div>
-
-          <div id="divDeadline" style="display: none">
-            <br>
-            <form class="well form-horizontal">
-              <label>Name:</label>
-                <input type="text" name="deadlineName"></input>
-              <label>Start Date: (Ex: mm/dd/yy)</label>
-                <input type="text" name="deadlineStartDate"></input>
-              <label>Due Date: (Ex: mm/dd/yy)</label>
-                <input type="text" name="deadlineEndDate"></input>
-              <label>Due by: (Ex: 11:45 AM)</label>
-                <input type="text" id="deadlineEndTime" name="deadlineEndTime"></input>
-              <label>How many hours do you estimate you will need to complete this task?</label>
-                <input class="input-small" type="text" name="deadlineHours"></input>
-            </form>
-
-            <div id='priorityDeadline'>
-            </div>
-          </div><!-- End of Deadline div -->
-
-          <div id="divMeeting" style="display: none">
-            <br>
-            <form class="well form-horizontal">
-              <label>Name:</label>
-                <input type="text" name="meetingName"></input>
-              <label>Date: (Ex: mm/dd/yy)</label>
-                <input type="text" name="meetingEndDate"></input>
-              <label>From: (Ex: 10:45 AM)</label>
-                <input type="text" id="meetingStartTime" name="meetingStartTime"></input>
-              <label>To: (Ex: 11:45 AM)</label>
-                <input type="text" id="meetingEndTime" name="meetingEndTime"></input>
-            </form>
-          </div><!-- End of Meeting div -->
-
-          <div id="divFlexible" style="display: none">
-          <br>
-          <form class="well form-horizontal">
-
-          </form>
-          </div><!--End of flexible forms -->
-
-          <div class="form-actions" style="display:none">
-            <button type="button" class="btn btn-block btn-success" id="btnAddEvent">Add event</button>
-            <button type="button" class="btn btn-block" id="btnCancel">Cancel</button>
-          </div>
+          </div><!-- End of priority div -->
         </div><!-- End of collumn -->
        
         <div class="span5" id="rightCol">

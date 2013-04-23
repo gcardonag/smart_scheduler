@@ -33,8 +33,8 @@ $(document).ready(function() {
         var endTime = $("input[name=" + currentEventType + "EndTime]").val();
         var startDate = $("input[name=" + currentEventType + "StartDate]").val();
         var endDate = $("input[name=" + currentEventType + "EndDate]").val();
-        var recType = $('#recType').val();
-        var recInterval = $('#recInterval').val();
+        var recType = $('.recType').val();
+        var recInterval = $('.recInterval').val();
         var recHours = $('input[name=estimateHrs]').val();
         //if there is no input for estimated hours, it is set to 'none' default
         if(recHours === "")
@@ -173,7 +173,7 @@ $(document).ready(function() {
                 </div>\
             </div>";
 
-        //Add event to events list and calendar tabs -This probably needs modifications-
+        //Add event to events list and calendar tabs -This needs modifications-
         calendarType = "Events";
         $('#accordionEventsList').append(newEventHtml);
         calendarType = "Daily";
@@ -233,9 +233,54 @@ $(document).ready(function() {
                     break;
             };
         });
-        eventPriority = "";
+        eventPriority = "N/A";
     };
+// -------------------------THIS SECTION NEEDS WORK ----------------------------------
+/*    $('#btnRecurrence').click(function(){
+        $("#divRecurrence").toggle();
+    });*/
+    var recDiv = $('#divRecurrence').detach();
 
+    $('.btnRecurrence').click(function(){
+        //$(this).parent().siblings().toggle();  
+        $(this).closest('.showDivRecurrence').append(recDiv);
+  
+    });
+
+    //Make this code simpler, using toggle perhaps?
+    $('.recType').change(function(){
+        $('.checkboxesWeekly').show();
+        //$('.checkboxes' + capFirst($(this).val())).show();
+    });
+
+    var priorityDiv = $('#divPriority').detach();
+
+    $('.btnPriority').click(function(){ //Change this maybe to just having the hours input be there, and if there is anything except a empty or a 0 you show priority buttons
+        $(this).closest('.showDivPriority').append(priorityDiv);
+    });
+
+    //Event Priority Button Functions    
+    $('#lowPriority').click(function(){
+        eventPriority = "low";
+    });
+    $('#medPriority').click(function(){
+        eventPriority = "medium";
+    });
+    $('#highPriority').click(function(){
+        eventPriority = "high";
+    });
+
+    //View Events Options
+    $('#listViewBtn').click(function(){
+        $('#listView').show();
+        $('#calendarView').hide();
+    });
+
+    $('#calendarViewBtn').click(function(){
+        $('#listView').hide();
+        $('#calendarView').show();
+    });
+//--------------------- END OF SECTION IN NEED OF WORK --------------------
     //Show event forms and save type
     $('#btnClass, #btnDeadline, #btnMeeting, #btnFlexible').click(function(){
         $('#divClass, #divDeadline, #divMeeting, #divFlexible').hide();
@@ -255,38 +300,6 @@ $(document).ready(function() {
         };
         $('.form-actions').show();
         currentEventType = this.name;
-    });
-
-    //Event Priority Button Functions    
-    $('#lowPriority').click(function(){
-        eventPriority = "low";
-    });
-    $('#medPriority').click(function(){
-        eventPriority = "medium";
-    });
-    $('#highPriority').click(function(){
-        eventPriority = "high";
-    });
-
-    $('#btnRecurring').click(function(){
-        $("#divRecurring").toggle();
-    });
-
-    //View Events Options
-    $('#listViewBtn').click(function(){
-        $('#listView').show();
-        $('#calendarView').hide();
-    });
-
-    $('#calendarViewBtn').click(function(){
-        $('#listView').hide();
-        $('#calendarView').show();
-    });
-
-    //Make this code simpler, using toggle perhaps?
-    $('#recType').change(function(){
-        $('#checkboxesWeekly').hide();
-        $('#checkboxes' + capFirst($(this).val())).show();
     });
 
     //Help popover
