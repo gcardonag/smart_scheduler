@@ -35,6 +35,7 @@ $(document).ready(function() {
         var endDate = $("input[name=" + currentEventType + "EndDate]").val();
         var recType = $('.recType').val();
         var recInterval = $('.recInterval').val();
+        //modify this so minutes are taken into account
         var recHours = $('input[name=estimateHrs]').val();
         //if there is no input for estimated hours, it is set to 'none' default
         if(recHours === "")
@@ -103,11 +104,13 @@ $(document).ready(function() {
             interval : recInterval,
             days : recDays,  
             hours : recHours,
+            //minutes : recMinutes,
             priority : eventPriority
         };
         //Add to Global Array
         eventArray.push(newEvent);
 
+        calendarType = "Events";
         //Accordion html code to add -Need see how i can use this as html so i can later repeat the accordion in the calendar view tabs
         var newEventHtml = "\
             <div class='accordion-group' id='" + eventId + "'>\
@@ -174,31 +177,55 @@ $(document).ready(function() {
             </div>";
 
         //Add event to events list and calendar tabs -This needs modifications-
-        calendarType = "Events";
+        
         $('#accordionEventsList').append(newEventHtml);
-        calendarType = "Daily";
+/*        calendarType = "Daily";
         $('#accordionDailyList').append(newEventHtml);
         calendarType = "Weekly";
         $('#accordionWeeklyList').append(newEventHtml);
         calendarType = "Monthly";
-        $('#accordionMonthlyList').append(newEventHtml);
+        $('#accordionMonthlyList').append(newEventHtml);*/
         clearForm('form'); //is this clearing just currentEventType's forms, or all forms?
     });
 
     //Cancel button
     $('#btnCancel').click(function(){
-        clearForm($('form')); //is this clearing just currentEventType's forms, or all forms?
+        clearForm($('#forms' + capFirst(currentEventType))); //is this clearing just currentEventType's forms, or all forms?
     });
 
     //Edit current event
-/*    $(document).on('click', '#editBtn', function() {
-    });*/
+    // $(document).on('click', '#editBtn', function(){
+    //     var thisId = $(this).parents.eq(2).attr('id');
+    //     $.each(eventArray, function(i){
+    //         if(eventArray[i].id === thisId){
+    //             var eventType = firstCap(eventArray[i].type;
+    //             $('#btn' + eventType).click();
+    //             $('#forms' + eventType).each(function(){
+    //                 var $this = $(this);
+    //                 switch(this.type)
+    //                 {
+    //                     case 'select-one':
+    //                     case 'select-multiple':
+    //                         $this.attr('selected', true);
+    //                         break;
+    //                     case 'text':
+    //                         $this.val(value);
+    //                         break;
+    //                     case 'checkbox':
+    //                         this.checked = true;
+    //                         break;
+    //                 }
+    //             });
+    //         }
+    //     });
+    // });
 
     //Delete current event from list and global array
-    $(document).on('click', '#deleteBtn', function() {
+    $(document).on('click', '#deleteBtn', function(){
         var thisId = $(this).parents().eq(2).attr('id'); //get this event id
         $.each(eventArray, function(i){
-            if(eventArray[i].id === thisId) eventArray.splice(i,1);
+            if(eventArray[i].id === thisId) 
+                eventArray.splice(i,1);
         });
         $(this).parents().eq(2).remove(); //delets from events list
     });
@@ -217,6 +244,7 @@ $(document).ready(function() {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
 
+// -------------------------CODE THAT IS IN SECTION NEEDS WORK OR NEEDS TO BE FIXED ----------------------------------
     //Clear all forms
     function clearForm(datForm){
         $(datForm).find(':input, :button').each(function(){
@@ -228,14 +256,14 @@ $(document).ready(function() {
                 case 'checkbox':
                     this.checked = false;
                     break;
-                case 'button':
+/*                case 'button':
                     $(this).removeClass('active'); //.off('click') & .blur() dont work; .toggle() and .click() only partially work
-                    break;
+                    break;*/
             };
         });
         eventPriority = "N/A";
     };
-// -------------------------THIS SECTION NEEDS WORK ----------------------------------
+
 /*    $('#btnRecurrence').click(function(){
         $("#divRecurrence").toggle();
     });*/
@@ -280,6 +308,10 @@ $(document).ready(function() {
         $('#listView').hide();
         $('#calendarView').show();
     });
+
+    //Recurrence Help Popover -Not working properly-
+    $('#btnRecHelp').popover();
+
 //--------------------- END OF SECTION IN NEED OF WORK --------------------
     //Show event forms and save type
     $('#btnClass, #btnDeadline, #btnMeeting, #btnFlexible').click(function(){
@@ -325,15 +357,12 @@ $(document).ready(function() {
         $help.data('popover').tip().find('.popover-title').empty().append("Flexible type");
         $help.data('popover').tip().find('.popover-content').empty().append("Flexible events are those that do not need to happen at a specific time, as long as they happen during that day or week");
     });
-    
-    //Recurrence Help Popover -Not working properly-
-    $('#btnRecHelp').popover();
-
 
     //[{name: eventName, ...},{name:eventName2}]
     //alert("The event as an object: " + JSON.stringify(eventArray));
     //Generate string of schedule events
     $('#generateBtn').click(function(){
+        eventArray.push(eventCount);
         $('#eventArrayList').val(JSON.stringify(eventArray));
         $('generateForm').submit();
     });

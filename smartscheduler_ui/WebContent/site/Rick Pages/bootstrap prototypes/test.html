@@ -46,14 +46,14 @@
               <button type="button" class="btn" id="btnDeadline" name="deadline">Deadline</button>
               <button type="button" class="btn" id="btnMeeting" name="meeting">Meeting</button>
               <button type="button" class="btn" id="btnFlexible" name="flexible">Flexible</button>
-              <!--<button type="button" class="btn" id="CustomButton" name="custom">Custom</button>-->
+              <button type="button" class="btn disabled" id="CustomButton" name="custom">Custom</button>
           </div>
 
           <button type="button" id="helpButton" class="btn btn-inverse" rel="popover" title="Help Popover" data-trigger="click" data-placement="right" data-content=""><i class="icon-info-sign icon-white"></i> Help</button>
 
           <div id="divClass" style="display: none">
             <br />
-            <form class="well form-horizontal">
+            <form class="well form-horizontal" id="formsClass">
               <div class="control-group">
                 <label class="control-label">Name:</label>
                 <div class="controls">
@@ -100,7 +100,7 @@
 
           <div id="divDeadline" style="display: none">
             <br />
-            <form class="well form-horizontal">
+            <form class="well form-horizontal" id="formsDeadline">
               <div class="control-group">
                 <label class="control-label">Name:</label>
                 <div class="controls">
@@ -140,7 +140,7 @@
 
           <div id="divMeeting" style="display: none">
             <br />
-            <form class="well form-horizontal">
+            <form class="well form-horizontal" id="formsMeeting">
               <div class="control-group">
                 <label class="control-label">Name:</label>
                 <div class="controls">
@@ -170,7 +170,7 @@
 
           <div id="divFlexible" style="display: none">
             <br />
-            <form class="well form-horizontal">
+            <form class="well form-horizontal" id="formsFlexible">
               <div class="control-group">
                 <label class="control-label">Name:</label>
                 <div class="controls">
@@ -350,7 +350,7 @@
             <p>
             <button type="button" class="btn btn-block btn-primary" id="listViewBtn">Event List</button>
             <button type="button" class="btn btn-block btn-warning" id="calendarViewBtn">Calendar</button>
-            <button type="button" class="btn btn-block">Alt Calendar</button>
+            <button type="button" class="btn btn-block btn-inverse">Alt Calendar</button>
             </p>
           </div>
           <p>
