@@ -19,7 +19,7 @@ public class Event implements Comparable<Event> {
 	/**
 	 * Unique identifier for this <code>Event</code> object. Currently unused and it's methods are deprecated.
 	 */
-	private int id;
+	private String id;
 	
 	private String name;
 	protected Calendar start;
@@ -143,11 +143,11 @@ public class Event implements Comparable<Event> {
 		recurrenceGroup = group;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
@@ -171,7 +171,7 @@ public class Event implements Comparable<Event> {
 		return name+"[("+duration+") "+start_str+" - "+end_str+", "+s+", "+r+"]";*/
 		
 		SimpleDateFormat formatter = new SimpleDateFormat();
-		formatter.applyPattern("yyyy-MM-dd-HH:mm:ss");
+		formatter.applyPattern("yyyy-MM-dd HH/mm/ss");
 
 		String str = "{\n\"event\" : {\n"
 				//+ "\t\"id\" : \"" + this.getId() + "\",\n"
@@ -190,4 +190,52 @@ public class Event implements Comparable<Event> {
 		return str;
 	}
 	
+	public String toJSON(){
+		/*
+		 * var newEvent = { id : eventId, Ê Ê Ê Ê Ê 
+		 * 		name : eventName, Ê Ê Ê Ê Ê
+		 * 		type : currentEventType, Ê Ê Ê Ê Ê Ê
+		 * 		sDate : startDate, Ê Ê Ê Ê Ê
+		 * Ê	eDate : endDate, Ê Ê Ê Ê Ê Ê
+		 * 		sTime : startTime, Ê Ê Ê Ê Ê 
+		 * 		eTime : endTime, Ê Ê Ê Ê Ê Ê
+		 * 		recurrence : recType,
+		 * 		interval : recInterval, Ê Ê Ê Ê Ê Ê
+		 * 		days : recDays,
+		 * 		hours : recHours, 
+		 * 		minutes: recMinutes,
+		 * 		priority : eventPriority Ê
+		 * };
+		 */
+
+		SimpleDateFormat formatterDate = new SimpleDateFormat();
+		formatterDate.applyPattern("yyyy-MM-dd HH:mm");
+		
+		SimpleDateFormat formatterTime = new SimpleDateFormat();
+		formatterTime.applyPattern("yyyy-MM-dd HH/mm/ss");
+		
+		String str = "" ;
+		str += "{ " ;
+		str += " \"id\" : \"" + this.getId() + "\" , " ;
+		str += " \"name\" : \"" + this.getName() + "\" , " ;
+		str += " \"type\" : \"" + "notfilled" + "\" , " ;
+		str += " \"sDate\" : \"" + formatterDate.format(this.getStart().getTime()) + "\" , " ;
+		str += " \"eDate\" : \"" + formatterDate.format(this.getEnd().getTime()) + "\" , " ;
+		str += " \"sTime\" : \"" + formatterTime.format(this.getStart().getTime()) + "\" , " ;
+		str += " \"eTime\" : \"" + formatterTime.format(this.getStart().getTime()) + "\" , " ;
+		str += " \"recurrence\" : \"" + "none" + "\" , " ;
+		str += " \"interval\" : \"" + "notfilled" + "\" , " ;
+		str += " \"days\" : \"" + "notfilled" + "\" , " ;
+		str += " \"hours\" : \"" + "notfilled" + "\" , " ;
+		str += " \"minutes\" : \"" + "notfilled" + "\" , " ;
+		str += " \"priority\" : \"" + "notfilled" + "\" " ;
+		str += " }" ;
+		return str;
+		
+		
+		
+		
+		
+						
+	}
 }

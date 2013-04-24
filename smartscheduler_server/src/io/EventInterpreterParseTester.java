@@ -18,6 +18,7 @@ public static void main(String[] args){
 		//A quickie tester.
 
 		String s = "{ { " + 
+		   " id  : SE1, " +
            " name  : SE1, " +
            " type  : Class, " +
            " sDate : 10/10/2013, " +
@@ -27,9 +28,11 @@ public static void main(String[] args){
            " recurrence : weekly, " +
            " interval : 1," + 
            " days : 1111111, " + 
-           " hours : 2, " + 
+           " hours : 2, " +
+           " minutes : 30, " + 
            " priority : MEDIUM " +
-           "}, { " + 
+           "}, { " +
+           " id  : SE1, " +
            " name  : SE2, " +
            " type  : Meeting, " +
            " sDate : 10/10/2013, " +
@@ -40,6 +43,7 @@ public static void main(String[] args){
            " interval : 1," + 
            " days : 1111111, " + 
            " hours : 2, " + 
+           " minutes : 30, " + 
            " priority : HIGH " +
            "} }";
 		

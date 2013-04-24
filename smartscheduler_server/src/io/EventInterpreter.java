@@ -25,22 +25,30 @@ public class EventInterpreter {
 	
 	/**Given a string in the format
 	 * <code>
-	 * { <br />
-	 * name Ê: SE1, <br />
-	 * type Ê: Class,Ê<br />
-	 * sDate : 10/10/2013, <br />
-	 * eDate : 12/12/2013, <br />
-	 * sTime : 3:00 PM, <br />
-	 * eTime : 7:00 PM, <br />
-	 * recurrence : weekly,<br />
-	 * interval : 1,<br />
-	 * days : 1111111, Ê<br />
-	 * hours : 2, Ê<br />
-	 * priority : MEDIUM<br />
-	 * }<br />
+	 * <div style="padding:10px;">
+	 * var newEvent = {
+	 * 		<div style="padding:10px;">
+	 * 		id : eventId,<br />
+	 * 		name : eventName,<br />
+	 * 		type : currentEventType,<br />
+	 * 		sDate : startDate,<br />
+	 * 		eDate : endDate,<br />
+	 * 		sTime : startTime,<br />
+	 * 		eTime : endTime,<br />
+	 * 		recurrence : recType,<br />
+	 * 		interval : recInterval,<br />
+	 * 		days : recDays,<br />
+	 * 		hours : recHours,<br />
+	 * 		minutes: recMinutes,<br />
+	 * 		priority : eventPriority<br />
+	 * 		</div>
+	 * };<br />
+	 * </div>
+	 * <br />
 	 * </code>
 	 * this algorithm interprets and creates the
 	 * collection of events that the string represents.
+	 * <br />
 	 * 
 	 * @param s
 	 * @return
@@ -114,16 +122,11 @@ public class EventInterpreter {
 				end = ee.getEnd() ;
 				isRecurring = ee.getRecurrence() != -1 ;
 				
-				if(isRecurring){
-					recurrence = ee.getRecurrence();
-					interval = ee.getInterval() ;
-					days = ee.getDays();	
-				}
-				else{
-					recurrence = RecurrenceGroup.WEEKLY;
-					interval = 1 ;
-					days = parseDays("1111111"); 
-				}
+				//Dynamic Event.
+				recurrence = (isRecurring) ? ee.getRecurrence() : -1 ;
+				interval = (isRecurring) ? ee.getInterval() : -1 ;
+				days = (isRecurring) ? ee.getDays() : null ;
+				
 			}
 			else{
 				System.out.println("Error in object: \n" + ee) ;
@@ -132,6 +135,8 @@ public class EventInterpreter {
 			
 			//Event Creation.
 			Event e = new Event(ee.getName(), start, end, true, isRecurring);
+			//TODO: ID.
+			e.setId(ee.getId());
 			
 			if(isRecurring){
 				e.setEnd(this.parseDate(ee.getStartDate(), ee.getEndTime()));
@@ -140,7 +145,10 @@ public class EventInterpreter {
 			}
 			
 			ParetoElsenhowerEvent de = 
-					new ParetoElsenhowerEvent("D-" + ee.getName(), dstart,end,ee.getPriority(),ee.getHours(),0) ;
+					new ParetoElsenhowerEvent("D-" + ee.getName(), dstart,end,ee.getPriority(),ee.getHours(),ee.getMinutes()) ;
+			//TODO: ID.
+			de.setId(ee.getId()) ;
+			
 			RecurrenceGroup rg = new RecurrenceGroup(de,recurrence, interval, end, days);
 			de.setRecurrenceGroup(rg);
 			
@@ -200,14 +208,30 @@ public class EventInterpreter {
 				}
 				
 				index = ignoreWhiteSpace(s, index);
-				newEntry.addParameter(parameterName, parameterValue);
-				if(s.charAt(index++) == '}') break ;
+				
+				/////////////////////////////////////////////
+				// TODO: Testing.
+
+				parameterName = parameterName.trim();
+				if (parameterName.equalsIgnoreCase("days")) {
+					newEntry.addParameter(parameterName.trim(), "0101010");
+				} 
+				else if (parameterName.equalsIgnoreCase("hours")) {
+					newEntry.addParameter(parameterName.trim(), "1");
+				} 
+				else {
+					newEntry.addParameter(parameterName.trim(), parameterValue.trim());
+				}
+				if (s.charAt(index++) == '}') break;
+
+				//
+				/////////////////////////////////////////////
 				
 			}
 			/////////////
-			
+			newEntry.addParameter("minutes", "0");
 			entries.add(newEntry);
-			
+
 			//Closing Container of Entry or repeat.
 			index = ignoreWhiteSpace(s, index);
 			if(s.charAt(index) == '}') break ;
@@ -345,6 +369,10 @@ public class EventInterpreter {
 					+ " \n}\n";
 		}
 		
+		public String getId(){
+			return getParameter("id");
+		}
+		
 		public String getName(){
 			return getParameter("name");
 		}
@@ -391,6 +419,10 @@ public class EventInterpreter {
 		
 		public int getHours(){
 			return Integer.parseInt(getParameter("hours"));
+		}
+		
+		public int getMinutes(){
+			return Integer.parseInt(getParameter("minutes"));
 		}
 		
 		public int getPriority(){
