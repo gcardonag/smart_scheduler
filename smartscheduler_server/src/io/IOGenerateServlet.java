@@ -1,5 +1,3 @@
-package io;
-
 import java.io.IOException;
 import io.EventInterpreter;
 import java.util.ArrayList;
@@ -44,68 +42,44 @@ public class IOGenerateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		//
 		response.setContentType("text/html");
 		
-		System.out.println("EventsS:" + request.getParameter("eventArrayList"));
+		//Interpret.
 		String events = EventInterpreter.jsonToSSFormat(request.getParameter("eventArrayList"));
-		System.out.println("Events:" + events);
 		EventInterpreter interpreter = new EventInterpreter(events);
-		ArrayList<Event> staticEvents = interpreter.getStaticEvents();
 		
+		//Static and Dynamic Events
+		ArrayList<Event> staticEvents = interpreter.getStaticEvents();
 		EventQueue dynamicEvents = interpreter.getDynamicEvents();
 		
-		for(Event e: staticEvents){
-			if(!this.staticEvents.conflictsWith(e)){
-				this.staticEvents.add(e);
-			}
-		}
+		//Errors/Conflicts
+		ArrayList<Event> conflictingEvents = processNewStaticEvents(staticEvents);
 		
-		System.out.println("SE: " + this.staticEvents.size() + " - DE: " + this.dynamicEvents.size()) ;
-		GregorianCalendar start = new GregorianCalendar();
-		start.set(2013, Calendar.MARCH, 04, 0, 0);
-		
-		GregorianCalendar end = new GregorianCalendar();
-		end.set(2013, Calendar.MAY, 31, 23, 59);
-		
-		ScheduleOptions options  = makeScheduleOptions();
-		
+		//Setup...
+		GregorianCalendar start = getSchedulerStartDate();
+		GregorianCalendar end = getSchedulerEndDate();
+		ScheduleOptions options  = getScheduleOptions();
 		ParetoElsenhowerScheduler pes = new ParetoElsenhowerScheduler(this.staticEvents,options,start,end);
+		
+		//Scheduling...
 		ArrayList<Event> scheduledEvents = pes.scheduleDynamicEvents(dynamicEvents);
 		
-		System.out.println("SS: "+ scheduledEvents.size()) ;
+		//Translation
+		String json = eventsToJSON(this.staticEvents, scheduledEvents);
 		
-		String json = "{";
-		Iterator<Event> s_it = this.staticEvents.iterator() ;
-		
-		while(s_it.hasNext()){
-			Event e = s_it.next() ;
-			json += "<li>" + e.toJSON() ;
-			if(s_it.hasNext()){
-				json += ",</li>\n" ;
-			}
-		}
-		
-		Iterator<Event> d_it = scheduledEvents.iterator() ;
-		System.out.println("HAS???? - " + d_it.hasNext()) ;
-		while(d_it.hasNext()){
-			Event e = d_it.next() ;
-			json += "</li>,\n" ;
-			json += "<li>" + e.toJSON() ;
-			
-		}
-		
-		json += "}";
-		
+		//Binding
 		request.setAttribute("attr1", json) ;
 		
+		//Dispatcher
 		RequestDispatcher rd = request.getRequestDispatcher("test.jsp");
 		rd.forward(request, response);
 		
-		//response.sendRedirect("menu1.html");
 		
 		
 	}
+
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -115,7 +89,35 @@ public class IOGenerateServlet extends HttpServlet {
 		this.doGet(request, response);
 	}
 	
-	public ScheduleOptions makeScheduleOptions(){
+	/***********************************************/
+	
+	private ArrayList<Event> processNewStaticEvents(ArrayList<Event> staticEvents2) {
+		ArrayList<Event> conflictingEvents = new ArrayList<Event>();
+		for(Event e: staticEvents){
+			if(!this.staticEvents.conflictsWith(e)){
+				this.staticEvents.add(e);
+			}
+			else{
+				conflictingEvents.add(e);
+			}
+		}
+		
+		return conflictingEvents ;
+	}
+
+	public GregorianCalendar getSchedulerStartDate(){
+		GregorianCalendar start = new GregorianCalendar();
+		start.set(2013, Calendar.MARCH, 04, 0, 0);
+		return start ;
+	}
+	
+	private GregorianCalendar getSchedulerEndDate() {
+		GregorianCalendar end = new GregorianCalendar();
+		end.set(2013, Calendar.MAY, 31, 23, 59);
+		return end;
+	}
+	
+	public ScheduleOptions getScheduleOptions(){
 		ScheduleOptions options = new ScheduleOptions() ;
 		Calendar o1 = Calendar.getInstance() ;
 		o1.set(Calendar.HOUR_OF_DAY, 0) ;
@@ -131,6 +133,37 @@ public class IOGenerateServlet extends HttpServlet {
 		options.addNewForbiddenHour(o2, 2, 59) ;
 		return options ;
 	}
+	
+	
 
+	private String eventsToJSON(EventTree staticEvents2,
+			ArrayList<Event> scheduledEvents) {
+		String json = "{";
+		Iterator<Event> s_it = this.staticEvents.iterator() ;
+		
+		while(s_it.hasNext()){
+			Event e = s_it.next() ;
+			json += e.toJSON() ;
+			if(s_it.hasNext()){
+				json += " , " ;
+			}
+		}
+		
+		Iterator<Event> d_it = scheduledEvents.iterator() ;
+		while(d_it.hasNext()){
+			Event e = d_it.next() ;
+			json += " , " ;
+			json += e.toJSON() ;
+			
+		}
+		
+		json += "}";
+		return json;
+	}
+	
+	
+
+
+	
 	
 }
