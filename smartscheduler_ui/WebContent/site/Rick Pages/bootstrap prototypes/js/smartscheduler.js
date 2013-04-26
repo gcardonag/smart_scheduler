@@ -22,7 +22,7 @@ $(function() {
 //eventCount is used to create a unique id for each event
 var eventCount = 0; //need to modify this since the number will never decrease in the current code.
 var eventArray = [];
-var currentEventType, eventPriority = "";//the ="" is needed until validation is implemented so you can add an event even without selecting priority
+var currentEventType, eventPriority = "medium";//the ="" is needed until validation is implemented so you can add an event even without selecting priority
 
 $(document).ready(function() {
     $('#btnAddEvent').click(function(){
@@ -35,11 +35,17 @@ $(document).ready(function() {
         var endDate = $("input[name=" + currentEventType + "EndDate]").val();
         var recType = $('.recType').val();
         var recInterval = $('.recInterval').val();
-        //modify this so minutes are taken into account
-        var recHours = $('input[name=estimateHrs]').val();
-        //if there is no input for estimated hours, it is set to 'none' default
-        if(recHours === "")
-            recHours = "none";
+
+        var estimateType = $('#estimateType').val();
+        //if there is no input for estimated hours, it is set to 0 default -anyway to do this by default using html value atribute?-
+        if(estimateType === "minutes"){
+            recHours = 0;
+            recMinutes = $('input[name=estimate]').val();
+        }
+        if(estimateType === "hours"){
+            recHours = $('input[name=estimate]').val();
+            recMinutes = 0;
+        }
 
         //This is more complicated than it needs to be but someone fix it.
         var recDays="none";
@@ -68,7 +74,7 @@ $(document).ready(function() {
                     daysArray[6]=1;
                     break;
             };
-            recDays = "foobar";
+            recDays = "foobar"; //this does nothing and is never used
         });
         //if there is no days checked keeps value as "none"
         if(recDays != "none")
@@ -104,7 +110,7 @@ $(document).ready(function() {
             interval : recInterval,
             days : recDays,  
             hours : recHours,
-            //minutes : recMinutes,
+            minutes : recMinutes,
             priority : eventPriority
         };
         //Add to Global Array
@@ -159,15 +165,13 @@ $(document).ready(function() {
                             }
                             if(currentEventType != "meeting"){
                                 newEventHtml += "<dt>Priority: </dt>\
-                                <dd>" + capFirst(eventPriority) + "</dd>";
-                            }
-                            if(currentEventType != "deadline"){
-                                newEventHtml += "<dt>Recurrence: </dt>\
+                                <dd>" + capFirst(eventPriority) + "</dd>\
+                                <dt>Recurrence: </dt>\
                                 <dd>" + capFirst(recType) + ", every " + recInterval + " days</dd>\
                                 <dt>Days: </dt>\
                                 <dd>" + recDays + "</dd>\
                                 <dt>Estimate: </dt>\
-                                <dd>" + recHours + "</dd>";
+                                <dd>" + recHours + " hours and " + recMinutes + "minutes</dd>";
                             }
                             newEventHtml += "</dl>\
                         <button class='btn btn-inverse' id='editBtn'>Edit</button>\
@@ -261,7 +265,7 @@ $(document).ready(function() {
                     break;*/
             };
         });
-        eventPriority = "N/A";
+        //eventPriority = "N/A";
     };
 
 /*    $('#btnRecurrence').click(function(){
@@ -275,11 +279,11 @@ $(document).ready(function() {
   
     });
 
-    //Make this code simpler, using toggle perhaps?
+/*    //Make this code simpler, using toggle perhaps?
     $('.recType').change(function(){
         $('.checkboxesWeekly').show();
         //$('.checkboxes' + capFirst($(this).val())).show();
-    });
+    });*/
 
     var priorityDiv = $('#divPriority').detach();
 
@@ -287,7 +291,7 @@ $(document).ready(function() {
         $(this).closest('.showDivPriority').append(priorityDiv);
     });
 
-    //Event Priority Button Functions    
+/*    //Event Priority Button Functions    
     $('#lowPriority').click(function(){
         eventPriority = "low";
     });
@@ -296,7 +300,7 @@ $(document).ready(function() {
     });
     $('#highPriority').click(function(){
         eventPriority = "high";
-    });
+    });*/
 
     //View Events Options
     $('#listViewBtn').click(function(){
@@ -367,7 +371,7 @@ $(document).ready(function() {
         $('generateForm').submit();
         eventCount=0;
     });
-    $('#eventArrayParagraph').html(window.location.search);
+    //$('#eventArrayParagraph').html(window.location.search); //what was this for?
 
     //Test alert to show current events
     $('#btnShowEvents').click(function(){

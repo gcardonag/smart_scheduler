@@ -223,7 +223,7 @@
           <div id="divRecurrence">
             <label>Repeats every:</label>
             <select class="span2 recInterval">
-              <option value="none"></option>
+              <option value="none">N/A</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -258,13 +258,13 @@
             </select>
 
             <select class="span3 recType">
-              <option value="none"></option>
+              <option value="none">N/A</option>
               <option value="daily">Days</option>
               <option value="weekly">Weeks</option>
               <option value="monthly">Months</option>
             </select>
 
-            <div class="checkboxesWeekly" style="display:none">
+            <div class="checkboxesWeekly">
               <label>Days of the week:</label>
               <label class="checkbox inline">
                 <input type="checkbox" value="Sunday"> Sun
@@ -291,9 +291,12 @@
           </div><!-- End of recurrence div -->
 
           <div id="divPriority">
-            <label>How much weekly time (in hours) do you estimate you will need to dedicate to this event?</label>
-            <label>How many hours do you estimate you will need to complete this task?</label>
-              <input class="input-mini" type="text" name="estimateHrs"></input>
+            <label>How much weekly time do you estimate you will need to dedicate to this task?</label>
+              <input class="input-mini" type="text" name="estimate"></input>
+              <select class="input-small" id="estimateType">
+                <option value="minutes">Minutes</option>
+                <option value="hours">Hours</option>
+              </select>
             <label>Priority:</label>
             <div class="btn-group" data-toggle="buttons-radio" id="classPriority">
                 <button type="button" class="btn" id="lowPriority">Low</button>
