@@ -365,6 +365,7 @@ $(document).ready(function() {
         eventArray.push(eventCount);
         $('#eventArrayList').val(JSON.stringify(eventArray));
         $('generateForm').submit();
+        eventCount=0;
     });
     $('#eventArrayParagraph').html(window.location.search);
 
