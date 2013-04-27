@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+    <meta charset="utf-8">
+		<title>Smart Scheduler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel='stylesheet' href='css/bootstrap.css'>
+    <link rel='stylesheet' href='css/bootstrap-responsive.css'> 
+    <link rel='shortcut icon' href='img/favicon.ico'>
+
+
+    <style type="text/css">
+      body {
+				padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        padding-bottom: 40px;
+        background-color: white;
+      }
+      /* Styling for the login is here only for testing purposes */ 
+      .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+    </style>
+	</head>
+
+	<body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="index.html"><img src="img/Logo.gif" height="100px" width="100px" ></a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="index.html">Home</a></li>
+              <li><a href="timemanagement.html">Time Management Techniques</a></li>
+              <li><a href="#aboutModal" data-toggle="modal">About</a></li>
+              <li><a href="#contactModal" data-toggle="modal">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="page-header">
+        <h1>Smart Scheduler <small>prototype</small></h1>
+      </div>
+      <!-- <h4> &nbsp; Click <a href="test.html">here</a> to go to the Test User event manager page.</h4>   Using this for later -->
+
+      <div class="row-fluid">
+        <div class="span1"></div>
+        <div class="span5">
+          <h2 class="text-success">How it works</h2>
+          <p class="lead"> Smart Scheduler was created with the busy student in mind. An easy way to organize your schedule!</p>
+          <p><span class="badge badge-success">1</span> Log in with your UPRM credentials.</p>
+          <p><span class="badge badge-warning">2</span> Add your classes and events! We'll save your progress.</p>
+          <p><span class="badge badge-important">3</span> Hit create and watch the magic!</p>
+
+        </div>
+        <div class="span5">
+          <!-- Sign in form -->
+          <form class="form-signin">
+            <h2 class="form-signin-heading text-success">Please sign in</h2>
+            <input type="text" class="input-block-level" name="username" id="username" placeholder="Email address">
+            <input type="password" class="input-block-level" name="password" id="password" placeholder="Password">
+            <label class="checkbox">
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
+            <a href="test.html" class="btn btn-large btn-inverse" type="submit" name="signInBtn" id="signInBtn">Sign in</a>
+            <h5><a href="https://gaemail.upr.edu/ascc/index.php?action=resetbyquestions" target="_blank">Can't access your account?</a></h5>
+          </form>
+          <!--End of sign in form -->
+        </div><!-- End of collumn -->
+      </div>
+
+    </div> <!-- /container -->
+
+<!-- Footer
+    <footer>
+      <div class="container">
+        <p>Made with Bootstrap</p>
+      </div>
+    </footer> -->
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">About us</h3>
+      </div>
+      <div class="modal-body">
+        <h2>We are the UPRM cloud development team</h2>
+        <h3>GUI team</h3>
+          <h4>Project Leader:</h4> <p class="muted">Gabriel Cardona</p>
+          <h4>Current members</h4>
+          <p class="muted">Gabriel Cardona, Anthony Elias, Ricardo Fuenes</p>
+          <h4>Past Members</h4>
+          <p class="muted">Jonathan Gonzalez</p>
+        <h3>Server Team</h3>
+          <h4>Current Members</h4>
+          <p class="muted">Amado Gomez, Anthony Llanos and Nelson Reyes</p>
+          <h4>Past Members</h4>
+          <p class="muted">Ricardo Fuentes, Juan Torres and Jose Acevedo</p>
+        <p>Special Thanks to Jonathan Gonzalez, original project leader and cloud advisor, Humberto Diaz for his contributions to this application, and to Dr. Nayda Santiago, our advisor and adoptive mother</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-inverse" data-dismiss="modal" aria-hidden="true">Return to Page</button>
+      </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Contact us!</h3>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          <p>Forms go here</p>
+          <label>Email</label>
+          <input placeholder="email"></input>
+           <label>Comments</label>
+          <textarea placeholder="Comments and/or suggestions"></textarea>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-inverse" type="submit" onClick="contactSubmit();">Submit</button>
+      </div>
+    </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-1.8.2.js"></script>
+    <script src='js/bootstrap.js'></script>
+    <script type="text/javascript" src="js/smartscheduler.js"></script>
+
+	</body>
+</html>
