@@ -74,7 +74,7 @@ $(document).ready(function() {
                     daysArray[6]=1;
                     break;
             };
-            recDays = "foobar"; //this does nothing and is never used
+            recDays = "foobar"; 
         });
         //if there is no days checked keeps value as "none"
         if(recDays != "none")
@@ -92,7 +92,7 @@ $(document).ready(function() {
             hColor = "#ffc40d";
             break;
           case 'meeting':
-            hColor = "#9d261d";
+            hColor = "#9d261d"; 
             break;
           default:
             hColor = '#049cdb';
@@ -248,6 +248,9 @@ $(document).ready(function() {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
 
+    function readScheduleArray(theArray){
+
+    };
 // -------------------------CODE THAT IS IN SECTION NEEDS WORK OR NEEDS TO BE FIXED ----------------------------------
     //Clear all forms
     function clearForm(datForm){
@@ -366,7 +369,6 @@ $(document).ready(function() {
     //alert("The event as an object: " + JSON.stringify(eventArray));
     //Generate string of schedule events
     $('#generateBtn').click(function(){
-        eventArray.push(eventCount);
         $('#eventArrayList').val(JSON.stringify(eventArray));
         $('generateForm').submit();
         eventCount=0;
