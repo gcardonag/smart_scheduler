@@ -228,15 +228,15 @@ $(document).ready(function() {
     $(document).on('click', '#deleteBtn', function(){
         var thisId = $(this).parents().eq(2).attr('id'); //get this event id
         $.each(eventArray, function(i){
-            if(eventArray[i].id === thisId) 
+            if(eventArray[i].id === thisId)
                 eventArray.splice(i,1);
         });
         $(this).parents().eq(2).remove(); //delets from events list
     });
 
     //Delete all events button -fix why it only 1 per click instead of at same time-
-    $(document).on('click', '#btnDeleteAll', function(){
-        $.each(eventArray, function(i){
+    $('#btnDeleteAll').click(function(){
+        $.each(eventArray, function(i){ //try with just javascript to see if works as intended
             $('#'+eventArray[i].id).remove();
             eventArray.splice(i,1);
         });
@@ -247,9 +247,22 @@ $(document).ready(function() {
     function capFirst(string){
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
-
+    //Works, but inserting event info as html into daily tab is just for testing purposes
     function readScheduleArray(theArray){
-
+        $daily = $('#tabDaily');
+        for(var i = 0; i < theArray.length; i++){
+            var obj = theArray[i];
+            for (var prop in obj){
+                if(prop === "name"){
+                    $daily.append("<h3>Event: " + obj[prop] + "</h3>");
+                    $daily.append("<ul>");
+                }
+                else if(prop != "id"){
+                    $daily.append("<li>" + prop + ":" + obj[prop] +"</li>");
+                }
+            };
+        };
+        $daily.append("</ul>");
     };
 // -------------------------CODE THAT IS IN SECTION NEEDS WORK OR NEEDS TO BE FIXED ----------------------------------
     //Clear all forms
@@ -381,7 +394,11 @@ $(document).ready(function() {
         $.each(eventArray, function(i){
             printList += "{" + eventArray[i].id + ", " + eventArray[i].name + "} ";
         });
-        alert("Events in the array by name and id are: " + printList);
+        alert("Event count is " + eventCount + " and the events in the array, by name and id, are: " + printList);
+    });
+    //Add events from array into tabDaily div
+    $('#btnAddFromArray').click(function(){
+        readScheduleArray(eventArray);
     });
 
 });
