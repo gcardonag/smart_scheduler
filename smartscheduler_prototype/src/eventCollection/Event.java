@@ -186,32 +186,16 @@ public class Event implements Comparable<Event> {
 	 * 
 	 */
 	public String toString() {
-		/*SimpleDateFormat f = new SimpleDateFormat(DATE_FORMAT);
-		String start_str = f.format(start.getTime());
-		String end_str = f.format(end.getTime());
-		String s = isStatic() ? "S" : "D";
-		String r = isRepeating() ? "R" : "NR";
-		return name+"[("+duration+") "+start_str+" - "+end_str+", "+s+", "+r+"]";*/
 		
-		SimpleDateFormat formatter = new SimpleDateFormat();
-		formatter.applyPattern("yyyy-MM-dd-HH:mm:ss");
-
-		
-		String str = "{\n\"event\" : {\n"
-				//+ "\t\"id\" : \"" + this.getId() + "\",\n"
-				+ "\t\"title\" : \"" + this.getName() + "\",\n"
-				//+ "\t\"static\" : \"" + this.isStatic() + "\",\n"
-				//+"\t\"repeating\" : \"" + this.isRepeating() + "\",\n"
-				+ "\t\"when\" : {\n"
-				+ "\t\t" + "\"start\" : " + "\"" + formatter.format(this.getStart().getTime()) + "\",\n"
-				+ "\t\t" + "\"end\" : " + "\"" + formatter.format(this.getEnd().getTime()) + "\"\n"
-				+ "\t\t}\n"
-				//+ "\"recurrence\" : \"" + this.getRecurrenceGroup().getRecurrence() + "\",\n"
-				//+ "\"interval\" : \"" + this.getRecurrenceGroup().getInterval() + "\",\n"
-				+ "\t}\n"
+		String str = "SmartScheduler.Event{"
+				//+ " 'ID': " + id  
+				+ ", 'Name' : " + name
+				+ ", 'CalendarRange' : [ "+ new SimpleDateFormat().format(start.getTime())
+					+ " - " + new SimpleDateFormat().format(end.getTime()) + " ]"
+				//+ ", 'Static' : "+isStatic()
+				//+ ", 'Repeating' : " + isRepeating()
 				+ "}"
 				;
-		 
 		
 		return str;
 	}
@@ -250,7 +234,7 @@ public class Event implements Comparable<Event> {
 		+ " \"priority\" : \"" + "notfilled" + "\" " 
 		+ " }" ;
 		 */
-
+		
 		SimpleDateFormat formatterDate = new SimpleDateFormat();
 		formatterDate.applyPattern("yyyy-MM-dd");
 		

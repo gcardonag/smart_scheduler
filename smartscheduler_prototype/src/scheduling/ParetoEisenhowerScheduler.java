@@ -3,6 +3,8 @@
  */
 package scheduling;
 
+import io.IOGenerateServlet;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -26,9 +28,10 @@ import optionStructures.ScheduleOptions;
  * are scheduled for 80%, then the low priority events. Should there be time left from the 
  * medium priority events then the low priority events will be scheduled then the high 
  * priority events.
+ * 
  * @author Anthony Llanos Velazquez
  */
-public class ParetoElsenhowerScheduler {
+public class ParetoEisenhowerScheduler {
 	
 	/**(Priority 2 'Do' Events)
 	 * The highest category in the Elsenhower hierarchy that needs
@@ -81,9 +84,22 @@ public class ParetoElsenhowerScheduler {
 	 * @param staticEvents - the static events already set in the schedule.
 	 * @param options - the options the user has set for scheduling.
 	 */
-	public ParetoElsenhowerScheduler(EventTree staticEvents, 
+	public ParetoEisenhowerScheduler(EventTree staticEvents, 
 										ScheduleOptions options, Calendar start, Calendar end){
 		this.staticEvents = staticEvents ;
+		ArrayList<Event> newEvents = new ArrayList<Event>();
+		for(Event e: staticEvents){
+			if(e.getRecurrenceGroup() != null){
+				for(Event ee: e.getRecurrenceGroup()){
+					newEvents.add(ee);
+				}
+			}
+		}
+		
+		for(Event e: newEvents){
+			staticEvents.add(e);
+		}
+		
 		this.options = options ;
 		this.counterStart = start ;
 		this.counterEnd = end ;
@@ -96,18 +112,17 @@ public class ParetoElsenhowerScheduler {
 	 */
 	public ArrayList<Event> scheduleDynamicEvents(EventQueue dynamicEvents){
 		
+		System.out.println(staticEvents) ;
 		// Prepare lists for scheduling and results.
 		unprocessedP1 = new ArrayList<DynamicEvent>();
 		unprocessedP2 = new ArrayList<DynamicEvent>();
 		unprocessedP3 = new ArrayList<DynamicEvent>();
 		ArrayList<Event> processedEvents = new ArrayList<Event>();
 		
-		System.out.println("Here!: [" + counterStart.getTime() + " - " + counterEnd.getTime() + "]") ;
-		
 		///////////////////////////////////////////
 		//Loop 'till end date.
 		while(counterStart.compareTo(counterEnd) <= 0){ 
-			System.out.println("Here!") ;
+			
 			//Prepare day for scheduling.
 			ParetoSchedule currentDay = new ParetoSchedule(counterStart, staticEvents, options);
 			//Categorization for prioritization occurs here.
@@ -125,7 +140,7 @@ public class ParetoElsenhowerScheduler {
 			//Move to next day.
 			counterStart.add(Calendar.DAY_OF_MONTH, 1) ;
 		}
-		
+		System.out.println("PROCESSED: " + processedEvents.size()) ;
 		return processedEvents ;	
 	}
 	
@@ -181,6 +196,7 @@ public class ParetoElsenhowerScheduler {
 				unprocessedP1.add(event) ;
 			}
 			else if(event.getPriority() == PE_PRIORITY_MED){
+				System.out.println(event.getTime()) ;
 				unprocessedP2.add(event) ;
 			}
 			else{

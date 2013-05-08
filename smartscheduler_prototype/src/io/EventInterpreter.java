@@ -10,7 +10,7 @@ import java.util.TreeMap;
 import dynamicEventCollection.DynamicEvent;
 import dynamicEventCollection.ParetoEisenhowerEvent;
 
-import scheduling.ParetoElsenhowerScheduler;
+import scheduling.ParetoEisenhowerScheduler;
 
 import eventCollection.Event;
 import eventCollection.EventQueue;
@@ -82,6 +82,10 @@ public class EventInterpreter {
 		dynamicEvents = new EventQueue();
 		ArrayList<EventEntry> entries = this.parse(events);
 		
+		if(entries == null){
+			return ;
+		}
+		
 		//For every parsed entry.
 		for(EventEntry ee: entries){
 			
@@ -89,6 +93,7 @@ public class EventInterpreter {
 			Calendar dstart = null ;
 			Calendar end = null ;
 			boolean isRecurring ;
+			boolean isFlexible = false ;
 	
 			int recurrence = -1 ;
 			int interval = -1;
@@ -117,22 +122,32 @@ public class EventInterpreter {
 			//Deadline Type
 			else if(ee.getType().equalsIgnoreCase("Deadline")){
 				
-				start = this.parseDate(ee.getEndDate(), "12:00 AM") ;
+				start = this.parseDate(ee.getStartDate(), ee.getEndTime());
+				start.add(Calendar.MINUTE, -5);
 				dstart = Calendar.getInstance() ;
-				end = this.parseDate(ee.getEndDate(), "11:59 PM") ;
+				end = this.parseDate(ee.getEndDate(), ee.getEndTime()) ;
 				isRecurring = false ;
 				
-				recurrence = RecurrenceGroup.WEEKLY;
-				interval = 1 ;
-				days = parseDays("1111111");
+				if(isRecurring){
+					recurrence = ee.getRecurrence();
+					interval = ee.getInterval() ;
+					days = ee.getDays();	
+				}
+				else{
+					recurrence = RecurrenceGroup.WEEKLY;
+					interval = 1 ;
+					days = parseDays("1111111");
+				}
 				
 			}
 			//Meeting Type.
 			else if(ee.getType().equalsIgnoreCase("Meeting")){
+				
 				//TODO: Assumption
-				start = this.parseDate(ee.getEndDate(), "12:00 AM") ;
+				
+				start = this.parseDate(ee.getEndDate(), ee.getEndTime()) ;
 				dstart = Calendar.getInstance() ;
-				end = this.parseDate(ee.getEndDate(), "11:59 PM") ;
+				end = this.parseDate(ee.getEndDate(), ee.getEndTime()) ;
 				isRecurring = false ;
 				
 				recurrence = RecurrenceGroup.WEEKLY;
@@ -152,6 +167,8 @@ public class EventInterpreter {
 				interval = (isRecurring) ? ee.getInterval() : -1 ;
 				days = (isRecurring) ? ee.getDays() : null ;
 				
+				isFlexible = true ;
+				
 			}
 			else{
 				System.out.println("------------\nType:" + ee.getType() + ee.getType().equalsIgnoreCase("class"));
@@ -159,27 +176,40 @@ public class EventInterpreter {
 				return ;
 			}
 			
-			//Event Creation.
-			Event e = new Event(ee.getName(), start, end, true, isRecurring);
-			//TODO: ID.
-			e.setId(ee.getId());
-			
-			if(isRecurring){
-				e.setEnd(this.parseDate(ee.getStartDate(), ee.getEndTime()));
-				RecurrenceGroup rg = new RecurrenceGroup(e,recurrence,interval,end,days);
-				e.setRecurrenceGroup(rg);
+			//Dynamic only events.
+			if (!isFlexible) {
+				// Event Creation.
+				Event e = new Event(ee.getName(), start, end, true, isRecurring);
+				// TODO: ID.
+				e.setId(ee.getId());
+
+				if (isRecurring) {
+					e.setEnd(this.parseDate(ee.getStartDate(), ee.getEndTime()));
+					RecurrenceGroup rg = new RecurrenceGroup(e, recurrence,
+							interval, end, days);
+					e.setRecurrenceGroup(rg);
+				}
+				staticEvents.add(e);
 			}
 			
-			ParetoEisenhowerEvent de = 
-					new ParetoEisenhowerEvent("D-" + ee.getName(), dstart,end,ee.getPriority(),ee.getHours(),ee.getMinutes()) ;
-			//TODO: ID.
-			de.setId(ee.getId()) ;
+			//////
+			//
+			if(isRecurring || isFlexible ){
+				if(!(ee.getHours() == -1 || ee.getMinutes() == -1)){
+					
+					ParetoEisenhowerEvent de = 
+							new ParetoEisenhowerEvent("D-" + ee.getName(), start,end,ee.getPriority(),ee.getHours(),ee.getMinutes()) ;
+					//TODO: ID.
+					de.setId(ee.getId()) ;
+					RecurrenceGroup rg = new RecurrenceGroup(de,recurrence, interval, end, days);
+					de.setRecurrenceGroup(rg);
+					dynamicEvents.offer(de) ;
+				}
+			}
+			if(!isFlexible){
+				
+			}
 			
-			RecurrenceGroup rg = new RecurrenceGroup(de,recurrence, interval, end, days);
-			de.setRecurrenceGroup(rg);
-			
-			staticEvents.add(e);
-			dynamicEvents.offer(de) ;
 		}
 		
 	}
@@ -248,6 +278,7 @@ public class EventInterpreter {
 				else{
 					
 				}*/
+				System.out.println("EI.interpret(): " + parameterName.trim() + " - " + parameterValue.trim());
 				newEntry.addParameter(parameterName.trim(), parameterValue.trim());
 				if(s.charAt(index++) == '}') break ;
 				
@@ -255,7 +286,7 @@ public class EventInterpreter {
 				/////////////////////////////////////////////
 			}
 			/////////////
-			newEntry.addParameter("minutes", "0");
+			//newEntry.addParameter("minutes", "0");
 			entries.add(newEntry);
 			
 			//Closing Container of Entry or repeat.
@@ -346,11 +377,11 @@ public class EventInterpreter {
 	 */
 	private int parsePriority(String priority){
 		if(priority.equalsIgnoreCase("high"))
-			return ParetoElsenhowerScheduler.PE_PRIORITY_HIGH ;
+			return ParetoEisenhowerScheduler.PE_PRIORITY_HIGH ;
 		else if(priority.equalsIgnoreCase("medium"))
-			return ParetoElsenhowerScheduler.PE_PRIORITY_MED ;
+			return ParetoEisenhowerScheduler.PE_PRIORITY_MED ;
 		else
-			return ParetoElsenhowerScheduler.PE_PRIORITY_LOW ;
+			return ParetoEisenhowerScheduler.PE_PRIORITY_LOW ;
 	}
 	
 	public static String jsonToSSFormat(String jsonEvents){
@@ -456,10 +487,22 @@ public class EventInterpreter {
 		}
 		
 		public int getHours(){
+			if(getParameter("minutes").equalsIgnoreCase("")){
+				return -1 ;
+			}
+			if(getParameter("hours").equalsIgnoreCase("none")){
+				return -1 ;
+			}
 			return Integer.parseInt(getParameter("hours"));
 		}
 		
 		public int getMinutes(){
+			if(getParameter("minutes").equalsIgnoreCase("")){
+				return -1 ;
+			}
+			if(getParameter("minutes").equalsIgnoreCase("none")){
+				return -1 ;
+			}
 			return Integer.parseInt(getParameter("minutes"));
 		}
 		

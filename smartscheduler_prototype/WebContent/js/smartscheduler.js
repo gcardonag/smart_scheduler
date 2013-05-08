@@ -35,16 +35,20 @@ $(document).ready(function() {
         var endDate = $("input[name=" + currentEventType + "EndDate]").val();
         var recType = $('.recType').val();
         var recInterval = $('.recInterval').val();
-
         var estimateType = $('#estimateType').val();
+        
+        $estimate = $('input[name=estimate]').val();
         //if there is no input for estimated hours, it is set to 0 default -anyway to do this by default using html value atribute?-
         if(estimateType === "minutes"){
-            recHours = 0;
-            recMinutes = $('input[name=estimate]').val();
+            recHours = "none";
+            recMinutes = $estimate;
         }
         if(estimateType === "hours"){
-            recHours = $('input[name=estimate]').val();
-            recMinutes = 0;
+            recHours = $estimate;
+            recMinutes = "none";
+        }
+        if ($estimate === "" || 0){
+        	recHours, recMinutes = "none";
         }
 
         //This is more complicated than it needs to be but someone fix it.

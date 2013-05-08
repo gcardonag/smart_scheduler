@@ -6,7 +6,7 @@ package dynamicEventCollection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import scheduling.ParetoElsenhowerScheduler;
+import scheduling.ParetoEisenhowerScheduler;
 
 public class ParetoEisenhowerEvent extends DynamicEvent {
 
@@ -87,9 +87,9 @@ public class ParetoEisenhowerEvent extends DynamicEvent {
 		
 		String p = "" ;
 		switch(priority){
-			case ParetoElsenhowerScheduler.PE_PRIORITY_HIGH : p = "High" ; break ;
-			case ParetoElsenhowerScheduler.PE_PRIORITY_MED : p = "Medium" ; break ;
-			case ParetoElsenhowerScheduler.PE_PRIORITY_LOW : p = "Low" ; break ;
+			case ParetoEisenhowerScheduler.PE_PRIORITY_HIGH : p = "High" ; break ;
+			case ParetoEisenhowerScheduler.PE_PRIORITY_MED : p = "Medium" ; break ;
+			case ParetoEisenhowerScheduler.PE_PRIORITY_LOW : p = "Low" ; break ;
 			default: break ;
 		}
 		

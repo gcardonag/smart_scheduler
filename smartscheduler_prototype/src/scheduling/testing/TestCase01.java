@@ -9,7 +9,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import optionStructures.ScheduleOptions;
-import scheduling.ParetoElsenhowerScheduler;
+import scheduling.ParetoEisenhowerScheduler;
 
 import dynamicEventCollection.DynamicEvent;
 import dynamicEventCollection.ParetoEisenhowerEvent;
@@ -27,7 +27,7 @@ public class TestCase01 {
 	 */
 	public static void main(String[] args){
 		
-		ParetoElsenhowerScheduler pem ;
+		ParetoEisenhowerScheduler pem ;
 		
 		EventTree staticEvents = makeStaticEvents() ;
 		EventQueue dynamicEvents = makeDynamicEvents() ;
@@ -40,7 +40,7 @@ public class TestCase01 {
 
 		
 		
-		pem = new ParetoElsenhowerScheduler(staticEvents, options, counterStart, counterEnd) ;
+		pem = new ParetoEisenhowerScheduler(staticEvents, options, counterStart, counterEnd) ;
 		
 		ArrayList<Event> processed = pem.scheduleDynamicEvents(dynamicEvents) ;
 		System.out.println("\n\nProcessed:") ;
@@ -90,6 +90,7 @@ public class TestCase01 {
 	
 	public static Calendar makeEnd(){
 		Calendar counterEnd = new GregorianCalendar() ;
+		counterEnd.set(Calendar.MONTH, Calendar.MARCH);
 		counterEnd.set(Calendar.DAY_OF_MONTH, 23);
 		counterEnd.set(Calendar.HOUR_OF_DAY, 23) ;
 		counterEnd.set(Calendar.MINUTE, 59) ;
@@ -217,7 +218,7 @@ public class TestCase01 {
 		ParetoEisenhowerEvent de = createDynamicEvent("DE1", 
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,4, true),
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,10,false),
-				ParetoElsenhowerScheduler.PE_PRIORITY_HIGH, 2,0) ;
+				ParetoEisenhowerScheduler.PE_PRIORITY_HIGH, 2,0) ;
 		makeRecurrenceGroupFor(de, RecurrenceGroup.WEEKLY, 1, 
 				new boolean[]{false, true, false, true, false, true,false});
 		dynamicEvents.offer(de) ;
@@ -225,7 +226,7 @@ public class TestCase01 {
 		de = createDynamicEvent("DE2", 
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,4,true),
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,10,false),
-				ParetoElsenhowerScheduler.PE_PRIORITY_MED, 1,0) ;
+				ParetoEisenhowerScheduler.PE_PRIORITY_MED, 1,0) ;
 		makeRecurrenceGroupFor(de, RecurrenceGroup.WEEKLY, 1, 
 				new boolean[]{false, true, false, true, false, true,false});
 		dynamicEvents.offer(de) ;
@@ -233,7 +234,7 @@ public class TestCase01 {
 		de = createDynamicEvent("DE3", 
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,4,true),
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,9,false),
-				ParetoElsenhowerScheduler.PE_PRIORITY_HIGH, 4,0) ;
+				ParetoEisenhowerScheduler.PE_PRIORITY_HIGH, 4,0) ;
 		
 		makeRecurrenceGroupFor(de, RecurrenceGroup.WEEKLY, 1, 
 				new boolean[]{true, false, true, false, true, false,true});
@@ -242,7 +243,7 @@ public class TestCase01 {
 		de = createDynamicEvent("DE4", 
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,4,true),
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,28,false),
-				ParetoElsenhowerScheduler.PE_PRIORITY_MED, 4,0) ;
+				ParetoEisenhowerScheduler.PE_PRIORITY_MED, 4,0) ;
 		makeRecurrenceGroupFor(de, RecurrenceGroup.WEEKLY, 1, 
 				new boolean[]{true, false, true, false, true, false,true});
 		dynamicEvents.offer(de) ;
@@ -250,7 +251,7 @@ public class TestCase01 {
 		de = createDynamicEvent("DE5", 
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,10,true),
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,12,false),
-				ParetoElsenhowerScheduler.PE_PRIORITY_HIGH, 4,0) ;
+				ParetoEisenhowerScheduler.PE_PRIORITY_HIGH, 4,0) ;
 		makeRecurrenceGroupFor(de, RecurrenceGroup.WEEKLY, 1, 
 				new boolean[]{true, false, true, false, true, false,true});
 		dynamicEvents.offer(de) ;
@@ -258,7 +259,7 @@ public class TestCase01 {
 		 de = createDynamicEvent("DE6", 
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,4, true),
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,10,false),
-				ParetoElsenhowerScheduler.PE_PRIORITY_HIGH, 2,0) ;
+				ParetoEisenhowerScheduler.PE_PRIORITY_HIGH, 2,0) ;
 		makeRecurrenceGroupFor(de, RecurrenceGroup.WEEKLY, 1, 
 				new boolean[]{false, true, false, true, false, true,false});
 		dynamicEvents.offer(de) ;
@@ -266,7 +267,7 @@ public class TestCase01 {
 		 de = createDynamicEvent("DE7", 
 					makeDynamicCalendarFromDate(2013,Calendar.MARCH,4, true),
 					makeDynamicCalendarFromDate(2013,Calendar.MARCH,28,false),
-					ParetoElsenhowerScheduler.PE_PRIORITY_MED, 2,0) ;
+					ParetoEisenhowerScheduler.PE_PRIORITY_MED, 2,0) ;
 			makeRecurrenceGroupFor(de, RecurrenceGroup.WEEKLY, 1, 
 					new boolean[]{false, true, false, true, false, true,false});
 			dynamicEvents.offer(de) ;

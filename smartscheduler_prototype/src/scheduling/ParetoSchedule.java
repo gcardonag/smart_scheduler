@@ -192,8 +192,8 @@ public class ParetoSchedule extends DaySchedule {
 			event.reduceTime(slotTimeLeft);
 			timeSlots.remove(tr);
 			return new ParetoEisenhowerEvent(event.getName(), tr.getStart(), 
-							tr.getEnd(), event.getPriority(), event.getDuration() / 60, 
-							event.getDuration() % 60);
+							tr.getEnd(), event.getPriority(), event.getTime() / 60, 
+							event.getTime() % 60);
 		} 
 		else {
 			// This day has all the time available for

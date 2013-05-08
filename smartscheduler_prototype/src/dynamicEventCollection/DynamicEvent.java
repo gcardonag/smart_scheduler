@@ -34,7 +34,9 @@ public abstract class DynamicEvent extends Event {
 	 */
 	public DynamicEvent(String name, Calendar start, Calendar end, int hours, int minutes) {
 		super(name, start, end, false, true);
+		System.out.println("DE.scheduleTime = hours: " + hours + ", minutes:" + minutes);
 		this.scheduleTime = (hours * 60) + minutes ;
+		System.out.println("DE.scheduleTime = " + this.scheduleTime);
 		this.unscheduledTime = 0 ;
 		this.scheduleTimeLeft = 0 ;
 	}

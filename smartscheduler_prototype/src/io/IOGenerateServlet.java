@@ -15,9 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import optionStructures.ScheduleOptions;
 
-import scheduling.ParetoElsenhowerScheduler;
+import scheduling.ParetoEisenhowerScheduler;
 
 import dynamicEventCollection.DynamicEvent;
+import dynamicEventCollection.ParetoEisenhowerEvent;
 
 import eventCollection.*;
 
@@ -44,15 +45,20 @@ public class IOGenerateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//
 		response.setContentType("text/html");
+		this.staticEvents = new EventTree();
+		this.dynamicEvents = new ArrayList<DynamicEvent>();
 		
 		//Interpret.
 		System.out.println(request.getParameter("eventArrayList"));
 		String events = EventInterpreter.jsonToSSFormat(request.getParameter("eventArrayList"));
+		System.out.println("IO: " + events) ;
 		EventInterpreter interpreter = new EventInterpreter(events);
-		
+		System.out.println("=========================================");
 		//Static and Dynamic Events
 		ArrayList<Event> staticEvents = interpreter.getStaticEvents();
+		printEvents(staticEvents);
 		EventQueue dynamicEvents = interpreter.getDynamicEvents();
+		printDynamicEvents(dynamicEvents);
 		
 		//Errors/Conflicts
 		ArrayList<Event> conflictingEvents = processNewStaticEvents(staticEvents);
@@ -62,8 +68,9 @@ public class IOGenerateServlet extends HttpServlet {
 		GregorianCalendar end = getSchedulerEndDate();
 		ScheduleOptions options  = getScheduleOptions();
 		
+		System.out.println("==========================================") ;
 		//Scheduling...
-		ParetoElsenhowerScheduler pes = new ParetoElsenhowerScheduler(this.staticEvents,options,start,end);
+		ParetoEisenhowerScheduler pes = new ParetoEisenhowerScheduler(this.staticEvents,options,start,end);
 		ArrayList<Event> scheduledEvents = pes.scheduleDynamicEvents(dynamicEvents);
 		
 		//Translation
@@ -75,14 +82,12 @@ public class IOGenerateServlet extends HttpServlet {
 		
 		//Dispatcher
 		RequestDispatcher rd = request.getRequestDispatcher("test.jsp");
-		rd.forward(request, response);
-		
-		
-		
+		rd.forward(request, response);	
 	}
 
 	
 
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -109,7 +114,7 @@ public class IOGenerateServlet extends HttpServlet {
 
 	public GregorianCalendar getSchedulerStartDate(){
 		GregorianCalendar start = new GregorianCalendar();
-		start.set(2013, Calendar.MARCH, 04, 0, 0);
+		start.set(2013, Calendar.MAY, 1, 0, 0);
 		return start ;
 	}
 	
@@ -127,12 +132,12 @@ public class IOGenerateServlet extends HttpServlet {
 		o1.set(Calendar.SECOND, 0) ;
 		
 		Calendar o2 = Calendar.getInstance() ;
-		o2.set(Calendar.HOUR_OF_DAY, 21) ;
+		o2.set(Calendar.HOUR_OF_DAY, 23) ;
 		o2.set(Calendar.MINUTE, 0) ;
 		o2.set(Calendar.SECOND, 0) ;
 
-		options.addNewForbiddenHour(o1, 9, 30) ;
-		options.addNewForbiddenHour(o2, 2, 59) ;
+		options.addNewForbiddenHour(o1, 7, 00) ;
+		options.addNewForbiddenHour(o2, 0, 59) ;
 		return options ;
 	}
 	
@@ -177,6 +182,24 @@ public class IOGenerateServlet extends HttpServlet {
 		}
 		
 	}
+	
+	public static void printEvents(ArrayList<Event> events){
+		System.out.println("IO.EI.events(): ") ;
+		for(Object e: events){
+			System.out.println(e);
+		}
+	}
+	
+	public static void printDynamicEvents(EventQueue dynamicEvents) {
+		// TODO Auto-generated method stub
+		System.out.println("IO.EI.dynamicEvents(): ") ;
+		for(Event e: dynamicEvents){
+			System.out.println((DynamicEvent)e);
+			System.out.println((((ParetoEisenhowerEvent)e).getPriority() == ParetoEisenhowerScheduler.PE_PRIORITY_MED)?"MEDIUM!":"ELSE!");
+			
+		}
+	}
+
 
 
 	
