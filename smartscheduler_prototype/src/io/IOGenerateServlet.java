@@ -24,7 +24,7 @@ import eventCollection.*;
 /**
  * Servlet implementation class Redirector_1
  */
-@WebServlet("IOGenerateServlet")
+@WebServlet("/IOGenerateServlet")
 public class IOGenerateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     EventTree staticEvents ;
