@@ -155,6 +155,27 @@ public class RecurrenceGroup implements Iterable<Event> {
 		return false;
 	}
 	
+	public String toStringDays(){
+		String s = "" ;
+		if(recurrence == WEEKLY){
+			if(weekly != null){
+				s += "" + ((weekly[0]) ? "1" : "0")
+						+ ((weekly[1]) ? "1" : "0")
+						+ ((weekly[2]) ? "1" : "0")
+						+ ((weekly[3]) ? "1" : "0")
+						+ ((weekly[4]) ? "1" : "0")
+						+ ((weekly[5]) ? "1" : "0");
+			}
+			else{
+				s = "not set" ;
+			}
+		}
+		else{
+			s = "not weekly" ;
+		}
+		return s ;
+	}
+	
 	public String toString(){
 		return group.toString();
 	}

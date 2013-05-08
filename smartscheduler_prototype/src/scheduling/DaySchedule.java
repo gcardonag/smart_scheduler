@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import dynamicEventCollection.DynamicEvent;
+import dynamicEventCollection.ParetoEisenhowerEvent;
 import eventCollection.Event;
 
 /**Represents a day's schedule along with the time-slots
@@ -99,7 +100,7 @@ public abstract class DaySchedule{
 	 * @param event - the dynamic event to schedule.
 	 * @return an Event object that 
 	 */
-	public Event setEventTime(DynamicEvent event){
+	public ParetoEisenhowerEvent setEventTime(ParetoEisenhowerEvent event){
 		return setEventTimeForTimeSlots(event, timeSlots);
 	}
 	
@@ -114,7 +115,7 @@ public abstract class DaySchedule{
 	 * @return an static event that represents the result of scheduling.
 	 * @deprecated Change paramater implementation.
 	 */
-	public Event setEventTimeForTimeSlots(DynamicEvent event, ArrayList<TimeSlot> timeSlots){
+	private ParetoEisenhowerEvent setEventTimeForTimeSlots(ParetoEisenhowerEvent event, ArrayList<TimeSlot> timeSlots){
 		
 		if(!hasTimeAvailable()) 
 			return null ;	
@@ -129,15 +130,15 @@ public abstract class DaySchedule{
 
 			event.reduceTime(slotTimeLeft);
 			timeSlots.remove(tr);
-			return new Event(event.getName(), tr.getStart(), 
-							tr.getEnd(), false, false);
+			return new ParetoEisenhowerEvent(event.getName(), tr.getStart(), 
+							tr.getEnd(), event.getPriority(), event.getTime()/60,event.getTime()%60);
 		} 
 		else {
 			// This day has all the time available for
 			// the event.
 
 			event.reduceTime(eventTimeLeft);
-			Event newEvent = tr.getEventForTime(eventTimeLeft,event.getName());
+			ParetoEisenhowerEvent newEvent = tr.getEventForTime(eventTimeLeft,event.getName(),event);
 			return newEvent;
 		}
 		
@@ -241,13 +242,13 @@ public abstract class DaySchedule{
 		 * managing time slot instances in collections. Also, does
 		 * not verify length of time.
 		 */
-		public Event getEventForTime(int timeLength,String name){
+		public ParetoEisenhowerEvent getEventForTime(int timeLength,String name, ParetoEisenhowerEvent pee){
 			
 			Calendar start = (Calendar) this.start.clone() ;
 			this.start.add(Calendar.MINUTE, timeLength) ;
 			Calendar end = (Calendar) this.start.clone() ;
 			
-			return new Event(name, start, end, false, false) ;
+			return new ParetoEisenhowerEvent(name, start, end, pee.getPriority(), pee.getTime()/60, pee.getDuration()%60) ;
 			
 		}
 		

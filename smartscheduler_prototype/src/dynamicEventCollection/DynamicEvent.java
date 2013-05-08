@@ -14,10 +14,10 @@ import eventCollection.*;
 public abstract class DynamicEvent extends Event {
 
 	/** The time in minutes to schedule for this event in a period. */
-	protected int time ;
+	protected int scheduleTime ;
 	
 	/** The time left for scheduling in a particular period. */
-	protected int timeLeft ;
+	protected int scheduleTimeLeft ;
 	
 	/** Represents the time in minutes of the dynamic event that 
 	 * hasn't been scheduled from past periods.*/
@@ -34,9 +34,9 @@ public abstract class DynamicEvent extends Event {
 	 */
 	public DynamicEvent(String name, Calendar start, Calendar end, int hours, int minutes) {
 		super(name, start, end, false, true);
-		this.time = (hours * 60) + minutes ;
+		this.scheduleTime = (hours * 60) + minutes ;
 		this.unscheduledTime = 0 ;
-		this.timeLeft = 0 ;
+		this.scheduleTimeLeft = 0 ;
 	}
 	
 	/**Returns whether this event has time left for
@@ -48,12 +48,16 @@ public abstract class DynamicEvent extends Event {
 		return (getTimeLeft() > 0 || this.unscheduledTime > 0) ;
 	}
 	
+	public int getTime(){
+		return this.scheduleTime;
+	}
+	
 	/**Returns in minutes how much time is left 
 	 * to schedule for this dynamic event.
 	 * @return the number of minutes left for scheduling.
 	 */
 	public int getTimeLeft(){
-		return this.timeLeft ;
+		return this.scheduleTimeLeft ;
 	}
 	
 	
@@ -62,7 +66,7 @@ public abstract class DynamicEvent extends Event {
 	 * @param timeDelta - the amount of time left to schedule.
 	 */
 	public void reduceTime(int timeDelta){
-		this.timeLeft -= timeDelta ;
+		this.scheduleTimeLeft -= timeDelta ;
 	}
 	
 	/**
@@ -70,7 +74,7 @@ public abstract class DynamicEvent extends Event {
 	 * allow for reschedule.
 	 */
 	public void resetTime(){
-		this.timeLeft = this.time + this.timeLeft + this.unscheduledTime ;
+		this.scheduleTimeLeft = this.scheduleTime + this.scheduleTimeLeft + this.unscheduledTime ;
 		unscheduledTime = 0 ;
 	}
 	
@@ -79,7 +83,7 @@ public abstract class DynamicEvent extends Event {
 	 * allow for reschedule.
 	 */
 	public void resetUnscheduledTime(){
-		this.timeLeft = this.timeLeft + unscheduledTime ;
+		this.scheduleTimeLeft = this.scheduleTimeLeft + unscheduledTime ;
 		unscheduledTime = 0 ;
 	}
 	
@@ -87,8 +91,8 @@ public abstract class DynamicEvent extends Event {
 	 * Zero the time available for scheduling for this event.
 	 */
 	public void zeroTime(){
-		unscheduledTime += this.timeLeft ;
-		this.timeLeft = 0 ;
+		unscheduledTime += this.scheduleTimeLeft ;
+		this.scheduleTimeLeft = 0 ;
 	}
 	
 	/**Determines whether this dynamic event occurs on a given
@@ -322,17 +326,6 @@ public abstract class DynamicEvent extends Event {
 	/* (non-Javadoc)
 	 * @see eventCollection.Event#toString()
 	 */
-	public String toString(){
-		String str = "\nSmartScheduler.DynamicEvent{"
-				+ " 'ID': " + super.getId()  
-				+ ", 'Name' : " + super.getName()
-				+ ", 'CalendarRange' : [ "+ start.getTime().toString()  
-				+ " - " + end.getTime().toString() + " ]"
-				+ ", 'Time' : '" + this.time + "',"  
-				+ ", 'TimeLeft' : '" + this.timeLeft
-				+ "}\n" ;
-		
-		return str;
-	}
+	
 	
 }

@@ -398,7 +398,7 @@ $(document).ready(function() {
     });
     //Add events from array into tabDaily div
     $('#btnAddFromArray').click(function(){
-        readScheduleArray(eventArray);
+        readScheduleArray(eventsList);
     });
 
 });

@@ -1,4 +1,4 @@
- <!doctype html>
+<!doctype html>
 <html lang="en">
 	<head>
     <meta charset="utf-8">
@@ -17,6 +17,9 @@
   	<script src="anytime/anytime.js"></script>
 	<!-- END DATE&TIME PICKER ADDITION -->
     <script src='js/smartscheduler.js'></script>
+    <script>
+    
+    </script>
     <style type="text/css">
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -37,6 +40,7 @@
       <div class="row-fluid">
         <div class="span1">
           <button type="button" class="btn btn-mini btn-success" id="btnShowEvents">Show current events in array</button>
+          <button type="button" class="btn btn-mini" id="btnAddFromArray">Add events from array</button>
         </div>
         <div class="span5">
           <h3>Select the event type you wish to schedule</h3>
@@ -343,7 +347,7 @@
           <!--<p id="eventArrayParagraph"></p>-->
         </div><!-- End of collumn -->
         <div class="span1">
-          <form action="IOGenerateServlet" method="get" id="generateForm">
+          <form action="Redirector_1" method="get" id="generateForm">
             <p>
             <button class="btn btn-block btn-danger" id="generateBtn"><i class="icon-calendar icon-white"></i>Generate Schedule</button>
             <input type="hidden" id="eventArrayList" name="eventArrayList"></input>

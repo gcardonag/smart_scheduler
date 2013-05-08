@@ -12,7 +12,7 @@ import optionStructures.ScheduleOptions;
 import scheduling.ParetoElsenhowerScheduler;
 
 import dynamicEventCollection.DynamicEvent;
-import dynamicEventCollection.ParetoElsenhowerEvent;
+import dynamicEventCollection.ParetoEisenhowerEvent;
 
 import eventCollection.*;
 
@@ -29,74 +29,16 @@ public class TestCase01 {
 		
 		ParetoElsenhowerScheduler pem ;
 		
-		EventTree staticEvents = new EventTree();
-		EventQueue dynamicEvents = new EventQueue() ;
-		
-		createDynamicEvents(dynamicEvents) ;		
-		
-		GregorianCalendar start = new GregorianCalendar();
-		start.set(2013, Calendar.MARCH, 04, 0, 0);
-		
-		staticEvents.add(createHourEvent("Event.", start)) ;
-		
-		Calendar s1 = new GregorianCalendar() ;
-		s1.setTime(start.getTime()) ;
-		s1.set(Calendar.HOUR_OF_DAY, 0) ;
-		s1.set(Calendar.MINUTE, 0) ;
-		s1.set(Calendar.SECOND, 0) ;
-		s1 = (Calendar) s1.clone() ;
-		
-		for(int i = 0; i < 20; i++){
-			Event e = createHourEvent("1hr@0", s1) ;
-			staticEvents.add(e) ;
-			
-			s1.set(Calendar.HOUR_OF_DAY, 10) ;
-			e = createHourEvent("1hr@10", s1) ;
-			staticEvents.add(e) ;
-			
-			s1.set(Calendar.HOUR_OF_DAY, 12) ;
-			e = createTwoHourEvent("2hr@12", s1) ;
-			staticEvents.add(e) ;
-		
-			s1.set(Calendar.HOUR_OF_DAY, 15) ;
-			e = createTwoHourEvent("2hr@15", s1) ;
-			staticEvents.add(e) ;
-			
-			s1.add(Calendar.DAY_OF_MONTH, 1);
-			s1.set(Calendar.HOUR_OF_DAY, 0) ;
-			s1.set(Calendar.MINUTE, 0) ;
-			s1.set(Calendar.SECOND, 0) ;
-		}
-		
-		s1.set(Calendar.DAY_OF_MONTH, 23);
-		s1.set(Calendar.HOUR_OF_DAY, 23) ;
-		s1.set(Calendar.MINUTE, 59) ;
-		s1.set(Calendar.SECOND, 59) ;
-		
-		ScheduleOptions options = new ScheduleOptions() ;
-		Calendar o1 = Calendar.getInstance() ;
-		o1.set(Calendar.HOUR_OF_DAY, 0) ;
-		o1.set(Calendar.MINUTE, 0) ;
-		o1.set(Calendar.SECOND, 0) ;
-		
-		Calendar o2 = Calendar.getInstance() ;
-		o2.set(Calendar.HOUR_OF_DAY, 21) ;
-		o2.set(Calendar.MINUTE, 0) ;
-		o2.set(Calendar.SECOND, 0) ;
-
-		options.addNewForbiddenHour(o1, 9, 30) ;
-		options.addNewForbiddenHour(o2, 2, 59) ;
+		EventTree staticEvents = makeStaticEvents() ;
+		EventQueue dynamicEvents = makeDynamicEvents() ;
+		ScheduleOptions options = makeOptions();
+		Calendar counterStart = makeStart(); 
+		Calendar counterEnd = makeEnd() ;
 		
 		System.out.println("Static Event Size: " + staticEvents.size()) ;
 		System.out.println("Dynamic Event Size: " + dynamicEvents.size()) ;
 
-		Calendar counterStart = (Calendar) Calendar.getInstance() ;
-		counterStart.set(Calendar.DAY_OF_MONTH, 4) ;
-		counterStart.set(Calendar.HOUR_OF_DAY, 0);
-		counterStart.set(Calendar.MINUTE, 0) ;
-		counterStart.set(Calendar.SECOND, 0);
 		
-		Calendar counterEnd = s1 ;
 		
 		pem = new ParetoElsenhowerScheduler(staticEvents, options, counterStart, counterEnd) ;
 		
@@ -136,8 +78,85 @@ public class TestCase01 {
 	}
 	
 	
+	public static Calendar makeStart(){
+		Calendar counterStart = (Calendar) Calendar.getInstance() ;
+		counterStart.set(Calendar.MONTH, Calendar.MARCH);
+		counterStart.set(Calendar.DAY_OF_MONTH, 4) ;
+		counterStart.set(Calendar.HOUR_OF_DAY, 0);
+		counterStart.set(Calendar.MINUTE, 0) ;
+		counterStart.set(Calendar.SECOND, 0);
+		return counterStart;
+	}
 	
+	public static Calendar makeEnd(){
+		Calendar counterEnd = new GregorianCalendar() ;
+		counterEnd.set(Calendar.DAY_OF_MONTH, 23);
+		counterEnd.set(Calendar.HOUR_OF_DAY, 23) ;
+		counterEnd.set(Calendar.MINUTE, 59) ;
+		counterEnd.set(Calendar.SECOND, 59) ;
+		return counterEnd;
+	}
 	
+	public static ScheduleOptions makeOptions(){
+		ScheduleOptions options = new ScheduleOptions() ;
+		Calendar o1 = Calendar.getInstance() ;
+		o1.set(Calendar.HOUR_OF_DAY, 0) ;
+		o1.set(Calendar.MINUTE, 0) ;
+		o1.set(Calendar.SECOND, 0) ;
+		
+		Calendar o2 = Calendar.getInstance() ;
+		o2.set(Calendar.HOUR_OF_DAY, 21) ;
+		o2.set(Calendar.MINUTE, 0) ;
+		o2.set(Calendar.SECOND, 0) ;
+
+		options.addNewForbiddenHour(o1, 9, 30) ;
+		options.addNewForbiddenHour(o2, 2, 59) ;
+		return options;
+	}
+	
+	public static EventTree makeStaticEvents(){
+		EventTree staticEvents = new EventTree();
+		GregorianCalendar start = new GregorianCalendar();
+		start.set(2013, Calendar.MARCH, 04, 0, 0);
+		
+		staticEvents.add(createHourEvent("Event.", start)) ; 
+		
+		Calendar s1 = new GregorianCalendar() ;
+		s1.setTime(start.getTime()) ;
+		s1.set(Calendar.HOUR_OF_DAY, 0) ;
+		s1.set(Calendar.MINUTE, 0) ;
+		s1.set(Calendar.SECOND, 0) ;
+		s1 = (Calendar) s1.clone() ;
+		
+		for(int i = 0; i < 20; i++){
+			Event e = createHourEvent("1hr@0", s1) ;
+			staticEvents.add(e) ;
+			
+			s1.set(Calendar.HOUR_OF_DAY, 10) ;
+			e = createHourEvent("1hr@10", s1) ;
+			staticEvents.add(e) ;
+			
+			s1.set(Calendar.HOUR_OF_DAY, 12) ;
+			e = createTwoHourEvent("2hr@12", s1) ;
+			staticEvents.add(e) ;
+		
+			s1.set(Calendar.HOUR_OF_DAY, 15) ;
+			e = createTwoHourEvent("2hr@15", s1) ;
+			staticEvents.add(e) ;
+			
+			s1.add(Calendar.DAY_OF_MONTH, 1);
+			s1.set(Calendar.HOUR_OF_DAY, 0) ;
+			s1.set(Calendar.MINUTE, 0) ;
+			s1.set(Calendar.SECOND, 0) ;
+		}
+		
+		s1.set(Calendar.DAY_OF_MONTH, 23);
+		s1.set(Calendar.HOUR_OF_DAY, 23) ;
+		s1.set(Calendar.MINUTE, 59) ;
+		s1.set(Calendar.SECOND, 59) ;
+		
+		return staticEvents;
+	}
 	/**Creates an hour long event starting from a given date.
 	 * @param name - the name of the event.
 	 * @param c1 - the starting date of the event.
@@ -177,11 +196,11 @@ public class TestCase01 {
 		return newCalendar; 
 	}
 	
-	public static ParetoElsenhowerEvent createDynamicEvent(String name, 
+	public static ParetoEisenhowerEvent createDynamicEvent(String name, 
 			Calendar start, Calendar end, int priority, int hours, int minutes){
 		
-		ParetoElsenhowerEvent newEvent = 
-				new ParetoElsenhowerEvent( name,  start,  end,  priority,  hours,  minutes);
+		ParetoEisenhowerEvent newEvent = 
+				new ParetoEisenhowerEvent( name,  start,  end,  priority,  hours,  minutes);
 		return newEvent ;
 	}
 	
@@ -193,8 +212,9 @@ public class TestCase01 {
 		
 	}
 	
-	public static void createDynamicEvents(EventQueue dynamicEvents){
-		ParetoElsenhowerEvent de = createDynamicEvent("DE1", 
+	public static EventQueue makeDynamicEvents(){
+		EventQueue dynamicEvents = new EventQueue() ;
+		ParetoEisenhowerEvent de = createDynamicEvent("DE1", 
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,4, true),
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,10,false),
 				ParetoElsenhowerScheduler.PE_PRIORITY_HIGH, 2,0) ;
@@ -250,6 +270,8 @@ public class TestCase01 {
 			makeRecurrenceGroupFor(de, RecurrenceGroup.WEEKLY, 1, 
 					new boolean[]{false, true, false, true, false, true,false});
 			dynamicEvents.offer(de) ;
+		
+		return dynamicEvents;
 		
 	}
 	

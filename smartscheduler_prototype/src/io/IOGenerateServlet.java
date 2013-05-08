@@ -70,7 +70,8 @@ public class IOGenerateServlet extends HttpServlet {
 		String json = eventsToJSON(this.staticEvents, scheduledEvents);
 		
 		//Binding
-		request.setAttribute("attr1", json) ;
+		request.setAttribute("processedEvents", json) ;
+		System.out.println(json);
 		
 		//Dispatcher
 		RequestDispatcher rd = request.getRequestDispatcher("test.jsp");
@@ -137,10 +138,10 @@ public class IOGenerateServlet extends HttpServlet {
 	
 	
 
-	private String eventsToJSON(EventTree staticEvents2,
-			ArrayList<Event> scheduledEvents) {
+	private String eventsToJSON(EventTree staticEvents, ArrayList<Event> scheduledEvents) {
+		addRecurrentEvents(staticEvents) ;
 		String json = "[";
-		Iterator<Event> s_it = this.staticEvents.iterator() ;
+		Iterator<Event> s_it = staticEvents.iterator() ;
 		
 		while(s_it.hasNext()){
 			Event e = s_it.next() ;
@@ -162,7 +163,20 @@ public class IOGenerateServlet extends HttpServlet {
 		return json;
 	}
 	
-	
+	private void addRecurrentEvents(EventTree eventList){
+		ArrayList<Event> recurrentEvents = new ArrayList<Event>();
+		for(Event e: eventList){
+			if(e.getRecurrenceGroup() != null){
+				for(Event e2 : e.getRecurrenceGroup().getEventsInRecurrenceGroup()){
+					recurrentEvents.add(e2);
+				}
+			}
+		}
+		for(Event e : recurrentEvents){
+			eventList.add(e);
+		}
+		
+	}
 
 
 	

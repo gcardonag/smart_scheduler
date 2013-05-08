@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.TreeMap;
 
 import dynamicEventCollection.DynamicEvent;
-import dynamicEventCollection.ParetoElsenhowerEvent;
+import dynamicEventCollection.ParetoEisenhowerEvent;
 
 import scheduling.ParetoElsenhowerScheduler;
 
@@ -170,8 +170,8 @@ public class EventInterpreter {
 				e.setRecurrenceGroup(rg);
 			}
 			
-			ParetoElsenhowerEvent de = 
-					new ParetoElsenhowerEvent("D-" + ee.getName(), dstart,end,ee.getPriority(),ee.getHours(),ee.getMinutes()) ;
+			ParetoEisenhowerEvent de = 
+					new ParetoEisenhowerEvent("D-" + ee.getName(), dstart,end,ee.getPriority(),ee.getHours(),ee.getMinutes()) ;
 			//TODO: ID.
 			de.setId(ee.getId()) ;
 			

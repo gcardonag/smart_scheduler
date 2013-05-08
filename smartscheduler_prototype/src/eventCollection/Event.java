@@ -26,7 +26,7 @@ public class Event implements Comparable<Event> {
 	protected Calendar end;
 	private boolean staticEvent;
 	private boolean repeating;
-	private RecurrenceGroup recurrenceGroup;
+	protected RecurrenceGroup recurrenceGroup;
 	
 	/**
 	 * Event duration in minutes.
@@ -162,6 +162,8 @@ public class Event implements Comparable<Event> {
 		return duration;
 	}
 	
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -264,19 +266,14 @@ public class Event implements Comparable<Event> {
 		+ " eDate : '" + formatterDate.format(this.getEnd().getTime()) + "' , " 
 		+ " sTime : '" + formatterTime.format(this.getStart().getTime()) + "' , " 
 		+ " eTime : '" + formatterTime.format(this.getEnd().getTime()) + "' , " 
-		+ " recurrence : '" + "none" + "' , " 
-		+ " interval : '" + "none" + "' , " 
-		+ " days : '" + "none" + "' , " 
-		+ " hours : '" + "none" + "' , " 
-		+ " minutes : '" + "none" + "' , " 
-		+ " priority : '" + "none" + "' " 
+		+ " recurrence : '" + ((recurrenceGroup!=null) ? recurrenceGroup.getRecurrence() : "none") + "' , " 
+		+ " interval : '" + ((recurrenceGroup != null) ? recurrenceGroup.getInterval() : "none") + "' , " 
+		+ " days : '" + ((recurrenceGroup != null) ? recurrenceGroup.toStringDays() : "none") + "' , " 
+		+ " hours : '" + "static" + "' , " 
+		+ " minutes : '" + "static" + "' , " 
+		+ " priority : '" + "static" + "' " 
 		+ " }" ;
-		return str;
-		
-		
-		
-		
-						
+		return str;					
 	}
 	
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import dynamicEventCollection.DynamicEvent;
-import dynamicEventCollection.ParetoElsenhowerEvent;
+import dynamicEventCollection.ParetoEisenhowerEvent;
 import eventCollection.Event;
 import eventCollection.EventTree;
 import eventCollection.EventQueue;
@@ -102,10 +102,12 @@ public class ParetoElsenhowerScheduler {
 		unprocessedP3 = new ArrayList<DynamicEvent>();
 		ArrayList<Event> processedEvents = new ArrayList<Event>();
 		
+		System.out.println("Here!: [" + counterStart.getTime() + " - " + counterEnd.getTime() + "]") ;
+		
 		///////////////////////////////////////////
 		//Loop 'till end date.
 		while(counterStart.compareTo(counterEnd) <= 0){ 
-			
+			System.out.println("Here!") ;
 			//Prepare day for scheduling.
 			ParetoSchedule currentDay = new ParetoSchedule(counterStart, staticEvents, options);
 			//Categorization for prioritization occurs here.
@@ -169,8 +171,8 @@ public class ParetoElsenhowerScheduler {
 	 * @param dynamicEvents - the dynamic events to check if in range.
 	 */
 	private void addDynamicEventsInRange(Calendar day, EventQueue dynamicEvents){	
-		while( !dynamicEvents.isEmpty() && ((ParetoElsenhowerEvent)dynamicEvents.element()).containsDay(day) ){
-			ParetoElsenhowerEvent event = (ParetoElsenhowerEvent) dynamicEvents.remove();
+		while( !dynamicEvents.isEmpty() && ((ParetoEisenhowerEvent)dynamicEvents.element()).containsDay(day) ){
+			ParetoEisenhowerEvent event = (ParetoEisenhowerEvent) dynamicEvents.remove();
 			
 			//if(!event.containsDay(day)) continue ;
 			//dynamicEvents.remove(i);
@@ -199,7 +201,7 @@ public class ParetoElsenhowerScheduler {
 		if(currentDay.hasHighPriorityTimeAvailable()){
 			for(int i = 0; i < unprocessedEvents.size() && currentDay.hasHighPriorityTimeAvailable(); i++){
 				
-				ParetoElsenhowerEvent currentDynamicEvent = (ParetoElsenhowerEvent) unprocessedEvents.get(i);
+				ParetoEisenhowerEvent currentDynamicEvent = (ParetoEisenhowerEvent) unprocessedEvents.get(i);
 				
 				while (currentDynamicEvent.takesPlaceOnDate(currentDay.getDay())
 						&& currentDynamicEvent.hasTimeLeft() && currentDay.hasHighPriorityTimeAvailable()){	
@@ -224,7 +226,7 @@ public class ParetoElsenhowerScheduler {
 		if(currentDay.hasMediumPrioritySlotsAvailable()){
 			for (int i = 0; i < unprocessedEvents.size() && currentDay.hasMediumPrioritySlotsAvailable(); i++) {
 				
-				ParetoElsenhowerEvent currentDynamicEvent = (ParetoElsenhowerEvent) unprocessedEvents.get(i);
+				ParetoEisenhowerEvent currentDynamicEvent = (ParetoEisenhowerEvent) unprocessedEvents.get(i);
 				
 				while (currentDynamicEvent.takesPlaceOnDate(currentDay.getDay())
 						&& currentDynamicEvent.hasTimeLeft() && currentDay.hasMediumPrioritySlotsAvailable()) {

@@ -13,7 +13,7 @@ import scheduler.PomodoroCreator;
 import scheduling.ParetoElsenhowerScheduler;
 
 import dynamicEventCollection.DynamicEvent;
-import dynamicEventCollection.ParetoElsenhowerEvent;
+import dynamicEventCollection.ParetoEisenhowerEvent;
 
 import eventCollection.*;
 
@@ -220,11 +220,11 @@ public class TestCase01Pomodoro {
 		return newCalendar; 
 	}
 	
-	public static ParetoElsenhowerEvent createDynamicEvent(String name, 
+	public static ParetoEisenhowerEvent createDynamicEvent(String name, 
 			Calendar start, Calendar end, int priority, int hours, int minutes){
 		
-		ParetoElsenhowerEvent newEvent = 
-				new ParetoElsenhowerEvent( name,  start,  end,  priority,  hours,  minutes);
+		ParetoEisenhowerEvent newEvent = 
+				new ParetoEisenhowerEvent( name,  start,  end,  priority,  hours,  minutes);
 		return newEvent ;
 	}
 	
@@ -237,7 +237,7 @@ public class TestCase01Pomodoro {
 	}
 	
 	public static void createDynamicEvents(EventQueue dynamicEvents){
-		ParetoElsenhowerEvent de = createDynamicEvent("DE1", 
+		ParetoEisenhowerEvent de = createDynamicEvent("DE1", 
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,4, true),
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,10,false),
 				ParetoElsenhowerScheduler.PE_PRIORITY_HIGH, 2,0) ;

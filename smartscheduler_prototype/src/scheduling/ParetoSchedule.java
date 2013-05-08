@@ -7,9 +7,7 @@ import java.util.ArrayList;
 
 import java.util.Calendar;
 import optionStructures.ScheduleOptions;
-import dynamicEventCollection.DynamicEvent;
-import dynamicEventCollection.ParetoElsenhowerEvent;
-import eventCollection.Event;
+import dynamicEventCollection.ParetoEisenhowerEvent;
 import eventCollection.EventTree;
 
 /**Class that determines the schedule for a day in accordance with the
@@ -136,7 +134,7 @@ public class ParetoSchedule extends DaySchedule {
 	 * @deprecated Can attempt to schedule as much time available, and return a list
 	 * of created events but will create inflexibility for the class.
 	 */
-	public Event setHighPriorityEventTime(ParetoElsenhowerEvent event){
+	public ParetoEisenhowerEvent setHighPriorityEventTime(ParetoEisenhowerEvent event){
 		return setEventTimeForTimeSlots(event, highPrioritySlots);
 	}
 	
@@ -150,7 +148,7 @@ public class ParetoSchedule extends DaySchedule {
 	 * @deprecated Can attempt to schedule as much time available, and return a list
 	 * of created events but will create inflexibility for the class.
 	 */
-	public Event setMediumPriorityEventTime(ParetoElsenhowerEvent event){
+	public ParetoEisenhowerEvent setMediumPriorityEventTime(ParetoEisenhowerEvent event){
 		return setEventTimeForTimeSlots(event, mediumPrioritySlots);
 	}
 	
@@ -181,7 +179,7 @@ public class ParetoSchedule extends DaySchedule {
 	 * (non-Javadoc)
 	 * @see scheduler.DaySchedule#setEventTimeForTimeSlots(dynamicEventCollection.DynamicEvent, java.util.ArrayList)
 	 */
-	public Event setEventTimeForTimeSlots(DynamicEvent event, ArrayList<TimeSlot> timeSlots){
+	private ParetoEisenhowerEvent setEventTimeForTimeSlots(ParetoEisenhowerEvent event, ArrayList<TimeSlot> timeSlots){
 		
 		TimeSlot tr = timeSlots.get(0) ;
 		int slotTimeLeft = tr.getTimeLeft() ;
@@ -193,8 +191,9 @@ public class ParetoSchedule extends DaySchedule {
 
 			event.reduceTime(slotTimeLeft);
 			timeSlots.remove(tr);
-			return new Event(event.getName(), tr.getStart(), 
-							tr.getEnd(), false, false);
+			return new ParetoEisenhowerEvent(event.getName(), tr.getStart(), 
+							tr.getEnd(), event.getPriority(), event.getDuration() / 60, 
+							event.getDuration() % 60);
 		} 
 		else {
 			// This day has all the time available for
@@ -202,7 +201,7 @@ public class ParetoSchedule extends DaySchedule {
 
 			event.reduceTime(eventTimeLeft);
 		
-			Event newEvent = tr.getEventForTime(eventTimeLeft,event.getName());
+			ParetoEisenhowerEvent newEvent = tr.getEventForTime(eventTimeLeft,event.getName(),event);
 			return newEvent;
 		}
 		
@@ -217,13 +216,13 @@ public class ParetoSchedule extends DaySchedule {
 	public String toString(){
 		String s = "{" ;
 		s += "\nHigh Priority:\n";
-		for(Event e: this.highPrioritySlots){
+		for(TimeSlot e: this.highPrioritySlots){
 			s += "\n" + e ;
 		}
 		
 		s += "\n\nMedium Priority:\n";
 		
-		for(Event e: this.mediumPrioritySlots){
+		for(TimeSlot e: this.mediumPrioritySlots){
 			s += "\n" + e ;
 		}
 		
