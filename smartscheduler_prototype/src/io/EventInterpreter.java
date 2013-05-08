@@ -145,7 +145,7 @@ public class EventInterpreter {
 				
 				//TODO: Assumption
 				
-				start = this.parseDate(ee.getEndDate(), ee.getEndTime()) ;
+				start = this.parseDate(ee.getStartDate(), ee.getStartTime()) ;
 				dstart = Calendar.getInstance() ;
 				end = this.parseDate(ee.getEndDate(), ee.getEndTime()) ;
 				isRecurring = false ;
