@@ -371,7 +371,7 @@
           <!--<p id="eventArrayParagraph"></p>-->
         </div><!-- End of collumn -->
         <div class="span1">
-          <form action="IOGenerateServlet" method="post" id="generateForm">
+          <form action="SchedulerServlet" method="post" id="generateForm">
             <p>
             <button class="btn btn-block btn-danger" id="generateBtn"><i class="icon-calendar icon-white"></i>Generate Schedule</button>
             <input type="hidden" id="eventArrayList" name="eventArrayList"></input>

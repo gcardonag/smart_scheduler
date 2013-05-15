@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TreeMap;
 
-import dynamicEventCollection.DynamicEvent;
 import dynamicEventCollection.ParetoEisenhowerEvent;
 
 import scheduling.ParetoEisenhowerScheduler;
