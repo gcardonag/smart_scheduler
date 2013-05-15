@@ -241,6 +241,7 @@ public abstract class DaySchedule{
 		 * of the reduction but seems less feasible (maybe) when 
 		 * managing time slot instances in collections. Also, does
 		 * not verify length of time.
+		 * Can: exception thrown if given event is longer.
 		 */
 		public ParetoEisenhowerEvent getEventForTime(int timeLength,String name, ParetoEisenhowerEvent pee){
 			
