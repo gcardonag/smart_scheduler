@@ -25,12 +25,12 @@ import eventCollection.*;
 /**
  * Servlet implementation class Redirector_1
  */
-@WebServlet("/IOGenerateServlet")
-public class IOGenerateServlet extends HttpServlet {
+@WebServlet("/SchedulerServlet")
+public class SchedulerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     EventTree staticEvents ;
     ArrayList<DynamicEvent> dynamicEvents ;
-    public IOGenerateServlet() {
+    public SchedulerServlet() {
         super();
        
         staticEvents = new EventTree();

@@ -3,7 +3,7 @@
  */
 package scheduling;
 
-import io.IOGenerateServlet;
+import io.SchedulerServlet;
 
 import java.util.ArrayList;
 import java.util.Calendar;
