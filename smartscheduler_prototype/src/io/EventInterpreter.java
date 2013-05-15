@@ -88,6 +88,7 @@ public class EventInterpreter {
 		//For every parsed entry.
 		for(EventEntry ee: entries){
 			
+			/*
 			Calendar start = null ;
 			Calendar dstart = null ;
 			Calendar end = null ;
@@ -97,12 +98,16 @@ public class EventInterpreter {
 			int recurrence = -1 ;
 			int interval = -1;
 			boolean[] days = new boolean[7] ;
+			*/
 			
 			//////////////////////////////////////////////////////
 			//Begin Switch.
 			//Class Type.
 			if(ee.getType().equalsIgnoreCase("class")){
 				
+				//Class Event
+				makeClassEvent(ee);
+				/*
 				start = dstart = ee.getStart();
 				end = ee.getEnd();
 				isRecurring = ee.getRecurrence() != -1 ;
@@ -117,10 +122,13 @@ public class EventInterpreter {
 					interval = 1 ;
 					days = parseDays("1111111");
 				}
+				*/
 			}
 			//Deadline Type
 			else if(ee.getType().equalsIgnoreCase("Deadline")){
 				
+				makeDeadlineEvent(ee);
+				/*
 				start = this.parseDate(ee.getStartDate(), ee.getEndTime());
 				start.add(Calendar.MINUTE, -5);
 				dstart = Calendar.getInstance() ;
@@ -130,18 +138,21 @@ public class EventInterpreter {
 				if(isRecurring){
 					recurrence = ee.getRecurrence();
 					interval = ee.getInterval() ;
-					days = ee.getDays();	
+					days = ee.getDays();
 				}
 				else{
 					recurrence = RecurrenceGroup.WEEKLY;
 					interval = 1 ;
 					days = parseDays("1111111");
 				}
+				*/
 				
 			}
 			//Meeting Type.
 			else if(ee.getType().equalsIgnoreCase("Meeting")){
 				
+				makeMeetingEvent(ee);
+				/*
 				//TODO: Assumption
 				
 				start = this.parseDate(ee.getStartDate(), ee.getStartTime()) ;
@@ -152,11 +163,14 @@ public class EventInterpreter {
 				recurrence = RecurrenceGroup.WEEKLY;
 				interval = 1 ;
 				days = parseDays("1111111");
+				*/
 				
 			}
 			//Flexible Type.
 			else if(ee.getType().equalsIgnoreCase("Flexible")){
 				
+				makeFlexibleEvent(ee);
+				/*
 				start = dstart = ee.getStart();
 				end = ee.getEnd() ;
 				isRecurring = ee.getRecurrence() != -1 ;
@@ -167,6 +181,7 @@ public class EventInterpreter {
 				days = (isRecurring) ? ee.getDays() : null ;
 				
 				isFlexible = true ;
+				*/
 				
 			}
 			else{
@@ -175,6 +190,7 @@ public class EventInterpreter {
 				return ;
 			}
 			
+			/*
 			//Dynamic only events.
 			if (!isFlexible) {
 				// Event Creation.
@@ -208,8 +224,123 @@ public class EventInterpreter {
 			if(!isFlexible){
 				
 			}
-			
+			*/
 		}
+		
+	}
+	
+	/**DONE!
+	 * @param ee
+	 */
+	private void makeClassEvent(EventEntry ee){
+		
+		Calendar start = ee.getStart();
+		Calendar dstart = ee.getStart();
+		Calendar end = ee.getEnd();
+		int recurrence = -1 ;
+		int interval = -1 ;
+		boolean[] days = null ;
+		
+		boolean isRecurring = ee.getRecurrence() != -1 ;
+		
+		if(isRecurring){
+			recurrence = ee.getRecurrence();
+			interval = ee.getInterval() ;
+			days = ee.getDays();	
+		}
+		else{
+			recurrence = RecurrenceGroup.WEEKLY;
+			interval = 1 ;
+			days = parseDays("1111111");
+		}
+		
+		Event newEvent = new Event(ee.getName(),start,end,true,isRecurring);
+			
+		if(isRecurring){
+			RecurrenceGroup rg = new RecurrenceGroup(newEvent, recurrence, interval, end, days);
+			newEvent.setRecurrenceGroup(rg);
+		}
+		
+		ParetoEisenhowerEvent newDynamicEvent = new ParetoEisenhowerEvent("CDynamic-" + ee.getName(), 
+										dstart, end, ee.getPriority(), 
+										ee.getHours(), ee.getMinutes());
+		
+		RecurrenceGroup rg = new RecurrenceGroup(newDynamicEvent, recurrence, interval, end, days);
+		newDynamicEvent.setRecurrenceGroup(rg);
+		
+		
+		staticEvents.add(newEvent);
+		dynamicEvents.offer(newDynamicEvent);
+		
+	}
+	
+	/**
+	 * @param ee
+	 */
+	private void makeDeadlineEvent(EventEntry ee){
+		
+		Calendar start = this.parseDate(ee.getEndDate(), ee.getEndTime());
+		start.add(Calendar.MINUTE, -5);
+		Calendar dstart = this.parseDate(ee.getStartDate(), ee.getEndTime()) ;
+		Calendar end = this.parseDate(ee.getEndDate(), ee.getEndTime()) ;
+		
+		int recurrence = RecurrenceGroup.WEEKLY ;
+		int interval = 1 ;
+		boolean[] days = parseDays("1111111"); ;
+		boolean isRecurring = false ; //By definition.
+	
+		
+		
+		Event newEvent = new Event(ee.getName(),start,end,true,isRecurring);
+		
+		
+		ParetoEisenhowerEvent newDynamicEvent = new ParetoEisenhowerEvent("DDynamic-" + ee.getName(), 
+										dstart, end, ee.getPriority(), 
+										ee.getHours(), ee.getMinutes());
+		RecurrenceGroup rg = new RecurrenceGroup(newDynamicEvent, recurrence, interval, end, days);
+		newDynamicEvent.setRecurrenceGroup(rg);
+		
+		staticEvents.add(newEvent);
+		dynamicEvents.offer(newDynamicEvent);
+	}
+	
+	private void makeMeetingEvent(EventEntry ee){
+		//TODO: Assumption
+		
+		Calendar start = this.parseDate(ee.getStartDate(), ee.getStartTime()) ;
+		//Calendar dstart = Calendar.getInstance() ;
+		Calendar end = this.parseDate(ee.getEndDate(), ee.getEndTime()) ;
+		boolean isRecurring = false ;
+		
+		
+		//fix
+		//int recurrence = RecurrenceGroup.WEEKLY;
+		//int interval = 1 ;
+		//boolean[] days = parseDays("1111111");
+		
+		Event newEvent = new Event(ee.getName(), start, end, true, isRecurring);
+		staticEvents.add(newEvent);
+		
+	}
+	
+	private void makeFlexibleEvent(EventEntry ee){
+		
+		//Calendar start = ee.getStart();
+		Calendar dstart = ee.getStart();
+		Calendar end = ee.getEnd() ;
+		boolean isRecurring = ee.getRecurrence() != -1 ;
+		
+		//Dynamic Event.
+		int recurrence = (isRecurring) ? ee.getRecurrence() : RecurrenceGroup.WEEKLY ;
+		int interval = (isRecurring) ? ee.getInterval() : 1 ;
+		boolean[] days = (isRecurring) ? ee.getDays() : parseDays("1111111") ;
+		
+		ParetoEisenhowerEvent pe = new ParetoEisenhowerEvent("FDynamic-"+ee.getName(), dstart, end, 
+											ee.getPriority(), ee.getHours(), ee.getMinutes());
+		RecurrenceGroup rg = new RecurrenceGroup(pe, recurrence, interval, end, days);
+		pe.setRecurrenceGroup(rg);
+		
+		dynamicEvents.offer(pe);
 		
 	}
 	
