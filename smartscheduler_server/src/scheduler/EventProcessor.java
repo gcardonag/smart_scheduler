@@ -11,6 +11,7 @@ public class EventProcessor {
 	 * @param events the list of events to be processed
 	 * @param q a destination EventQueue
 	 * @param c a destination EventCollection
+	 * @deprecated Functionality is already implemented directly in the scheduler.
 	 */
 	public static void processEvents(List<Event> events, EventTree q, EventTree c) {
 		Iterator<Event> iterator = events.iterator();
