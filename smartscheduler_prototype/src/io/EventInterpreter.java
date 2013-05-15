@@ -254,13 +254,13 @@ public class EventInterpreter {
 			days = parseDays("1111111");
 		}
 		
-		Event newEvent = new Event(ee.getName(),start,end,true,isRecurring);
+		Event newEvent = new Event(ee.getName(),start,parseDate(ee.getStartDate(),ee.getEndTime()),true,isRecurring);
 			
 		if(isRecurring){
 			RecurrenceGroup rg = new RecurrenceGroup(newEvent, recurrence, interval, end, days);
 			newEvent.setRecurrenceGroup(rg);
 		}
-		
+		System.out.println("CDynamic-"+ee.getMinutes());
 		ParetoEisenhowerEvent newDynamicEvent = new ParetoEisenhowerEvent("CDynamic-" + ee.getName(), 
 										dstart, end, ee.getPriority(), 
 										ee.getHours(), ee.getMinutes());
@@ -282,11 +282,12 @@ public class EventInterpreter {
 		Calendar start = this.parseDate(ee.getEndDate(), ee.getEndTime());
 		start.add(Calendar.MINUTE, -5);
 		Calendar dstart = this.parseDate(ee.getStartDate(), ee.getEndTime()) ;
-		Calendar end = this.parseDate(ee.getEndDate(), ee.getEndTime()) ;
+		Calendar end = this.parseDate(ee.getStartDate(), ee.getEndTime()) ;
+		Calendar dend = this.parseDate(ee.getEndDate(), ee.getEndTime());
 		
 		int recurrence = RecurrenceGroup.WEEKLY ;
 		int interval = 1 ;
-		boolean[] days = parseDays("1111111"); ;
+		boolean[] days = parseDays("1111111"); 
 		boolean isRecurring = false ; //By definition.
 	
 		
@@ -295,9 +296,9 @@ public class EventInterpreter {
 		
 		
 		ParetoEisenhowerEvent newDynamicEvent = new ParetoEisenhowerEvent("DDynamic-" + ee.getName(), 
-										dstart, end, ee.getPriority(), 
+										dstart, dend, ee.getPriority(), 
 										ee.getHours(), ee.getMinutes());
-		RecurrenceGroup rg = new RecurrenceGroup(newDynamicEvent, recurrence, interval, end, days);
+		RecurrenceGroup rg = new RecurrenceGroup(newDynamicEvent, recurrence, interval, dend, days);
 		newDynamicEvent.setRecurrenceGroup(rg);
 		
 		staticEvents.add(newEvent);
@@ -618,20 +619,20 @@ public class EventInterpreter {
 		
 		public int getHours(){
 			if(getParameter("minutes").equalsIgnoreCase("")){
-				return -1 ;
+				return 0 ;
 			}
 			if(getParameter("hours").equalsIgnoreCase("none")){
-				return -1 ;
+				return 0 ;
 			}
 			return Integer.parseInt(getParameter("hours"));
 		}
 		
 		public int getMinutes(){
 			if(getParameter("minutes").equalsIgnoreCase("")){
-				return -1 ;
+				return 0 ;
 			}
 			if(getParameter("minutes").equalsIgnoreCase("none")){
-				return -1 ;
+				return 0 ;
 			}
 			return Integer.parseInt(getParameter("minutes"));
 		}
