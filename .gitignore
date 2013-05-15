@@ -2,3 +2,30 @@
 bin/
 *.class
 smartscheduler_prototype/.classpath
+
+smartscheduler_prototype/*.pydevproject
+smartscheduler_prototype/.project
+smartscheduler_prototype/.metadata
+smartscheduler_prototype/bin/**
+smartscheduler_prototype/tmp/**
+smartscheduler_prototype/tmp/**/*
+smartscheduler_prototype/*.tmp
+smartscheduler_prototype/*.bak
+smartscheduler_prototype/*.swp
+smartscheduler_prototype/*~.nib
+smartscheduler_prototype/local.properties
+smartscheduler_prototype/.classpath
+smartscheduler_prototype/.settings/
+smartscheduler_prototype/.loadpath
+
+# External tool builders
+smartscheduler_prototype/.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+smartscheduler_prototype/*.launch
+
+# CDT-specific
+smartscheduler_prototype/.cproject
+
+# PDT-specific
+smartscheduler_prototype/.buildpath
