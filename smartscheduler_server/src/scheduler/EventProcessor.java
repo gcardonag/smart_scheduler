@@ -12,7 +12,7 @@ public class EventProcessor {
 	 * @param q a destination EventQueue
 	 * @param c a destination EventCollection
 	 */
-	public static void processEvents(List<Event> events, EventQueue q, EventTree c) {
+	public static void processEvents(List<Event> events, EventTree q, EventTree c) {
 		Iterator<Event> iterator = events.iterator();
 		Event current;
 		while(iterator.hasNext()) {
@@ -21,7 +21,7 @@ public class EventProcessor {
 				c.add(current);
 			}
 			else {
-				q.offer(current);
+				q.add(current);
 			}
 		}
 	}
