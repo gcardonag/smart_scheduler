@@ -4,6 +4,12 @@ import java.util.Iterator;
 import java.util.List;
 import eventCollection.*;
 
+/**
+ * Distrubutes events to a queue or a tree according to it's type.
+ * @author Nelson Reyes Ciena
+ * @deprecated
+ * 
+ */
 public class EventProcessor {
 	
 	/**
