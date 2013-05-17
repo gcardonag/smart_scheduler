@@ -55,13 +55,13 @@ public class SchedulerServlet extends HttpServlet {
 		EventInterpreter interpreter = new EventInterpreter(events);
 		
 		//Static and Dynamic Events
-		ArrayList<Event> staticEvents = interpreter.getStaticEvents();
+		EventTree staticEvents = interpreter.getStaticEvents();
 		printEvents(staticEvents);
 		EventQueue dynamicEvents = interpreter.getDynamicEvents();
 		printDynamicEvents(dynamicEvents);
 		
 		//Errors/Conflicts
-		ArrayList<Event> conflictingEvents = processNewStaticEvents(staticEvents);
+		EventTree conflictingEvents = processNewStaticEvents(staticEvents);
 		
 		//Setup...
 		GregorianCalendar start = getSchedulerStartDate();
@@ -71,7 +71,7 @@ public class SchedulerServlet extends HttpServlet {
 		System.out.println("==========================================") ;
 		//Scheduling...
 		ParetoEisenhowerScheduler pes = new ParetoEisenhowerScheduler(this.staticEvents,options,start,end);
-		ArrayList<Event> scheduledEvents = pes.scheduleDynamicEvents(dynamicEvents);
+		EventTree scheduledEvents = pes.scheduleDynamicEvents(dynamicEvents);
 		
 		System.out.println("\n\nScheduledEvents");
 		printEvents(scheduledEvents);
@@ -100,8 +100,8 @@ public class SchedulerServlet extends HttpServlet {
 	
 	/***********************************************/
 	
-	private ArrayList<Event> processNewStaticEvents(ArrayList<Event> staticEvents) {
-		ArrayList<Event> conflictingEvents = new ArrayList<Event>();
+	private EventTree processNewStaticEvents(EventTree staticEvents) {
+		EventTree conflictingEvents = new EventTree();
 		for(Event e: staticEvents){
 			if(!this.staticEvents.conflictsWith(e)){
 				System.out.println(this.staticEvents.add(e));
@@ -145,7 +145,7 @@ public class SchedulerServlet extends HttpServlet {
 	
 	
 
-	private String eventsToJSON(EventTree staticEvents, ArrayList<Event> scheduledEvents) {
+	private String eventsToJSON(EventTree staticEvents, EventTree scheduledEvents) {
 		addRecurrentEvents(staticEvents) ;
 		String json = "[";
 		Iterator<Event> s_it = staticEvents.iterator() ;
@@ -171,7 +171,7 @@ public class SchedulerServlet extends HttpServlet {
 	}
 	
 	private void addRecurrentEvents(EventTree eventList){
-		ArrayList<Event> recurrentEvents = new ArrayList<Event>();
+		EventTree recurrentEvents = new EventTree();
 		for(Event e: eventList){
 			if(e.getRecurrenceGroup() != null){
 				for(Event e2 : e.getRecurrenceGroup().getEventsInRecurrenceGroup()){
@@ -185,7 +185,7 @@ public class SchedulerServlet extends HttpServlet {
 		
 	}
 	
-	public static void printEvents(ArrayList<Event> events){
+	public static void printEvents(EventTree events){
 		System.out.println("IO.EI.events(): ") ;
 		for(Object e: events){
 			System.out.println(e);

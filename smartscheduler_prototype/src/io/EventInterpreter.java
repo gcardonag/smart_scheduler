@@ -13,6 +13,7 @@ import scheduling.ParetoEisenhowerScheduler;
 
 import eventCollection.Event;
 import eventCollection.EventQueue;
+import eventCollection.EventTree;
 import eventCollection.RecurrenceGroup;
 
 /**Interprets the events that come from the user interface as a
@@ -24,7 +25,7 @@ import eventCollection.RecurrenceGroup;
  */
 public class EventInterpreter {
 	
-	ArrayList<Event> staticEvents ;
+	EventTree staticEvents ;
 	EventQueue dynamicEvents ;
 	String events ;
 	
@@ -33,7 +34,7 @@ public class EventInterpreter {
 		interpretEvents();
 	}
 	
-	public ArrayList<Event> getStaticEvents(){
+	public EventTree getStaticEvents(){
 		return this.staticEvents;
 	}
 	
@@ -77,7 +78,7 @@ public class EventInterpreter {
 	 * @return
 	 */
 	private void interpretEvents(){
-		staticEvents = new ArrayList<Event>();
+		staticEvents = new EventTree();
 		dynamicEvents = new EventQueue();
 		ArrayList<EventEntry> entries = this.parse(events);
 		

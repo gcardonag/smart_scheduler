@@ -9,6 +9,7 @@ import dynamicEventCollection.DynamicEvent;
 
 import eventCollection.Event;
 import eventCollection.EventQueue;
+import eventCollection.EventTree;
 
 /**Tester for Interpreter <code>EventInterpreter</code>.
  * @author Anthony Llanos Velazquez
@@ -64,7 +65,7 @@ public static void main(String[] args){
 	 */
 	public static void testEventInterpreter(String s){
 		EventInterpreter interpreter = new EventInterpreter(s);
-		ArrayList<Event> staticEvents = interpreter.getStaticEvents() ;
+		EventTree staticEvents = interpreter.getStaticEvents() ;
 		EventQueue dynamicEvents = interpreter.getDynamicEvents() ;
 		System.out.println("\n------\nStatic Events");
 		System.out.println(staticEvents);
