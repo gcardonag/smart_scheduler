@@ -4,17 +4,9 @@
 package scheduling.testing;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
-import optionStructures.ScheduleOptions;
 import scheduler.PomodoroCreator;
-import scheduling.ParetoEisenhowerScheduler;
-
-import dynamicEventCollection.DynamicEvent;
-import dynamicEventCollection.ParetoEisenhowerEvent;
-
 import eventCollection.*;
 
 /**
