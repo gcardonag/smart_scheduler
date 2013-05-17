@@ -3,12 +3,13 @@ package scheduler;
 import java.util.Calendar;
 import java.util.LinkedList;
 
-import eventCollection.Event;
+import eventCollection.*;
 
 /**
  * Breaks an event into it's corresponding list of pomodoro events, event durations are in minutes
  * @author Nelson Reyes Ciena
  * @author Anthony Llanos
+ * @version 0.1
  *
  */
 public class PomodoroCreator {
@@ -42,11 +43,24 @@ public class PomodoroCreator {
 	}
 	
 	/**
+	* Generates a new list of schedules pomodoro events from a list of scheduled events.
+	* @param list the source list to generate pomodoros from
+	* @return the generated list of pomodoro events.
+	*/
+	public Iterable<Event> implementPomodoroToList(Iterable<Event> list) {
+		EventTree pomodoros = new EventTree();
+		for(Event e : list) {
+			pomodoros.add(this.getPomodorosFromEvent(e));
+		}
+		return pomodoros;
+	}
+	
+	/**
 	 * Generates a list of pomodoro events from a single Event object
 	 * @param e an event to break into pomodoro events
 	 * @return a list of pomodoro events generates from an ordinary event
 	 */
-	public Iterable<Event> getPomodorosFromEvent(Event e) {
+	private Iterable<Event> getPomodorosFromEvent(Event e) {
 		LinkedList<Event> list = new LinkedList<Event>();
 		int duration = e.getDuration();
 		
