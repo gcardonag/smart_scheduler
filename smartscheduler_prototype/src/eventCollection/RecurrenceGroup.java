@@ -99,15 +99,8 @@ public class RecurrenceGroup implements Iterable<Event> {
 				if(weekly[currentStart.get(Calendar.DAY_OF_WEEK)-1]) {
 					group.add(r);
 				}
-				if(currentStart.get(Calendar.DAY_OF_WEEK) == 6) {
-					currentStart.add(Calendar.DATE, 7*interval);
-					currentEnd.add(Calendar.DATE, 7*interval);
-				}
-				else {
-					currentStart.add(Calendar.DATE, 1);
-					currentEnd.add(Calendar.DATE, 1);
-				}
-
+				currentStart.add(Calendar.DATE, 1);
+				currentEnd.add(Calendar.DATE, 1);
 			}
 			// MONTHLY
 			else if(recurrence == MONTHLY) {
