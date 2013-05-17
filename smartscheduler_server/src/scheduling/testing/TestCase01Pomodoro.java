@@ -139,7 +139,11 @@ public class TestCase01Pomodoro {
 		
 		PomodoroCreator pc = new PomodoroCreator(25, 5, 30);
 		
-		processed = (ArrayList<Event>) pc.implementPomodoroToList(processed);
+		for(int p=0; p < processed.size(); p++) {
+			Iterable<Event> pomodoros = pc.getPomodorosFromEvent(processed.remove(0));
+			for(Event e : pomodoros)
+				processed.add(e);
+		}
 		
 		System.out.println("\n\nProcessed after applying Pomodoro:") ;
 		

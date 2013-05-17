@@ -48,7 +48,11 @@ public class PomodoroTester {
 			c.add(e);
 		for(Event e : studyrec.getEventsInRecurrenceGroup())
 			q.offer(e);
-		c.add(p.implementPomodoroToList(q));
+		while(!q.isEmpty()) {
+			Iterable<Event> pomodoros = p.getPomodorosFromEvent(q.remove());
+			for(Event e : pomodoros)
+				c.add(e);
+		}
 		for(Event e : c)
 			System.out.println(e.toString());
 		
