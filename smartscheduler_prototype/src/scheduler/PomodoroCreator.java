@@ -61,7 +61,7 @@ public class PomodoroCreator {
 	 * @return a list of pomodoro events generates from an ordinary event
 	 */
 	private Iterable<Event> getPomodorosFromEvent(Event e) {
-		LinkedList<Event> list = new LinkedList<Event>();
+		EventTree list = new EventTree();
 		int duration = e.getDuration();
 		
 		//Case for a single pomodoro event (duration is shorter than a single pomodoro)
