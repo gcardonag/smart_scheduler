@@ -27,6 +27,11 @@ public class TestCase01 {
 	 */
 	public static void main(String[] args){
 		
+		runTest();
+		
+	}
+	
+	public static ArrayList<Event> runTest(){
 		ParetoEisenhowerScheduler pem ;
 		
 		EventTree staticEvents = makeStaticEvents() ;
@@ -75,6 +80,8 @@ public class TestCase01 {
 			System.out.println("" + (++i) + " - " + e) ;
 		}
 		System.out.println("Result Size: " + processed.size() + " - Time: " + Calendar.getInstance().getTime());
+		
+		return processed;
 	}
 	
 	
