@@ -53,7 +53,7 @@ public class SchedulerServlet extends HttpServlet {
 		String events = EventInterpreter.jsonToSSFormat(request.getParameter("eventArrayList"));
 		System.out.println("IO: " + events) ;
 		EventInterpreter interpreter = new EventInterpreter(events);
-		
+		System.out.println("=========================================");
 		//Static and Dynamic Events
 		ArrayList<Event> staticEvents = interpreter.getStaticEvents();
 		printEvents(staticEvents);
@@ -73,8 +73,6 @@ public class SchedulerServlet extends HttpServlet {
 		ParetoEisenhowerScheduler pes = new ParetoEisenhowerScheduler(this.staticEvents,options,start,end);
 		ArrayList<Event> scheduledEvents = pes.scheduleDynamicEvents(dynamicEvents);
 		
-		System.out.println("\n\nScheduledEvents");
-		printEvents(scheduledEvents);
 		//Translation
 		String json = eventsToJSON(this.staticEvents, scheduledEvents);
 		
@@ -197,6 +195,7 @@ public class SchedulerServlet extends HttpServlet {
 		System.out.println("IO.EI.dynamicEvents(): ") ;
 		for(Event e: dynamicEvents){
 			System.out.println((DynamicEvent)e);
+			System.out.println((((ParetoEisenhowerEvent)e).getPriority() == ParetoEisenhowerScheduler.PE_PRIORITY_MED)?"MEDIUM!":"ELSE!");
 			
 		}
 	}
