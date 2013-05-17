@@ -269,6 +269,7 @@ public class EventInterpreter {
 		newDynamicEvent.setRecurrenceGroup(rg);
 		
 		
+		
 		staticEvents.add(newEvent);
 		dynamicEvents.offer(newDynamicEvent);
 		
