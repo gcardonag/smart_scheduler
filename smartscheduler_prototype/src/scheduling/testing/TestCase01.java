@@ -4,7 +4,6 @@
 package scheduling.testing;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -31,7 +30,7 @@ public class TestCase01 {
 		
 	}
 	
-	public static ArrayList<Event> runTest(){
+	public static Iterable<Event> runTest(){
 		ParetoEisenhowerScheduler pem ;
 		
 		EventTree staticEvents = makeStaticEvents() ;
@@ -47,14 +46,14 @@ public class TestCase01 {
 		
 		pem = new ParetoEisenhowerScheduler(staticEvents, options, counterStart, counterEnd) ;
 		
-		ArrayList<Event> processed = pem.scheduleDynamicEvents(dynamicEvents) ;
+		EventTree processed = pem.scheduleDynamicEvents(dynamicEvents) ;
 		System.out.println("\n\nProcessed:") ;
 		
 		int i = 0;
 		boolean dateset = false ;
 		
 		int count = 0 ;
-		int d1 = processed.get(0).getStart().get(Calendar.DAY_OF_YEAR) ;
+		int d1 = processed.getMinimum().getStart().get(Calendar.DAY_OF_YEAR) ;
 		
 		SimpleDateFormat formatter = new SimpleDateFormat();
 		for(Event e: processed){

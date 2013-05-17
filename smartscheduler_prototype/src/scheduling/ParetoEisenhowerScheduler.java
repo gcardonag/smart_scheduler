@@ -87,7 +87,7 @@ public class ParetoEisenhowerScheduler {
 	public ParetoEisenhowerScheduler(EventTree staticEvents, 
 										ScheduleOptions options, Calendar start, Calendar end){
 		this.staticEvents = staticEvents ;
-		ArrayList<Event> newEvents = new ArrayList<Event>();
+		EventTree newEvents = new EventTree();
 		for(Event e: staticEvents){
 			if(e.getRecurrenceGroup() != null){
 				for(Event ee: e.getRecurrenceGroup()){
@@ -110,14 +110,14 @@ public class ParetoEisenhowerScheduler {
 	 * @param counterEnd - the end date for which to schedule.
 	 * @return an ArrayList of Events that represent the dynamic event scheduling.
 	 */
-	public ArrayList<Event> scheduleDynamicEvents(EventQueue dynamicEvents){
+	public EventTree scheduleDynamicEvents(EventQueue dynamicEvents){
 		
 		System.out.println(staticEvents) ;
 		// Prepare lists for scheduling and results.
 		unprocessedP1 = new ArrayList<DynamicEvent>();
 		unprocessedP2 = new ArrayList<DynamicEvent>();
 		unprocessedP3 = new ArrayList<DynamicEvent>();
-		ArrayList<Event> processedEvents = new ArrayList<Event>();
+		EventTree processedEvents = new EventTree();
 		
 		///////////////////////////////////////////
 		//Loop 'till end date.
@@ -212,7 +212,7 @@ public class ParetoEisenhowerScheduler {
 	 * @param processedEvents - the list of events that have been succesfully scheduled. This is for storing results.
 	 * @param unprocessedEvents - the dynamic events which haven't yet been processed.
 	 */
-	private void scheduleForHighPriority(ParetoSchedule currentDay, ArrayList<Event> processedEvents, 
+	private void scheduleForHighPriority(ParetoSchedule currentDay, EventTree processedEvents, 
 														ArrayList<DynamicEvent> unprocessedEvents){
 		if(currentDay.hasHighPriorityTimeAvailable()){
 			for(int i = 0; i < unprocessedEvents.size() && currentDay.hasHighPriorityTimeAvailable(); i++){
@@ -236,7 +236,7 @@ public class ParetoEisenhowerScheduler {
 	 * @param unprocessedEvents - the dynamic events which haven't yet been processed.
 	 */
 	
-	private void scheduleForMediumPriority(ParetoSchedule currentDay, ArrayList<Event> processedEvents,
+	private void scheduleForMediumPriority(ParetoSchedule currentDay, EventTree processedEvents,
 														ArrayList<DynamicEvent> unprocessedEvents) {
 		
 		if(currentDay.hasMediumPrioritySlotsAvailable()){

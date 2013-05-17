@@ -28,18 +28,13 @@ public class TestCase01Pomodoro {
 	 */
 	public static void main(String[] args){
 
-		ArrayList<Event> processed = TestCase01.runTest();
-		//Apply Pomodoro to the processed events list
+		EventTree processed = (EventTree) TestCase01.runTest();
 		
+		//Apply Pomodoro to the processed events list
 		PomodoroCreator pc = new PomodoroCreator(25, 5, 30);
+		processed = (EventTree) pc.implementPomodoroToList(processed);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat();
-		
-		for(int p=0; p < processed.size(); p++) {
-			Iterable<Event> pomodoros = pc.getPomodorosFromEvent(processed.remove(0));
-			for(Event e : pomodoros)
-				processed.add(e);
-		}
 		
 		System.out.println("\n\nProcessed after applying Pomodoro:") ;
 		
@@ -47,7 +42,7 @@ public class TestCase01Pomodoro {
 		boolean dateset = false ;
 		
 		int count = 0 ;
-		int d1 = processed.get(0).getStart().get(Calendar.DAY_OF_YEAR) ;
+		int d1 = processed.getMinimum().getStart().get(Calendar.DAY_OF_YEAR) ;
 		
 		for(Event e: processed){
 			
