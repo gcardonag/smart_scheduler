@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import optionStructures.ScheduleOptions;
 
 import scheduling.ParetoEisenhowerScheduler;
+import scheduling.PomodoroScheduler;
 
 import dynamicEventCollection.DynamicEvent;
 import dynamicEventCollection.ParetoEisenhowerEvent;
@@ -46,8 +47,8 @@ public class SchedulerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//
 		response.setContentType("text/html");
-		this.staticEvents = new EventTree();
-		this.dynamicEvents = new ArrayList<DynamicEvent>();
+		//this.staticEvents = new EventTree(false);
+		//this.dynamicEvents = new ArrayList<DynamicEvent>();
 		
 		//Interpret.
 		System.out.println(request.getParameter("eventArrayList"));
@@ -58,7 +59,7 @@ public class SchedulerServlet extends HttpServlet {
 		//Static and Dynamic Events
 		EventTree staticEvents = interpreter.getStaticEvents();
 		printEvents(staticEvents);
-		EventQueue dynamicEvents = interpreter.getDynamicEvents();
+		EventTree dynamicEvents = interpreter.getDynamicEvents();
 		printDynamicEvents(dynamicEvents);
 		
 		//Errors/Conflicts
@@ -85,7 +86,7 @@ public class SchedulerServlet extends HttpServlet {
 
 		
 		//Apply Pomodoro.
-		//PomodoroCreator pc = new PomodoroCreator();
+		//PomodoroScheduler pc = new PomodoroScheduler();
 		//dynamicEvents = (EventTree) pc.implementPomodoroToList(dynamicEvents);
 		//printDynamicEvents(scheduledEvents);
 		
@@ -120,7 +121,7 @@ public class SchedulerServlet extends HttpServlet {
 	 * @return
 	 */
 	private EventTree processNewStaticEvents(EventTree staticEvents) {
-		EventTree conflictingEvents = new EventTree();
+		EventTree conflictingEvents = new EventTree(true);
 		for(Event e: staticEvents){
 			if(!this.staticEvents.conflictsWith(e)){
 				System.out.println(this.staticEvents.add(e));
@@ -211,10 +212,10 @@ public class SchedulerServlet extends HttpServlet {
 		}
 	}
 	
-	public static void printDynamicEvents(EventQueue dynamicEvents) {
+	public static void printDynamicEvents(EventTree dynamicEvents2) {
 		// TODO Auto-generated method stub
 		System.out.println("IO.EI.dynamicEvents(): ") ;
-		for(Event e: dynamicEvents){
+		for(Event e: dynamicEvents2){
 			System.out.println((DynamicEvent)e);
 			
 		}

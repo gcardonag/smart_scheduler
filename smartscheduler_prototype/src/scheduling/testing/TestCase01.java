@@ -17,7 +17,7 @@ import eventCollection.*;
 
 /**
  * Tester for the dynamic scheduler. Details for this tester are provided
- * in the excel file TestCases
+ * in the excel file TestCases.
  */
 public class TestCase01 {
 
@@ -26,7 +26,11 @@ public class TestCase01 {
 	 */
 	public static void main(String[] args){
 		
+		long t1 = System.currentTimeMillis() ;
 		runTest();
+		long t2 = System.currentTimeMillis() ;
+		
+		System.out.println("Time: " + (t2-t1) + " ms.") ;
 		
 	}
 	
@@ -34,7 +38,7 @@ public class TestCase01 {
 		ParetoEisenhowerScheduler pem ;
 		
 		EventTree staticEvents = makeStaticEvents() ;
-		EventQueue dynamicEvents = makeDynamicEvents() ;
+		EventTree dynamicEvents = makeDynamicEvents() ;
 		ScheduleOptions options = makeOptions();
 		Calendar counterStart = makeStart(); 
 		Calendar counterEnd = makeEnd() ;
@@ -78,7 +82,7 @@ public class TestCase01 {
 			
 			System.out.println("" + (++i) + " - " + e) ;
 		}
-		System.out.println("Result Size: " + processed.size() + " - Time: " + Calendar.getInstance().getTime());
+		System.out.println("Result Size: " + processed.size() + " - Date: " + Calendar.getInstance().getTime());
 		
 		return processed;
 	}
@@ -219,15 +223,15 @@ public class TestCase01 {
 		
 	}
 	
-	public static EventQueue makeDynamicEvents(){
-		EventQueue dynamicEvents = new EventQueue() ;
+	public static EventTree makeDynamicEvents(){
+		EventTree dynamicEvents = new EventTree(true) ;
 		ParetoEisenhowerEvent de = createDynamicEvent("DE1", 
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,4, true),
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,10,false),
 				ParetoEisenhowerScheduler.PE_PRIORITY_HIGH, 2,0) ;
 		makeRecurrenceGroupFor(de, RecurrenceGroup.WEEKLY, 1, 
 				new boolean[]{false, true, false, true, false, true,false});
-		dynamicEvents.offer(de) ;
+		dynamicEvents.add(de) ;
 		
 		de = createDynamicEvent("DE2", 
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,4,true),
@@ -235,7 +239,7 @@ public class TestCase01 {
 				ParetoEisenhowerScheduler.PE_PRIORITY_MED, 1,0) ;
 		makeRecurrenceGroupFor(de, RecurrenceGroup.WEEKLY, 1, 
 				new boolean[]{false, true, false, true, false, true,false});
-		dynamicEvents.offer(de) ;
+		dynamicEvents.add(de) ;
 		
 		de = createDynamicEvent("DE3", 
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,4,true),
@@ -244,7 +248,7 @@ public class TestCase01 {
 		
 		makeRecurrenceGroupFor(de, RecurrenceGroup.WEEKLY, 1, 
 				new boolean[]{true, false, true, false, true, false,true});
-		dynamicEvents.offer(de) ;
+		dynamicEvents.add(de) ;
 		
 		de = createDynamicEvent("DE4", 
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,4,true),
@@ -252,7 +256,7 @@ public class TestCase01 {
 				ParetoEisenhowerScheduler.PE_PRIORITY_MED, 4,0) ;
 		makeRecurrenceGroupFor(de, RecurrenceGroup.WEEKLY, 1, 
 				new boolean[]{true, false, true, false, true, false,true});
-		dynamicEvents.offer(de) ;
+		dynamicEvents.add(de) ;
 		
 		de = createDynamicEvent("DE5", 
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,10,true),
@@ -260,7 +264,7 @@ public class TestCase01 {
 				ParetoEisenhowerScheduler.PE_PRIORITY_HIGH, 4,0) ;
 		makeRecurrenceGroupFor(de, RecurrenceGroup.WEEKLY, 1, 
 				new boolean[]{true, false, true, false, true, false,true});
-		dynamicEvents.offer(de) ;
+		dynamicEvents.add(de) ;
 		
 		 de = createDynamicEvent("DE6", 
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,4, true),
@@ -268,7 +272,7 @@ public class TestCase01 {
 				ParetoEisenhowerScheduler.PE_PRIORITY_HIGH, 2,0) ;
 		makeRecurrenceGroupFor(de, RecurrenceGroup.WEEKLY, 1, 
 				new boolean[]{false, true, false, true, false, true,false});
-		dynamicEvents.offer(de) ;
+		dynamicEvents.add(de) ;
 		
 		 de = createDynamicEvent("DE7", 
 					makeDynamicCalendarFromDate(2013,Calendar.MARCH,4, true),
@@ -276,7 +280,7 @@ public class TestCase01 {
 					ParetoEisenhowerScheduler.PE_PRIORITY_MED, 2,0) ;
 			makeRecurrenceGroupFor(de, RecurrenceGroup.WEEKLY, 1, 
 					new boolean[]{false, true, false, true, false, true,false});
-			dynamicEvents.offer(de) ;
+			dynamicEvents.add(de) ;
 		
 		return dynamicEvents;
 		
