@@ -35,29 +35,16 @@ $(document).ready(function() {
         var endDate = $("input[name=" + currentEventType + "EndDate]").val();
         var recType = $('.recType').val();
         var recInterval = $('.recInterval').val();
+
         var estimateType = $('#estimateType').val();
-        var estimateTypeTotal = $('#estimateTypeTotal').val();
-
-        $estimate = $('input[name=estimate]').val();
-        $estimateTotal = $('input[name=estimateTotal]').val();
-
-        var recHours, recTotalHours, recMinutes, recTotalMinutes;
         //if there is no input for estimated hours, it is set to 0 default -anyway to do this by default using html value atribute?-
         if(estimateType === "minutes"){
-            recHours = "none";
-            recMinutes = $estimate;
+            recHours = 0;
+            recMinutes = $('input[name=estimate]').val();
         }
         if(estimateType === "hours"){
-            recHours = $estimate;
-            recMinutes = "none"; 
-        }
-        if(estimateTypeTotal === "minutes"){
-            recTotalHours = "none";
-            recTotalMinutes = $estimateTotal;
-        }
-        if(estimateTypeTotal === "hours"){
-            recTotalHours = $estimateTotal;
-            recTotalMinutes = "none";
+            recHours = $('input[name=estimate]').val();
+            recMinutes = 0;
         }
 
         //This is more complicated than it needs to be but someone fix it.
@@ -124,8 +111,6 @@ $(document).ready(function() {
             days : recDays,  
             hours : recHours,
             minutes : recMinutes,
-            totalHours : recTotalHours,
-            totalMinutes : recTotalMinutes,
             priority : eventPriority
         };
         //Add to Global Array
@@ -195,7 +180,8 @@ $(document).ready(function() {
                 </div>\
             </div>";
 
-        //Add event to events list and calendar tabs -This needs modifications-    
+        //Add event to events list and calendar tabs -This needs modifications-
+        
         $('#accordionEventsList').append(newEventHtml);
 /*        calendarType = "Daily";
         $('#accordionDailyList').append(newEventHtml);
@@ -254,19 +240,8 @@ $(document).ready(function() {
             $('#'+eventArray[i].id).remove();
             eventArray.splice(i,1);
         });
-/*        for(var i = 0; i <= eventArray.length; i++){
-            $('#'+eventArray[i].id).remove();
-            eventArray.splice(i,1);
-        }*/
         eventCount = 0;
     });
-
-    //-Not Finished- For disabling Generate button while no events are in list.
-    //while(true)
-      if(eventArray.length===0)
-        //$('#generateBtn').addCLass("disabled");
-      if(eventArray.length > 0)
-        //$('#generateBtn').removeClass("disabled");
 
     //Capitalize first letter
     function capFirst(string){
@@ -403,13 +378,6 @@ $(document).ready(function() {
         $help.data('popover').tip().find('.popover-content').empty().append("Flexible events are those that do not need to happen at a specific time, as long as they happen during that day or week");
     });
 
-    //Preferences popover - Using modal atm
-    var preferencesDiv = $('#divPreferences').detach();
- /*   $preferences = $('#preferencesButton');
-    $preferences.popover();  
-    $preferences.click(function(){
-        $preferences.data('popover').tip().find('.popover-content').empty().append(preferencesDiv);
-    });*/
     //[{name: eventName, ...},{name:eventName2}]
     //alert("The event as an object: " + JSON.stringify(eventArray));
     //Generate string of schedule events

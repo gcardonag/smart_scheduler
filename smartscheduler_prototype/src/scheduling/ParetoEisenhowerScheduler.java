@@ -110,7 +110,7 @@ public class ParetoEisenhowerScheduler {
 	 * @param counterEnd - the end date for which to schedule.
 	 * @return an ArrayList of Events that represent the dynamic event scheduling.
 	 */
-	public EventTree scheduleDynamicEvents(EventTree dynamicEvents){
+	public EventTree scheduleDynamicEvents(EventQueue dynamicEvents){
 		
 		System.out.println(staticEvents) ;
 		// Prepare lists for scheduling and results.
@@ -185,10 +185,9 @@ public class ParetoEisenhowerScheduler {
 	 * @param day - the day for which to check if in range.
 	 * @param dynamicEvents - the dynamic events to check if in range.
 	 */
-	private void addDynamicEventsInRange(Calendar day, EventTree dynamicEvents){	
-		while( !dynamicEvents.isEmpty() && ((ParetoEisenhowerEvent)dynamicEvents.getMinimum()).containsDay(day) ){
-			ParetoEisenhowerEvent event = (ParetoEisenhowerEvent) dynamicEvents.getMinimum();
-			dynamicEvents.remove(dynamicEvents.getMinimum());
+	private void addDynamicEventsInRange(Calendar day, EventQueue dynamicEvents){	
+		while( !dynamicEvents.isEmpty() && ((ParetoEisenhowerEvent)dynamicEvents.element()).containsDay(day) ){
+			ParetoEisenhowerEvent event = (ParetoEisenhowerEvent) dynamicEvents.remove();
 			
 			//if(!event.containsDay(day)) continue ;
 			//dynamicEvents.remove(i);
