@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import optionStructures.ScheduleOptions;
 
+import scheduler.PomodoroCreator;
 import scheduling.ParetoEisenhowerScheduler;
+import scheduling.PomodoroScheduler;
 
 import dynamicEventCollection.DynamicEvent;
 import dynamicEventCollection.ParetoEisenhowerEvent;
@@ -57,9 +59,28 @@ public class SchedulerServlet extends HttpServlet {
 		//Static and Dynamic Events
 		EventTree staticEvents = interpreter.getStaticEvents();
 		printEvents(staticEvents);
-		EventQueue dynamicEvents = interpreter.getDynamicEvents();
-		printDynamicEvents(dynamicEvents);
+		EventTree dynamicEvents = interpreter.getDynamicEvents();
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 		
+<<<<<<< HEAD
+<<<<<<< HEAD
+		//Apply pomodoro.
+		PomodoroScheduler pc = new PomodoroScheduler();
+		dynamicEvents = (EventTree) pc.implementPomodoroToList(dynamicEvents);
+		printDynamicEvents(dynamicEvents);
+=======
+>>>>>>> 1cd9e0faddcb38ac6054dd76af95a90e8bf505c1
+=======
+>>>>>>> 1cd9e0faddcb38ac6054dd76af95a90e8bf505c1
+=======
+>>>>>>> 1cd9e0faddcb38ac6054dd76af95a90e8bf505c1
+		
+=======
+>>>>>>> 1cd9e0faddcb38ac6054dd76af95a90e8bf505c1
+=======
+>>>>>>> 1cd9e0faddcb38ac6054dd76af95a90e8bf505c1
 		//Errors/Conflicts
 		EventTree conflictingEvents = processNewStaticEvents(staticEvents);
 		
@@ -75,6 +96,12 @@ public class SchedulerServlet extends HttpServlet {
 		
 		System.out.println("\n\nScheduledEvents");
 		printEvents(scheduledEvents);
+		
+		//Apply Pomodoro.
+		PomodoroCreator pc = new PomodoroCreator();
+		dynamicEvents = (EventTree) pc.implementPomodoroToList(dynamicEvents);
+		printDynamicEvents(dynamicEvents);
+		
 		//Translation
 		String json = eventsToJSON(this.staticEvents, scheduledEvents);
 		
@@ -192,7 +219,7 @@ public class SchedulerServlet extends HttpServlet {
 		}
 	}
 	
-	public static void printDynamicEvents(EventQueue dynamicEvents) {
+	public static void printDynamicEvents(EventTree dynamicEvents) {
 		// TODO Auto-generated method stub
 		System.out.println("IO.EI.dynamicEvents(): ") ;
 		for(Event e: dynamicEvents){
