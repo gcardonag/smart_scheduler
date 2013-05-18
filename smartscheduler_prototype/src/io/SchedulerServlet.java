@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import optionStructures.ScheduleOptions;
 
+import scheduler.PomodoroCreator;
 import scheduling.ParetoEisenhowerScheduler;
 
 import dynamicEventCollection.DynamicEvent;
@@ -57,7 +58,11 @@ public class SchedulerServlet extends HttpServlet {
 		//Static and Dynamic Events
 		EventTree staticEvents = interpreter.getStaticEvents();
 		printEvents(staticEvents);
-		EventQueue dynamicEvents = interpreter.getDynamicEvents();
+		EventTree dynamicEvents = interpreter.getDynamicEvents();
+		
+		//Apply pomodoro.
+		PomodoroCreator pc = new PomodoroCreator();
+		dynamicEvents = (EventTree) pc.implementPomodoroToList(dynamicEvents);
 		printDynamicEvents(dynamicEvents);
 		
 		//Errors/Conflicts
@@ -192,7 +197,7 @@ public class SchedulerServlet extends HttpServlet {
 		}
 	}
 	
-	public static void printDynamicEvents(EventQueue dynamicEvents) {
+	public static void printDynamicEvents(EventTree dynamicEvents) {
 		// TODO Auto-generated method stub
 		System.out.println("IO.EI.dynamicEvents(): ") ;
 		for(Event e: dynamicEvents){
