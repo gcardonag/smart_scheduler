@@ -60,11 +60,6 @@ public class SchedulerServlet extends HttpServlet {
 		printEvents(staticEvents);
 		EventTree dynamicEvents = interpreter.getDynamicEvents();
 		
-		//Apply pomodoro.
-		PomodoroCreator pc = new PomodoroCreator();
-		dynamicEvents = (EventTree) pc.implementPomodoroToList(dynamicEvents);
-		printDynamicEvents(dynamicEvents);
-		
 		//Errors/Conflicts
 		EventTree conflictingEvents = processNewStaticEvents(staticEvents);
 		
@@ -80,6 +75,12 @@ public class SchedulerServlet extends HttpServlet {
 		
 		System.out.println("\n\nScheduledEvents");
 		printEvents(scheduledEvents);
+		
+		//Apply Pomodoro.
+		PomodoroCreator pc = new PomodoroCreator();
+		dynamicEvents = (EventTree) pc.implementPomodoroToList(dynamicEvents);
+		printDynamicEvents(dynamicEvents);
+		
 		//Translation
 		String json = eventsToJSON(this.staticEvents, scheduledEvents);
 		
