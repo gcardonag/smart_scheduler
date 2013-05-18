@@ -99,9 +99,9 @@ public class RecurrenceGroup implements Iterable<Event> {
 				if(weekly[currentStart.get(Calendar.DAY_OF_WEEK)-1]) {
 					group.add(r);
 				}
-				if(currentStart.get(Calendar.DAY_OF_WEEK)-1 == Calendar.SUNDAY) {
-					currentStart.add(Calendar.DATE, 7*interval);
-					currentEnd.add(Calendar.DATE, 7*interval);
+				if(currentStart.get(Calendar.DAY_OF_WEEK)-1 == Calendar.SATURDAY) {
+					currentStart.add(Calendar.DATE, 1+7*(interval-1));
+					currentEnd.add(Calendar.DATE, 1+7*(interval-1));
 				}
 				else {
 					currentStart.add(Calendar.DATE, 1);
