@@ -3,7 +3,7 @@ package scheduling.testing;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import scheduler.PomodoroScheduler;
+import scheduling.PomodoroScheduler;
 
 import eventCollection.*;
 

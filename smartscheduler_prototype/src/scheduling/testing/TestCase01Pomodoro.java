@@ -6,7 +6,7 @@ package scheduling.testing;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import scheduler.PomodoroScheduler;
+import scheduling.PomodoroScheduler;
 import eventCollection.*;
 
 /**
