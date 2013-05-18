@@ -66,7 +66,7 @@ public static void main(String[] args){
 	public static void testEventInterpreter(String s){
 		EventInterpreter interpreter = new EventInterpreter(s);
 		EventTree staticEvents = interpreter.getStaticEvents() ;
-		EventTree dynamicEvents = interpreter.getDynamicEvents() ;
+		EventQueue dynamicEvents = interpreter.getDynamicEvents() ;
 		System.out.println("\n------\nStatic Events");
 		System.out.println(staticEvents);
 		System.out.println("\n------\nDynamic Events");

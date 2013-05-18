@@ -26,7 +26,7 @@ import eventCollection.RecurrenceGroup;
 public class EventInterpreter {
 	
 	EventTree staticEvents ;
-	EventTree dynamicEvents ;
+	EventQueue dynamicEvents ;
 	String events ;
 	
 	public EventInterpreter(String events){
@@ -38,7 +38,7 @@ public class EventInterpreter {
 		return this.staticEvents;
 	}
 	
-	public EventTree getDynamicEvents(){
+	public EventQueue getDynamicEvents(){
 		return this.dynamicEvents ;
 	}
 	
@@ -79,7 +79,7 @@ public class EventInterpreter {
 	 */
 	private void interpretEvents(){
 		staticEvents = new EventTree();
-		dynamicEvents = new EventTree();
+		dynamicEvents = new EventQueue();
 		ArrayList<EventEntry> entries = this.parse(events);
 		
 		if(entries == null){
@@ -272,7 +272,7 @@ public class EventInterpreter {
 		
 		
 		staticEvents.add(newEvent);
-		dynamicEvents.add(newDynamicEvent);
+		dynamicEvents.offer(newDynamicEvent);
 		
 	}
 	
@@ -304,7 +304,7 @@ public class EventInterpreter {
 		newDynamicEvent.setRecurrenceGroup(rg);
 		
 		staticEvents.add(newEvent);
-		dynamicEvents.add(newDynamicEvent);
+		dynamicEvents.offer(newDynamicEvent);
 	}
 	
 	private void makeMeetingEvent(EventEntry ee){
@@ -343,7 +343,7 @@ public class EventInterpreter {
 		RecurrenceGroup rg = new RecurrenceGroup(pe, recurrence, interval, end, days);
 		pe.setRecurrenceGroup(rg);
 		
-		dynamicEvents.add(pe);
+		dynamicEvents.offer(pe);
 		
 	}
 	
