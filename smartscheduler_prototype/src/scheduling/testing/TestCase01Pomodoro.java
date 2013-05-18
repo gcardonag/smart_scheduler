@@ -6,7 +6,7 @@ package scheduling.testing;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import scheduler.PomodoroCreator;
+import scheduler.PomodoroScheduler;
 import eventCollection.*;
 
 /**
@@ -23,7 +23,7 @@ public class TestCase01Pomodoro {
 		EventTree processed = (EventTree) TestCase01.runTest();
 		
 		//Apply Pomodoro to the processed events list
-		PomodoroCreator pc = new PomodoroCreator(25, 5, 30);
+		PomodoroScheduler pc = new PomodoroScheduler(25, 5, 30);
 		processed = (EventTree) pc.implementPomodoroToList(processed);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat();

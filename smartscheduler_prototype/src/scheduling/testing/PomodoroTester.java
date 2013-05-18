@@ -3,7 +3,7 @@ package scheduling.testing;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import scheduler.PomodoroCreator;
+import scheduler.PomodoroScheduler;
 
 import eventCollection.*;
 
@@ -21,7 +21,7 @@ public class PomodoroTester {
 		
 		EventTree c = new EventTree();
 		EventQueue q = new EventQueue();
-		PomodoroCreator p = new PomodoroCreator(25, 5, 30);
+		PomodoroScheduler p = new PomodoroScheduler(25, 5, 30);
 		
 		Calendar start = new GregorianCalendar();
 		start.set(2013, Calendar.MARCH, 3, 8, 0);
