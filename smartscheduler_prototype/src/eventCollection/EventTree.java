@@ -236,8 +236,8 @@ public class EventTree implements Iterable<Event>, Serializable {
 			return new EventNode(1, event);
 
 		//Check for a conflict
-		if (root.conflictsWith(event))
-			return null;
+		//if (root.conflictsWith(event))
+		//	return null;
 
 		//The case of the new event and the current node's event having equal
 		//starting times is ignored because it would obviously cause a conflict.
