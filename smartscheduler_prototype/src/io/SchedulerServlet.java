@@ -24,7 +24,8 @@ import dynamicEventCollection.ParetoEisenhowerEvent;
 import eventCollection.*;
 
 /**
- * Servlet implementation class Redirector_1
+ * Servlet implementation class SchedulerServlet
+ * @version 0.8
  */
 @WebServlet("/SchedulerServlet")
 public class SchedulerServlet extends HttpServlet {
@@ -63,23 +64,29 @@ public class SchedulerServlet extends HttpServlet {
 		//Errors/Conflicts
 		EventTree conflictingEvents = processNewStaticEvents(staticEvents);
 		
+		System.out.println("Conflicting event size: " + conflictingEvents.size());
+		
 		//Setup...
 		GregorianCalendar start = getSchedulerStartDate();
 		GregorianCalendar end = getSchedulerEndDate();
 		ScheduleOptions options  = getScheduleOptions();
 		
 		System.out.println("==========================================") ;
+		
+		println("StaticEvents:\n-----------------------------------------");
+		println(this.staticEvents.toString());
+		
 		//Scheduling...
 		ParetoEisenhowerScheduler pes = new ParetoEisenhowerScheduler(this.staticEvents,options,start,end);
 		EventTree scheduledEvents = pes.scheduleDynamicEvents(dynamicEvents);
 		
-		System.out.println("\n\nScheduledEvents");
+		println("\n\nScheduledEvents");
 		printEvents(scheduledEvents);
 		
 		//Apply Pomodoro.
-		PomodoroCreator pc = new PomodoroCreator();
-		dynamicEvents = (EventTree) pc.implementPomodoroToList(dynamicEvents);
-		printDynamicEvents(dynamicEvents);
+		//PomodoroCreator pc = new PomodoroCreator();
+		//dynamicEvents = (EventTree) pc.implementPomodoroToList(dynamicEvents);
+		//printDynamicEvents(scheduledEvents);
 		
 		//Translation
 		String json = eventsToJSON(this.staticEvents, scheduledEvents);
@@ -106,6 +113,10 @@ public class SchedulerServlet extends HttpServlet {
 	
 	/***********************************************/
 	
+	/**
+	 * @param staticEvents
+	 * @return
+	 */
 	private EventTree processNewStaticEvents(EventTree staticEvents) {
 		EventTree conflictingEvents = new EventTree();
 		for(Event e: staticEvents){
@@ -207,6 +218,9 @@ public class SchedulerServlet extends HttpServlet {
 		}
 	}
 
+	public static void println(String s){
+		System.out.println(s);
+	}
 
 
 	
