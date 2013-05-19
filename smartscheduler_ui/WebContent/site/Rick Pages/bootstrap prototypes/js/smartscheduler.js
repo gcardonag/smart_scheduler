@@ -384,32 +384,33 @@ $(document).ready(function() {
     $help.popover();  
     $help.click(function(){
         $help.data('popover').tip().find('.popover-title').empty().append("Help Popover");
-        $help.data('popover').tip().find('.popover-content').empty().append("While this popover is active, a brief description of each event type will show after selecting an event type");
+        $help.data('popover').tip().find('.popover-content').empty().append("While this popover is active, a brief description of each event type will show after selecting an event type.");
     });
     $('#btnClass').click(function(){
         $help.data('popover').tip().find('.popover-title').empty().append("Class type");
-        $help.data('popover').tip().find('.popover-content').empty().append("Class events are those that usually repeat multiple times a week, for 1 or more weeks");
+        $help.data('popover').tip().find('.popover-content').empty().append("Class events are those that usually repeat multiple times a week, for 1 or more weeks.");
     });
     $('#btnDeadline').click(function(){
         $help.data('popover').tip().find('.popover-title').empty().append("Deadline type");
-        $help.data('popover').tip().find('.popover-content').empty().append("Deadline events are those that require a set amount of time to complete by a due date");
+        $help.data('popover').tip().find('.popover-content').empty().append("Deadline events are those that require a set amount of time to complete by a due date.");
     });
     $('#btnMeeting').click(function(){
         $help.data('popover').tip().find('.popover-title').empty().append("Meeting type");
-        $help.data('popover').tip().find('.popover-content').empty().append("Meeting events are those that occur at a specific time and date, but can be recurrent");
+        $help.data('popover').tip().find('.popover-content').empty().append("Meeting events are those that occur only once, at a specific time and date.");
     });
     $('#btnFlexible').click(function(){
         $help.data('popover').tip().find('.popover-title').empty().append("Flexible type");
-        $help.data('popover').tip().find('.popover-content').empty().append("Flexible events are those that do not need to happen at a specific time, as long as they happen during that day or week");
+        $help.data('popover').tip().find('.popover-content').empty().append("Flexible events are those that do not need to happen at a specific time, as long as they happen during that day or week.");
     });
 
-    //Preferences popover - Using modal atm
+    //Preferences popover
     var preferencesDiv = $('#divPreferences').detach();
- /*   $preferences = $('#preferencesButton');
+    $preferences = $('#preferencesButton');
     $preferences.popover();  
     $preferences.click(function(){
         $preferences.data('popover').tip().find('.popover-content').empty().append(preferencesDiv);
-    });*/
+    });
+
     //[{name: eventName, ...},{name:eventName2}]
     //alert("The event as an object: " + JSON.stringify(eventArray));
     //Generate string of schedule events
