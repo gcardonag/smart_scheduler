@@ -17,7 +17,7 @@ import eventCollection.*;
 
 /**
  * Tester for the dynamic scheduler. Details for this tester are provided
- * in the excel file TestCases
+ * in the excel file TestCases.
  */
 public class TestCase01 {
 
@@ -26,7 +26,11 @@ public class TestCase01 {
 	 */
 	public static void main(String[] args){
 		
+		long t1 = System.currentTimeMillis() ;
 		runTest();
+		long t2 = System.currentTimeMillis() ;
+		
+		System.out.println("Time: " + (t2-t1) + " ms.") ;
 		
 	}
 	
@@ -41,6 +45,8 @@ public class TestCase01 {
 		
 		System.out.println("Static Event Size: " + staticEvents.size()) ;
 		System.out.println("Dynamic Event Size: " + dynamicEvents.size()) ;
+
+		
 		
 		pem = new ParetoEisenhowerScheduler(staticEvents, options, counterStart, counterEnd) ;
 		
@@ -76,7 +82,7 @@ public class TestCase01 {
 			
 			System.out.println("" + (++i) + " - " + e) ;
 		}
-		System.out.println("Result Size: " + processed.size() + " - Time: " + Calendar.getInstance().getTime());
+		System.out.println("Result Size: " + processed.size() + " - Date: " + Calendar.getInstance().getTime());
 		
 		return processed;
 	}
@@ -218,7 +224,7 @@ public class TestCase01 {
 	}
 	
 	public static EventTree makeDynamicEvents(){
-		EventTree dynamicEvents = new EventTree() ;
+		EventTree dynamicEvents = new EventTree(true) ;
 		ParetoEisenhowerEvent de = createDynamicEvent("DE1", 
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,4, true),
 				makeDynamicCalendarFromDate(2013,Calendar.MARCH,10,false),

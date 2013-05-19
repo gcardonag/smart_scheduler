@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import optionStructures.ScheduleOptions;
 
-import scheduler.PomodoroCreator;
 import scheduling.ParetoEisenhowerScheduler;
+import scheduling.PomodoroScheduler;
 
 import dynamicEventCollection.DynamicEvent;
 import dynamicEventCollection.ParetoEisenhowerEvent;
@@ -24,7 +24,8 @@ import dynamicEventCollection.ParetoEisenhowerEvent;
 import eventCollection.*;
 
 /**
- * Servlet implementation class Redirector_1
+ * Servlet implementation class SchedulerServlet
+ * @version 0.8
  */
 @WebServlet("/SchedulerServlet")
 public class SchedulerServlet extends HttpServlet {
@@ -46,8 +47,8 @@ public class SchedulerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//
 		response.setContentType("text/html");
-		this.staticEvents = new EventTree();
-		this.dynamicEvents = new ArrayList<DynamicEvent>();
+		//this.staticEvents = new EventTree(false);
+		//this.dynamicEvents = new ArrayList<DynamicEvent>();
 		
 		//Interpret.
 		System.out.println(request.getParameter("eventArrayList"));
@@ -59,14 +60,12 @@ public class SchedulerServlet extends HttpServlet {
 		EventTree staticEvents = interpreter.getStaticEvents();
 		printEvents(staticEvents);
 		EventTree dynamicEvents = interpreter.getDynamicEvents();
-		
-		//Apply pomodoro.
-		PomodoroCreator pc = new PomodoroCreator();
-		dynamicEvents = (EventTree) pc.implementPomodoroToList(dynamicEvents);
 		printDynamicEvents(dynamicEvents);
 		
 		//Errors/Conflicts
 		EventTree conflictingEvents = processNewStaticEvents(staticEvents);
+		
+		System.out.println("Conflicting event size: " + conflictingEvents.size());
 		
 		//Setup...
 		GregorianCalendar start = getSchedulerStartDate();
@@ -74,12 +73,24 @@ public class SchedulerServlet extends HttpServlet {
 		ScheduleOptions options  = getScheduleOptions();
 		
 		System.out.println("==========================================") ;
+		
+		println("StaticEvents:\n-----------------------------------------");
+		println(this.staticEvents.toString());
+		
 		//Scheduling...
 		ParetoEisenhowerScheduler pes = new ParetoEisenhowerScheduler(this.staticEvents,options,start,end);
 		EventTree scheduledEvents = pes.scheduleDynamicEvents(dynamicEvents);
 		
-		System.out.println("\n\nScheduledEvents");
+		println("\n\nScheduledEvents");
 		printEvents(scheduledEvents);
+
+		
+		//Apply Pomodoro.
+		//PomodoroScheduler pc = new PomodoroScheduler();
+		//dynamicEvents = (EventTree) pc.implementPomodoroToList(dynamicEvents);
+		//printDynamicEvents(scheduledEvents);
+		
+
 		//Translation
 		String json = eventsToJSON(this.staticEvents, scheduledEvents);
 		
@@ -105,8 +116,12 @@ public class SchedulerServlet extends HttpServlet {
 	
 	/***********************************************/
 	
+	/**
+	 * @param staticEvents
+	 * @return
+	 */
 	private EventTree processNewStaticEvents(EventTree staticEvents) {
-		EventTree conflictingEvents = new EventTree();
+		EventTree conflictingEvents = new EventTree(true);
 		for(Event e: staticEvents){
 			if(!this.staticEvents.conflictsWith(e)){
 				System.out.println(this.staticEvents.add(e));
@@ -197,15 +212,18 @@ public class SchedulerServlet extends HttpServlet {
 		}
 	}
 	
-	public static void printDynamicEvents(EventTree dynamicEvents) {
+	public static void printDynamicEvents(EventTree dynamicEvents2) {
 		// TODO Auto-generated method stub
 		System.out.println("IO.EI.dynamicEvents(): ") ;
-		for(Event e: dynamicEvents){
+		for(Event e: dynamicEvents2){
 			System.out.println((DynamicEvent)e);
 			
 		}
 	}
 
+	public static void println(String s){
+		System.out.println(s);
+	}
 
 
 	

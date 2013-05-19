@@ -117,7 +117,7 @@ public class ParetoEisenhowerScheduler {
 		unprocessedP1 = new ArrayList<DynamicEvent>();
 		unprocessedP2 = new ArrayList<DynamicEvent>();
 		unprocessedP3 = new ArrayList<DynamicEvent>();
-		EventTree processedEvents = new EventTree();
+		EventTree processedEvents = new EventTree(true);
 		
 		///////////////////////////////////////////
 		//Loop 'till end date.
@@ -188,7 +188,7 @@ public class ParetoEisenhowerScheduler {
 	private void addDynamicEventsInRange(Calendar day, EventTree dynamicEvents){	
 		while( !dynamicEvents.isEmpty() && ((ParetoEisenhowerEvent)dynamicEvents.getMinimum()).containsDay(day) ){
 			ParetoEisenhowerEvent event = (ParetoEisenhowerEvent) dynamicEvents.getMinimum();
-			dynamicEvents.remove(dynamicEvents.getMinimum());
+			dynamicEvents.remove(event);
 			
 			//if(!event.containsDay(day)) continue ;
 			//dynamicEvents.remove(i);

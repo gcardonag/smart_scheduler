@@ -170,12 +170,22 @@ public class EventTree implements Iterable<Event>, Serializable {
 	private EventNode root;
 	private int size;
 	private int version;
+	private boolean conflicts;
 
 	public EventTree()
 	{
 		root = null;
 		size = 0;
 		version = 0;
+		conflicts = false;
+	}
+	
+	public EventTree(boolean conflicts)
+	{
+		root = null;
+		size = 0;
+		version = 0;
+		this.conflicts = conflicts;
 	}
 	
 	private EventTree(EventTree source)
@@ -184,6 +194,7 @@ public class EventTree implements Iterable<Event>, Serializable {
 		root = copyTree(source.root);
 		size = source.size;
 		version = source.version;
+		conflicts = source.conflicts;
 	}
 	
 	private static EventNode copyTree(EventNode root)
@@ -210,7 +221,7 @@ public class EventTree implements Iterable<Event>, Serializable {
 	 */
 	public boolean add(Event event)
 	{
-		EventNode node = add(root, event);
+		EventNode node = add(root, event, conflicts);
 		if (node != null)
 		{
 			root = node;
@@ -230,21 +241,21 @@ public class EventTree implements Iterable<Event>, Serializable {
 			add(e);
 	}
 
-	private static EventNode add(EventNode root, Event event)
+	private static EventNode add(EventNode root, Event event, boolean conflicts)
 	{
 		if (root == null)
 			return new EventNode(1, event);
 
 		//Check for a conflict
-		if (root.conflictsWith(event))
+		if (root.conflictsWith(event) && !conflicts)
 			return null;
 
 		//The case of the new event and the current node's event having equal
 		//starting times is ignored because it would obviously cause a conflict.
-		if (root.compareStart(event) < 0)
+		if (root.compareStart(event) <= 0)
 		{
 			//root.event < event
-			EventNode right = add(root.getRightChild(), event);
+			EventNode right = add(root.getRightChild(), event, conflicts);
 			if (right == null)
 				return null;
 
@@ -253,7 +264,7 @@ public class EventTree implements Iterable<Event>, Serializable {
 		else
 		{
 			//root.event > event
-			EventNode left = add(root.getLeftChild(), event);
+			EventNode left = add(root.getLeftChild(), event, conflicts);
 			if (left == null)
 				return null;
 

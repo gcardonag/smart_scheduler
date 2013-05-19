@@ -1,4 +1,4 @@
-package scheduler;
+package scheduling;
 
 import java.util.Calendar;
 
@@ -11,7 +11,7 @@ import eventCollection.*;
  * @version 0.1
  *
  */
-public class PomodoroCreator {
+public class PomodoroScheduler {
 	
 	public static final int DEFAULT_POMODORO_DURATION = 25;
 	public static final int DEFAULT_SHORT_BREAK_DURATION = 5;
@@ -26,7 +26,7 @@ public class PomodoroCreator {
 	 * @param short_break duration for each of the short breaks between pomodoros
 	 * @param long_break duration for each long break after 4 pomodoro events
 	 */
-	public PomodoroCreator(int pomodoro, int short_break, int long_break) {
+	public PomodoroScheduler(int pomodoro, int short_break, int long_break) {
 		pomodoro_duration = pomodoro;
 		short_break_duration = short_break;
 		long_break_duration = long_break;
@@ -35,7 +35,7 @@ public class PomodoroCreator {
 	/**
 	 * Default constructor, uses the default values for event durations
 	 */
-	public PomodoroCreator() {
+	public PomodoroScheduler() {
 		pomodoro_duration = DEFAULT_POMODORO_DURATION;
 		short_break_duration = DEFAULT_SHORT_BREAK_DURATION;
 		long_break_duration = DEFAULT_LONG_BREAK_DURATION;

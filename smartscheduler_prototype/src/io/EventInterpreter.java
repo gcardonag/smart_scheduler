@@ -78,8 +78,8 @@ public class EventInterpreter {
 	 * @return
 	 */
 	private void interpretEvents(){
-		staticEvents = new EventTree();
-		dynamicEvents = new EventTree();
+		staticEvents = new EventTree(true);
+		dynamicEvents = new EventTree(true);
 		ArrayList<EventEntry> entries = this.parse(events);
 		
 		if(entries == null){
@@ -89,17 +89,7 @@ public class EventInterpreter {
 		//For every parsed entry.
 		for(EventEntry ee: entries){
 			
-			/*
-			Calendar start = null ;
-			Calendar dstart = null ;
-			Calendar end = null ;
-			boolean isRecurring ;
-			boolean isFlexible = false ;
-	
-			int recurrence = -1 ;
-			int interval = -1;
-			boolean[] days = new boolean[7] ;
-			*/
+			
 			
 			//////////////////////////////////////////////////////
 			//Begin Switch.
@@ -108,81 +98,24 @@ public class EventInterpreter {
 				
 				//Class Event
 				makeClassEvent(ee);
-				/*
-				start = dstart = ee.getStart();
-				end = ee.getEnd();
-				isRecurring = ee.getRecurrence() != -1 ;
 				
-				if(isRecurring){
-					recurrence = ee.getRecurrence();
-					interval = ee.getInterval() ;
-					days = ee.getDays();	
-				}
-				else{
-					recurrence = RecurrenceGroup.WEEKLY;
-					interval = 1 ;
-					days = parseDays("1111111");
-				}
-				*/
 			}
 			//Deadline Type
 			else if(ee.getType().equalsIgnoreCase("Deadline")){
 				
 				makeDeadlineEvent(ee);
-				/*
-				start = this.parseDate(ee.getStartDate(), ee.getEndTime());
-				start.add(Calendar.MINUTE, -5);
-				dstart = Calendar.getInstance() ;
-				end = this.parseDate(ee.getEndDate(), ee.getEndTime()) ;
-				isRecurring = false ;
-				
-				if(isRecurring){
-					recurrence = ee.getRecurrence();
-					interval = ee.getInterval() ;
-					days = ee.getDays();
-				}
-				else{
-					recurrence = RecurrenceGroup.WEEKLY;
-					interval = 1 ;
-					days = parseDays("1111111");
-				}
-				*/
 				
 			}
 			//Meeting Type.
 			else if(ee.getType().equalsIgnoreCase("Meeting")){
 				
 				makeMeetingEvent(ee);
-				/*
-				//TODO: Assumption
-				
-				start = this.parseDate(ee.getStartDate(), ee.getStartTime()) ;
-				dstart = Calendar.getInstance() ;
-				end = this.parseDate(ee.getEndDate(), ee.getEndTime()) ;
-				isRecurring = false ;
-				
-				recurrence = RecurrenceGroup.WEEKLY;
-				interval = 1 ;
-				days = parseDays("1111111");
-				*/
 				
 			}
 			//Flexible Type.
 			else if(ee.getType().equalsIgnoreCase("Flexible")){
 				
 				makeFlexibleEvent(ee);
-				/*
-				start = dstart = ee.getStart();
-				end = ee.getEnd() ;
-				isRecurring = ee.getRecurrence() != -1 ;
-				
-				//Dynamic Event.
-				recurrence = (isRecurring) ? ee.getRecurrence() : -1 ;
-				interval = (isRecurring) ? ee.getInterval() : -1 ;
-				days = (isRecurring) ? ee.getDays() : null ;
-				
-				isFlexible = true ;
-				*/
 				
 			}
 			else{
@@ -191,41 +124,6 @@ public class EventInterpreter {
 				return ;
 			}
 			
-			/*
-			//Dynamic only events.
-			if (!isFlexible) {
-				// Event Creation.
-				Event e = new Event(ee.getName(), start, end, true, isRecurring);
-				// TODO: ID.
-				e.setId(ee.getId());
-
-				if (isRecurring) {
-					e.setEnd(this.parseDate(ee.getStartDate(), ee.getEndTime()));
-					RecurrenceGroup rg = new RecurrenceGroup(e, recurrence,
-							interval, end, days);
-					e.setRecurrenceGroup(rg);
-				}
-				staticEvents.add(e);
-			}
-			
-			//////
-			//
-			if(isRecurring || isFlexible ){
-				if(!(ee.getHours() == -1 || ee.getMinutes() == -1)){
-					
-					ParetoEisenhowerEvent de = 
-							new ParetoEisenhowerEvent("D-" + ee.getName(), start,end,ee.getPriority(),ee.getHours(),ee.getMinutes()) ;
-					//TODO: ID.
-					de.setId(ee.getId()) ;
-					RecurrenceGroup rg = new RecurrenceGroup(de,recurrence, interval, end, days);
-					de.setRecurrenceGroup(rg);
-					dynamicEvents.offer(de) ;
-				}
-			}
-			if(!isFlexible){
-				
-			}
-			*/
 		}
 		
 	}
@@ -316,7 +214,7 @@ public class EventInterpreter {
 		boolean isRecurring = false ;
 		
 		
-		//fix
+		//TODO: fix
 		//int recurrence = RecurrenceGroup.WEEKLY;
 		//int interval = 1 ;
 		//boolean[] days = parseDays("1111111");
