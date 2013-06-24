@@ -95,55 +95,6 @@ public abstract class DaySchedule{
 	
 	
 	
-	/**Sets as much time available as possible for a given 
-	 * dynamic event.
-	 * @param event - the dynamic event to schedule.
-	 * @return an Event object that 
-	 */
-	public ParetoEisenhowerEvent setEventTime(ParetoEisenhowerEvent event){
-		return setEventTimeForTimeSlots(event, timeSlots);
-	}
-	
-	/**Sets available time from time slots to a given event. It assigns the complete
-	 * time slot  should the time required from the event be more or equal 
-	 * to the time available from the slot. It assigns a fraction of the time slot and
-	 * reduces the time slot's range should the time required from the event be less than
-	 * the time available from the slot.
-	 *  
-	 * @param event - the event to schedule.
-	 * @param timeSlots the available time slots.
-	 * @return an static event that represents the result of scheduling.
-	 * @deprecated Change paramater implementation.
-	 */
-	private ParetoEisenhowerEvent setEventTimeForTimeSlots(ParetoEisenhowerEvent event, ArrayList<TimeSlot> timeSlots){
-		
-		if(!hasTimeAvailable()) 
-			return null ;	
-		
-		TimeSlot tr = timeSlots.get(0) ;
-		int slotTimeLeft = tr.getTimeLeft() ;
-		int eventTimeLeft = event.getTimeLeft() ;
-		
-		if (slotTimeLeft <= eventTimeLeft) {
-			// This day does not have enough time left
-			// available for the event.
-
-			event.reduceTime(slotTimeLeft);
-			timeSlots.remove(tr);
-			return new ParetoEisenhowerEvent(event.getName(), tr.getStart(), 
-							tr.getEnd(), event.getPriority(), event.getTime()/60,event.getTime()%60);
-		} 
-		else {
-			// This day has all the time available for
-			// the event.
-
-			event.reduceTime(eventTimeLeft);
-			ParetoEisenhowerEvent newEvent = tr.getEventForTime(eventTimeLeft,event.getName(),event);
-			return newEvent;
-		}
-		
-		
-	}
 	
 	/**Returns whether this day schedule still as time available.
 	 * @return a boolean value.
@@ -196,13 +147,13 @@ public abstract class DaySchedule{
 	// Time Slot Class
 	////////////////////////////////////////////////////////////
 	
-	/**
+	/**TODO: Define outside.
 	 * Class that defines a time slot and provides methods for 
 	 * quantification of time between two calendar instances.
 	 * @deprecated Subclassing of Event may not be needed. Need to
 	 * verify use in implementation.
 	 */
-	protected class TimeSlot extends Event{
+	public class TimeSlot extends Event{
 		
 		/**Constructor that initializes a new time slot that last
 		 * from the given start and end calendar times.

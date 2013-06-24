@@ -19,7 +19,7 @@ public abstract class DynamicEvent extends Event {
 	/** The time left for scheduling in a particular period. */
 	protected int scheduleTimeLeft ;
 	
-	/** Represents the time in minutes of the dynamic event that 
+	/** TODO: Represents the time in minutes of the dynamic event that 
 	 * hasn't been scheduled from past periods.*/
 	protected int unscheduledTime;
 	
@@ -34,9 +34,7 @@ public abstract class DynamicEvent extends Event {
 	 */
 	public DynamicEvent(String name, Calendar start, Calendar end, int hours, int minutes) {
 		super(name, start, end, false, true);
-		System.out.println("DE.scheduleTime = hours: " + hours + ", minutes:" + minutes);
 		this.scheduleTime = (hours * 60) + minutes ;
-		System.out.println("DE.scheduleTime = " + this.scheduleTime);
 		this.unscheduledTime = 0 ;
 		this.scheduleTimeLeft = 0 ;
 	}
@@ -325,9 +323,15 @@ public abstract class DynamicEvent extends Event {
 		
 	}
 	
-	/* (non-Javadoc)
-	 * @see eventCollection.Event#toString()
-	 */
+	//
+	
+	public boolean isScheduledForCurrentDay(){
+		return scheduleTimeLeft == 0;
+	}
+	
+	public boolean isScheduledCompletely(){
+		return isScheduledForCurrentDay() && unscheduledTime == 0;
+	}
 	
 	
 }

@@ -17,6 +17,8 @@ import optionStructures.ScheduleOptions;
 
 import scheduling.ParetoEisenhowerScheduler;
 import scheduling.PomodoroScheduler;
+import scheduling.dayScheduling.DSFirstComeFirstServe;
+import scheduling.dayScheduling.DayScheduler;
 
 import dynamicEventCollection.DynamicEvent;
 import dynamicEventCollection.ParetoEisenhowerEvent;
@@ -71,6 +73,7 @@ public class SchedulerServlet extends HttpServlet {
 		GregorianCalendar start = getSchedulerStartDate();
 		GregorianCalendar end = getSchedulerEndDate();
 		ScheduleOptions options  = getScheduleOptions();
+		DayScheduler ts = new DSFirstComeFirstServe();
 		
 		System.out.println("==========================================") ;
 		
@@ -78,7 +81,7 @@ public class SchedulerServlet extends HttpServlet {
 		println(this.staticEvents.toString());
 		
 		//Scheduling...
-		ParetoEisenhowerScheduler pes = new ParetoEisenhowerScheduler(this.staticEvents,options,start,end);
+		ParetoEisenhowerScheduler pes = new ParetoEisenhowerScheduler(this.staticEvents,options,start,end,ts);
 		EventTree scheduledEvents = pes.scheduleDynamicEvents(dynamicEvents);
 		
 		println("\n\nScheduledEvents");

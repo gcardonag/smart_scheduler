@@ -1,7 +1,7 @@
 /* @deprecated annotations mean that the class or 
  * method may need revision, not that it should not be used.
  */
-package scheduling.testing;
+package tests.scheduling;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,7 +20,7 @@ public class TestCase01Pomodoro {
 	 */
 	public static void main(String[] args){
 
-		EventTree processed = (EventTree) TestCase01.runTest();
+		EventTree processed = (EventTree) new TestCase01.TestCase().runScheduler();
 		
 		//Apply Pomodoro to the processed events list
 		PomodoroScheduler pc = new PomodoroScheduler(25, 5, 30);

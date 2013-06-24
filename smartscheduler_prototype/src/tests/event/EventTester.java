@@ -1,4 +1,4 @@
-package scheduling.testing;
+package tests.event;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

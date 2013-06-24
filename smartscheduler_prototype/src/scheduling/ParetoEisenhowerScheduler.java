@@ -15,6 +15,10 @@ import eventCollection.EventTree;
 import eventCollection.EventQueue;
 import eventCollection.RecurrenceGroup;
 import optionStructures.ScheduleOptions;
+import scheduling.dayScheduling.DSAbstract;
+import scheduling.dayScheduling.DSFirstComeFirstServe;
+import scheduling.dayScheduling.DSShortestTaskFirst;
+import scheduling.dayScheduling.DayScheduler;
 
 //For testing/notes only. Will be removed.
 @SuppressWarnings("deprecation") 
@@ -55,6 +59,11 @@ public class ParetoEisenhowerScheduler {
 	public static final int PE_PRIORITY_LOW = 2 ;
 	
 	
+	/**
+	 * The scheduler used for scheduling the time in each day.
+	 */
+	DayScheduler ts ;
+	
 	/** The static events for determining the available time slots
 	 *  for each day. */
 	private EventTree staticEvents ;
@@ -71,22 +80,27 @@ public class ParetoEisenhowerScheduler {
 	private Calendar counterEnd ;
 	
 	/** Holds currently unprocessed events with high priority. */
-	private ArrayList<DynamicEvent> unprocessedP1 = new ArrayList<DynamicEvent>();
+	private ArrayList<DynamicEvent> unprocessed_P_HIGH = new ArrayList<DynamicEvent>();
 	
 	/** Holds currently unprocessed events with medium priority. */
-	private ArrayList<DynamicEvent> unprocessedP2 = new ArrayList<DynamicEvent>();
+	private ArrayList<DynamicEvent> unprocessed_P_MED = new ArrayList<DynamicEvent>();
 	
 	/** Holds currently unprocessed events with low priority. */
-	private ArrayList<DynamicEvent> unprocessedP3 = new ArrayList<DynamicEvent>();
+	private ArrayList<DynamicEvent> unprocessed_P_LOW = new ArrayList<DynamicEvent>();
 	
 	/**Constructor that initializes the scheduler using the given static events and
 	 * the schedule options to determine the free time available for each day to be scheduled.
 	 * @param staticEvents - the static events already set in the schedule.
 	 * @param options - the options the user has set for scheduling.
+	 * 
+	 * @deprecated Remove the action of having to take out recurrence group events.
 	 */
 	public ParetoEisenhowerScheduler(EventTree staticEvents, 
-										ScheduleOptions options, Calendar start, Calendar end){
+										ScheduleOptions options, Calendar start, Calendar end, DayScheduler ts){
 		this.staticEvents = staticEvents ;
+		this.ts = ts ;
+		
+		// RG Events
 		EventTree newEvents = new EventTree();
 		for(Event e: staticEvents){
 			if(e.getRecurrenceGroup() != null){
@@ -95,7 +109,6 @@ public class ParetoEisenhowerScheduler {
 				}
 			}
 		}
-		
 		for(Event e: newEvents){
 			staticEvents.add(e);
 		}
@@ -112,11 +125,10 @@ public class ParetoEisenhowerScheduler {
 	 */
 	public EventTree scheduleDynamicEvents(EventTree dynamicEvents){
 		
-		System.out.println(staticEvents) ;
 		// Prepare lists for scheduling and results.
-		unprocessedP1 = new ArrayList<DynamicEvent>();
-		unprocessedP2 = new ArrayList<DynamicEvent>();
-		unprocessedP3 = new ArrayList<DynamicEvent>();
+		unprocessed_P_HIGH = new ArrayList<DynamicEvent>();
+		unprocessed_P_MED = new ArrayList<DynamicEvent>();
+		unprocessed_P_LOW = new ArrayList<DynamicEvent>();
 		EventTree processedEvents = new EventTree(true);
 		
 		///////////////////////////////////////////
@@ -125,22 +137,22 @@ public class ParetoEisenhowerScheduler {
 			
 			//Prepare day for scheduling.
 			ParetoSchedule currentDay = new ParetoSchedule(counterStart, staticEvents, options);
+			
 			//Categorization for prioritization occurs here.
 			addDynamicEventsInRange(currentDay.getDay(), dynamicEvents) ;
 			removeEventsNotInRange(currentDay.getDay()) ;
 			
-			//Elsenhower scheduling in effect.
-			scheduleForHighPriority(currentDay, processedEvents, unprocessedP1);
-			scheduleForHighPriority(currentDay, processedEvents, unprocessedP2);
-			scheduleForHighPriority(currentDay, processedEvents, unprocessedP3) ;
-			scheduleForMediumPriority(currentDay, processedEvents, unprocessedP2);
-			scheduleForMediumPriority(currentDay, processedEvents, unprocessedP3);
-			scheduleForMediumPriority(currentDay, processedEvents, unprocessedP1);
+			//Eisenhower scheduling in effect.
+			scheduleForHighPriority(currentDay, processedEvents, unprocessed_P_HIGH);
+			scheduleForHighPriority(currentDay, processedEvents, unprocessed_P_MED);
+			scheduleForHighPriority(currentDay, processedEvents, unprocessed_P_LOW) ;
+			scheduleForMediumPriority(currentDay, processedEvents, unprocessed_P_MED);
+			scheduleForMediumPriority(currentDay, processedEvents, unprocessed_P_LOW);
+			scheduleForMediumPriority(currentDay, processedEvents, unprocessed_P_HIGH);
 			
 			//Move to next day.
 			counterStart.add(Calendar.DAY_OF_MONTH, 1) ;
 		}
-		System.out.println("PROCESSED: " + processedEvents.size()) ;
 		return processedEvents ;	
 	}
 	
@@ -149,12 +161,12 @@ public class ParetoEisenhowerScheduler {
 	 * @param day - the day to check if the dynamic event is valid on.
 	 */
 	private void removeEventsNotInRange(Calendar day){
-		removeEventsNotInRange(day, unprocessedP1);
-		removeEventsNotInRange(day, unprocessedP2);
-		removeEventsNotInRange(day, unprocessedP3);
+		removeEventsNotInRange(day, unprocessed_P_HIGH);
+		removeEventsNotInRange(day, unprocessed_P_MED);
+		removeEventsNotInRange(day, unprocessed_P_LOW);
 	}
 	
-	/**Remove events whose schedule is ends before the given day. 
+	/**Remove events whose schedule ends before the given day. 
 	 * This implies that scheduling for the removed day is done.
 	 * @param day - the day to consider.
 	 * @param unprocessedEvents - the list of unprocessed events
@@ -194,14 +206,13 @@ public class ParetoEisenhowerScheduler {
 			//dynamicEvents.remove(i);
 			
 			if(event.getPriority() == PE_PRIORITY_HIGH){	
-				unprocessedP1.add(event) ;
+				unprocessed_P_HIGH.add(event) ;
 			}
 			else if(event.getPriority() == PE_PRIORITY_MED){
-				System.out.println(event.getTime()) ;
-				unprocessedP2.add(event) ;
+				unprocessed_P_MED.add(event) ;
 			}
 			else{
-				unprocessedP3.add(event) ;
+				unprocessed_P_LOW.add(event) ;
 			}
 			event.zeroTime();
 		}
@@ -216,15 +227,12 @@ public class ParetoEisenhowerScheduler {
 	private void scheduleForHighPriority(ParetoSchedule currentDay, EventTree processedEvents, 
 														ArrayList<DynamicEvent> unprocessedEvents){
 		if(currentDay.hasHighPriorityTimeAvailable()){
-			for(int i = 0; i < unprocessedEvents.size() && currentDay.hasHighPriorityTimeAvailable(); i++){
-				
-				ParetoEisenhowerEvent currentDynamicEvent = (ParetoEisenhowerEvent) unprocessedEvents.get(i);
-				
-				while (currentDynamicEvent.takesPlaceOnDate(currentDay.getDay())
-						&& currentDynamicEvent.hasTimeLeft() && currentDay.hasHighPriorityTimeAvailable()){	
-					Event newEvent = currentDay.setHighPriorityEventTime(currentDynamicEvent);
-					processedEvents.add(newEvent);	
-				}
+			
+			ArrayList<Event> pe = this.ts.scheduleEventsForSlots(currentDay, 
+													unprocessedEvents,  
+													currentDay.getHighPrioritySlots());
+			for(Event e: pe){
+				processedEvents.add(e);
 			}
 		}
 	}
@@ -241,16 +249,12 @@ public class ParetoEisenhowerScheduler {
 														ArrayList<DynamicEvent> unprocessedEvents) {
 		
 		if(currentDay.hasMediumPrioritySlotsAvailable()){
-			for (int i = 0; i < unprocessedEvents.size() && currentDay.hasMediumPrioritySlotsAvailable(); i++) {
-				
-				ParetoEisenhowerEvent currentDynamicEvent = (ParetoEisenhowerEvent) unprocessedEvents.get(i);
-				
-				while (currentDynamicEvent.takesPlaceOnDate(currentDay.getDay())
-						&& currentDynamicEvent.hasTimeLeft() && currentDay.hasMediumPrioritySlotsAvailable()) {
-					Event newEvent = currentDay.setMediumPriorityEventTime(currentDynamicEvent);
-					processedEvents.add(newEvent);
- 				
-				}
+			
+			ArrayList<Event> pe = this.ts.scheduleEventsForSlots(currentDay, 
+														unprocessedEvents, 
+														currentDay.getMediumPrioritySlots());
+			for(Event e: pe){
+				processedEvents.add(e);
 			}
 		}
 		

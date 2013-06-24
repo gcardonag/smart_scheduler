@@ -174,6 +174,13 @@ public class ParetoSchedule extends DaySchedule {
 	public boolean hasMediumPrioritySlotsAvailable(){
 		return !mediumPrioritySlots.isEmpty();
 	}
+	
+	public ArrayList<TimeSlot> getHighPrioritySlots(){
+		return this.highPrioritySlots;
+	}
+	public ArrayList<TimeSlot> getMediumPrioritySlots(){
+		return this.mediumPrioritySlots;
+	}
 
 	/* TODO: Attempt to hide this from other objects (i.e. private).
 	 * (non-Javadoc)

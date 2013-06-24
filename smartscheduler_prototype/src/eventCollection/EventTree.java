@@ -180,6 +180,9 @@ public class EventTree implements Iterable<Event>, Serializable {
 		conflicts = false;
 	}
 	
+	/**Allows conflicts between event schedules if true.
+	 * @param conflicts
+	 */
 	public EventTree(boolean conflicts)
 	{
 		root = null;
